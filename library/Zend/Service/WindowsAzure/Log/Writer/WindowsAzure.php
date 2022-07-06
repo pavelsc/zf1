@@ -165,7 +165,7 @@ class Zend_Service_WindowsAzure_Log_Writer_WindowsAzure
      * @todo enable custom formatters using the WindowsAzure_Storage_DynamicTableEntity class
      */
     public function setFormatter(
-        Zend_Service_Log_Formatter_Interface $formatter
+        Zend_Log_Formatter_Interface $formatter
     )
     {
         require_once 'Zend/Service/Log/Exception.php';

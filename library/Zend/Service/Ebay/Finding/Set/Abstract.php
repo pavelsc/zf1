@@ -63,17 +63,17 @@ abstract class Zend_Service_Ebay_Finding_Set_Abstract implements SeekableIterato
     /**
      * Implement SeekableIterator::seek()
      *
-     * @param  integer $key
-     * @throws OutOfBoundsException When $key is not seekable
+     * @param  integer $offset
      * @return void
+     * @throws OutOfBoundsException When $key is not seekable
      */
-    public function seek($key)
+    #[ReturnTypeWillChange] public function seek($offset)
     {
-        if ($key < 0 || $key >= $this->count()) {
-            $message = "Position '{$key}' is not seekable.";
+        if ($offset < 0 || $offset >= $this->count()) {
+            $message = "Position '{$offset}' is not seekable.";
             throw new OutOfBoundsException($message);
         }
-        $this->_key = $key;
+        $this->_key = $offset;
     }
 
     /**

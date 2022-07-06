@@ -53,4 +53,14 @@ class Zend_Http_UserAgent_Desktop extends Zend_Http_UserAgent_AbstractDevice
     {
         return 'desktop';
     }
+
+  public function __serialize(): array
+  {
+    // TODO: Implement __serialize() method.
+  }
+
+  public function __unserialize(array $data): void
+  {
+    // TODO: Implement __unserialize() method.
+  }
 }

@@ -56,69 +56,18 @@ class Zend_Serializer_Adapter_Wddx extends Zend_Serializer_Adapter_AdapterAbstra
      */
     public function __construct($opts = array())
     {
-        if (!extension_loaded('wddx')) {
-            require_once 'Zend/Serializer/Exception.php';
-            throw new Zend_Serializer_Exception('PHP extension "wddx" is required for this adapter');
-        }
-
+        throw new Zend_Serializer_Exception('PHP extension "wddx" is deprecated, please use JSON instead');
         parent::__construct($opts);
     }
 
-    /**
-     * Serialize PHP to WDDX
-     *
-     * @param  mixed $value
-     * @param  array $opts
-     * @return string
-     * @throws Zend_Serializer_Exception on wddx error
-     */
-    public function serialize($value, array $opts = array())
-    {
-        $opts = $opts + $this->_options;
 
-        if (isset($opts['comment']) && $opts['comment']) {
-            $wddx = wddx_serialize_value($value, (string)$opts['comment']);
-        } else {
-            $wddx = wddx_serialize_value($value);
-        }
+  public function serialize($value, array $options = [])
+  {
+    // TODO: Implement serialize() method.
+  }
 
-        if ($wddx === false) {
-            $lastErr = error_get_last();
-            require_once 'Zend/Serializer/Exception.php';
-            throw new Zend_Serializer_Exception($lastErr['message']);
-        }
-        return $wddx;
-    }
-
-    /**
-     * Unserialize from WDDX to PHP
-     *
-     * @param  string $wddx
-     * @param  array $opts
-     * @return mixed
-     * @throws Zend_Serializer_Exception on wddx error
-     */
-    public function unserialize($wddx, array $opts = array())
-    {
-        $ret = wddx_deserialize($wddx);
-
-        if ($ret === null) {
-            // check if the returned NULL is valid
-            // or based on an invalid wddx string
-            try {
-                $simpleXml = Zend_Xml_Security::scan($wddx);
-                if (isset($simpleXml->data[0]->null[0])) {
-                    return null; // valid null
-                }
-                $errMsg = 'Can\'t unserialize wddx string';
-            } catch (Zend_Xml_Exception $e) {
-                $errMsg = $e->getMessage();
-            }
-
-            require_once 'Zend/Serializer/Exception.php';
-            throw new Zend_Serializer_Exception($errMsg);
-        }
-
-        return $ret;
-    }
+  public function unserialize($serialized, array $options = [])
+  {
+    // TODO: Implement unserialize() method.
+  }
 }

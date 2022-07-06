@@ -224,13 +224,13 @@ abstract class Zend_Mail_Storage_Abstract implements Countable, ArrayAccess, See
      /**
       * ArrayAccess::offsetExists()
       *
-      * @param    int     $id
+      * @param    int     $offset
       * @return   boolean
       */
-     public function offsetExists($id)
+     #[ReturnTypeWillChange] public function offsetExists($offset)
      {
         try {
-            if ($this->getMessage($id)) {
+            if ($this->getMessage($offset)) {
                 return true;
             }
         } catch(Zend_Mail_Storage_Exception $e) {}
@@ -242,24 +242,24 @@ abstract class Zend_Mail_Storage_Abstract implements Countable, ArrayAccess, See
      /**
       * ArrayAccess::offsetGet()
       *
-      * @param    int $id
+      * @param    int $offset
       * @return   Zend_Mail_Message message object
       */
-     public function offsetGet($id)
+     #[ReturnTypeWillChange] public function offsetGet($offset)
      {
-        return $this->getMessage($id);
+        return $this->getMessage($offset);
      }
 
 
      /**
       * ArrayAccess::offsetSet()
       *
-      * @param    id     $id
+      * @param    id     $offset
       * @param    mixed  $value
-      * @throws   Zend_Mail_Storage_Exception
       * @return   void
+      * @throws   Zend_Mail_Storage_Exception
       */
-     public function offsetSet($id, $value)
+     #[ReturnTypeWillChange] public function offsetSet($offset, $value)
      {
         /**
          * @see Zend_Mail_Storage_Exception
@@ -347,20 +347,20 @@ abstract class Zend_Mail_Storage_Abstract implements Countable, ArrayAccess, See
      /**
       * SeekableIterator::seek()
       *
-      * @param  int $pos
+      * @param  int $offset
       * @return void
       * @throws OutOfBoundsException
       */
-     public function seek($pos)
+     #[ReturnTypeWillChange] public function seek($offset)
      {
         if ($this->_iterationMax === null) {
           $this->_iterationMax = $this->countMessages();
         }
 
-        if ($pos > $this->_iterationMax) {
+        if ($offset > $this->_iterationMax) {
             throw new OutOfBoundsException('this position does not exist');
         }
-        $this->_iterationPos = $pos;
+        $this->_iterationPos = $offset;
      }
 
 }

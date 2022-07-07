@@ -73,7 +73,7 @@ class Zend_Paginator_Adapter_Null implements Zend_Paginator_Adapter_Interface
      *
      * @return integer
      */
-    public function count()
+    #[ReturnTypeWillChange] public function count()
     {
         return $this->_count;
     }

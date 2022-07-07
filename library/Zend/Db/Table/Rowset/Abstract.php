@@ -227,7 +227,7 @@ abstract class Zend_Db_Table_Rowset_Abstract implements SeekableIterator, Counta
      *
      * @return Zend_Db_Table_Rowset_Abstract Fluent interface.
      */
-    public function rewind()
+    #[ReturnTypeWillChange] public function rewind()
     {
         $this->_pointer = 0;
         return $this;
@@ -240,7 +240,7 @@ abstract class Zend_Db_Table_Rowset_Abstract implements SeekableIterator, Counta
      *
      * @return Zend_Db_Table_Row_Abstract current element from the collection
      */
-    public function current()
+    #[ReturnTypeWillChange] public function current()
     {
         if ($this->valid() === false) {
             return null;
@@ -257,7 +257,7 @@ abstract class Zend_Db_Table_Rowset_Abstract implements SeekableIterator, Counta
      *
      * @return int
      */
-    public function key()
+    #[ReturnTypeWillChange] public function key()
     {
         return $this->_pointer;
     }
@@ -269,7 +269,7 @@ abstract class Zend_Db_Table_Rowset_Abstract implements SeekableIterator, Counta
      *
      * @return void
      */
-    public function next()
+    #[ReturnTypeWillChange] public function next()
     {
         ++$this->_pointer;
     }
@@ -281,7 +281,7 @@ abstract class Zend_Db_Table_Rowset_Abstract implements SeekableIterator, Counta
      *
      * @return bool False if there's nothing more to iterate over
      */
-    public function valid()
+    #[ReturnTypeWillChange] public function valid()
     {
         return $this->_pointer >= 0 && $this->_pointer < $this->_count;
     }
@@ -293,7 +293,7 @@ abstract class Zend_Db_Table_Rowset_Abstract implements SeekableIterator, Counta
      *
      * @return int
      */
-    public function count()
+    #[ReturnTypeWillChange] public function count()
     {
         return $this->_count;
     }
@@ -302,18 +302,18 @@ abstract class Zend_Db_Table_Rowset_Abstract implements SeekableIterator, Counta
      * Take the Iterator to position $position
      * Required by interface SeekableIterator.
      *
-     * @param int $position the position to seek to
+     * @param int $offset the position to seek to
      * @return Zend_Db_Table_Rowset_Abstract
      * @throws Zend_Db_Table_Rowset_Exception
      */
-    public function seek($position)
+    #[ReturnTypeWillChange] public function seek($offset)
     {
-        $position = (int) $position;
-        if ($position < 0 || $position >= $this->_count) {
+        $offset = (int) $offset;
+        if ($offset < 0 || $offset >= $this->_count) {
             require_once 'Zend/Db/Table/Rowset/Exception.php';
-            throw new Zend_Db_Table_Rowset_Exception("Illegal index $position");
+            throw new Zend_Db_Table_Rowset_Exception("Illegal index $offset");
         }
-        $this->_pointer = $position;
+        $this->_pointer = $offset;
         return $this;
     }
 
@@ -324,7 +324,7 @@ abstract class Zend_Db_Table_Rowset_Abstract implements SeekableIterator, Counta
      * @param string $offset
      * @return boolean
      */
-    public function offsetExists($offset)
+    #[ReturnTypeWillChange] public function offsetExists($offset)
     {
         return isset($this->_data[(int) $offset]);
     }
@@ -336,7 +336,7 @@ abstract class Zend_Db_Table_Rowset_Abstract implements SeekableIterator, Counta
      * @param string $offset
      * @return Zend_Db_Table_Row_Abstract
      */
-    public function offsetGet($offset)
+    #[ReturnTypeWillChange] public function offsetGet($offset)
     {
         $offset = (int) $offset;
         if ($offset < 0 || $offset >= $this->_count) {
@@ -355,7 +355,7 @@ abstract class Zend_Db_Table_Rowset_Abstract implements SeekableIterator, Counta
      * @param string $offset
      * @param mixed $value
      */
-    public function offsetSet($offset, $value)
+    #[ReturnTypeWillChange] public function offsetSet($offset, $value)
     {
     }
 
@@ -365,7 +365,7 @@ abstract class Zend_Db_Table_Rowset_Abstract implements SeekableIterator, Counta
      *
      * @param string $offset
      */
-    public function offsetUnset($offset)
+    #[ReturnTypeWillChange] public function offsetUnset($offset)
     {
     }
 

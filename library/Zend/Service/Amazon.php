@@ -116,7 +116,7 @@ class Zend_Service_Amazon
 
         $defaultOptions = array('ResponseGroup' => 'Small');
         $options = $this->_prepareOptions('ItemSearch', $options, $defaultOptions);
-        $client->getHttpClient()->resetParameters();
+        $client::getHttpClient()->resetParameters();
         $response = $client->restGet('/onca/xml', $options);
 
         if ($response->isError()) {
@@ -153,7 +153,7 @@ class Zend_Service_Amazon
     {
         $client = $this->getRestClient();
         $client->setUri($this->_baseUri);
-        $client->getHttpClient()->resetParameters();
+        $client::getHttpClient()->resetParameters();
 
         $defaultOptions = array('ResponseGroup' => 'Small');
         $options['ItemId'] = (string) $asin;

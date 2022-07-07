@@ -172,7 +172,7 @@ abstract class Zend_Feed_Abstract extends Zend_Feed_Element implements Iterator,
      *
      * @return integer Entry count.
      */
-    public function count()
+    #[ReturnTypeWillChange] public function count()
     {
         return count($this->_entries);
     }
@@ -183,7 +183,7 @@ abstract class Zend_Feed_Abstract extends Zend_Feed_Element implements Iterator,
      *
      * @return void
      */
-    public function rewind()
+    #[ReturnTypeWillChange] public function rewind()
     {
         $this->_entryIndex = 0;
     }
@@ -194,7 +194,7 @@ abstract class Zend_Feed_Abstract extends Zend_Feed_Element implements Iterator,
      *
      * @return mixed The current row, or null if no rows.
      */
-    public function current()
+    #[ReturnTypeWillChange] public function current()
     {
         return new $this->_entryClassName(
             null,
@@ -207,7 +207,7 @@ abstract class Zend_Feed_Abstract extends Zend_Feed_Element implements Iterator,
      *
      * @return mixed The current row number (starts at 0), or NULL if no rows
      */
-    public function key()
+    #[ReturnTypeWillChange] public function key()
     {
         return $this->_entryIndex;
     }
@@ -218,7 +218,7 @@ abstract class Zend_Feed_Abstract extends Zend_Feed_Element implements Iterator,
      *
      * @return mixed The next row, or null if no more rows.
      */
-    public function next()
+    #[ReturnTypeWillChange] public function next()
     {
         ++$this->_entryIndex;
     }
@@ -229,7 +229,7 @@ abstract class Zend_Feed_Abstract extends Zend_Feed_Element implements Iterator,
      *
      * @return boolean Whether the iteration is valid
      */
-    public function valid()
+    #[ReturnTypeWillChange] public function valid()
     {
         return 0 <= $this->_entryIndex && $this->_entryIndex < $this->count();
     }

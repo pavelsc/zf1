@@ -666,7 +666,7 @@ abstract class Zend_Translate_Adapter {
 
         if ($this->_automatic === true) {
             $find = new Zend_Locale($options['locale']);
-            $browser = $find->getEnvironment() + $find->getBrowser();
+            $browser = $find::getEnvironment() + $find::getBrowser();
             arsort($browser);
             foreach($browser as $language => $quality) {
                 if (isset($this->_translate[$language])) {

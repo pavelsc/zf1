@@ -55,7 +55,7 @@ class Zend_XmlRpc_Value_Array extends Zend_XmlRpc_Value_Collection
      */
     protected function _generateXml()
     {
-        $generator = $this->getGenerator();
+        $generator = static::getGenerator();
         $generator->openElement('value')
                   ->openElement('array')
                   ->openElement('data');

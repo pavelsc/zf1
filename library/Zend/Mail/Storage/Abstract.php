@@ -215,7 +215,7 @@ abstract class Zend_Mail_Storage_Abstract implements Countable, ArrayAccess, See
      *
      * @return   int
      */
-     public function count()
+     #[ReturnTypeWillChange] public function count()
      {
         return $this->countMessages();
      }
@@ -275,7 +275,7 @@ abstract class Zend_Mail_Storage_Abstract implements Countable, ArrayAccess, See
       * @param    int   $id
       * @return   boolean success
       */
-     public function offsetUnset($id)
+     #[ReturnTypeWillChange] public function offsetUnset($id)
      {
         return $this->removeMessage($id);
      }
@@ -290,7 +290,7 @@ abstract class Zend_Mail_Storage_Abstract implements Countable, ArrayAccess, See
       *
       * @return   void
       */
-     public function rewind()
+     #[ReturnTypeWillChange] public function rewind()
      {
         $this->_iterationMax = $this->countMessages();
         $this->_iterationPos = 1;
@@ -302,7 +302,7 @@ abstract class Zend_Mail_Storage_Abstract implements Countable, ArrayAccess, See
       *
       * @return   Zend_Mail_Message current message
       */
-     public function current()
+     #[ReturnTypeWillChange] public function current()
      {
         return $this->getMessage($this->_iterationPos);
      }
@@ -313,7 +313,7 @@ abstract class Zend_Mail_Storage_Abstract implements Countable, ArrayAccess, See
       *
       * @return   int id of current position
       */
-     public function key()
+     #[ReturnTypeWillChange] public function key()
      {
         return $this->_iterationPos;
      }
@@ -324,7 +324,7 @@ abstract class Zend_Mail_Storage_Abstract implements Countable, ArrayAccess, See
       *
       * @return   void
       */
-     public function next()
+     #[ReturnTypeWillChange] public function next()
      {
         ++$this->_iterationPos;
      }
@@ -335,7 +335,7 @@ abstract class Zend_Mail_Storage_Abstract implements Countable, ArrayAccess, See
       *
       * @return   boolean
       */
-     public function valid()
+     #[ReturnTypeWillChange] public function valid()
      {
         if ($this->_iterationMax === null) {
           $this->_iterationMax = $this->countMessages();

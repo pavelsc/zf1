@@ -162,7 +162,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
      */
     public function initView()
     {
-        if (!$this->getInvokeArg('noViewRenderer') && $this->_helper->hasHelper('viewRenderer')) {
+        if (!$this->getInvokeArg('noViewRenderer') && $this->_helper::hasHelper('viewRenderer')) {
             return $this->view;
         }
 
@@ -208,7 +208,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
      */
     public function render($action = null, $name = null, $noController = false)
     {
-        if (!$this->getInvokeArg('noViewRenderer') && $this->_helper->hasHelper('viewRenderer')) {
+        if (!$this->getInvokeArg('noViewRenderer') && $this->_helper::hasHelper('viewRenderer')) {
             return $this->_helper->viewRenderer->render($action, $name, $noController);
         }
 
@@ -239,7 +239,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
      */
     public function renderScript($script, $name = null)
     {
-        if (!$this->getInvokeArg('noViewRenderer') && $this->_helper->hasHelper('viewRenderer')) {
+        if (!$this->getInvokeArg('noViewRenderer') && $this->_helper::hasHelper('viewRenderer')) {
             return $this->_helper->viewRenderer->renderScript($script, $name);
         }
 
@@ -262,7 +262,7 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
      */
     public function getViewScript($action = null, $noController = null)
     {
-        if (!$this->getInvokeArg('noViewRenderer') && $this->_helper->hasHelper('viewRenderer')) {
+        if (!$this->getInvokeArg('noViewRenderer') && $this->_helper::hasHelper('viewRenderer')) {
             $viewRenderer = $this->_helper->getHelper('viewRenderer');
             if (null !== $noController) {
                 $viewRenderer->setNoController($noController);

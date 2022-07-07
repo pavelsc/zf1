@@ -421,7 +421,7 @@ class Zend_Queue implements Countable
      *
      * @return integer
      */
-    public function count()
+    #[ReturnTypeWillChange] public function count()
     {
         if ($this->getAdapter()->isSupported('count')) {
             return $this->getAdapter()->count();

@@ -72,7 +72,7 @@ class Zend_Exception extends Exception
      *
      * @return string
      */
-    public function __toString()
+    #[ReturnTypeWillChange] public function __toString()
     {
         if (version_compare(PHP_VERSION, '5.3.0', '<')) {
             if (null !== ($e = $this->getPrevious())) {

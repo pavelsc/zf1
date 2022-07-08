@@ -34,7 +34,7 @@ require_once 'Zend/Gdata.php';
 /**
  * Service class for interacting with the Google Base data API
  *
- * @link http://code.google.com/apis/base
+ * @link       http://code.google.com/apis/base
  *
  * @category   Zend
  * @package    Zend_Gdata
@@ -63,9 +63,9 @@ class Zend_Gdata_Gbase extends Zend_Gdata
     /**
      * Create Zend_Gdata_Gbase object
      *
-     * @param Zend_Http_Client $client (optional) The HTTP client to use when
-     *          when communicating with the Google Apps servers.
-     * @param string $applicationId The identity of the app in the form of Company-AppName-Version
+     * @param Zend_Http_Client $client        (optional) The HTTP client to use when
+     *                                        when communicating with the Google Apps servers.
+     * @param string           $applicationId The identity of the app in the form of Company-AppName-Version
      */
     public function __construct($client = null, $applicationId = 'MyCompany-MyApp-1.0')
     {

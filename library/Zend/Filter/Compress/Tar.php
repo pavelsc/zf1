@@ -43,11 +43,11 @@ class Zend_Filter_Compress_Tar extends Zend_Filter_Compress_CompressAbstract
      *
      * @var array
      */
-    protected $_options = array(
-        'archive'  => null,
-        'target'   => '.',
-        'mode'     => null,
-    );
+    protected $_options = [
+        'archive' => null,
+        'target' => '.',
+        'mode' => null,
+    ];
 
     /**
      * Class constructor
@@ -87,8 +87,8 @@ class Zend_Filter_Compress_Tar extends Zend_Filter_Compress_CompressAbstract
      */
     public function setArchive($archive)
     {
-        $archive = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $archive);
-        $this->_options['archive'] = (string) $archive;
+        $archive = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $archive);
+        $this->_options['archive'] = (string)$archive;
 
         return $this;
     }
@@ -116,8 +116,8 @@ class Zend_Filter_Compress_Tar extends Zend_Filter_Compress_CompressAbstract
             throw new Zend_Filter_Exception("The directory '$target' does not exist");
         }
 
-        $target = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $target);
-        $this->_options['target'] = (string) $target;
+        $target = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $target);
+        $this->_options['target'] = (string)$target;
         return $this;
     }
 
@@ -157,7 +157,7 @@ class Zend_Filter_Compress_Tar extends Zend_Filter_Compress_CompressAbstract
     /**
      * Compresses the given content
      *
-     * @param  string $content
+     * @param string $content
      * @return string
      */
     public function compress($content)
@@ -181,9 +181,9 @@ class Zend_Filter_Compress_Tar extends Zend_Filter_Compress_CompressAbstract
         if (is_dir($content)) {
             // collect all file infos
             foreach (new RecursiveIteratorIterator(
-                        new RecursiveDirectoryIterator($content, RecursiveDirectoryIterator::KEY_AS_PATHNAME),
-                        RecursiveIteratorIterator::SELF_FIRST
-                    ) as $directory => $info
+                         new RecursiveDirectoryIterator($content, RecursiveDirectoryIterator::KEY_AS_PATHNAME),
+                         RecursiveIteratorIterator::SELF_FIRST
+                     ) as $directory => $info
             ) {
                 if ($info->isFile()) {
                     $file[] = $directory;
@@ -193,7 +193,7 @@ class Zend_Filter_Compress_Tar extends Zend_Filter_Compress_CompressAbstract
             $content = $file;
         }
 
-        $result  = $archive->create($content);
+        $result = $archive->create($content);
         if ($result === false) {
             require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Error creating the Tar archive');
@@ -205,21 +205,21 @@ class Zend_Filter_Compress_Tar extends Zend_Filter_Compress_CompressAbstract
     /**
      * Decompresses the given content
      *
-     * @param  string $content
+     * @param string $content
      * @return boolean
      */
     public function decompress($content)
     {
         $archive = $this->getArchive();
         if (file_exists($content)) {
-            $archive = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, realpath($content));
+            $archive = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, realpath($content));
         } elseif (empty($archive) || !file_exists($archive)) {
             require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Tar Archive not found');
         }
 
         $archive = new Archive_Tar($archive, $this->getMode());
-        $target  = $this->getTarget();
+        $target = $this->getTarget();
         if (!is_dir($target)) {
             $target = dirname($target);
         }

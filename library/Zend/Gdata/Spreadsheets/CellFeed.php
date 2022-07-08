@@ -38,41 +38,41 @@ require_once 'Zend/Gdata/Spreadsheets/Extension/ColCount.php';
 
 /**
  *
- * @category   Zend
- * @package    Zend_Gdata
+ * @category     Zend
+ * @package      Zend_Gdata
  * @subpackage   Spreadsheets
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @copyright    Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license      http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Spreadsheets_CellFeed extends Zend_Gdata_Feed
 {
 
     /**
-    * The classname for individual feed elements.
-    *
-    * @var string
-    */
+     * The classname for individual feed elements.
+     *
+     * @var string
+     */
     protected $_entryClassName = 'Zend_Gdata_Spreadsheets_CellEntry';
 
     /**
-    * The classname for the feed.
-    *
-    * @var string
-    */
+     * The classname for the feed.
+     *
+     * @var string
+     */
     protected $_feedClassName = 'Zend_Gdata_Spreadsheets_CellFeed';
 
     /**
-    * The row count for the feed.
-    *
-    * @var Zend_Gdata_Spreadsheets_Extension_RowCount
-    */
+     * The row count for the feed.
+     *
+     * @var Zend_Gdata_Spreadsheets_Extension_RowCount
+     */
     protected $_rowCount = null;
 
     /**
-    * The column count for the feed.
-    *
-    * @var Zend_Gdata_Spreadsheets_Extension_ColCount
-    */
+     * The column count for the feed.
+     *
+     * @var Zend_Gdata_Spreadsheets_Extension_ColCount
+     */
     protected $_colCount = null;
 
     /**

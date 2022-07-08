@@ -61,15 +61,15 @@ class Zend_Gdata_Gapps_MemberQuery extends Zend_Gdata_Gapps_Query
     /**
      * Create a new instance.
      *
-     * @param string $domain (optional) The Google Apps-hosted domain to use
-     *          when constructing query URIs.
-     * @param string $groupId (optional) Value for the groupId property.
-     * @param string $memberId (optional) Value for the memberId property.
+     * @param string $domain        (optional) The Google Apps-hosted domain to use
+     *                              when constructing query URIs.
+     * @param string $groupId       (optional) Value for the groupId property.
+     * @param string $memberId      (optional) Value for the memberId property.
      * @param string $startMemberId (optional) Value for the
-     *          startMemberId property.
+     *                              startMemberId property.
      */
     public function __construct($domain = null, $groupId = null, $memberId = null,
-            $startMemberId = null)
+                                $startMemberId = null)
     {
         parent::__construct($domain);
         $this->setGroupId($groupId);
@@ -80,9 +80,9 @@ class Zend_Gdata_Gapps_MemberQuery extends Zend_Gdata_Gapps_Query
     /**
      * Set the group id to query for.
      *
-     * @see getGroupId
      * @param string $value The group id to filter search results by, or null to
-     *              disable.
+     *                      disable.
+     * @see getGroupId
      */
     public function setGroupId($value)
     {
@@ -94,7 +94,7 @@ class Zend_Gdata_Gapps_MemberQuery extends Zend_Gdata_Gapps_Query
      * returned.
      *
      * @param string $value The group id to filter search results by, or
-     *          null if disabled.
+     *                      null if disabled.
      * @return string The group id
      */
     public function getGroupId()
@@ -108,9 +108,9 @@ class Zend_Gdata_Gapps_MemberQuery extends Zend_Gdata_Gapps_Query
      * matching this value will be returned in search results. Set to
      * null to disable filtering by member id.
      *
-     * @see getMemberId
      * @param string $value The member id to filter search results by, or null to
-     *              disable.
+     *                      disable.
+     * @see getMemberId
      */
     public function setMemberId($value)
     {
@@ -122,7 +122,7 @@ class Zend_Gdata_Gapps_MemberQuery extends Zend_Gdata_Gapps_Query
      * returned.
      *
      * @param string $value The member id to filter search results by, or
-     *          null if disabled.
+     *                      null if disabled.
      * @return The member id
      */
     public function getMemberId()
@@ -135,7 +135,7 @@ class Zend_Gdata_Gapps_MemberQuery extends Zend_Gdata_Gapps_Query
      * a list of members.
      *
      * @param string $value The first member id to be returned, or null to
-     *          disable.
+     *                      disable.
      */
     public function setStartMemberId($value)
     {
@@ -150,9 +150,9 @@ class Zend_Gdata_Gapps_MemberQuery extends Zend_Gdata_Gapps_Query
      * Get the first username which should be displayed when retrieving
      * a list of users.
      *
-     * @see setStartUsername
      * @return string The first username to be returned, or null if
      *          disabled.
+     * @see setStartUsername
      */
     public function getStartMemberId()
     {
@@ -179,7 +179,7 @@ class Zend_Gdata_Gapps_MemberQuery extends Zend_Gdata_Gapps_Query
         } else {
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'groupId must not be null');
+                'groupId must not be null');
         }
 
         $uri .= '/member';

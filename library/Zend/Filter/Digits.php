@@ -61,7 +61,7 @@ class Zend_Filter_Digits implements Zend_Filter_Interface
      *
      * Returns the string $value, removing all but digit characters
      *
-     * @param  string $value
+     * @param string $value
      * @return string
      */
     public function filter($value)
@@ -77,6 +77,6 @@ class Zend_Filter_Digits implements Zend_Filter_Interface
             $pattern = '/[\p{^N}]/';
         }
 
-        return preg_replace($pattern, '', (string) $value);
+        return preg_replace($pattern, '', (string)$value);
     }
 }

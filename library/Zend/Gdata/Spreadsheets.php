@@ -16,9 +16,9 @@
  * @category     Zend
  * @package      Zend_Gdata
  * @subpackage   Spreadsheets
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @copyright    Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license      http://framework.zend.com/license/new-bsd     New BSD License
+ * @version      $Id$
  */
 
 /**
@@ -84,13 +84,13 @@ require_once('Zend/Gdata/Spreadsheets/CellQuery.php');
 /**
  * Gdata Spreadsheets
  *
- * @link http://code.google.com/apis/gdata/spreadsheets.html
+ * @link         http://code.google.com/apis/gdata/spreadsheets.html
  *
  * @category     Zend
  * @package      Zend_Gdata
  * @subpackage   Spreadsheets
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @copyright    Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license      http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Spreadsheets extends Zend_Gdata
 {
@@ -106,18 +106,18 @@ class Zend_Gdata_Spreadsheets extends Zend_Gdata
      *
      * @var array
      */
-    public static $namespaces = array(
-        array('gs', 'http://schemas.google.com/spreadsheets/2006', 1, 0),
-        array(
-            'gsx', 'http://schemas.google.com/spreadsheets/2006/extended', 1, 0)
-    );
+    public static $namespaces = [
+        ['gs', 'http://schemas.google.com/spreadsheets/2006', 1, 0],
+        [
+            'gsx', 'http://schemas.google.com/spreadsheets/2006/extended', 1, 0]
+    ];
 
     /**
      * Create Gdata_Spreadsheets object
      *
-     * @param Zend_Http_Client $client (optional) The HTTP client to use when
-     *          when communicating with the Google servers.
-     * @param string $applicationId The identity of the app in the form of Company-AppName-Version
+     * @param Zend_Http_Client $client        (optional) The HTTP client to use when
+     *                                        when communicating with the Google servers.
+     * @param string           $applicationId The identity of the app in the form of Company-AppName-Version
      */
     public function __construct($client = null, $applicationId = 'MyCompany-MyApp-1.0')
     {
@@ -286,16 +286,16 @@ class Zend_Gdata_Spreadsheets extends Zend_Gdata
     /**
      * Updates an existing cell.
      *
-     * @param int $row The row containing the cell to update
-     * @param int $col The column containing the cell to update
-     * @param int $inputValue The new value for the cell
-     * @param string $key The key for the spreadsheet to be updated
-     * @param string $wkshtId (optional) The worksheet to be updated
+     * @param int    $row        The row containing the cell to update
+     * @param int    $col        The column containing the cell to update
+     * @param int    $inputValue The new value for the cell
+     * @param string $key        The key for the spreadsheet to be updated
+     * @param string $wkshtId    (optional) The worksheet to be updated
      * @return CellEntry The updated cell entry.
      */
     public function updateCell($row, $col, $inputValue, $key, $wkshtId = 'default')
     {
-        $cell = 'R'.$row.'C'.$col;
+        $cell = 'R' . $row . 'C' . $col;
 
         $query = new Zend_Gdata_Spreadsheets_CellQuery();
         $query->setSpreadsheetKey($key);
@@ -311,15 +311,15 @@ class Zend_Gdata_Spreadsheets extends Zend_Gdata
     /**
      * Inserts a new row with provided data.
      *
-     * @param array $rowData An array of column header to row data
-     * @param string $key The key of the spreadsheet to modify
+     * @param array  $rowData An array of column header to row data
+     * @param string $key     The key of the spreadsheet to modify
      * @param string $wkshtId (optional) The worksheet to modify
      * @return ListEntry The inserted row
      */
     public function insertRow($rowData, $key, $wkshtId = 'default')
     {
         $newEntry = new Zend_Gdata_Spreadsheets_ListEntry();
-        $newCustomArr = array();
+        $newCustomArr = [];
         foreach ($rowData as $k => $v) {
             $newCustom = new Zend_Gdata_Spreadsheets_Extension_Custom();
             $newCustom->setText($v)->setColumnName($k);
@@ -339,12 +339,12 @@ class Zend_Gdata_Spreadsheets extends Zend_Gdata
     /**
      * Updates an existing row with provided data.
      *
-     * @param ListEntry $entry The row entry to update
-     * @param array $newRowData An array of column header to row data
+     * @param ListEntry $entry      The row entry to update
+     * @param array     $newRowData An array of column header to row data
      */
     public function updateRow($entry, $newRowData)
     {
-        $newCustomArr = array();
+        $newCustomArr = [];
         foreach ($newRowData as $k => $v) {
             $newCustom = new Zend_Gdata_Spreadsheets_Extension_Custom();
             $newCustom->setText($v)->setColumnName($k);
@@ -375,9 +375,9 @@ class Zend_Gdata_Spreadsheets extends Zend_Gdata
     {
         $listFeed = $this->getListFeed($location);
         $listFeed = $this->retrieveAllEntriesForFeed($listFeed);
-        $spreadsheetContents = array();
+        $spreadsheetContents = [];
         foreach ($listFeed as $listEntry) {
-            $rowContents = array();
+            $rowContents = [];
             $customArray = $listEntry->getCustom();
             foreach ($customArray as $custom) {
                 $rowContents[$custom->getColumnName()] = $custom->getText();
@@ -395,9 +395,9 @@ class Zend_Gdata_Spreadsheets extends Zend_Gdata
      * value of the 'range' query parameter specified at:
      * http://code.google.com/apis/spreadsheets/reference.html#cells_Parameters
      *
-     * @param mixed $location A CellQuery, WorksheetEntry or a URL (w/o query string) specifying the feed location.
-     * @param string $range The range of cells to retrieve
-     * @param boolean $empty Whether to retrieve empty cells
+     * @param mixed   $location A CellQuery, WorksheetEntry or a URL (w/o query string) specifying the feed location.
+     * @param string  $range    The range of cells to retrieve
+     * @param boolean $empty    Whether to retrieve empty cells
      * @return array An associative array of cells
      */
     public function getSpreadsheetCellFeedContents($location, $range = null, $empty = false)
@@ -420,9 +420,9 @@ class Zend_Gdata_Spreadsheets extends Zend_Gdata
 
         $cellFeed = $this->getCellFeed($cellQuery);
         $cellFeed = $this->retrieveAllEntriesForFeed($cellFeed);
-        $spreadsheetContents = array();
+        $spreadsheetContents = [];
         foreach ($cellFeed as $cellEntry) {
-            $cellContents = array();
+            $cellContents = [];
             $cell = $cellEntry->getCell();
             $cellContents['formula'] = $cell->getInputValue();
             $cellContents['value'] = $cell->getText();

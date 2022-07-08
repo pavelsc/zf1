@@ -63,7 +63,7 @@ class Zend_XmlRpc_Fault
      * Internal fault codes => messages
      * @var array
      */
-    protected $_internal = array(
+    protected $_internal = [
         404 => 'Unknown Error',
 
         // 610 - 619 reflection errors
@@ -95,7 +95,7 @@ class Zend_XmlRpc_Fault
         651 => 'Failed to parse response',
         652 => 'Invalid response',
         653 => 'Invalid XMLRPC value in response',
-    );
+    ];
 
     /**
      * Constructor
@@ -123,7 +123,7 @@ class Zend_XmlRpc_Fault
      */
     public function setCode($code)
     {
-        $this->_code = (int) $code;
+        $this->_code = (int)$code;
         return $this;
     }
 
@@ -145,7 +145,7 @@ class Zend_XmlRpc_Fault
      */
     public function setMessage($message)
     {
-        $this->_message = (string) $message;
+        $this->_message = (string)$message;
         return $this;
     }
 
@@ -203,7 +203,7 @@ class Zend_XmlRpc_Fault
         } catch (Exception $e) {
             // Not valid XML
             require_once 'Zend/XmlRpc/Exception.php';
-            throw new Zend_XmlRpc_Exception('Failed to parse XML fault: ' .  $e->getMessage(), 500, $e);
+            throw new Zend_XmlRpc_Exception('Failed to parse XML fault: ' . $e->getMessage(), 500, $e);
         }
 
         // Check for fault
@@ -219,8 +219,8 @@ class Zend_XmlRpc_Fault
         }
 
         $structXml = $xml->fault->value->asXML();
-        $struct    = Zend_XmlRpc_Value::getXmlRpcValue($structXml, Zend_XmlRpc_Value::XML_STRING);
-        $struct    = $struct->getValue();
+        $struct = Zend_XmlRpc_Value::getXmlRpcValue($structXml, Zend_XmlRpc_Value::XML_STRING);
+        $struct = $struct->getValue();
 
         if (isset($struct['faultCode'])) {
             $code = $struct['faultCode'];
@@ -279,18 +279,18 @@ class Zend_XmlRpc_Fault
     public function saveXml()
     {
         // Create fault value
-        $faultStruct = array(
-            'faultCode'   => $this->getCode(),
+        $faultStruct = [
+            'faultCode' => $this->getCode(),
             'faultString' => $this->getMessage()
-        );
+        ];
         $value = Zend_XmlRpc_Value::getXmlRpcValue($faultStruct);
 
         $generator = Zend_XmlRpc_Value::getGenerator();
         $generator->openElement('methodResponse')
-                  ->openElement('fault');
+            ->openElement('fault');
         $value->generateXml();
         $generator->closeElement('fault')
-                  ->closeElement('methodResponse');
+            ->closeElement('methodResponse');
 
         return $generator->flush();
     }

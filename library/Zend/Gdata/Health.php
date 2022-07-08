@@ -34,7 +34,7 @@ require_once 'Zend/Gdata.php';
 /**
  * Service class for interacting with the Google Health Data API
  *
- * @link http://code.google.com/apis/health
+ * @link       http://code.google.com/apis/health
  *
  * @category   Zend
  * @package    Zend_Gdata
@@ -71,12 +71,12 @@ class Zend_Gdata_Health extends Zend_Gdata
     /**
      * Create Zend_Gdata_Health object
      *
-     * @param Zend_Http_Client $client (optional) The HTTP client to use when
-     *     when communicating with the Google Health servers.
-     * @param string $applicationId The identity of the application in the form
-     *     of Company-AppName-Version
-     * @param bool $useH9Sandbox True if the H9 Developer's Sandbox should be
-     *     used instead of production Google Health.
+     * @param Zend_Http_Client $client        (optional) The HTTP client to use when
+     *                                        when communicating with the Google Health servers.
+     * @param string           $applicationId The identity of the application in the form
+     *                                        of Company-AppName-Version
+     * @param bool             $useH9Sandbox  True if the H9 Developer's Sandbox should be
+     *                                        used instead of production Google Health.
      */
     public function __construct($client = null, $applicationId = 'MyCompany-MyApp-1.0', $useH9Sandbox = false)
     {

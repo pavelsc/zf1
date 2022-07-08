@@ -44,16 +44,16 @@ class Zend_Gdata_DublinCore extends Zend_Gdata
      *
      * @var array
      */
-    public static $namespaces = array(
-        array('dc', 'http://purl.org/dc/terms', 1, 0)
-    );
+    public static $namespaces = [
+        ['dc', 'http://purl.org/dc/terms', 1, 0]
+    ];
 
     /**
      * Create Zend_Gdata_DublinCore object
      *
-     * @param Zend_Http_Client $client (optional) The HTTP client to use when
-     *          when communicating with the Google servers.
-     * @param string $applicationId The identity of the app in the form of Company-AppName-Version
+     * @param Zend_Http_Client $client        (optional) The HTTP client to use when
+     *                                        when communicating with the Google servers.
+     * @param string           $applicationId The identity of the app in the form of Company-AppName-Version
      */
     public function __construct($client = null, $applicationId = 'MyCompany-MyApp-1.0')
     {

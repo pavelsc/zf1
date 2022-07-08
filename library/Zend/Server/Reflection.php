@@ -36,7 +36,7 @@ require_once 'Zend/Server/Reflection/Class.php';
  * @subpackage Reflection
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version $Id$
+ * @version    $Id$
  */
 class Zend_Server_Reflection
 {
@@ -49,11 +49,11 @@ class Zend_Server_Reflection
      * If extra arguments should be passed to dispatchable methods, these may
      * be provided as an array to $argv.
      *
-     * @param string|object $class Class name or object
-     * @param null|array $argv Optional arguments to be used during the method call
-     * @param string $namespace Optional namespace with which to prefix the
-     * method name (used for the signature key). Primarily to avoid collisions,
-     * also for XmlRpc namespacing
+     * @param string|object $class     Class name or object
+     * @param null|array    $argv      Optional arguments to be used during the method call
+     * @param string        $namespace Optional namespace with which to prefix the
+     *                                 method name (used for the signature key). Primarily to avoid collisions,
+     *                                 also for XmlRpc namespacing
      * @return Zend_Server_Reflection_Class
      * @throws Zend_Server_Reflection_Exception
      */
@@ -85,11 +85,11 @@ class Zend_Server_Reflection
      * If extra arguments should be passed to the dispatchable function, these
      * may be provided as an array to $argv.
      *
-     * @param string $function Function name
-     * @param null|array $argv Optional arguments to be used during the method call
-     * @param string $namespace Optional namespace with which to prefix the
-     * function name (used for the signature key). Primarily to avoid
-     * collisions, also for XmlRpc namespacing
+     * @param string     $function  Function name
+     * @param null|array $argv      Optional arguments to be used during the method call
+     * @param string     $namespace Optional namespace with which to prefix the
+     *                              function name (used for the signature key). Primarily to avoid
+     *                              collisions, also for XmlRpc namespacing
      * @return Zend_Server_Reflection_Function
      * @throws Zend_Server_Reflection_Exception
      */

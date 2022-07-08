@@ -37,7 +37,7 @@ class Zend_Crypt
     /**
      * @var array
      */
-    protected static $_supportedAlgosOpenssl = array(
+    protected static $_supportedAlgosOpenssl = [
         'md2',
         'md4',
         'mdc2',
@@ -48,12 +48,12 @@ class Zend_Crypt
         'sha256',
         'sha384',
         'sha512'
-    );
+    ];
 
     /**
      * @var array
      */
-    protected static $_supportedAlgosMhash = array(
+    protected static $_supportedAlgosMhash = [
         'adler32',
         'crc32',
         'crc32b',
@@ -70,12 +70,12 @@ class Zend_Crypt
         'tiger',
         'tiger128',
         'tiger160'
-    );
+    ];
 
     /**
      * @param string $algorithm
      * @param string $data
-     * @param bool $binaryOutput
+     * @param bool   $binaryOutput
      * @return unknown
      */
     public static function hash($algorithm, $data, $binaryOutput = false)
@@ -99,13 +99,13 @@ class Zend_Crypt
         if (function_exists('hash')) {
             self::$_type = self::TYPE_HASH;
             if (in_array($algorithm, hash_algos())) {
-               return;
+                return;
             }
         }
         if (function_exists('mhash')) {
             self::$_type = self::TYPE_MHASH;
             if (in_array($algorithm, self::$_supportedAlgosMhash)) {
-               return;
+                return;
             }
         }
         if (function_exists('openssl_digest')) {
@@ -114,7 +114,7 @@ class Zend_Crypt
             }
             self::$_type = self::TYPE_OPENSSL;
             if (in_array($algorithm, self::$_supportedAlgosOpenssl)) {
-               return;
+                return;
             }
         }
         /**
@@ -127,7 +127,7 @@ class Zend_Crypt
     /**
      * @param string $algorithm
      * @param string $data
-     * @param bool $binaryOutput
+     * @param bool   $binaryOutput
      * @return string
      */
     protected static function _digestHash($algorithm, $data, $binaryOutput)
@@ -138,7 +138,7 @@ class Zend_Crypt
     /**
      * @param string $algorithm
      * @param string $data
-     * @param bool $binaryOutput
+     * @param bool   $binaryOutput
      * @return string
      */
     protected static function _digestMhash($algorithm, $data, $binaryOutput)
@@ -154,7 +154,7 @@ class Zend_Crypt
     /**
      * @param string $algorithm
      * @param string $data
-     * @param bool $binaryOutput
+     * @param bool   $binaryOutput
      * @return string
      */
     protected static function _digestOpenssl($algorithm, $data, $binaryOutput)

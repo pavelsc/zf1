@@ -20,7 +20,7 @@
  * @version    $Id$
  */
 
-/** @see Zend_Barcode_Renderer_RendererAbstract*/
+/** @see Zend_Barcode_Renderer_RendererAbstract */
 require_once 'Zend/Barcode/Renderer/RendererAbstract.php';
 
 /**
@@ -37,11 +37,11 @@ class Zend_Barcode_Renderer_Image extends Zend_Barcode_Renderer_RendererAbstract
      * List of authorized output format
      * @var array
      */
-    protected $_allowedImageType = array(
+    protected $_allowedImageType = [
         'png',
         'jpeg',
         'gif',
-    );
+    ];
 
     /**
      * Image format
@@ -218,11 +218,11 @@ class Zend_Barcode_Renderer_Image extends Zend_Barcode_Renderer_RendererAbstract
             throw $e;
         }
 
-        $barcodeWidth  = $this->_barcode->getWidth(true);
+        $barcodeWidth = $this->_barcode->getWidth(true);
         $barcodeHeight = $this->_barcode->getHeight(true);
 
         if ($this->_resource !== null) {
-            $foreColor       = $this->_barcode->getForeColor();
+            $foreColor = $this->_barcode->getForeColor();
             $backgroundColor = $this->_barcode->getBackgroundColor();
             $this->_imageBackgroundColor = imagecolorallocate(
                 $this->_resource,
@@ -246,7 +246,7 @@ class Zend_Barcode_Renderer_Image extends Zend_Barcode_Renderer_RendererAbstract
                 $height = $this->_userHeight;
             }
 
-            $foreColor       = $this->_barcode->getForeColor();
+            $foreColor = $this->_barcode->getForeColor();
             $backgroundColor = $this->_barcode->getBackgroundColor();
             $this->_resource = imagecreatetruecolor($width, $height);
 
@@ -353,13 +353,13 @@ class Zend_Barcode_Renderer_Image extends Zend_Barcode_Renderer_RendererAbstract
     /**
      * Draw a polygon in the image resource
      *
-     * @param array $points
+     * @param array   $points
      * @param integer $color
      * @param boolean $filled
      */
     protected function _drawPolygon($points, $color, $filled = true)
     {
-        $newPoints = array(
+        $newPoints = [
             $points[0][0] + $this->_leftOffset,
             $points[0][1] + $this->_topOffset,
             $points[1][0] + $this->_leftOffset,
@@ -368,7 +368,7 @@ class Zend_Barcode_Renderer_Image extends Zend_Barcode_Renderer_RendererAbstract
             $points[2][1] + $this->_topOffset,
             $points[3][0] + $this->_leftOffset,
             $points[3][1] + $this->_topOffset,
-        );
+        ];
 
         $allocatedColor = imagecolorallocate(
             $this->_resource,
@@ -445,7 +445,7 @@ class Zend_Barcode_Renderer_Image extends Zend_Barcode_Renderer_RendererAbstract
                 require_once 'Zend/Barcode/Renderer/Exception.php';
                 throw new Zend_Barcode_Renderer_Exception(
                     'A font was provided, but this instance of PHP does not have TTF (FreeType) support'
-                    );
+                );
             }
 
             $box = imagettfbbox($size, 0, $font, $text);

@@ -88,7 +88,7 @@ class Zend_Crypt_Rsa
         if (isset($options['passPhrase'])) {
             $this->_passPhrase = $options['passPhrase'];
         }
-        foreach ($options as $option=>$value) {
+        foreach ($options as $option => $value) {
             switch ($option) {
                 case 'pemString':
                     $this->setPemString($value);
@@ -120,9 +120,9 @@ class Zend_Crypt_Rsa
     }
 
     /**
-     * @param string $data
+     * @param string                     $data
      * @param Zend_Crypt_Rsa_Key_Private $privateKey
-     * @param string $format
+     * @param string                     $format
      * @return string
      */
     public function sign($data, Zend_Crypt_Rsa_Key_Private $privateKey = null, $format = null)
@@ -162,9 +162,9 @@ class Zend_Crypt_Rsa
     }
 
     /**
-     * @param string $data
+     * @param string             $data
      * @param Zend_Crypt_Rsa_Key $key
-     * @param string $format
+     * @param string             $format
      * @return string
      */
     public function encrypt($data, Zend_Crypt_Rsa_Key $key, $format = null)
@@ -182,9 +182,9 @@ class Zend_Crypt_Rsa
     }
 
     /**
-     * @param string $data
+     * @param string             $data
      * @param Zend_Crypt_Rsa_Key $key
-     * @param string $format
+     * @param string             $format
      * @return string
      */
     public function decrypt($data, Zend_Crypt_Rsa_Key $key, $format = null)
@@ -202,11 +202,11 @@ class Zend_Crypt_Rsa
     }
 
     /**
-     * @param  array $configargs
-     * 
-     * @throws Zend_Crypt_Rsa_Exception
-     * 
+     * @param array $configargs
+     *
      * @return ArrayObject
+     * @throws Zend_Crypt_Rsa_Exception
+     *
      */
     public function generateKeys(array $configargs = null)
     {
@@ -231,10 +231,10 @@ class Zend_Crypt_Rsa
         $privateKey = new Zend_Crypt_Rsa_Key_Private($private, $passPhrase);
         $details = openssl_pkey_get_details($resource);
         $publicKey = new Zend_Crypt_Rsa_Key_Public($details['key']);
-        $return = new ArrayObject(array(
-           'privateKey'=>$privateKey,
-           'publicKey'=>$publicKey
-        ), ArrayObject::ARRAY_AS_PROPS);
+        $return = new ArrayObject([
+            'privateKey' => $privateKey,
+            'publicKey' => $publicKey
+        ], ArrayObject::ARRAY_AS_PROPS);
         return $return;
     }
 
@@ -322,7 +322,7 @@ class Zend_Crypt_Rsa
 
     protected function _parseConfigArgs(array $config = null)
     {
-        $configs = array();
+        $configs = [];
         if (isset($config['private_key_bits'])) {
             $configs['private_key_bits'] = $config['private_key_bits'];
         }

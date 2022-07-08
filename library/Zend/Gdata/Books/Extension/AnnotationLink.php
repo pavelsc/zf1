@@ -43,17 +43,17 @@ class Zend_Gdata_Books_Extension_AnnotationLink extends
      * Constructor for Zend_Gdata_Books_Extension_AnnotationLink which
      * Describes an annotation link
      *
-     * @param string|null $href Linked resource URI
-     * @param string|null $rel Forward relationship
-     * @param string|null $type Resource MIME type
+     * @param string|null $href     Linked resource URI
+     * @param string|null $rel      Forward relationship
+     * @param string|null $type     Resource MIME type
      * @param string|null $hrefLang Resource language
-     * @param string|null $title Human-readable resource title
-     * @param string|null $length Resource length in octets
-     * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
+     * @param string|null $title    Human-readable resource title
+     * @param string|null $length   Resource length in octets
+     * @param DOMElement  $element  (optional) DOMElement from which this
+     *                              object should be constructed.
      */
     public function __construct($href = null, $rel = null, $type = null,
-            $hrefLang = null, $title = null, $length = null)
+                                $hrefLang = null, $title = null, $length = null)
     {
         $this->registerAllNamespaces(Zend_Gdata_Books::$namespaces);
         parent::__construct($href, $rel, $type, $hrefLang, $title, $length);

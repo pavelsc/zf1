@@ -46,7 +46,7 @@ class Zend_Feed_Reader_Extension_DublinCore_Feed
     /**
      * Get a single author
      *
-     * @param  int $index
+     * @param int $index
      * @return string|null
      */
     public function getAuthor($index = 0)
@@ -71,8 +71,8 @@ class Zend_Feed_Reader_Extension_DublinCore_Feed
             return $this->_data['authors'];
         }
 
-        $authors = array();
-        $list    = $this->_xpath->query('//dc11:creator');
+        $authors = [];
+        $list = $this->_xpath->query('//dc11:creator');
 
         if (!$list->length) {
             $list = $this->_xpath->query('//dc10:creator');
@@ -87,9 +87,9 @@ class Zend_Feed_Reader_Extension_DublinCore_Feed
 
         if ($list->length) {
             foreach ($list as $author) {
-                $authors[] = array(
+                $authors[] = [
                     'name' => $author->nodeValue
-                );
+                ];
             }
             $authors = new Zend_Feed_Reader_Collection_Author(
                 Zend_Feed_Reader::arrayUnique($authors)
@@ -282,11 +282,11 @@ class Zend_Feed_Reader_Extension_DublinCore_Feed
         if ($list->length) {
             $categoryCollection = new Zend_Feed_Reader_Collection_Category;
             foreach ($list as $category) {
-                $categoryCollection[] = array(
+                $categoryCollection[] = [
                     'term' => $category->nodeValue,
                     'scheme' => null,
                     'label' => $category->nodeValue,
-                );
+                ];
             }
         } else {
             $categoryCollection = new Zend_Feed_Reader_Collection_Category;

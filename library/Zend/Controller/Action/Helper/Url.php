@@ -40,10 +40,10 @@ class Zend_Controller_Action_Helper_Url extends Zend_Controller_Action_Helper_Ab
     /**
      * Create URL based on default route
      *
-     * @param  string $action
-     * @param  string $controller
-     * @param  string $module
-     * @param  array  $params
+     * @param string $action
+     * @param string $controller
+     * @param string $module
+     * @param array  $params
      * @return string
      */
     public function simple($action, $controller = null, $module = null, array $params = null)
@@ -68,7 +68,7 @@ class Zend_Controller_Action_Helper_Url extends Zend_Controller_Action_Helper_Ab
         }
 
         if (null !== $params) {
-            $paramPairs = array();
+            $paramPairs = [];
             foreach ($params as $key => $value) {
                 $paramPairs[] = urlencode($key) . '/' . urlencode($value);
             }
@@ -87,13 +87,13 @@ class Zend_Controller_Action_Helper_Url extends Zend_Controller_Action_Helper_Ab
      * This method will typically be used for more complex operations, as it
      * ties into the route objects registered with the router.
      *
-     * @param  array   $urlOptions Options passed to the assemble method of the Route object.
-     * @param  mixed   $name       The name of a Route to use. If null it will use the current Route
-     * @param  boolean $reset
-     * @param  boolean $encode
+     * @param array   $urlOptions Options passed to the assemble method of the Route object.
+     * @param mixed   $name       The name of a Route to use. If null it will use the current Route
+     * @param boolean $reset
+     * @param boolean $encode
      * @return string Url for the link href attribute.
      */
-    public function url($urlOptions = array(), $name = null, $reset = false, $encode = true)
+    public function url($urlOptions = [], $name = null, $reset = false, $encode = true)
     {
         $router = $this->getFrontController()->getRouter();
         return $router->assemble($urlOptions, $name, $reset, $encode);
@@ -104,10 +104,10 @@ class Zend_Controller_Action_Helper_Url extends Zend_Controller_Action_Helper_Ab
      *
      * Proxies to {@link simple()}
      *
-     * @param  string $action
-     * @param  string $controller
-     * @param  string $module
-     * @param  array  $params
+     * @param string $action
+     * @param string $controller
+     * @param string $module
+     * @param array  $params
      * @return string
      */
     public function direct($action, $controller = null, $module = null, array $params = null)

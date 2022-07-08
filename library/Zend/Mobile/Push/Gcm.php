@@ -77,7 +77,7 @@ class Zend_Mobile_Push_Gcm extends Zend_Mobile_Push_Abstract
     /**
      * Set API Key
      *
-     * @param  string $key
+     * @param string $key
      * @return Zend_Mobile_Push_Gcm
      * @throws Zend_Mobile_Push_Exception
      */
@@ -99,9 +99,9 @@ class Zend_Mobile_Push_Gcm extends Zend_Mobile_Push_Abstract
     {
         if (!$this->_httpClient) {
             $this->_httpClient = new Zend_Http_Client();
-            $this->_httpClient->setConfig(array(
+            $this->_httpClient->setConfig([
                 'strictredirects' => true,
-            ));
+            ]);
         }
         return $this->_httpClient;
     }
@@ -120,13 +120,13 @@ class Zend_Mobile_Push_Gcm extends Zend_Mobile_Push_Abstract
     /**
      * Send Message
      *
-     * @param  Zend_Mobile_Push_Message_Abstract $message
-     * @throws Zend_Http_Client_Exception
+     * @param Zend_Mobile_Push_Message_Abstract $message
+     * @return Zend_Mobile_Push_Response_Gcm
      * @throws Zend_Mobile_Push_Exception
      * @throws Zend_Mobile_Push_Exception_InvalidAuthToken
      * @throws Zend_Mobile_Push_Exception_InvalidPayload
      * @throws Zend_Mobile_Push_Exception_ServerUnavailable
-     * @return Zend_Mobile_Push_Response_Gcm
+     * @throws Zend_Http_Client_Exception
      */
     public function send(Zend_Mobile_Push_Message_Abstract $message)
     {
@@ -141,11 +141,10 @@ class Zend_Mobile_Push_Gcm extends Zend_Mobile_Push_Abstract
         $client->setHeaders('Authorization', 'key=' . $this->getApiKey());
 
         $response = $client->setRawData($message->toJson(), 'application/json')
-                           ->request('POST');
+            ->request('POST');
         $this->close();
 
-        switch ($response->getStatus())
-        {
+        switch ($response->getStatus()) {
             case 500:
                 require_once 'Zend/Mobile/Push/Exception/ServerUnavailable.php';
                 throw new Zend_Mobile_Push_Exception_ServerUnavailable('The server encountered an internal error, try again');

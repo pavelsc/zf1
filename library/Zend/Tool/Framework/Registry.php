@@ -370,7 +370,7 @@ class Zend_Tool_Framework_Registry implements Zend_Tool_Framework_Registry_Inter
      * __set() - Set a property via the magic set $registry->foo = 'foo'
      *
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
      */
     public function __set($name, $value)
     {

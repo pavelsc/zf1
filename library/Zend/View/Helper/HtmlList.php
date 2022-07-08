@@ -29,7 +29,7 @@ require_once 'Zend/View/Helper/FormElement.php';
 /**
  * Helper for ordered and unordered lists
  *
- * @uses Zend_View_Helper_FormElement
+ * @uses       Zend_View_Helper_FormElement
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
@@ -67,7 +67,7 @@ class Zend_View_Helper_HtmlList extends Zend_View_Helper_FormElement
             } else {
                 if (6 < strlen($list)) {
                     $list = substr($list, 0, strlen($list) - 6)
-                     . $this->htmlList($item, $ordered, $attribs, $escape) . '</li>' . self::EOL;
+                        . $this->htmlList($item, $ordered, $attribs, $escape) . '</li>' . self::EOL;
                 } else {
                     $list .= '<li>' . $this->htmlList($item, $ordered, $attribs, $escape) . '</li>' . self::EOL;
                 }

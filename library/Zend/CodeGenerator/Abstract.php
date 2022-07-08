@@ -44,7 +44,7 @@ abstract class Zend_CodeGenerator_Abstract
      *
      * @param array $options
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         $this->_init();
         if ($options != null) {
@@ -78,7 +78,7 @@ abstract class Zend_CodeGenerator_Abstract
      * @param array $options
      * @return Zend_CodeGenerator_Abstract
      */
-    public function setOptions(Array $options)
+    public function setOptions(array $options)
     {
         foreach ($options as $optionName => $optionValue) {
             $methodName = 'set' . $optionName;

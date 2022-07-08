@@ -5,10 +5,10 @@ CLDR data files are interpreted according to the LDML specification (http://unic
 For terms of use, see http://www.unicode.org/copyright.html
 -->
 <ldml>
-	<identity>
-		<version number="$Revision: 9747 $"/>
-		<generation date="$Date: 2014-02-20 10:33:36 -0600 (Thu, 20 Feb 2014) $"/>
-		<language type="fy"/>
-		<territory type="NL"/>
-	</identity>
+    <identity>
+        <version number="$Revision: 9747 $"/>
+        <generation date="$Date: 2014-02-20 10:33:36 -0600 (Thu, 20 Feb 2014) $"/>
+        <language type="fy"/>
+        <territory type="NL"/>
+    </identity>
 </ldml>

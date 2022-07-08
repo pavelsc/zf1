@@ -59,7 +59,7 @@ class Zend_Gdata_Gapps_ServiceException extends Zend_Exception
      *
      * @var array
      */
-    protected $_errors = array();
+    protected $_errors = [];
 
     /**
      * Create a new ServiceException.
@@ -67,7 +67,8 @@ class Zend_Gdata_Gapps_ServiceException extends Zend_Exception
      * @return array An array containing a collection of
      *          Zend_Gdata_Gapps_Error objects.
      */
-    public function __construct($errors = null) {
+    public function __construct($errors = null)
+    {
         parent::__construct("Server errors encountered");
         if ($errors !== null) {
             $this->setErrors($errors);
@@ -79,10 +80,11 @@ class Zend_Gdata_Gapps_ServiceException extends Zend_Exception
      * server.
      *
      * @param Zend_Gdata_Gapps_Error $error An instance of an error returned
-     *          by the server. The error's errorCode must be set.
+     *                                      by the server. The error's errorCode must be set.
      * @throws Zend_Gdata_App_Exception
      */
-    public function addError($error) {
+    public function addError($error)
+    {
         // Make sure that we don't try to index an error that doesn't
         // contain an index value.
         if ($error->getErrorCode() == null) {
@@ -98,12 +100,13 @@ class Zend_Gdata_Gapps_ServiceException extends Zend_Exception
      * AppsForYourDomainErrors tag.
      *
      * @param array $array An associative array containing a collection of
-     *          Zend_Gdata_Gapps_Error objects. All errors must have their
-     *          errorCode value set.
+     *                     Zend_Gdata_Gapps_Error objects. All errors must have their
+     *                     errorCode value set.
      * @throws Zend_Gdata_App_Exception
      */
-    public function setErrors($array) {
-        $this->_errors = array();
+    public function setErrors($array)
+    {
+        $this->_errors = [];
         foreach ($array as $error) {
             $this->addError($error);
         }
@@ -116,7 +119,8 @@ class Zend_Gdata_Gapps_ServiceException extends Zend_Exception
      * @return array An associative array containing a collection of
      *          Zend_Gdata_Gapps_Error objects, indexed by error code.
      */
-    public function getErrors() {
+    public function getErrors()
+    {
         return $this->_errors;
     }
 
@@ -126,7 +130,8 @@ class Zend_Gdata_Gapps_ServiceException extends Zend_Exception
      * @return Zend_Gdata_Gapps_Error The Error object requested, or null
      *              if not found.
      */
-    public function getError($errorCode) {
+    public function getError($errorCode)
+    {
         if (array_key_exists($errorCode, $this->_errors)) {
             $result = $this->_errors[$errorCode];
             return $result;
@@ -141,9 +146,10 @@ class Zend_Gdata_Gapps_ServiceException extends Zend_Exception
      *
      * @param integer $errorCode The error code to check against.
      * @return boolean Whether or not the supplied error code was returned
-     *          by the server.
+     *                           by the server.
      */
-    public function hasError($errorCode) {
+    public function hasError($errorCode)
+    {
         return array_key_exists($errorCode, $this->_errors);
     }
 
@@ -154,7 +160,8 @@ class Zend_Gdata_Gapps_ServiceException extends Zend_Exception
      * @return Zend_Gdata_Gapps_ServiceException Provides a fluent interface.
      * @throws Zend_Gdata_App_Exception
      */
-    public function importFromString($string) {
+    public function importFromString($string)
+    {
         if ($string) {
             // Check to see if an AppsForYourDomainError exists
             //
@@ -201,7 +208,8 @@ class Zend_Gdata_Gapps_ServiceException extends Zend_Exception
      *
      * @return string
      */
-    public function __toString() {
+    public function __toString()
+    {
         $result = "The server encountered the following errors processing the request:";
         foreach ($this->_errors as $error) {
             $result .= "\n" . $error->__toString();

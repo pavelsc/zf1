@@ -66,7 +66,7 @@ class Zend_Reflection_Method extends ReflectionMethod
     /**
      * Get start line (position) of method
      *
-     * @param  bool $includeDocComment
+     * @param bool $includeDocComment
      * @return int
      */
     public function getStartLine($includeDocComment = false)
@@ -83,12 +83,12 @@ class Zend_Reflection_Method extends ReflectionMethod
     /**
      * Get reflection of declaring class
      *
-     * @param  string $reflectionClass Name of reflection class to use
+     * @param string $reflectionClass Name of reflection class to use
      * @return Zend_Reflection_Class
      */
     public function getDeclaringClass($reflectionClass = 'Zend_Reflection_Class')
     {
-        $phpReflection  = parent::getDeclaringClass();
+        $phpReflection = parent::getDeclaringClass();
         $zendReflection = new $reflectionClass($phpReflection->getName());
         if (!$zendReflection instanceof Zend_Reflection_Class) {
             require_once 'Zend/Reflection/Exception.php';
@@ -101,15 +101,15 @@ class Zend_Reflection_Method extends ReflectionMethod
     /**
      * Get all method parameter reflection objects
      *
-     * @param  string $reflectionClass Name of reflection class to use
+     * @param string $reflectionClass Name of reflection class to use
      * @return array of Zend_Reflection_Parameter objects
      */
     public function getParameters($reflectionClass = 'Zend_Reflection_Parameter')
     {
-        $phpReflections  = parent::getParameters();
-        $zendReflections = array();
+        $phpReflections = parent::getParameters();
+        $zendReflections = [];
         while ($phpReflections && ($phpReflection = array_shift($phpReflections))) {
-            $instance = new $reflectionClass(array($this->getDeclaringClass()->getName(), $this->getName()), $phpReflection->getName());
+            $instance = new $reflectionClass([$this->getDeclaringClass()->getName(), $this->getName()], $phpReflection->getName());
             if (!$instance instanceof Zend_Reflection_Parameter) {
                 require_once 'Zend/Reflection/Exception.php';
                 throw new Zend_Reflection_Exception('Invalid reflection class provided; must extend Zend_Reflection_Parameter');
@@ -124,7 +124,7 @@ class Zend_Reflection_Method extends ReflectionMethod
     /**
      * Get method contents
      *
-     * @param  bool $includeDocblock
+     * @param bool $includeDocblock
      * @return string
      */
     public function getContents($includeDocblock = true)
@@ -145,7 +145,7 @@ class Zend_Reflection_Method extends ReflectionMethod
     {
         $lines = array_slice(
             file($this->getDeclaringClass()->getFileName(), FILE_IGNORE_NEW_LINES),
-            $this->getStartLine()-1,
+            $this->getStartLine() - 1,
             ($this->getEndLine() - $this->getStartLine()) + 1,
             true
         );
@@ -158,7 +158,7 @@ class Zend_Reflection_Method extends ReflectionMethod
 
         // If the opening brace isn't on the same line as method 
         // signature, then we should pop off more lines until we find it
-        if (strpos($firstLine,'{') === false) {
+        if (strpos($firstLine, '{') === false) {
             do {
                 if (count($lines) == 0) break;
                 $firstLine = array_shift($lines);
@@ -167,7 +167,7 @@ class Zend_Reflection_Method extends ReflectionMethod
 
         // If there are more characters on the line after the opening brace,
         // push them back onto the lines stack as they are part of the body
-        $restOfFirstLine = trim(substr($firstLine, strpos($firstLine, '{')+1));
+        $restOfFirstLine = trim(substr($firstLine, strpos($firstLine, '{') + 1));
         if (!empty($restOfFirstLine)) {
             array_unshift($lines, $restOfFirstLine);
         }
@@ -176,7 +176,7 @@ class Zend_Reflection_Method extends ReflectionMethod
 
         // If there are more characters on the line before the closing brace,
         // push them back onto the lines stack as they are part of the body
-        $restOfLastLine = trim(substr($lastLine, 0, strrpos($lastLine, '}')-1));
+        $restOfLastLine = trim(substr($lastLine, 0, strrpos($lastLine, '}') - 1));
         if (!empty($restOfLastLine)) {
             array_push($lines, $restOfLastLine);
         }

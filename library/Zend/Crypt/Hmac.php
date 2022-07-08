@@ -29,7 +29,7 @@ require_once 'Zend/Crypt.php';
  * PHP implementation of the RFC 2104 Hash based Message Authentication Code
  * algorithm.
  *
- * @todo  Patch for refactoring failed tests (key block sizes >80 using internal algo)
+ * @todo       Patch for refactoring failed tests (key block sizes >80 using internal algo)
  * @todo       Check if mhash() is a required alternative (will be PECL-only soon)
  * @category   Zend
  * @package    Zend_Crypt
@@ -66,9 +66,9 @@ class Zend_Crypt_Hmac extends Zend_Crypt
      *
      * @var array
      */
-    protected static $_supportedMhashAlgorithms = array('adler32',' crc32', 'crc32b', 'gost',
-            'haval128', 'haval160', 'haval192', 'haval256', 'md4', 'md5', 'ripemd160',
-            'sha1', 'sha256', 'tiger', 'tiger128', 'tiger160');
+    protected static $_supportedMhashAlgorithms = ['adler32', ' crc32', 'crc32b', 'gost',
+        'haval128', 'haval160', 'haval192', 'haval256', 'md4', 'md5', 'ripemd160',
+        'sha1', 'sha256', 'tiger', 'tiger128', 'tiger160'];
 
     /**
      * Constants representing the output mode of the hash algorithm
@@ -85,8 +85,8 @@ class Zend_Crypt_Hmac extends Zend_Crypt
      * @param string $hash
      * @param string $data
      * @param string $output
-     * @throws Zend_Crypt_Hmac_Exception
      * @return string
+     * @throws Zend_Crypt_Hmac_Exception
      */
     public static function compute($key, $hash, $data, $output = self::STRING)
     {
@@ -108,8 +108,8 @@ class Zend_Crypt_Hmac extends Zend_Crypt
      * Setter for the hash method.
      *
      * @param string $hash
-     * @throws Zend_Crypt_Hmac_Exception
      * @return Zend_Crypt_Hmac
+     * @throws Zend_Crypt_Hmac_Exception
      */
     protected static function _setHashAlgorithm($hash)
     {
@@ -141,7 +141,7 @@ class Zend_Crypt_Hmac extends Zend_Crypt
      *
      * @param string $data
      * @param string $output
-     * @param bool $internal Option to not use hash() functions for testing
+     * @param bool   $internal Option to not use hash() functions for testing
      * @return string
      */
     protected static function _hash($data, $output = self::STRING, $internal = false)
@@ -172,8 +172,7 @@ class Zend_Crypt_Hmac extends Zend_Crypt
      */
     protected static function _getMhashDefinition($hashAlgorithm)
     {
-        for ($i = 0; $i <= mhash_count(); $i++)
-        {
+        for ($i = 0; $i <= mhash_count(); $i++) {
             $types[mhash_get_hash_name($i)] = $i;
         }
         return $types[strtoupper($hashAlgorithm)];

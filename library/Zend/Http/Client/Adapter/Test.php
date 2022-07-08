@@ -54,7 +54,7 @@ class Zend_Http_Client_Adapter_Test implements Zend_Http_Client_Adapter_Interfac
      *
      * @var array
      */
-    protected $config = array();
+    protected $config = [];
 
     /**
      * Buffer of responses to be returned by the read() method.  Can be
@@ -62,7 +62,7 @@ class Zend_Http_Client_Adapter_Test implements Zend_Http_Client_Adapter_Interfac
      *
      * @var array
      */
-    protected $responses = array("HTTP/1.1 400 Bad Request\r\n\r\n");
+    protected $responses = ["HTTP/1.1 400 Bad Request\r\n\r\n"];
 
     /**
      * Current position in the response buffer
@@ -83,7 +83,8 @@ class Zend_Http_Client_Adapter_Test implements Zend_Http_Client_Adapter_Interfac
      *
      */
     public function __construct()
-    { }
+    {
+    }
 
     /**
      * Set the nextRequestWillFail flag
@@ -93,7 +94,7 @@ class Zend_Http_Client_Adapter_Test implements Zend_Http_Client_Adapter_Interfac
      */
     public function setNextRequestWillFail($flag)
     {
-        $this->_nextRequestWillFail = (bool) $flag;
+        $this->_nextRequestWillFail = (bool)$flag;
 
         return $this;
     }
@@ -103,12 +104,12 @@ class Zend_Http_Client_Adapter_Test implements Zend_Http_Client_Adapter_Interfac
      *
      * @param Zend_Config | array $config
      */
-    public function setConfig($config = array())
+    public function setConfig($config = [])
     {
         if ($config instanceof Zend_Config) {
             $config = $config->toArray();
 
-        } elseif (! is_array($config)) {
+        } elseif (!is_array($config)) {
             require_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new Zend_Http_Client_Adapter_Exception(
                 'Array or Zend_Config object expected, got ' . gettype($config)
@@ -149,10 +150,10 @@ class Zend_Http_Client_Adapter_Test implements Zend_Http_Client_Adapter_Interfac
      * @param string        $body
      * @return string Request as string
      */
-    public function write($method, $uri, $http_ver = '1.1', $headers = array(), $body = '')
+    public function write($method, $uri, $http_ver = '1.1', $headers = [], $body = '')
     {
         $host = $uri->getHost();
-            $host = (strtolower($uri->getScheme()) == 'https' ? 'sslv2://' . $host : $host);
+        $host = (strtolower($uri->getScheme()) == 'https' ? 'sslv2://' . $host : $host);
 
         // Build request headers
         $path = $uri->getPath();
@@ -189,7 +190,8 @@ class Zend_Http_Client_Adapter_Test implements Zend_Http_Client_Adapter_Interfac
      *
      */
     public function close()
-    { }
+    {
+    }
 
     /**
      * Set the HTTP response(s) to be returned by this adapter
@@ -213,7 +215,7 @@ class Zend_Http_Client_Adapter_Test implements Zend_Http_Client_Adapter_Interfac
      */
     public function addResponse($response)
     {
-         if ($response instanceof Zend_Http_Response) {
+        if ($response instanceof Zend_Http_Response) {
             $response = $response->asString("\r\n");
         }
 

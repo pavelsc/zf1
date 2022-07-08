@@ -46,8 +46,8 @@ class Zend_Tool_Project_Provider_Model extends Zend_Tool_Project_Provider_Abstra
 
         $newModel = $modelsDirectory->createResource(
             'modelFile',
-            array('modelName' => $modelName, 'moduleName' => $moduleName)
-            );
+            ['modelName' => $modelName, 'moduleName' => $moduleName]
+        );
 
         return $newModel;
     }
@@ -56,8 +56,8 @@ class Zend_Tool_Project_Provider_Model extends Zend_Tool_Project_Provider_Abstra
      * hasResource()
      *
      * @param Zend_Tool_Project_Profile $profile
-     * @param string $modelName
-     * @param string $moduleName
+     * @param string                    $modelName
+     * @param string                    $moduleName
      * @return Zend_Tool_Project_Profile_Resource
      */
     public static function hasResource(Zend_Tool_Project_Profile $profile, $modelName, $moduleName = null)
@@ -67,27 +67,27 @@ class Zend_Tool_Project_Provider_Model extends Zend_Tool_Project_Provider_Abstra
         }
 
         $modelsDirectory = self::_getModelsDirectoryResource($profile, $moduleName);
-        
+
         if (!$modelsDirectory instanceof Zend_Tool_Project_Profile_Resource) {
             return false;
         }
-        
-        return (($modelsDirectory->search(array('modelFile' => array('modelName' => $modelName)))) instanceof Zend_Tool_Project_Profile_Resource);
+
+        return (($modelsDirectory->search(['modelFile' => ['modelName' => $modelName]])) instanceof Zend_Tool_Project_Profile_Resource);
     }
 
     /**
      * _getModelsDirectoryResource()
      *
      * @param Zend_Tool_Project_Profile $profile
-     * @param string $moduleName
+     * @param string                    $moduleName
      * @return Zend_Tool_Project_Profile_Resource
      */
     protected static function _getModelsDirectoryResource(Zend_Tool_Project_Profile $profile, $moduleName = null)
     {
-        $profileSearchParams = array();
+        $profileSearchParams = [];
 
         if ($moduleName != null && is_string($moduleName)) {
-            $profileSearchParams = array('modulesDirectory', 'moduleDirectory' => array('moduleName' => $moduleName));
+            $profileSearchParams = ['modulesDirectory', 'moduleDirectory' => ['moduleName' => $moduleName]];
         }
 
         $profileSearchParams[] = 'modelsDirectory';
@@ -132,10 +132,10 @@ class Zend_Tool_Project_Provider_Model extends Zend_Tool_Project_Provider_Abstra
         if ($name !== $originalName) {
             $response->appendContent(
                 'Note: The canonical model name that ' . $tense
-                    . ' used with other providers is "' . $name . '";'
-                    . ' not "' . $originalName . '" as supplied',
-                array('color' => array('yellow'))
-                );
+                . ' used with other providers is "' . $name . '";'
+                . ' not "' . $originalName . '" as supplied',
+                ['color' => ['yellow']]
+            );
         }
 
         try {
@@ -153,7 +153,7 @@ class Zend_Tool_Project_Provider_Model extends Zend_Tool_Project_Provider_Abstra
         // do the creation
         if ($request->isPretend()) {
 
-            $response->appendContent('Would create a model at '  . $modelResource->getContext()->getPath());
+            $response->appendContent('Would create a model at ' . $modelResource->getContext()->getPath());
 
             if ($testModelResource) {
                 $response->appendContent('Would create a model test file at ' . $testModelResource->getContext()->getPath());

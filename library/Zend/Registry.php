@@ -59,7 +59,7 @@ class Zend_Registry extends ArrayObject
      * Set the default registry instance to a specified instance.
      *
      * @param Zend_Registry $registry An object instance of type Zend_Registry,
-     *   or a subclass.
+     *                                or a subclass.
      * @return void
      * @throws Zend_Exception if registry is already initialized.
      */
@@ -158,8 +158,8 @@ class Zend_Registry extends ArrayObject
      * static instance stored in the class.
      *
      * @param string $index The location in the ArrayObject in which to store
-     *   the value.
-     * @param mixed $value The object to store in the ArrayObject.
+     *                      the value.
+     * @param mixed  $value The object to store in the ArrayObject.
      * @return void
      */
     public static function set($index, $value)
@@ -172,7 +172,7 @@ class Zend_Registry extends ArrayObject
      * Returns TRUE if the $index is a named value in the registry,
      * or FALSE if $index was not found in the registry.
      *
-     * @param  string $index
+     * @param string $index
      * @return boolean
      */
     public static function isRegistered($index)
@@ -187,10 +187,10 @@ class Zend_Registry extends ArrayObject
      * Constructs a parent ArrayObject with default
      * ARRAY_AS_PROPS to allow acces as an object
      *
-     * @param array $array data array
+     * @param array   $array data array
      * @param integer $flags ArrayObject flags
      */
-    public function __construct($array = array(), $flags = parent::ARRAY_AS_PROPS)
+    public function __construct($array = [], $flags = parent::ARRAY_AS_PROPS)
     {
         parent::__construct($array, $flags);
     }

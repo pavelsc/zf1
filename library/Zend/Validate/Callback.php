@@ -47,10 +47,10 @@ class Zend_Validate_Callback extends Zend_Validate_Abstract
      *
      * @var array
      */
-    protected $_messageTemplates = array(
-        self::INVALID_VALUE    => "'%value%' is not valid",
+    protected $_messageTemplates = [
+        self::INVALID_VALUE => "'%value%' is not valid",
         self::INVALID_CALLBACK => "An exception has been raised within the callback",
-    );
+    ];
 
     /**
      * Callback in a call_user_func format
@@ -64,12 +64,12 @@ class Zend_Validate_Callback extends Zend_Validate_Abstract
      *
      * @var mixed
      */
-    protected $_options = array();
+    protected $_options = [];
 
     /**
      * Sets validator options
      *
-     * @param  mixed $callback
+     * @param mixed $callback
      * @throws Zend_Validate_Exception
      */
     public function __construct($callback = null)
@@ -104,9 +104,9 @@ class Zend_Validate_Callback extends Zend_Validate_Abstract
     /**
      * Sets the callback
      *
-     * @param  string|array $callback
-     * @throws Zend_Validate_Exception
+     * @param string|array $callback
      * @return Zend_Validate_Callback Provides a fluent interface
+     * @throws Zend_Validate_Exception
      */
     public function setCallback($callback)
     {
@@ -131,12 +131,12 @@ class Zend_Validate_Callback extends Zend_Validate_Abstract
     /**
      * Sets options for the callback
      *
-     * @param  mixed $options
+     * @param mixed $options
      * @return Zend_Validate_Callback Provides a fluent interface
      */
     public function setOptions($options)
     {
-        $this->_options = (array) $options;
+        $this->_options = (array)$options;
         return $this;
     }
 
@@ -146,17 +146,17 @@ class Zend_Validate_Callback extends Zend_Validate_Abstract
      * Returns true if and only if the set callback returns
      * for the provided $value
      *
-     * @param  mixed $value
+     * @param mixed $value
      * @return boolean
      */
     public function isValid($value)
     {
         $this->_setValue($value);
 
-        $options  = $this->getOptions();
+        $options = $this->getOptions();
         $callback = $this->getCallback();
-        $args     = func_get_args();
-        $options  = array_merge($args, $options);
+        $args = func_get_args();
+        $options = array_merge($args, $options);
 
         try {
             if (!call_user_func_array($callback, $options)) {

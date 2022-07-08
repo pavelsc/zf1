@@ -41,8 +41,8 @@ class Zend_Feed_Reader_Feed_Atom extends Zend_Feed_Reader_FeedAbstract
     /**
      * Constructor
      *
-     * @param  DOMDocument $dom
-     * @param  string $type
+     * @param DOMDocument $dom
+     * @param string      $type
      */
     public function __construct(DOMDocument $dom, $type = null)
     {
@@ -59,7 +59,7 @@ class Zend_Feed_Reader_Feed_Atom extends Zend_Feed_Reader_FeedAbstract
     /**
      * Get a single author
      *
-     * @param  int $index
+     * @param int $index
      * @return string|null
      */
     public function getAuthor($index = 0)
@@ -394,10 +394,10 @@ class Zend_Feed_Reader_Feed_Atom extends Zend_Feed_Reader_FeedAbstract
     {
         if ($this->getType() == Zend_Feed_Reader::TYPE_ATOM_10 ||
             $this->getType() == Zend_Feed_Reader::TYPE_ATOM_03) {
-            $entries = array();
+            $entries = [];
             $entries = $this->_xpath->evaluate('//atom:entry');
 
-            foreach($entries as $index=>$entry) {
+            foreach ($entries as $index => $entry) {
                 $this->_entries[$index] = $entry;
             }
         }

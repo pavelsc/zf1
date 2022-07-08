@@ -12,11 +12,11 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category  Zend
- * @package   Zend_Validate
+ * @category   Zend
+ * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id$
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
 /**
@@ -27,44 +27,44 @@ require_once 'Zend/Validate/File/MimeType.php';
 /**
  * Validator which checks if the file already exists in the directory
  *
- * @category  Zend
- * @package   Zend_Validate
+ * @category   Zend
+ * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_File_IsImage extends Zend_Validate_File_MimeType
 {
     /**
      * @const string Error constants
      */
-    const FALSE_TYPE   = 'fileIsImageFalseType';
+    const FALSE_TYPE = 'fileIsImageFalseType';
     const NOT_DETECTED = 'fileIsImageNotDetected';
     const NOT_READABLE = 'fileIsImageNotReadable';
 
     /**
      * @var array Error message templates
      */
-    protected $_messageTemplates = array(
-        self::FALSE_TYPE   => "File '%value%' is no image, '%type%' detected",
+    protected $_messageTemplates = [
+        self::FALSE_TYPE => "File '%value%' is no image, '%type%' detected",
         self::NOT_DETECTED => "The mimetype of file '%value%' could not be detected",
         self::NOT_READABLE => "File '%value%' is not readable or does not exist",
-    );
+    ];
 
     /**
      * Sets validator options
      *
      * @param string|array|Zend_Config $mimetype
      */
-    public function __construct($mimetype = array())
+    public function __construct($mimetype = [])
     {
         if ($mimetype instanceof Zend_Config) {
             $mimetype = $mimetype->toArray();
         }
 
-        $temp    = array();
+        $temp = [];
         // http://de.wikipedia.org/wiki/Liste_von_Dateiendungen
         // http://www.iana.org/assignments/media-types/image/
-        $default = array(
+        $default = [
             'application/cdf',
             'application/dicom',
             'application/fractals',
@@ -119,7 +119,7 @@ class Zend_Validate_File_IsImage extends Zend_Validate_File_MimeType
             'image/x-unknown',
             'image/x-windows-bmp',
             'image/x-xpmi',
-        );
+        ];
 
         if (is_array($mimetype)) {
             $temp = $mimetype;
@@ -147,14 +147,14 @@ class Zend_Validate_File_IsImage extends Zend_Validate_File_MimeType
      * Throws an error of the given type
      * Duplicates parent method due to OOP Problem with late static binding in PHP 5.2
      *
-     * @param  string $file
-     * @param  string $errorType
+     * @param string $file
+     * @param string $errorType
      * @return false
      */
     protected function _throw($file, $errorType)
     {
         $this->_value = $file['name'];
-        switch($errorType) {
+        switch ($errorType) {
             case Zend_Validate_File_MimeType::FALSE_TYPE :
                 $errorType = self::FALSE_TYPE;
                 break;

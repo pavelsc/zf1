@@ -34,13 +34,13 @@ class Zend_Translate_Plural
      *
      * @var string
      */
-    protected static $_plural = array();
+    protected static $_plural = [];
 
     /**
      * Returns the plural definition to use
      *
-     * @param  integer $number Number for plural selection
-     * @param  string  $locale Locale to use
+     * @param integer $number Number for plural selection
+     * @param string  $locale Locale to use
      * @return integer Plural number to use
      */
     public static function getPlural($number, $locale)
@@ -64,7 +64,7 @@ class Zend_Translate_Plural
             return $return;
         }
 
-        switch($locale) {
+        switch ($locale) {
             case 'az':
             case 'bo':
             case 'dz':

@@ -41,7 +41,7 @@ require_once 'Zend/Ldap/Filter/String.php';
 abstract class Zend_Ldap_Filter_Logical extends Zend_Ldap_Filter_Abstract
 {
     const TYPE_AND = '&';
-    const TYPE_OR  = '|';
+    const TYPE_OR = '|';
 
     /**
      * All the sub-filters for this grouping filter.
@@ -82,7 +82,7 @@ abstract class Zend_Ldap_Filter_Logical extends Zend_Ldap_Filter_Abstract
     /**
      * Adds a filter to this grouping filter.
      *
-     * @param  Zend_Ldap_Filter_Abstract $filter
+     * @param Zend_Ldap_Filter_Abstract $filter
      * @return Zend_Ldap_Filter_Logical
      */
     public function addFilter(Zend_Ldap_Filter_Abstract $filter)

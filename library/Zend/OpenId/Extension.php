@@ -34,9 +34,9 @@ abstract class Zend_OpenId_Extension
     /**
      * Calls given function with given argument for all extensions
      *
-     * @param mixed $extensions list of extensions or one extension
-     * @param string $func function to be called
-     * @param mixed &$params argument to pass to given funcion
+     * @param mixed  $extensions list of extensions or one extension
+     * @param string $func       function to be called
+     * @param mixed &$params     argument to pass to given funcion
      * @return bool
      */
     static public function forAll($extensions, $func, &$params)
@@ -53,8 +53,8 @@ abstract class Zend_OpenId_Extension
                     }
                 }
             } else if (!is_object($extensions) ||
-                       !($extensions instanceof Zend_OpenId_Extension) ||
-                       !$extensions->$func($params)) {
+                !($extensions instanceof Zend_OpenId_Extension) ||
+                !$extensions->$func($params)) {
                 return false;
             }
         }

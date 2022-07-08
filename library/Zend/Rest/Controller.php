@@ -27,8 +27,8 @@ require_once 'Zend/Controller/Action.php';
  * Zend_Rest_Route.
  *
  * @category   Zend
- * @package Zend_Rest
- * @see Zend_Rest_Route
+ * @package    Zend_Rest
+ * @see        Zend_Rest_Route
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

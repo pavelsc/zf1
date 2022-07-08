@@ -44,11 +44,11 @@ class Zend_Acl_Resource implements Zend_Acl_Resource_Interface
     /**
      * Sets the Resource identifier
      *
-     * @param  string $resourceId
+     * @param string $resourceId
      */
     public function __construct($resourceId)
     {
-        $this->_resourceId = (string) $resourceId;
+        $this->_resourceId = (string)$resourceId;
     }
 
     /**

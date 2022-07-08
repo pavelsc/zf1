@@ -92,11 +92,11 @@ class Zend_Config_Ini extends Zend_Config
      *     'skipExtends'        => false,
      *      );
      *
-     * @param  string        $filename
-     * @param  mixed         $section
-     * @param  boolean|array $options
-     * @throws Zend_Config_Exception
+     * @param string        $filename
+     * @param mixed         $section
+     * @param boolean|array $options
      * @return void
+     * @throws Zend_Config_Exception
      */
     public function __construct($filename, $section = null, $options = false)
     {
@@ -113,13 +113,13 @@ class Zend_Config_Ini extends Zend_Config
             $allowModifications = $options;
         } elseif (is_array($options)) {
             if (isset($options['allowModifications'])) {
-                $allowModifications = (bool) $options['allowModifications'];
+                $allowModifications = (bool)$options['allowModifications'];
             }
             if (isset($options['nestSeparator'])) {
-                $this->_nestSeparator = (string) $options['nestSeparator'];
+                $this->_nestSeparator = (string)$options['nestSeparator'];
             }
             if (isset($options['skipExtends'])) {
-                $this->_skipExtends = (bool) $options['skipExtends'];
+                $this->_skipExtends = (bool)$options['skipExtends'];
             }
         }
 
@@ -127,10 +127,10 @@ class Zend_Config_Ini extends Zend_Config
 
         if (null === $section) {
             // Load entire file
-            $dataArray = array();
+            $dataArray = [];
             foreach ($iniArray as $sectionName => $sectionData) {
-                if(!is_array($sectionData)) {
-                    $dataArray = $this->_arrayMergeRecursive($dataArray, $this->_processKey(array(), $sectionName, $sectionData));
+                if (!is_array($sectionData)) {
+                    $dataArray = $this->_arrayMergeRecursive($dataArray, $this->_processKey([], $sectionName, $sectionData));
                 } else {
                     $dataArray[$sectionName] = $this->_processSection($iniArray, $sectionName);
                 }
@@ -139,9 +139,9 @@ class Zend_Config_Ini extends Zend_Config
         } else {
             // Load one or more sections
             if (!is_array($section)) {
-                $section = array($section);
+                $section = [$section];
             }
-            $dataArray = array();
+            $dataArray = [];
             foreach ($section as $sectionName) {
                 if (!isset($iniArray[$sectionName])) {
                     /**
@@ -164,12 +164,12 @@ class Zend_Config_Ini extends Zend_Config
      * handler to convert any loading errors into a Zend_Config_Exception
      *
      * @param string $filename
-     * @throws Zend_Config_Exception
      * @return array
+     * @throws Zend_Config_Exception
      */
     protected function _parseIniFile($filename)
     {
-        set_error_handler(array($this, '_loadFileErrorHandler'));
+        set_error_handler([$this, '_loadFileErrorHandler']);
         $iniArray = parse_ini_file($filename, true); // Warnings and errors are suppressed
         restore_error_handler();
 
@@ -194,15 +194,14 @@ class Zend_Config_Ini extends Zend_Config
      * parse_ini_file().
      *
      * @param string $filename
-     * @throws Zend_Config_Exception
      * @return array
+     * @throws Zend_Config_Exception
      */
     protected function _loadIniFile($filename)
     {
         $loaded = $this->_parseIniFile($filename);
-        $iniArray = array();
-        foreach ($loaded as $key => $data)
-        {
+        $iniArray = [];
+        foreach ($loaded as $key => $data) {
             $pieces = explode($this->_sectionSeparator, $key);
             $thisSection = trim($pieces[0]);
             switch (count($pieces)) {
@@ -212,7 +211,7 @@ class Zend_Config_Ini extends Zend_Config
 
                 case 2:
                     $extendedSection = trim($pieces[1]);
-                    $iniArray[$thisSection] = array_merge(array(';extends'=>$extendedSection), $data);
+                    $iniArray[$thisSection] = array_merge([';extends' => $extendedSection], $data);
                     break;
 
                 default:
@@ -232,13 +231,13 @@ class Zend_Config_Ini extends Zend_Config
      * key. Passes control to _processKey() to handle the nest separator
      * sub-property syntax that may be used within the key name.
      *
-     * @param  array  $iniArray
-     * @param  string $section
-     * @param  array  $config
-     * @throws Zend_Config_Exception
+     * @param array  $iniArray
+     * @param string $section
+     * @param array  $config
      * @return array
+     * @throws Zend_Config_Exception
      */
-    protected function _processSection($iniArray, $section, $config = array())
+    protected function _processSection($iniArray, $section, $config = [])
     {
         $thisSection = $iniArray[$section];
 
@@ -268,11 +267,11 @@ class Zend_Config_Ini extends Zend_Config
      * Assign the key's value to the property list. Handles the
      * nest separator for sub-properties.
      *
-     * @param  array  $config
-     * @param  string $key
-     * @param  string $value
-     * @throws Zend_Config_Exception
+     * @param array  $config
+     * @param string $key
+     * @param string $value
      * @return array
+     * @throws Zend_Config_Exception
      */
     protected function _processKey($config, $key, $value)
     {
@@ -282,9 +281,9 @@ class Zend_Config_Ini extends Zend_Config
                 if (!isset($config[$pieces[0]])) {
                     if ($pieces[0] === '0' && !empty($config)) {
                         // convert the current values in $config into an array
-                        $config = array($pieces[0] => $config);
+                        $config = [$pieces[0] => $config];
                     } else {
-                        $config[$pieces[0]] = array();
+                        $config[$pieces[0]] = [];
                     }
                 } elseif (!is_array($config[$pieces[0]])) {
                     /**

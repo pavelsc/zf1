@@ -39,13 +39,13 @@ final class Zend_Mail_Header_HeaderValue
      * Filter the header value according to RFC 2822
      *
      * @see    http://www.rfc-base.org/txt/rfc-2822.txt (section 2.2)
-     * @param  string $value
+     * @param string $value
      * @return string
      */
     public static function filter($value)
     {
         $result = '';
-        $tot    = strlen($value);
+        $tot = strlen($value);
 
         // Filter for CR and LF characters, leaving CRLF + WSP sequences for
         // Long Header Fields (section 2.2.3 of RFC 2822)
@@ -123,12 +123,12 @@ final class Zend_Mail_Header_HeaderValue
      * Raises an exception if invalid.
      *
      * @param string $value
-     * @throws Exception\RuntimeException
      * @return void
+     * @throws Exception\RuntimeException
      */
     public static function assertValid($value)
     {
-        if (! self::isValid($value)) {
+        if (!self::isValid($value)) {
             require_once 'Zend/Mail/Exception.php';
             throw new Zend_Mail_Exception('Invalid header value detected');
         }

@@ -66,10 +66,10 @@ class Zend_Tag_Cloud
      *
      * @var array
      */
-    protected $_skipOptions = array(
+    protected $_skipOptions = [
         'options',
         'config',
-    );
+    ];
 
     /**
      * Create a new tag cloud with options
@@ -90,7 +90,7 @@ class Zend_Tag_Cloud
     /**
      * Set options from Zend_Config
      *
-     * @param  Zend_Config $config
+     * @param Zend_Config $config
      * @return Zend_Tag_Cloud
      */
     public function setConfig(Zend_Config $config)
@@ -103,7 +103,7 @@ class Zend_Tag_Cloud
     /**
      * Set options from array
      *
-     * @param  array $options Configuration for Zend_Tag_Cloud
+     * @param array $options Configuration for Zend_Tag_Cloud
      * @return Zend_Tag_Cloud
      */
     public function setOptions(array $options)
@@ -136,7 +136,7 @@ class Zend_Tag_Cloud
      * parameter in the array is silently ignored and can be used by custom
      * decorators.
      *
-     * @param  array $tags
+     * @param array $tags
      * @return Zend_Tag_Cloud
      */
     public function setTags(array $tags)
@@ -161,7 +161,7 @@ class Zend_Tag_Cloud
     /**
      * Append a single tag to the cloud
      *
-     * @param  Zend_Tag_Taggable|array $tag
+     * @param Zend_Tag_Taggable|array $tag
      * @return Zend_Tag_Cloud
      */
     public function appendTag($tag)
@@ -182,7 +182,7 @@ class Zend_Tag_Cloud
     /**
      * Set the item list
      *
-     * @param  Zend_Tag_ItemList $itemList
+     * @param Zend_Tag_ItemList $itemList
      * @return Zend_Tag_Cloud
      */
     public function setItemList(Zend_Tag_ItemList $itemList)
@@ -210,7 +210,7 @@ class Zend_Tag_Cloud
     /**
      * Set the decorator for the cloud
      *
-     * @param  mixed $decorator
+     * @param mixed $decorator
      * @return Zend_Tag_Cloud
      */
     public function setCloudDecorator($decorator)
@@ -258,7 +258,7 @@ class Zend_Tag_Cloud
     /**
      * Set the decorator for the tags
      *
-     * @param  mixed $decorator
+     * @param mixed $decorator
      * @return Zend_Tag_Cloud
      */
     public function setTagDecorator($decorator)
@@ -306,7 +306,7 @@ class Zend_Tag_Cloud
     /**
      * Set plugin loaders for use with decorators
      *
-     * @param  Zend_Loader_PluginLoader_Interface $loader
+     * @param Zend_Loader_PluginLoader_Interface $loader
      * @return Zend_Tag_Cloud
      */
     public function setPluginLoader(Zend_Loader_PluginLoader_Interface $loader)
@@ -323,11 +323,11 @@ class Zend_Tag_Cloud
     public function getPluginLoader()
     {
         if ($this->_pluginLoader === null) {
-            $prefix     = 'Zend_Tag_Cloud_Decorator_';
+            $prefix = 'Zend_Tag_Cloud_Decorator_';
             $pathPrefix = 'Zend/Tag/Cloud/Decorator/';
 
             require_once 'Zend/Loader/PluginLoader.php';
-            $this->_pluginLoader = new Zend_Loader_PluginLoader(array($prefix => $pathPrefix));
+            $this->_pluginLoader = new Zend_Loader_PluginLoader([$prefix => $pathPrefix]);
         }
 
         return $this->_pluginLoader;
@@ -336,7 +336,7 @@ class Zend_Tag_Cloud
     /**
      * Add many prefix paths at once
      *
-     * @param  array $paths
+     * @param array $paths
      * @return Zend_Tag_Cloud
      */
     public function addPrefixPaths(array $paths)
@@ -359,8 +359,8 @@ class Zend_Tag_Cloud
     /**
      * Add prefix path for plugin loader
      *
-     * @param  string $prefix
-     * @param  string $path
+     * @param string $prefix
+     * @param string $path
      * @return Zend_Tag_Cloud
      */
     public function addPrefixPath($prefix, $path)
@@ -384,7 +384,7 @@ class Zend_Tag_Cloud
             return '';
         }
 
-        $tagsResult  = $this->getTagDecorator()->render($tags);
+        $tagsResult = $this->getTagDecorator()->render($tags);
         $cloudResult = $this->getCloudDecorator()->render($tagsResult);
 
         return $cloudResult;
@@ -402,7 +402,7 @@ class Zend_Tag_Cloud
             return $result;
         } catch (Exception $e) {
             $message = "Exception caught by tag cloud: " . $e->getMessage()
-                     . "\nStack Trace:\n" . $e->getTraceAsString();
+                . "\nStack Trace:\n" . $e->getTraceAsString();
             trigger_error($message, E_USER_WARNING);
             return '';
         }

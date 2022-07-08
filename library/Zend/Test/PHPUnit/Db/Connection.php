@@ -68,7 +68,7 @@ class Zend_Test_PHPUnit_Db_Connection extends PHPUnit_Extensions_Database_DB_Def
      * Construct Connection based on Zend_Db_Adapter_Abstract
      *
      * @param Zend_Db_Adapter_Abstract $db
-     * @param string $schema
+     * @param string                   $schema
      */
     public function __construct(Zend_Db_Adapter_Abstract $db, $schema)
     {
@@ -116,7 +116,7 @@ class Zend_Test_PHPUnit_Db_Connection extends PHPUnit_Extensions_Database_DB_Def
      */
     public function getMetaData()
     {
-        if($this->_metaData === null) {
+        if ($this->_metaData === null) {
             $this->_metaData = new Zend_Test_PHPUnit_Db_Metadata_Generic($this->getConnection(), $this->getSchema());
         }
         return $this->_metaData;

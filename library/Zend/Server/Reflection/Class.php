@@ -34,7 +34,7 @@ require_once 'Zend/Server/Reflection/Method.php';
  * @subpackage Reflection
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version $Id$
+ * @version    $Id$
  */
 class Zend_Server_Reflection_Class
 {
@@ -43,13 +43,13 @@ class Zend_Server_Reflection_Class
      * {@link __set()}
      * @var array
      */
-    protected $_config = array();
+    protected $_config = [];
 
     /**
      * Array of {@link Zend_Server_Reflection_Method}s
      * @var array
      */
-    protected $_methods = array();
+    protected $_methods = [];
 
     /**
      * Namespace
@@ -70,8 +70,8 @@ class Zend_Server_Reflection_Class
      * {@link Zend_Server_Reflection_Method}. Sets reflection object property.
      *
      * @param ReflectionClass $reflection
-     * @param string $namespace
-     * @param mixed $argv
+     * @param string          $namespace
+     * @param mixed           $argv
      * @return void
      */
     public function __construct(ReflectionClass $reflection, $namespace = null, $argv = false)
@@ -96,13 +96,13 @@ class Zend_Server_Reflection_Class
      * Proxy reflection calls
      *
      * @param string $method
-     * @param array $args
+     * @param array  $args
      * @return mixed
      */
     public function __call($method, $args)
     {
         if (method_exists($this->_reflection, $method)) {
-            return call_user_func_array(array($this->_reflection, $method), $args);
+            return call_user_func_array([$this->_reflection, $method], $args);
         }
 
         require_once 'Zend/Server/Reflection/Exception.php';
@@ -133,7 +133,7 @@ class Zend_Server_Reflection_Class
      * Values are stored by $key in {@link $_config}.
      *
      * @param string $key
-     * @param mixed $value
+     * @param mixed  $value
      * @return void
      */
     public function __set($key, $value)

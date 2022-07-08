@@ -21,11 +21,11 @@
 /**
  * Zend_Server_Interface
  *
- * @category Zend
- * @package  Zend_Server
+ * @category   Zend
+ * @package    Zend_Server
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version $Id$
+ * @version    $Id$
  */
 interface Zend_Server_Interface
 {
@@ -53,13 +53,13 @@ interface Zend_Server_Interface
      * Namespacing is primarily for xmlrpc, but could be used for other
      * implementations as well.
      *
-     * @param mixed $class Class name or object instance to examine and attach
-     * to the server.
+     * @param mixed  $class     Class name or object instance to examine and attach
+     *                          to the server.
      * @param string $namespace Optional namespace with which to prepend method
-     * names in the dispatch table.
-     * methods in the class will be valid callbacks.
+     *                          names in the dispatch table.
+     *                          methods in the class will be valid callbacks.
      * @param null|array Optional array of arguments to pass to callbacks at
-     * dispatch.
+     *                          dispatch.
      * @return void
      */
     public function setClass($class, $namespace = '', $argv = null);
@@ -68,7 +68,7 @@ interface Zend_Server_Interface
      * Generate a server fault
      *
      * @param mixed $fault
-     * @param int $code
+     * @param int   $code
      * @return mixed
      */
     public function fault($fault = null, $code = 404);
@@ -110,9 +110,9 @@ interface Zend_Server_Interface
     /**
      * Set server persistence
      *
-     * @todo Determine how to implement this
      * @param int $mode
      * @return void
+     * @todo Determine how to implement this
      */
     public function setPersistence($mode);
 }

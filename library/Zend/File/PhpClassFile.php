@@ -45,7 +45,7 @@ class Zend_File_PhpClassFile extends SplFileInfo
     /**
      * Add class
      *
-     * @param  string $class
+     * @param string $class
      * @return Zend_File_PhpClassFile
      */
     public function addClass($class)

@@ -46,8 +46,8 @@ class Zend_Tool_Project_Provider_Form extends Zend_Tool_Project_Provider_Abstrac
 
         $newForm = $formsDirectory->createResource(
             'formFile',
-            array('formName' => $formName, 'moduleName' => $moduleName)
-            );
+            ['formName' => $formName, 'moduleName' => $moduleName]
+        );
 
         return $newForm;
     }
@@ -56,8 +56,8 @@ class Zend_Tool_Project_Provider_Form extends Zend_Tool_Project_Provider_Abstrac
      * hasResource()
      *
      * @param Zend_Tool_Project_Profile $profile
-     * @param string $formName
-     * @param string $moduleName
+     * @param string                    $formName
+     * @param string                    $moduleName
      * @return Zend_Tool_Project_Profile_Resource
      */
     public static function hasResource(Zend_Tool_Project_Profile $profile, $formName, $moduleName = null)
@@ -67,22 +67,22 @@ class Zend_Tool_Project_Provider_Form extends Zend_Tool_Project_Provider_Abstrac
         }
 
         $formsDirectory = self::_getFormsDirectoryResource($profile, $moduleName);
-        return (($formsDirectory->search(array('formFile' => array('formName' => $formName)))) instanceof Zend_Tool_Project_Profile_Resource);
+        return (($formsDirectory->search(['formFile' => ['formName' => $formName]])) instanceof Zend_Tool_Project_Profile_Resource);
     }
 
     /**
      * _getFormsDirectoryResource()
      *
      * @param Zend_Tool_Project_Profile $profile
-     * @param string $moduleName
+     * @param string                    $moduleName
      * @return Zend_Tool_Project_Profile_Resource
      */
     protected static function _getFormsDirectoryResource(Zend_Tool_Project_Profile $profile, $moduleName = null)
     {
-        $profileSearchParams = array();
+        $profileSearchParams = [];
 
         if ($moduleName != null && is_string($moduleName)) {
-            $profileSearchParams = array('modulesDirectory', 'moduleDirectory' => array('moduleName' => $moduleName));
+            $profileSearchParams = ['modulesDirectory', 'moduleDirectory' => ['moduleName' => $moduleName]];
         }
 
         $profileSearchParams[] = 'formsDirectory';
@@ -155,7 +155,7 @@ class Zend_Tool_Project_Provider_Form extends Zend_Tool_Project_Provider_Abstrac
         // do the creation
         if ($this->_registry->getRequest()->isPretend()) {
 
-            $this->_registry->getResponse()->appendContent('Would create a form at '  . $formResource->getContext()->getPath());
+            $this->_registry->getResponse()->appendContent('Would create a form at ' . $formResource->getContext()->getPath());
 
             if ($testFormResource) {
                 $this->_registry->getResponse()->appendContent('Would create a form test file at ' . $testFormResource->getContext()->getPath());

@@ -28,7 +28,7 @@
  * @subpackage Reflection
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version $Id$
+ * @version    $Id$
  */
 class Zend_Server_Reflection_ReturnValue
 {
@@ -47,7 +47,7 @@ class Zend_Server_Reflection_ReturnValue
     /**
      * Constructor
      *
-     * @param string $type Return value type
+     * @param string $type        Return value type
      * @param string $description Return value type
      */
     public function __construct($type = 'mixed', $description = '')

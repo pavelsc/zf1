@@ -16,9 +16,9 @@
  * @category     Zend
  * @package      Zend_Gdata
  * @subpackage   Spreadsheets
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @copyright    Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license      http://framework.zend.com/license/new-bsd     New BSD License
+ * @version      $Id$
  */
 
 /**
@@ -37,8 +37,8 @@ require_once 'Zend/Gdata/Spreadsheets/Extension/Cell.php';
  * @category     Zend
  * @package      Zend_Gdata
  * @subpackage   Spreadsheets
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @copyright    Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license      http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Spreadsheets_CellEntry extends Zend_Gdata_Entry
 {
@@ -48,7 +48,7 @@ class Zend_Gdata_Spreadsheets_CellEntry extends Zend_Gdata_Entry
 
     /**
      * Constructs a new Zend_Gdata_Spreadsheets_CellEntry object.
-     * @param string $uri (optional)
+     * @param string     $uri     (optional)
      * @param DOMElement $element (optional) The DOMElement on which to base this object.
      */
     public function __construct($element = null)
@@ -70,14 +70,14 @@ class Zend_Gdata_Spreadsheets_CellEntry extends Zend_Gdata_Entry
     {
         $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
         switch ($absoluteNodeName) {
-        case $this->lookupNamespace('gs') . ':' . 'cell';
-            $cell = new Zend_Gdata_Spreadsheets_Extension_Cell();
-            $cell->transferFromDOM($child);
-            $this->_cell = $cell;
-            break;
-        default:
-            parent::takeChildFromDOM($child);
-            break;
+            case $this->lookupNamespace('gs') . ':' . 'cell';
+                $cell = new Zend_Gdata_Spreadsheets_Extension_Cell();
+                $cell->transferFromDOM($child);
+                $this->_cell = $cell;
+                break;
+            default:
+                parent::takeChildFromDOM($child);
+                break;
         }
     }
 
@@ -93,7 +93,7 @@ class Zend_Gdata_Spreadsheets_CellEntry extends Zend_Gdata_Entry
     /**
      * Sets the Cell element of this Cell Entry.
      * @param Zend_Gdata_Spreadsheets_Extension_Cell $cell
-		 * @return Zend_Gdata_Spreadsheets_CellEntry
+     * @return Zend_Gdata_Spreadsheets_CellEntry
      */
     public function setCell($cell)
     {

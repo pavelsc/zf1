@@ -77,7 +77,7 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
     /**
      * @var array Array of string names
      */
-    protected $_implementedInterfaces = array();
+    protected $_implementedInterfaces = [];
 
     /**
      * @var array Array of properties
@@ -121,14 +121,14 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
             $interfaces = $reflectionClass->getInterfaces();
         }
 
-        $interfaceNames = array();
-        foreach($interfaces AS $interface) {
+        $interfaceNames = [];
+        foreach ($interfaces as $interface) {
             $interfaceNames[] = $interface->getName();
         }
 
         $class->setImplementedInterfaces($interfaceNames);
 
-        $properties = array();
+        $properties = [];
         foreach ($reflectionClass->getProperties() as $reflectionProperty) {
             if ($reflectionProperty->getDeclaringClass()->getName() == $class->getName()) {
                 $properties[] = Zend_CodeGenerator_Php_Property::fromReflection($reflectionProperty);
@@ -136,7 +136,7 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
         }
         $class->setProperties($properties);
 
-        $methods = array();
+        $methods = [];
         foreach ($reflectionClass->getMethods() as $reflectionMethod) {
             if ($reflectionMethod->getDeclaringClass()->getName() == $class->getName()) {
                 $methods[] = Zend_CodeGenerator_Php_Method::fromReflection($reflectionMethod);
@@ -156,7 +156,7 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
     public function setDocblock($docblock)
     {
         if (is_string($docblock)) {
-            $docblock = array('shortDescription' => $docblock);
+            $docblock = ['shortDescription' => $docblock];
         }
 
         if (is_array($docblock)) {
@@ -252,7 +252,7 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
      * @param array $implementedInterfaces
      * @return Zend_CodeGenerator_Php_Class
      */
-    public function setImplementedInterfaces(Array $implementedInterfaces)
+    public function setImplementedInterfaces(array $implementedInterfaces)
     {
         $this->_implementedInterfaces = $implementedInterfaces;
         return $this;
@@ -274,7 +274,7 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
      * @param array $properties
      * @return Zend_CodeGenerator_Php_Class
      */
-    public function setProperties(Array $properties)
+    public function setProperties(array $properties)
     {
         foreach ($properties as $property) {
             $this->setProperty($property);
@@ -289,7 +289,7 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
      * @param array $constants
      * @return Zend_CodeGenerator_Php_Class
      */
-    public function setConstants(Array $constants)
+    public function setConstants(array $constants)
     {
         foreach ($constants as $const) {
             $this->setConstant($const);
@@ -439,7 +439,7 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
      * @param array $methods
      * @return Zend_CodeGenerator_Php_Class
      */
-    public function setMethods(Array $methods)
+    public function setMethods(array $methods)
     {
         foreach ($methods as $method) {
             $this->setMethod($method);
@@ -567,7 +567,7 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
 
         $output .= 'class ' . $this->getName();
 
-        if ( !empty( $this->_extendedClass) ) {
+        if (!empty($this->_extendedClass)) {
             $output .= ' extends ' . $this->_extendedClass;
         }
 

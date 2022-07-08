@@ -48,7 +48,7 @@ abstract class Zend_XmlRpc_Generator_GeneratorAbstract
      *
      * Method opens a new XML element with an element name and an optional value
      *
-     * @param string $name XML tag name
+     * @param string $name  XML tag name
      * @param string $value Optional value of the XML tag
      * @return Zend_XmlRpc_Generator_Abstract Fluent interface
      */

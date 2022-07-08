@@ -32,21 +32,21 @@ require_once 'Zend/Filter/Interface.php';
  */
 class Zend_Filter_Null implements Zend_Filter_Interface
 {
-    const BOOLEAN      = 1;
-    const INTEGER      = 2;
-    const EMPTY_ARRAY  = 4;
-    const STRING       = 8;
-    const ZERO         = 16;
-    const ALL          = 31;
+    const BOOLEAN = 1;
+    const INTEGER = 2;
+    const EMPTY_ARRAY = 4;
+    const STRING = 8;
+    const ZERO = 16;
+    const ALL = 31;
 
-    protected $_constants = array(
-        self::BOOLEAN     => 'boolean',
-        self::INTEGER     => 'integer',
+    protected $_constants = [
+        self::BOOLEAN => 'boolean',
+        self::INTEGER => 'integer',
         self::EMPTY_ARRAY => 'array',
-        self::STRING      => 'string',
-        self::ZERO        => 'zero',
-        self::ALL         => 'all'
-    );
+        self::STRING => 'string',
+        self::ZERO => 'zero',
+        self::ALL => 'all'
+    ];
 
     /**
      * Internal type to detect
@@ -66,7 +66,7 @@ class Zend_Filter_Null implements Zend_Filter_Interface
             $options = $options->toArray();
         } else if (!is_array($options)) {
             $options = func_get_args();
-            $temp    = array();
+            $temp = [];
             if (!empty($options)) {
                 $temp = array_shift($options);
             }
@@ -93,15 +93,15 @@ class Zend_Filter_Null implements Zend_Filter_Interface
     /**
      * Set the null types
      *
-     * @param  integer|array $type
-     * @throws Zend_Filter_Exception
+     * @param integer|array $type
      * @return Zend_Filter_Null
+     * @throws Zend_Filter_Exception
      */
     public function setType($type = null)
     {
         if (is_array($type)) {
             $detected = 0;
-            foreach($type as $value) {
+            foreach ($type as $value) {
                 if (is_int($value)) {
                     $detected += $value;
                 } else if (in_array($value, $this->_constants)) {
@@ -131,7 +131,7 @@ class Zend_Filter_Null implements Zend_Filter_Interface
      * Returns null representation of $value, if value is empty and matches
      * types that should be considered null.
      *
-     * @param  string $value
+     * @param string $value
      * @return string
      */
     public function filter($value)
@@ -157,7 +157,7 @@ class Zend_Filter_Null implements Zend_Filter_Interface
         // EMPTY_ARRAY (array())
         if ($type >= self::EMPTY_ARRAY) {
             $type -= self::EMPTY_ARRAY;
-            if (is_array($value) && ($value == array())) {
+            if (is_array($value) && ($value == [])) {
                 return null;
             }
         }

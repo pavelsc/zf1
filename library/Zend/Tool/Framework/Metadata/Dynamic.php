@@ -58,16 +58,16 @@ class Zend_Tool_Framework_Metadata_Dynamic
     /**
      * @var array
      */
-    protected $_dynamicAttributes = array();
+    protected $_dynamicAttributes = [];
 
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         if ($options) {
             $this->setOptions($options);
         }
     }
 
-    public function setOptions(Array $options = array())
+    public function setOptions(array $options = [])
     {
         foreach ($options as $optName => $optValue) {
             $methodName = 'set' . $optName;
@@ -199,7 +199,7 @@ class Zend_Tool_Framework_Metadata_Dynamic
      * __set() - Set a property via the magic set $metadata->foo = 'foo'
      *
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
      */
     public function __set($name, $value)
     {

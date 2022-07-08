@@ -12,11 +12,11 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category  Zend
- * @package   Zend_Validate
+ * @category   Zend
+ * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id$
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
 /**
@@ -27,10 +27,10 @@ require_once 'Zend/Validate/Abstract.php';
 /**
  * Validator for the file extension of a file
  *
- * @category  Zend
- * @package   Zend_Validate
+ * @category   Zend
+ * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_File_Extension extends Zend_Validate_Abstract
 {
@@ -38,15 +38,15 @@ class Zend_Validate_File_Extension extends Zend_Validate_Abstract
      * @const string Error constants
      */
     const FALSE_EXTENSION = 'fileExtensionFalse';
-    const NOT_FOUND       = 'fileExtensionNotFound';
+    const NOT_FOUND = 'fileExtensionNotFound';
 
     /**
      * @var array Error message templates
      */
-    protected $_messageTemplates = array(
+    protected $_messageTemplates = [
         self::FALSE_EXTENSION => "File '%value%' has a false extension",
-        self::NOT_FOUND       => "File '%value%' is not readable or does not exist",
-    );
+        self::NOT_FOUND => "File '%value%' is not readable or does not exist",
+    ];
 
     /**
      * Internal list of extensions
@@ -64,9 +64,9 @@ class Zend_Validate_File_Extension extends Zend_Validate_Abstract
     /**
      * @var array Error message template variables
      */
-    protected $_messageVariables = array(
+    protected $_messageVariables = [
         'extension' => '_extension'
-    );
+    ];
 
     /**
      * Sets validator options
@@ -105,12 +105,12 @@ class Zend_Validate_File_Extension extends Zend_Validate_Abstract
     /**
      * Sets the case to use
      *
-     * @param  boolean $case
+     * @param boolean $case
      * @return Zend_Validate_File_Extension Provides a fluent interface
      */
     public function setCase($case)
     {
-        $this->_case = (boolean) $case;
+        $this->_case = (boolean)$case;
         return $this;
     }
 
@@ -129,7 +129,7 @@ class Zend_Validate_File_Extension extends Zend_Validate_Abstract
     /**
      * Sets the file extensions
      *
-     * @param  string|array $extension The extensions to validate
+     * @param string|array $extension The extensions to validate
      * @return Zend_Validate_File_Extension Provides a fluent interface
      */
     public function setExtension($extension)
@@ -142,7 +142,7 @@ class Zend_Validate_File_Extension extends Zend_Validate_Abstract
     /**
      * Adds the file extensions
      *
-     * @param  string|array $extension The extensions to add for validation
+     * @param string|array $extension The extensions to add for validation
      * @return Zend_Validate_File_Extension Provides a fluent interface
      */
     public function addExtension($extension)
@@ -179,8 +179,8 @@ class Zend_Validate_File_Extension extends Zend_Validate_Abstract
      * Returns true if and only if the fileextension of $value is included in the
      * set extension list
      *
-     * @param  string  $value Real file to check for extension
-     * @param  array   $file  File data from Zend_File_Transfer
+     * @param string $value Real file to check for extension
+     * @param array  $file  File data from Zend_File_Transfer
      * @return boolean
      */
     public function isValid($value, $file = null)
@@ -221,8 +221,8 @@ class Zend_Validate_File_Extension extends Zend_Validate_Abstract
     /**
      * Throws an error of the given type
      *
-     * @param  string $file
-     * @param  string $errorType
+     * @param string $file
+     * @param string $errorType
      * @return false
      */
     protected function _throw($file, $errorType)

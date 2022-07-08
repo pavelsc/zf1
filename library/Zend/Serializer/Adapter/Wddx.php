@@ -37,37 +37,37 @@ require_once 'Zend/Xml/Exception.php';
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @deprecated Please use JSON
  */
 class Zend_Serializer_Adapter_Wddx extends Zend_Serializer_Adapter_AdapterAbstract
 {
     /**
      * @var array Default options
      */
-    protected $_options = array(
+    protected $_options = [
         'comment' => null,
-    );
+    ];
 
     /**
      * Constructor
      *
-     * @param  array $opts
+     * @param array $opts
      * @return void
      * @throws Zend_Serializer_Exception if wddx extension not found
      */
-    public function __construct($opts = array())
+    public function __construct($opts = [])
     {
         throw new Zend_Serializer_Exception('PHP extension "wddx" is deprecated, please use JSON instead');
-        parent::__construct($opts);
     }
 
 
-  public function serialize($value, array $options = [])
-  {
-    // TODO: Implement serialize() method.
-  }
+    public function serialize($value, array $options = [])
+    {
+        // TODO: Implement serialize() method.
+    }
 
-  public function unserialize($serialized, array $options = [])
-  {
-    // TODO: Implement unserialize() method.
-  }
+    public function unserialize($serialized, array $options = [])
+    {
+        // TODO: Implement unserialize() method.
+    }
 }

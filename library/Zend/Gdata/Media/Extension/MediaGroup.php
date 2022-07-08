@@ -118,12 +118,12 @@ class Zend_Gdata_Media_Extension_MediaGroup extends Zend_Gdata_Extension
     /**
      * @var array
      */
-    protected $_content = array();
+    protected $_content = [];
 
     /**
      * @var array
      */
-    protected $_category = array();
+    protected $_category = [];
 
     /**
      * @var Zend_Gdata_Media_Extension_MediaCopyright
@@ -133,7 +133,7 @@ class Zend_Gdata_Media_Extension_MediaGroup extends Zend_Gdata_Extension
     /**
      * @var array
      */
-    protected $_credit = array();
+    protected $_credit = [];
 
     /**
      * @var Zend_Gdata_Media_Extension_MediaDescription
@@ -143,7 +143,7 @@ class Zend_Gdata_Media_Extension_MediaGroup extends Zend_Gdata_Extension
     /**
      * @var array
      */
-    protected $_hash = array();
+    protected $_hash = [];
 
     /**
      * @var Zend_Gdata_Media_Extension_MediaKeywords
@@ -153,27 +153,27 @@ class Zend_Gdata_Media_Extension_MediaGroup extends Zend_Gdata_Extension
     /**
      * @var array
      */
-    protected $_player = array();
+    protected $_player = [];
 
     /**
      * @var array
      */
-    protected $_rating = array();
+    protected $_rating = [];
 
     /**
      * @var array
      */
-    protected $_restriction = array();
+    protected $_restriction = [];
 
     /**
      * @var array
      */
-    protected $_mediaText = array();
+    protected $_mediaText = [];
 
     /**
      * @var array
      */
-    protected $_thumbnail = array();
+    protected $_thumbnail = [];
 
     /**
      * @var string
@@ -197,7 +197,7 @@ class Zend_Gdata_Media_Extension_MediaGroup extends Zend_Gdata_Extension
      *
      * @param DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
-     * child properties.
+     *                         child properties.
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
@@ -228,22 +228,22 @@ class Zend_Gdata_Media_Extension_MediaGroup extends Zend_Gdata_Extension
         }
         if ($this->_copyright != null) {
             $element->appendChild(
-                    $this->_copyright->getDOM($element->ownerDocument));
+                $this->_copyright->getDOM($element->ownerDocument));
         }
         if ($this->_description != null) {
             $element->appendChild(
-                    $this->_description->getDOM($element->ownerDocument));
+                $this->_description->getDOM($element->ownerDocument));
         }
         foreach ($this->_hash as $hash) {
             $element->appendChild($hash->getDOM($element->ownerDocument));
         }
         if ($this->_keywords != null) {
             $element->appendChild(
-                    $this->_keywords->getDOM($element->ownerDocument));
+                $this->_keywords->getDOM($element->ownerDocument));
         }
         if ($this->_title != null) {
             $element->appendChild(
-                    $this->_title->getDOM($element->ownerDocument));
+                $this->_title->getDOM($element->ownerDocument));
         }
         return $element;
     }
@@ -323,9 +323,9 @@ class Zend_Gdata_Media_Extension_MediaGroup extends Zend_Gdata_Extension
                 $title->transferFromDOM($child);
                 $this->_title = $title;
                 break;
-        default:
-            parent::takeChildFromDOM($child);
-            break;
+            default:
+                parent::takeChildFromDOM($child);
+                break;
         }
     }
 

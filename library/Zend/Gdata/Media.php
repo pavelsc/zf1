@@ -28,7 +28,7 @@ require_once 'Zend/Gdata.php';
 
 /**
  * Service class for interacting with the services which use the media extensions
- * @link http://code.google.com/apis/gdata/calendar.html
+ * @link       http://code.google.com/apis/gdata/calendar.html
  *
  * @category   Zend
  * @package    Zend_Gdata
@@ -44,16 +44,16 @@ class Zend_Gdata_Media extends Zend_Gdata
      *
      * @var array
      */
-    public static $namespaces = array(
-        array('media', 'http://search.yahoo.com/mrss/', 1, 0)
-    );
+    public static $namespaces = [
+        ['media', 'http://search.yahoo.com/mrss/', 1, 0]
+    ];
 
     /**
      * Create Gdata_Media object
      *
-     * @param Zend_Http_Client $client (optional) The HTTP client to use when
-     *          when communicating with the Google Apps servers.
-     * @param string $applicationId The identity of the app in the form of Company-AppName-Version
+     * @param Zend_Http_Client $client        (optional) The HTTP client to use when
+     *                                        when communicating with the Google Apps servers.
+     * @param string           $applicationId The identity of the app in the form of Company-AppName-Version
      */
     public function __construct($client = null, $applicationId = 'MyCompany-MyApp-1.0')
     {

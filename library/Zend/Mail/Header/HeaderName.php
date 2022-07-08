@@ -39,13 +39,13 @@ final class Zend_Mail_Header_HeaderName
      * Filter the header name according to RFC 2822
      *
      * @see    http://www.rfc-base.org/txt/rfc-2822.txt (section 2.2)
-     * @param  string $name
+     * @param string $name
      * @return string
      */
     public static function filter($name)
     {
         $result = '';
-        $tot    = strlen($name);
+        $tot = strlen($name);
         for ($i = 0; $i < $tot; $i += 1) {
             $ord = ord($name[$i]);
             if ($ord > 32 && $ord < 127 && $ord !== 58) {
@@ -79,12 +79,12 @@ final class Zend_Mail_Header_HeaderName
      * Raises an exception if invalid.
      *
      * @param string $name
-     * @throws Exception\RuntimeException
      * @return void
+     * @throws Exception\RuntimeException
      */
     public static function assertValid($name)
     {
-        if (! self::isValid($name)) {
+        if (!self::isValid($name)) {
             require_once 'Zend/Mail/Exception.php';
             throw new Zend_Mail_Exception('Invalid header name detected');
         }

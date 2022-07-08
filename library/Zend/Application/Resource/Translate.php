@@ -114,8 +114,8 @@ class Zend_Application_Resource_Translate extends Zend_Application_Resource_Reso
             }
 
             $key = (isset($options['registry_key']) && !is_numeric($options['registry_key']))
-                 ? $options['registry_key']
-                 : self::DEFAULT_REGISTRY_KEY;
+                ? $options['registry_key']
+                : self::DEFAULT_REGISTRY_KEY;
             unset($options['registry_key']);
 
             if (Zend_Registry::isRegistered($key)) {

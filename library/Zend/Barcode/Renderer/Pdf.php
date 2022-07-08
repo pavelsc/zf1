@@ -78,7 +78,7 @@ class Zend_Barcode_Renderer_Pdf extends Zend_Barcode_Renderer_RendererAbstract
         }
 
         $this->_resource = $pdf;
-        $this->_page     = intval($page);
+        $this->_page = intval($page);
 
         if (!count($this->_resource->pages)) {
             $this->_page = 0;
@@ -128,7 +128,7 @@ class Zend_Barcode_Renderer_Pdf extends Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Draw a polygon in the rendering resource
-     * @param array $points
+     * @param array   $points
      * @param integer $color
      * @param boolean $filled
      */
@@ -161,8 +161,8 @@ class Zend_Barcode_Renderer_Pdf extends Zend_Barcode_Renderer_RendererAbstract
         $page->setLineWidth($this->_moduleSize);
 
         $fillType = ($filled)
-                  ? Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE
-                  : Zend_Pdf_Page::SHAPE_DRAW_STROKE;
+            ? Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE
+            : Zend_Pdf_Page::SHAPE_DRAW_STROKE;
 
         $page->drawPolygon($x, $y, $fillType);
     }
@@ -186,8 +186,9 @@ class Zend_Barcode_Renderer_Pdf extends Zend_Barcode_Renderer_RendererAbstract
         $color,
         $alignment = 'center',
         $orientation = 0
-    ) {
-        $page  = $this->_resource->pages[$this->_page];
+    )
+    {
+        $page = $this->_resource->pages[$this->_page];
         $color = new Zend_Pdf_Color_Rgb(
             (($color & 0xFF0000) >> 16) / 255.0,
             (($color & 0x00FF00) >> 8) / 255.0,
@@ -206,12 +207,12 @@ class Zend_Barcode_Renderer_Pdf extends Zend_Barcode_Renderer_RendererAbstract
 
         $angle = pi() * $orientation / 180;
         $left = $position[0] * $this->_moduleSize + $this->_leftOffset;
-        $top  = $page->getHeight() - $position[1] * $this->_moduleSize - $this->_topOffset;
+        $top = $page->getHeight() - $position[1] * $this->_moduleSize - $this->_topOffset;
 
         switch ($alignment) {
             case 'center':
                 $left -= ($width / 2) * cos($angle);
-                $top  -= ($width / 2) * sin($angle);
+                $top -= ($width / 2) * sin($angle);
                 break;
             case 'right':
                 $left -= $width;
@@ -219,23 +220,23 @@ class Zend_Barcode_Renderer_Pdf extends Zend_Barcode_Renderer_RendererAbstract
         }
         $page->rotate($left, $top, $angle);
         $page->drawText($text, $left, $top);
-        $page->rotate($left, $top, - $angle);
+        $page->rotate($left, $top, -$angle);
     }
 
     /**
      * Calculate the width of a string:
      * in case of using alignment parameter in drawText
-     * @param string $text
+     * @param string        $text
      * @param Zend_Pdf_Font $font
-     * @param float $fontSize
+     * @param float         $fontSize
      * @return float
      */
     public function widthForStringUsingFontSize($text, $font, $fontSize)
     {
         $drawingString = iconv('UTF-8', 'UTF-16BE//IGNORE', $text);
-        $characters    = array();
-        for ($i = 0; $i < strlen($drawingString); $i ++) {
-            $characters[] = (ord($drawingString[$i ++]) << 8) | ord($drawingString[$i]);
+        $characters = [];
+        for ($i = 0; $i < strlen($drawingString); $i++) {
+            $characters[] = (ord($drawingString[$i++]) << 8) | ord($drawingString[$i]);
         }
         $glyphs = $font->glyphNumbersForCharacters($characters);
         $widths = $font->widthsForGlyphs($glyphs);

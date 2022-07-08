@@ -82,8 +82,8 @@ class Zend_Search_Lucene_Search_Weight_Term extends Zend_Search_Lucene_Search_We
                                 Zend_Search_Lucene_Search_Query $query,
                                 Zend_Search_Lucene_Interface    $reader)
     {
-        $this->_term   = $term;
-        $this->_query  = $query;
+        $this->_term = $term;
+        $this->_query = $query;
         $this->_reader = $reader;
     }
 

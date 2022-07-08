@@ -46,7 +46,7 @@ interface Zend_Tool_Project_Profile_FileParser_Interface
      * This method should be able to take string data an create a
      * struture in the provided $profile
      *
-     * @param string $data
+     * @param string                    $data
      * @param Zend_Tool_Project_Profile $profile
      */
     public function unserialize($data, Zend_Tool_Project_Profile $profile);

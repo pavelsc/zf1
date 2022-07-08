@@ -36,7 +36,7 @@ class Zend_Pdf_Filter_Ascii85 implements Zend_Pdf_Filter_Interface
      * Encode data
      *
      * @param string $data
-     * @param array $params
+     * @param array  $params
      * @return string
      * @throws Zend_Pdf_Exception
      */
@@ -65,8 +65,8 @@ class Zend_Pdf_Filter_Ascii85 implements Zend_Pdf_Filter_Interface
 
             //encode into 5 bytes
             for ($j = 4; $j >= 0; $j--) {
-                $foo = (int) (($b / pow(85,$j)) + 33);
-                $b %= pow(85,$j);
+                $foo = (int)(($b / pow(85, $j)) + 33);
+                $b %= pow(85, $j);
                 $output .= chr($foo);
             }
         }
@@ -77,7 +77,7 @@ class Zend_Pdf_Filter_Ascii85 implements Zend_Pdf_Filter_Interface
             $chunk = substr($data, -$n);
 
             //0 pad the rest
-            for ($j = $n;$j < 4;$j++) {
+            for ($j = $n; $j < 4; $j++) {
                 $chunk .= "\0";
             }
 
@@ -86,8 +86,8 @@ class Zend_Pdf_Filter_Ascii85 implements Zend_Pdf_Filter_Interface
 
             //encode just $n + 1
             for ($j = 4; $j >= (4 - $n); $j--) {
-                $foo = (int) (($b / pow(85,$j)) + 33);
-                $b %= pow(85,$j);
+                $foo = (int)(($b / pow(85, $j)) + 33);
+                $b %= pow(85, $j);
                 $output .= chr($foo);
             }
         }
@@ -107,7 +107,7 @@ class Zend_Pdf_Filter_Ascii85 implements Zend_Pdf_Filter_Interface
      * Decode data
      *
      * @param string $data
-     * @param array $params
+     * @param array  $params
      * @return string
      * @throws Zend_Pdf_Exception
      */
@@ -116,7 +116,7 @@ class Zend_Pdf_Filter_Ascii85 implements Zend_Pdf_Filter_Interface
         $output = '';
 
         //get rid of the whitespaces
-        $whiteSpace = array("\x00", "\x09", "\x0A", "\x0C", "\x0D", "\x20");
+        $whiteSpace = ["\x00", "\x09", "\x0A", "\x0C", "\x0D", "\x20"];
         $data = str_replace($whiteSpace, '', $data);
 
         if (substr($data, -2) != '~>') {
@@ -139,7 +139,7 @@ class Zend_Pdf_Filter_Ascii85 implements Zend_Pdf_Filter_Interface
 
             $c = substr($data, $i, 5);
 
-            if(strlen($c) < 5) {
+            if (strlen($c) < 5) {
                 //partial chunk
                 break;
             }

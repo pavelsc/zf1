@@ -23,8 +23,8 @@
  */
 
 /**
-* @see Zend_Service_Console_Command_ParameterSource_ParameterSourceInterface
-*/
+ * @see Zend_Service_Console_Command_ParameterSource_ParameterSourceInterface
+ */
 require_once 'Zend/Service/Console/Command/ParameterSource/ParameterSourceInterface.php';
 
 /**
@@ -36,46 +36,46 @@ require_once 'Zend/Service/Console/Command/ParameterSource/ParameterSourceInterf
  * @license    http://phpazure.codeplex.com/license
  */
 class Zend_Service_Console_Command_ParameterSource_StdIn
-	implements Zend_Service_Console_Command_ParameterSource_ParameterSourceInterface
+    implements Zend_Service_Console_Command_ParameterSource_ParameterSourceInterface
 {
-	/**
-	 * Get value for a named parameter.
-	 *
-	 * @param mixed $parameter Parameter to get a value for
-	 * @param array $argv Argument values passed to the script when run in console.
-	 * @return mixed
-	 */
-	public function getValueForParameter($parameter, $argv = array())
-	{
-		// Default value
-		$parameterValue = null;
+    /**
+     * Get value for a named parameter.
+     *
+     * @param mixed $parameter Parameter to get a value for
+     * @param array $argv      Argument values passed to the script when run in console.
+     * @return mixed
+     */
+    public function getValueForParameter($parameter, $argv = [])
+    {
+        // Default value
+        $parameterValue = null;
 
-		// Check STDIN for data
-		if (ftell(STDIN) !== false) {
-			// Read from STDIN
-			$fs = fopen("php://stdin", "r");
-			if ($fs !== false) {
-				/*
-				while (!feof($fs)) {
-					$data = fread($fs, 1);
-					var_dump($data);
-					$parameterValue .= $data;
-				} */
-				$parameterValue = stream_get_contents($fs);
-				fclose($fs);
-			}
+        // Check STDIN for data
+        if (ftell(STDIN) !== false) {
+            // Read from STDIN
+            $fs = fopen("php://stdin", "r");
+            if ($fs !== false) {
+                /*
+                while (!feof($fs)) {
+                    $data = fread($fs, 1);
+                    var_dump($data);
+                    $parameterValue .= $data;
+                } */
+                $parameterValue = stream_get_contents($fs);
+                fclose($fs);
+            }
 
-			// Remove ending \r\n
-			$parameterValue = rtrim($parameterValue);
+            // Remove ending \r\n
+            $parameterValue = rtrim($parameterValue);
 
-			if (strtolower($parameterValue) == 'true') {
-				$parameterValue = true;
-			} else if (strtolower($parameterValue) == 'false') {
-				$parameterValue = false;
-			}
-		}
+            if (strtolower($parameterValue) == 'true') {
+                $parameterValue = true;
+            } else if (strtolower($parameterValue) == 'false') {
+                $parameterValue = false;
+            }
+        }
 
-		// Done!
-		return $parameterValue;
-	}
+        // Done!
+        return $parameterValue;
+    }
 }

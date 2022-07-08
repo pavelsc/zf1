@@ -117,7 +117,7 @@ class Zend_Service_SlideShare_SlideShow
      *
      * @var array An array of tags associated with the slide show
      */
-    protected $_tags = array();
+    protected $_tags = [];
 
     /**
      * The location of the slide show
@@ -196,7 +196,7 @@ class Zend_Service_SlideShare_SlideShow
      * @param array $tags An array of tags to set
      * @return Zend_Service_SlideShare_SlideShow
      */
-    public function setTags(Array $tags)
+    public function setTags(array $tags)
     {
         $this->_tags = $tags;
         return $this;
@@ -288,7 +288,7 @@ class Zend_Service_SlideShare_SlideShow
      */
     public function setThumbnailUrl($url)
     {
-        $this->_thumbnailUrl = (string) $url;
+        $this->_thumbnailUrl = (string)$url;
         return $this;
     }
 
@@ -393,10 +393,10 @@ class Zend_Service_SlideShare_SlideShow
     /**
      * Sets the permanent link of the slide show
      *
-     * @see Zend_Service_SlideShare_SlideShow::setUrl()
-     *
      * @param string $url The permanent URL for the slide show
      * @return Zend_Service_SlideShare_SlideShow
+     * @see        Zend_Service_SlideShare_SlideShow::setUrl()
+     *
      * @deprecated Since 1.12.10, use setUrl()
      */
     public function setPermaLink($url)
@@ -408,9 +408,9 @@ class Zend_Service_SlideShare_SlideShow
     /**
      * Gets the permanent link of the slide show
      *
-     * @see Zend_Service_SlideShare_SlideShow::getUrl()
-     *
      * @return string the permanent URL for the slide show
+     * @see        Zend_Service_SlideShare_SlideShow::getUrl()
+     *
      * @deprecated Since 1.12.10, use getUrl()
      */
     public function getPermaLink()
@@ -421,7 +421,7 @@ class Zend_Service_SlideShare_SlideShow
     /**
      * Sets the URL of the slide show
      *
-     * @param  string $url The URL for the slide show
+     * @param string $url The URL for the slide show
      * @return self
      */
     public function setUrl($url)

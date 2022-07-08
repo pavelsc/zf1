@@ -49,7 +49,7 @@ require_once 'Zend/Pdf/Font.php';
  */
 abstract class Zend_Pdf_Resource_Font extends Zend_Pdf_Resource
 {
-  /**** Instance Variables ****/
+    /**** Instance Variables ****/
 
 
     /**
@@ -62,7 +62,7 @@ abstract class Zend_Pdf_Resource_Font extends Zend_Pdf_Resource
      * Array containing descriptive names for the font. See {@link fontName()}.
      * @var array
      */
-    protected $_fontNames = array();
+    protected $_fontNames = [];
 
     /**
      * Flag indicating whether or not this font is bold.
@@ -131,11 +131,10 @@ abstract class Zend_Pdf_Resource_Font extends Zend_Pdf_Resource
     protected $_lineGap = 0;
 
 
+    /**** Public Interface ****/
 
-  /**** Public Interface ****/
 
-
-  /* Object Lifecycle */
+    /* Object Lifecycle */
 
     /**
      * Object constructor.
@@ -148,7 +147,7 @@ abstract class Zend_Pdf_Resource_Font extends Zend_Pdf_Resource
     }
 
 
-  /* Object Magic Methods */
+    /* Object Magic Methods */
 
     /**
      * Returns the full name of the font in the encoding method of the current
@@ -163,7 +162,7 @@ abstract class Zend_Pdf_Resource_Font extends Zend_Pdf_Resource
     }
 
 
-  /* Accessors */
+    /* Accessors */
 
     /**
      * Returns the type of font.
@@ -214,16 +213,16 @@ abstract class Zend_Pdf_Resource_Font extends Zend_Pdf_Resource
      * All names are stored internally as Unicode strings, using UTF-16BE
      * encoding. You may optionally supply a different resulting character set.
      *
-     * @param integer $nameType Type of name requested.
-     * @param mixed $language Preferred language (string) or array of languages
-     *   in preferred order. Use the ISO 639 standard 2-letter language codes.
-     * @param string $characterSet (optional) Desired resulting character set.
-     *   You may use any character set supported by {@link iconv()};
+     * @param integer $nameType     Type of name requested.
+     * @param mixed   $language     Preferred language (string) or array of languages
+     *                              in preferred order. Use the ISO 639 standard 2-letter language codes.
+     * @param string  $characterSet (optional) Desired resulting character set.
+     *                              You may use any character set supported by {@link iconv()};
      * @return string
      */
     public function getFontName($nameType, $language, $characterSet = null)
     {
-        if (! isset($this->_fontNames[$nameType])) {
+        if (!isset($this->_fontNames[$nameType])) {
             return null;
         }
         $name = null;
@@ -243,7 +242,7 @@ abstract class Zend_Pdf_Resource_Font extends Zend_Pdf_Resource
          */
         if ($name === null) {
             $names = $this->_fontNames[$nameType];
-            $name  = reset($names);
+            $name = reset($names);
         }
         /* Convert the character set if requested.
          */
@@ -411,7 +410,7 @@ abstract class Zend_Pdf_Resource_Font extends Zend_Pdf_Resource
     }
 
 
-  /* Information and Conversion Methods */
+    /* Information and Conversion Methods */
 
     /**
      * Returns an array of glyph numbers corresponding to the Unicode characters.
@@ -455,7 +454,7 @@ abstract class Zend_Pdf_Resource_Font extends Zend_Pdf_Resource
      *
      * @param string $string
      * @param string $charEncoding (optional) Character encoding of source text.
-     *   If omitted, uses 'current locale'.
+     *                             If omitted, uses 'current locale'.
      * @return float
      */
     abstract public function getCoveredPercentage($string, $charEncoding = '');
@@ -509,15 +508,15 @@ abstract class Zend_Pdf_Resource_Font extends Zend_Pdf_Resource
 
 
 
-  /**** Internal Methods ****/
+    /**** Internal Methods ****/
 
 
     /**
      * If the font's glyph space is not 1000 units per em, converts the value.
      *
-     * @internal
      * @param integer $value
      * @return integer
+     * @internal
      */
     public function toEmSpace($value)
     {

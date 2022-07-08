@@ -119,6 +119,6 @@ class Zend_Service_Amazon_SimpleDb_Page
     public function __toString()
     {
         return "Page with token: " . $this->_token
-             . "\n and data: " . $this->_data;
+            . "\n and data: " . $this->_data;
     }
 }

@@ -42,7 +42,7 @@ class Zend_Mime_Message
      *
      * @var array
      */
-    protected $_parts = array();
+    protected $_parts = [];
 
     /**
      * The Zend_Mime object for the message
@@ -150,13 +150,13 @@ class Zend_Mime_Message
 
             $boundaryLine = $mime->boundaryLine($EOL);
             $body = 'This is a message in Mime Format.  If you see this, '
-                  . "your mail reader does not support this format." . $EOL;
+                . "your mail reader does not support this format." . $EOL;
 
             foreach (array_keys($this->_parts) as $p) {
                 $body .= $boundaryLine
-                         . $this->getPartHeaders($p, $EOL)
-                         . $EOL
-                         . $this->getPartContent($p, $EOL);
+                    . $this->getPartHeaders($p, $EOL)
+                    . $EOL
+                    . $this->getPartContent($p, $EOL);
             }
 
             $body .= $mime->mimeEnd($EOL);
@@ -179,8 +179,8 @@ class Zend_Mime_Message
     /**
      * Get the headers of a given part as a string
      *
-     * @param  int    $partnum
-     * @param  string $EOL
+     * @param int    $partnum
+     * @param string $EOL
      * @return string
      */
     public function getPartHeaders($partnum, $EOL = Zend_Mime::LINEEND)
@@ -191,8 +191,8 @@ class Zend_Mime_Message
     /**
      * Get the (encoded) content of a given part as a string
      *
-     * @param  int    $partnum
-     * @param  string $EOL
+     * @param int    $partnum
+     * @param string $EOL
      * @return string
      */
     public function getPartContent($partnum, $EOL = Zend_Mime::LINEEND)
@@ -205,29 +205,29 @@ class Zend_Mime_Message
      *
      * Parts consist of the header and the body of each MIME part.
      *
-     * @param  string $body
-     * @param  string $boundary
-     * @throws Zend_Exception
+     * @param string $body
+     * @param string $boundary
      * @return array
+     * @throws Zend_Exception
      */
     protected static function _disassembleMime($body, $boundary)
     {
         $start = 0;
-        $res   = array();
+        $res = [];
         // find every mime part limiter and cut out the
         // string before it.
         // the part before the first boundary string is discarded:
         $p = strpos($body, '--' . $boundary . "\n", $start);
         if ($p === false) {
             // no parts found!
-            return array();
+            return [];
         }
 
         // position after first boundary line
         $start = $p + 3 + strlen($boundary);
 
         while (($p = strpos($body, '--' . $boundary . "\n", $start))
-               !== false) {
+            !== false) {
             $res[] = substr($body, $start, $p - $start);
             $start = $p + 3 + strlen($boundary);
         }
@@ -248,11 +248,11 @@ class Zend_Mime_Message
      * Decodes a MIME encoded string and returns a Zend_Mime_Message object with
      * all the MIME parts set according to the given string
      *
-     * @param  string $message
-     * @param  string $boundary
-     * @param  string $EOL EOL string; defaults to {@link Zend_Mime::LINEEND}
-     * @throws Zend_Exception
+     * @param string $message
+     * @param string $boundary
+     * @param string $EOL EOL string; defaults to {@link Zend_Mime::LINEEND}
      * @return Zend_Mime_Message
+     * @throws Zend_Exception
      */
     public static function createFromMessage(
         $message, $boundary, $EOL = Zend_Mime::LINEEND

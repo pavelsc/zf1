@@ -48,7 +48,7 @@ class Zend_Application_Resource_Session extends Zend_Application_Resource_Resour
     /**
      * Set session save handler
      *
-     * @param  array|string|Zend_Session_SaveHandler_Interface $saveHandler
+     * @param array|string|Zend_Session_SaveHandler_Interface $saveHandler
      * @return Zend_Application_Resource_Session
      * @throws Zend_Application_Resource_Exception When $saveHandler is not a valid save handler
      */
@@ -71,7 +71,7 @@ class Zend_Application_Resource_Session extends Zend_Application_Resource_Resour
                 if (!array_key_exists('class', $this->_saveHandler)) {
                     throw new Zend_Application_Resource_Exception('Session save handler class not provided in options');
                 }
-                $options = array();
+                $options = [];
                 if (array_key_exists('options', $this->_saveHandler)) {
                     $options = $this->_saveHandler['options'];
                 }

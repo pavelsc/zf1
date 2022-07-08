@@ -36,7 +36,7 @@ abstract class Zend_Log_Writer_Abstract implements Zend_Log_FactoryInterface
     /**
      * @var array of Zend_Log_Filter_Interface
      */
-    protected $_filters = array();
+    protected $_filters = [];
 
     /**
      * Formats the log message before writing.
@@ -48,7 +48,7 @@ abstract class Zend_Log_Writer_Abstract implements Zend_Log_FactoryInterface
     /**
      * Add a filter specific to this writer.
      *
-     * @param  Zend_Log_Filter_Interface|int $filter Filter class or filter
+     * @param Zend_Log_Filter_Interface|int $filter  Filter class or filter
      *                                               priority
      * @return Zend_Log_Writer_Abstract
      * @throws Zend_Log_Exception
@@ -72,7 +72,7 @@ abstract class Zend_Log_Writer_Abstract implements Zend_Log_FactoryInterface
     /**
      * Log a message to this writer.
      *
-     * @param  array $event log data event
+     * @param array $event log data event
      * @return void
      */
     public function write($event)
@@ -91,7 +91,7 @@ abstract class Zend_Log_Writer_Abstract implements Zend_Log_FactoryInterface
     /**
      * Set a new formatter for this writer
      *
-     * @param  Zend_Log_Formatter_Interface $formatter
+     * @param Zend_Log_Formatter_Interface $formatter
      * @return Zend_Log_Writer_Abstract
      */
     public function setFormatter(Zend_Log_Formatter_Interface $formatter)
@@ -106,12 +106,13 @@ abstract class Zend_Log_Writer_Abstract implements Zend_Log_FactoryInterface
      * @return void
      */
     public function shutdown()
-    {}
+    {
+    }
 
     /**
      * Write a message to the log.
      *
-     * @param  array $event log data event
+     * @param array $event log data event
      * @return void
      */
     abstract protected function _write($event);
@@ -119,7 +120,7 @@ abstract class Zend_Log_Writer_Abstract implements Zend_Log_FactoryInterface
     /**
      * Validate and optionally convert the config to array
      *
-     * @param  array|Zend_Config $config Zend_Config or Array
+     * @param array|Zend_Config $config Zend_Config or Array
      * @return array
      * @throws Zend_Log_Exception
      */

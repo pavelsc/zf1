@@ -29,7 +29,6 @@ require_once 'Zend/Http/UserAgent/Desktop.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
 class Zend_Http_UserAgent_Checker extends Zend_Http_UserAgent_Desktop
 {
 
@@ -38,7 +37,7 @@ class Zend_Http_UserAgent_Checker extends Zend_Http_UserAgent_Desktop
      *
      * @var array
      */
-    protected static $_uaSignatures = array(
+    protected static $_uaSignatures = [
         'abilogic',
         'checklink',
         'checker',
@@ -50,13 +49,13 @@ class Zend_Http_UserAgent_Checker extends Zend_Http_UserAgent_Desktop
         'sitebar',
         'xenu',
         'sleuth',
-    );
+    ];
 
     /**
      * Comparison of the UserAgent chain and User Agent signatures
      *
      * @param string $userAgent User Agent chain
-     * @param  array $server $_SERVER like param
+     * @param array  $server    $_SERVER like param
      * @return bool
      */
     public static function match($userAgent, $server)
@@ -74,13 +73,13 @@ class Zend_Http_UserAgent_Checker extends Zend_Http_UserAgent_Desktop
         return 'bot';
     }
 
-  public function __serialize(): array
-  {
-    // TODO: Implement __serialize() method.
-  }
+    public function __serialize(): array
+    {
+        // TODO: Implement __serialize() method.
+    }
 
-  public function __unserialize(array $data): void
-  {
-    // TODO: Implement __unserialize() method.
-  }
+    public function __unserialize(array $data): void
+    {
+        // TODO: Implement __unserialize() method.
+    }
 }

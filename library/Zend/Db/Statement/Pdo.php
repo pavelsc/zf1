@@ -232,7 +232,7 @@ class Zend_Db_Statement_Pdo extends Zend_Db_Statement implements IteratorAggrega
         } catch (PDOException $e) {
             require_once 'Zend/Db/Statement/Exception.php';
             $message = sprintf('%s, query was: %s', $e->getMessage(), $this->_stmt->queryString);
-            throw new Zend_Db_Statement_Exception($message, (int) $e->getCode(), $e);
+            throw new Zend_Db_Statement_Exception($message, (int)$e->getCode(), $e);
         }
     }
 
@@ -321,7 +321,7 @@ class Zend_Db_Statement_Pdo extends Zend_Db_Statement implements IteratorAggrega
      * @return mixed One object instance of the specified class.
      * @throws Zend_Db_Statement_Exception
      */
-    public function fetchObject($class = 'stdClass', array $config = array())
+    public function fetchObject($class = 'stdClass', array $config = [])
     {
         try {
             return $this->_stmt->fetchObject($class, $config);
@@ -422,7 +422,7 @@ class Zend_Db_Statement_Pdo extends Zend_Db_Statement implements IteratorAggrega
     /**
      * Set the default fetch mode for this statement.
      *
-     * @param int   $mode The fetch mode.
+     * @param int $mode The fetch mode.
      * @return bool
      * @throws Zend_Db_Statement_Exception
      */

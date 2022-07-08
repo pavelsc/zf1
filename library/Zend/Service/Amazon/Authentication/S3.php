@@ -42,15 +42,15 @@ class Zend_Service_Amazon_Authentication_S3 extends Zend_Service_Amazon_Authenti
     /**
      * Add the S3 Authorization signature to the request headers
      *
-     * @param  string $method
-     * @param  string $path
-     * @param  array &$headers
+     * @param string $method
+     * @param string $path
+     * @param array &$headers
      * @return string
      */
     public function generateSignature($method, $path, &$headers)
     {
-        if (! is_array($headers)) {
-            $headers = array($headers);
+        if (!is_array($headers)) {
+            $headers = [$headers];
         }
 
         $type = $md5 = $date = '';
@@ -75,7 +75,7 @@ class Zend_Service_Amazon_Authentication_S3 extends Zend_Service_Amazon_Authenti
 
         // For x-amz- headers, combine like keys, lowercase them, sort them
         // alphabetically and remove excess spaces around values
-        $amz_headers = array();
+        $amz_headers = [];
         foreach ($headers as $key => $val) {
             $key = strtolower($key);
             if (substr($key, 0, 6) == 'x-amz-') {
@@ -93,7 +93,7 @@ class Zend_Service_Amazon_Authentication_S3 extends Zend_Service_Amazon_Authenti
             }
         }
 
-        $sig_str .= '/'.parse_url($path, PHP_URL_PATH);
+        $sig_str .= '/' . parse_url($path, PHP_URL_PATH);
         if (strpos($path, '?location') !== false) {
             $sig_str .= '?location';
         } else

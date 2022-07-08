@@ -56,7 +56,7 @@ class Zend_Tool_Project_Context_Content_Engine
     /**
      * @var array
      */
-    protected $_engines = array();
+    protected $_engines = [];
 
     /**
      * __construct()
@@ -66,18 +66,18 @@ class Zend_Tool_Project_Context_Content_Engine
     public function __construct(Zend_Tool_Framework_Client_Storage $storage)
     {
         $this->_storage = $storage;
-        $this->_engines = array(
+        $this->_engines = [
             new Zend_Tool_Project_Context_Content_Engine_CodeGenerator($storage, $this->_keyInStorage),
             new Zend_Tool_Project_Context_Content_Engine_Phtml($storage, $this->_keyInStorage),
-            );
+        ];
     }
 
     /**
      * getContent()
      *
      * @param Zend_Tool_Project_Context_Interface $context
-     * @param string $methodName
-     * @param mixed $parameters
+     * @param string                              $methodName
+     * @param mixed                               $parameters
      * @return string
      */
     public function getContent(Zend_Tool_Project_Context_Interface $context, $methodName, $parameters)

@@ -47,15 +47,15 @@ class Zend_Filter_Encrypt_Mcrypt implements Zend_Filter_Encrypt_Interface
      *     'modedirectory' => directory where to find the mode
      * )
      */
-    protected $_encryption = array(
-        'key'                 => 'ZendFramework',
-        'algorithm'           => 'blowfish',
+    protected $_encryption = [
+        'key' => 'ZendFramework',
+        'algorithm' => 'blowfish',
         'algorithm_directory' => '',
-        'mode'                => 'cbc',
-        'mode_directory'      => '',
-        'vector'              => null,
-        'salt'                => false
-    );
+        'mode' => 'cbc',
+        'mode_directory' => '',
+        'vector' => null,
+        'salt' => false
+    ];
 
     /**
      * Internal compression
@@ -73,16 +73,16 @@ class Zend_Filter_Encrypt_Mcrypt implements Zend_Filter_Encrypt_Interface
      */
     public function __construct($options)
     {
-         throw new Zend_Filter_Exception('This filter is deprecated, use openssl extension');
+        throw new Zend_Filter_Exception('This filter is deprecated, use openssl extension');
     }
 
     public function encrypt($value)
     {
-      // TODO: Implement encrypt() method.
+        // TODO: Implement encrypt() method.
     }
 
     public function decrypt($value)
     {
-      // TODO: Implement decrypt() method.
+        // TODO: Implement decrypt() method.
     }
 }

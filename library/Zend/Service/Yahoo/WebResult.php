@@ -83,12 +83,12 @@ class Zend_Service_Yahoo_WebResult extends Zend_Service_Yahoo_Result
     /**
      * Initializes the web result
      *
-     * @param  DOMElement $result
+     * @param DOMElement $result
      * @return void
      */
     public function __construct(DOMElement $result)
     {
-        $this->_fields = array('Summary', 'MimeType', 'ModificationDate');
+        $this->_fields = ['Summary', 'MimeType', 'ModificationDate'];
         parent::__construct($result);
 
         $this->_xpath = new DOMXPath($result->ownerDocument);
@@ -96,14 +96,12 @@ class Zend_Service_Yahoo_WebResult extends Zend_Service_Yahoo_Result
 
         // check if the cache section exists
         $cacheUrl = $this->_xpath->query('./yh:Cache/yh:Url/text()', $result)->item(0);
-        if ($cacheUrl instanceof DOMNode)
-        {
+        if ($cacheUrl instanceof DOMNode) {
             $this->CacheUrl = $cacheUrl->data;
         }
         $cacheSize = $this->_xpath->query('./yh:Cache/yh:Size/text()', $result)->item(0);
-        if ($cacheSize instanceof DOMNode)
-        {
-            $this->CacheSize = (int) $cacheSize->data;
+        if ($cacheSize instanceof DOMNode) {
+            $this->CacheSize = (int)$cacheSize->data;
         }
     }
 }

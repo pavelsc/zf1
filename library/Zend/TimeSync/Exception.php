@@ -12,11 +12,11 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category  Zend
- * @package   Zend_TimeSync
+ * @category   Zend
+ * @package    Zend_TimeSync
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id$
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
 /**
@@ -27,10 +27,10 @@ require_once 'Zend/Exception.php';
 /**
  * Exception class for Zend_TimeSync
  *
- * @category  Zend
- * @package   Zend_TimeSync
+ * @category   Zend
+ * @package    Zend_TimeSync
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_TimeSync_Exception extends Zend_Exception
 {
@@ -44,7 +44,7 @@ class Zend_TimeSync_Exception extends Zend_Exception
     /**
      * Adds an exception to the exception list
      *
-     * @param  Zend_TimeSync_Exception $exception New exteption to throw
+     * @param Zend_TimeSync_Exception $exception New exteption to throw
      * @return void
      */
     public function addException(Zend_TimeSync_Exception $exception)

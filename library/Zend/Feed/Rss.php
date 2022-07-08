@@ -83,7 +83,7 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
         $rdfTags = $this->_element->getElementsByTagNameNS('http://www.w3.org/1999/02/22-rdf-syntax-ns#', 'RDF');
         if ($rdfTags->length != 0) {
             $this->_element = $rdfTags->item(0);
-        } else  {
+        } else {
             $this->_element = $this->_element->getElementsByTagName('channel')->item(0);
         }
         if (!$this->_element) {
@@ -108,7 +108,7 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
      * using foreach ($channel->items as $item) or foreach
      * ($channel->item as $item).
      *
-     * @param  string $var The property to access.
+     * @param string $var The property to access.
      * @return mixed
      */
     public function __get($var)
@@ -127,7 +127,7 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
     /**
      * Generate the header of the feed when working in write mode
      *
-     * @param  array $array the data to use
+     * @param array $array the data to use
      * @return DOMElement root node
      */
     protected function _mapFeedHeaders($array)
@@ -260,8 +260,8 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
     /**
      * Adds the iTunes extensions to a root node
      *
-     * @param  DOMElement $root
-     * @param  array $array
+     * @param DOMElement $root
+     * @param array      $array
      * @return void
      */
     private function _buildiTunes(DOMElement $root, $array)
@@ -386,8 +386,8 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
      *    <content:encoded>long version, can contain html</content:encoded>
      * </item>
      *
-     * @param  DOMElement $root the root node to use
-     * @param  array $array the data to use
+     * @param DOMElement $root  the root node to use
+     * @param array      $array the data to use
      * @return void
      */
     protected function _mapFeedEntries(DOMElement $root, $array)
@@ -454,8 +454,8 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
             }
             if (isset($dataentry->commentRss)) {
                 $comments = $this->_element->createElementNS('http://wellformedweb.org/CommentAPI/',
-                                                             'wfw:commentRss',
-                                                             $dataentry->commentRss);
+                    'wfw:commentRss',
+                    $dataentry->commentRss);
                 $item->appendChild($comments);
             }
 
@@ -487,7 +487,7 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
     {
         // Return a complete document including XML prologue.
         $doc = new DOMDocument($this->_element->ownerDocument->version,
-                               $this->_element->ownerDocument->actualEncoding);
+            $this->_element->ownerDocument->actualEncoding);
         $root = $doc->createElement('rss');
 
         // Use rss version 2.0

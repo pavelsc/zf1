@@ -47,7 +47,7 @@ class Zend_Gdata_Books_Extension_Embeddability extends Zend_Gdata_Extension
      * Describes an embeddability.
      *
      * @param string|null $value A programmatic value representing the book's
-     *        embeddability.
+     *                           embeddability.
      */
     public function __construct($value = null)
     {
@@ -64,7 +64,7 @@ class Zend_Gdata_Books_Extension_Embeddability extends Zend_Gdata_Extension
      *
      * @param DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
-     * child properties.
+     *                         child properties.
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
@@ -84,11 +84,11 @@ class Zend_Gdata_Books_Extension_Embeddability extends Zend_Gdata_Extension
     protected function takeAttributeFromDOM($attribute)
     {
         switch ($attribute->localName) {
-        case 'value':
-            $this->_value = $attribute->nodeValue;
-            break;
-        default:
-            parent::takeAttributeFromDOM($attribute);
+            case 'value':
+                $this->_value = $attribute->nodeValue;
+                break;
+            default:
+                parent::takeAttributeFromDOM($attribute);
         }
     }
 
@@ -108,9 +108,9 @@ class Zend_Gdata_Books_Extension_Embeddability extends Zend_Gdata_Extension
      * volume in Google Book Search
      *
      * @param string|null $value Programmatic value that describes the
-     *        embeddability of a volume in Google Book Search
+     *                           embeddability of a volume in Google Book Search
      * @return Zend_Gdata_Books_Extension_Embeddability Provides a fluent
-     *     interface
+     *                           interface
      */
     public function setValue($value)
     {

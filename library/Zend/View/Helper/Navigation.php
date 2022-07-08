@@ -60,7 +60,7 @@ class Zend_View_Helper_Navigation
      *
      * @var array
      */
-    protected $_helpers = array();
+    protected $_helpers = [];
 
     /**
      * Whether container should be injected when proxying
@@ -86,7 +86,7 @@ class Zend_View_Helper_Navigation
     /**
      * Helper entry point
      *
-     * @param  Zend_Navigation_Container $container  [optional] container to
+     * @param Zend_Navigation_Container $container   [optional] container to
      *                                               operate on
      * @return Zend_View_Helper_Navigation           fluent interface, returns
      *                                               self
@@ -115,9 +115,9 @@ class Zend_View_Helper_Navigation
      * $blogPages = $this->navigation()->findAllByRoute('blog');
      * </code>
      *
-     * @param  string $method             helper name or method name in
+     * @param string $method              helper name or method name in
      *                                    container
-     * @param  array  $arguments          [optional] arguments to pass
+     * @param array  $arguments           [optional] arguments to pass
      * @return mixed                      returns what the proxied call returns
      * @throws Zend_View_Exception        if proxying to a helper, and the
      *                                    helper is not an instance of the
@@ -125,11 +125,11 @@ class Zend_View_Helper_Navigation
      *                                    {@link findHelper()}
      * @throws Zend_Navigation_Exception  if method does not exist in container
      */
-    public function __call($method, array $arguments = array())
+    public function __call($method, array $arguments = [])
     {
         // check if call should proxy to another helper
         if ($helper = $this->findHelper($method, false)) {
-            return call_user_func_array(array($helper, $method), $arguments);
+            return call_user_func_array([$helper, $method], $arguments);
         }
 
         // default behaviour: proxy call to container
@@ -164,11 +164,11 @@ class Zend_View_Helper_Navigation
             // Add navigation helper path at the beginning
             $paths = $this->view->getHelperPaths();
             $this->view->setHelperPath(null);
-            
+
             $this->view->addHelperPath(
-                    str_replace('_', '/', self::NS),
-                    self::NS);
-            
+                str_replace('_', '/', self::NS),
+                self::NS);
+
             foreach ($paths as $ns => $path) {
                 $this->view->addHelperPath($path, $ns);
             }
@@ -188,9 +188,9 @@ class Zend_View_Helper_Navigation
             if ($strict) {
                 require_once 'Zend/View/Exception.php';
                 $e = new Zend_View_Exception(sprintf(
-                        'Proxy helper "%s" is not an instance of ' .
-                        'Zend_View_Helper_Navigation_Helper',
-                        get_class($helper)));
+                    'Proxy helper "%s" is not an instance of ' .
+                    'Zend_View_Helper_Navigation_Helper',
+                    get_class($helper)));
                 $e->setView($this->view);
                 throw $e;
             }
@@ -208,7 +208,7 @@ class Zend_View_Helper_Navigation
      * Injects container, ACL, and translator to the given $helper if this
      * helper is configured to do so
      *
-     * @param  Zend_View_Helper_Navigation_Helper $helper  helper instance
+     * @param Zend_View_Helper_Navigation_Helper $helper helper instance
      * @return void
      */
     protected function _inject(Zend_View_Helper_Navigation_Helper $helper)
@@ -236,12 +236,12 @@ class Zend_View_Helper_Navigation
     /**
      * Sets the default proxy to use in {@link render()}
      *
-     * @param  string $proxy                default proxy
+     * @param string $proxy default proxy
      * @return Zend_View_Helper_Navigation  fluent interface, returns self
      */
     public function setDefaultProxy($proxy)
     {
-        $this->_defaultProxy = (string) $proxy;
+        $this->_defaultProxy = (string)$proxy;
         return $this;
     }
 
@@ -265,7 +265,7 @@ class Zend_View_Helper_Navigation
      */
     public function setInjectContainer($injectContainer = true)
     {
-        $this->_injectContainer = (bool) $injectContainer;
+        $this->_injectContainer = (bool)$injectContainer;
         return $this;
     }
 
@@ -282,14 +282,14 @@ class Zend_View_Helper_Navigation
     /**
      * Sets whether ACL should be injected when proxying
      *
-     * @param  bool $injectAcl              [optional] whether ACL should be
+     * @param bool $injectAcl               [optional] whether ACL should be
      *                                      injected when proxying. Default is
      *                                      true.
      * @return Zend_View_Helper_Navigation  fluent interface, returns self
      */
     public function setInjectAcl($injectAcl = true)
     {
-        $this->_injectAcl = (bool) $injectAcl;
+        $this->_injectAcl = (bool)$injectAcl;
         return $this;
     }
 
@@ -306,14 +306,14 @@ class Zend_View_Helper_Navigation
     /**
      * Sets whether translator should be injected when proxying
      *
-     * @param  bool $injectTranslator       [optional] whether translator should
+     * @param bool $injectTranslator        [optional] whether translator should
      *                                      be injected when proxying. Default
      *                                      is true.
      * @return Zend_View_Helper_Navigation  fluent interface, returns self
      */
     public function setInjectTranslator($injectTranslator = true)
     {
-        $this->_injectTranslator = (bool) $injectTranslator;
+        $this->_injectTranslator = (bool)$injectTranslator;
         return $this;
     }
 
@@ -332,7 +332,7 @@ class Zend_View_Helper_Navigation
     /**
      * Renders helper
      *
-     * @param  Zend_Navigation_Container $container  [optional] container to
+     * @param Zend_Navigation_Container $container   [optional] container to
      *                                               render. Default is to
      *                                               render the container
      *                                               registered in the helper.

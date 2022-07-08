@@ -174,10 +174,10 @@ class Zend_Mime_Part
                     $this->_content,
                     'convert.quoted-printable-encode',
                     STREAM_FILTER_READ,
-                    array(
-                        'line-length'      => 76,
+                    [
+                        'line-length' => 76,
                         'line-break-chars' => Zend_Mime::LINEEND
-                    )
+                    ]
                 );
                 if (!is_resource($filter)) {
                     require_once 'Zend/Mime/Exception.php';
@@ -192,10 +192,10 @@ class Zend_Mime_Part
                     $this->_content,
                     'convert.base64-encode',
                     STREAM_FILTER_READ,
-                    array(
-                        'line-length'      => 76,
+                    [
+                        'line-length' => 76,
                         'line-break-chars' => Zend_Mime::LINEEND
-                    )
+                    ]
                 );
                 if (!is_resource($filter)) {
                     require_once 'Zend/Mime/Exception.php';
@@ -214,9 +214,9 @@ class Zend_Mime_Part
     /**
      * Get the Content of the current Mime Part in the given encoding.
      *
-     * @param  string $EOL Line end; defaults to {@link Zend_Mime::LINEEND}
-     * @throws Zend_Mime_Exception
+     * @param string $EOL Line end; defaults to {@link Zend_Mime::LINEEND}
      * @return string
+     * @throws Zend_Mime_Exception
      */
     public function getContent($EOL = Zend_Mime::LINEEND)
     {
@@ -244,12 +244,12 @@ class Zend_Mime_Part
     /**
      * Create and return the array of headers for this MIME part
      *
-     * @param  string $EOL Line end; defaults to {@link Zend_Mime::LINEEND}
+     * @param string $EOL Line end; defaults to {@link Zend_Mime::LINEEND}
      * @return array
      */
     public function getHeadersArray($EOL = Zend_Mime::LINEEND)
     {
-        $headers = array();
+        $headers = [];
 
         $contentType = $this->type;
         if ($this->charset) {
@@ -258,26 +258,26 @@ class Zend_Mime_Part
 
         if ($this->boundary) {
             $contentType .= ';' . $EOL
-                            . " boundary=\"" . $this->boundary . '"';
+                . " boundary=\"" . $this->boundary . '"';
         }
 
-        $headers[] = array(
+        $headers[] = [
             'Content-Type',
             $contentType
-        );
+        ];
 
         if ($this->encoding) {
-            $headers[] = array(
+            $headers[] = [
                 'Content-Transfer-Encoding',
                 $this->encoding
-            );
+            ];
         }
 
         if ($this->id) {
-            $headers[] = array(
+            $headers[] = [
                 'Content-ID',
                 '<' . $this->id . '>'
-            );
+            ];
         }
 
         if ($this->disposition) {
@@ -285,31 +285,31 @@ class Zend_Mime_Part
             if ($this->filename) {
                 $disposition .= '; filename="' . $this->filename . '"';
             }
-            $headers[] = array(
+            $headers[] = [
                 'Content-Disposition',
                 $disposition
-            );
+            ];
         }
 
         if ($this->description) {
-            $headers[] = array(
+            $headers[] = [
                 'Content-Description',
                 $this->description
-            );
+            ];
         }
 
         if ($this->location) {
-            $headers[] = array(
+            $headers[] = [
                 'Content-Location',
                 $this->location
-            );
+            ];
         }
 
         if ($this->language) {
-            $headers[] = array(
+            $headers[] = [
                 'Content-Language',
                 $this->language
-            );
+            ];
         }
 
         return $headers;
@@ -318,7 +318,7 @@ class Zend_Mime_Part
     /**
      * Return the headers for this part as a string
      *
-     * @param  string $EOL Line end; defaults to {@link Zend_Mime::LINEEND}
+     * @param string $EOL Line end; defaults to {@link Zend_Mime::LINEEND}
      * @return string
      */
     public function getHeaders($EOL = Zend_Mime::LINEEND)

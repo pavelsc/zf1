@@ -43,17 +43,17 @@ class Zend_View_Helper_HtmlFlash extends Zend_View_Helper_HtmlObject
     /**
      * Output a flash movie object tag
      *
-     * @param string $data The flash file
+     * @param string $data    The flash file
      * @param array  $attribs Attribs for the object tag
-     * @param array  $params Params for in the object tag
+     * @param array  $params  Params for in the object tag
      * @param string $content Alternative content
      * @return string
      */
-    public function htmlFlash($data, array $attribs = array(), array $params = array(), $content = null)
+    public function htmlFlash($data, array $attribs = [], array $params = [], $content = null)
     {
         // Params
-        $params = array_merge(array('movie'   => $data,
-                                    'quality' => 'high'), $params);
+        $params = array_merge(['movie' => $data,
+            'quality' => 'high'], $params);
 
         return $this->htmlObject($data, self::TYPE, $attribs, $params, $content);
     }

@@ -24,7 +24,7 @@
  * @category   Zend
  * @package    Zend_Server
  * @subpackage Reflection
- * @version $Id$
+ * @version    $Id$
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -40,7 +40,7 @@ class Zend_Server_Reflection_Node
      * Array of child nodes (if any)
      * @var array
      */
-    protected $_children = array();
+    protected $_children = [];
 
     /**
      * Parent node (if any)
@@ -51,7 +51,7 @@ class Zend_Server_Reflection_Node
     /**
      * Constructor
      *
-     * @param mixed $value
+     * @param mixed                       $value
      * @param Zend_Server_Reflection_Node $parent Optional
      * @return Zend_Server_Reflection_Node
      */
@@ -69,8 +69,8 @@ class Zend_Server_Reflection_Node
      * Set parent node
      *
      * @param Zend_Server_Reflection_Node $node
-     * @param boolean $new Whether or not the child node is newly created
-     * and should always be attached
+     * @param boolean                     $new Whether or not the child node is newly created
+     *                                         and should always be attached
      * @return void
      */
     public function setParent(Zend_Server_Reflection_Node $node, $new = false)
@@ -174,7 +174,7 @@ class Zend_Server_Reflection_Node
      */
     public function getEndPoints()
     {
-        $endPoints = array();
+        $endPoints = [];
         if (!$this->hasChildren()) {
             return $endPoints;
         }
@@ -185,8 +185,7 @@ class Zend_Server_Reflection_Node
             if (null === $value) {
                 $endPoints[] = $this;
             } elseif ((null !== $value)
-                && $child->hasChildren())
-            {
+                && $child->hasChildren()) {
                 $childEndPoints = $child->getEndPoints();
                 if (!empty($childEndPoints)) {
                     $endPoints = array_merge($endPoints, $childEndPoints);

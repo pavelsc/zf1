@@ -43,11 +43,11 @@ class Zend_View_Helper_FormFile extends Zend_View_Helper_FormElement
      *
      * @access public
      *
-     * @param string|array $name If a string, the element name.  If an
-     * array, all other parameters are ignored, and the array elements
-     * are extracted in place of added parameters.
+     * @param string|array $name    If a string, the element name.  If an
+     *                              array, all other parameters are ignored, and the array elements
+     *                              are extracted in place of added parameters.
      *
-     * @param array $attribs Attributes for the element tag.
+     * @param array        $attribs Attributes for the element tag.
      *
      * @return string The element XHTML.
      */
@@ -64,11 +64,11 @@ class Zend_View_Helper_FormFile extends Zend_View_Helper_FormElement
 
         // build the element
         $xhtml = '<input type="file"'
-                . ' name="' . $this->view->escape($name) . '"'
-                . ' id="' . $this->view->escape($id) . '"'
-                . $disabled
-                . $this->_htmlAttribs($attribs)
-                . $this->getClosingBracket();
+            . ' name="' . $this->view->escape($name) . '"'
+            . ' id="' . $this->view->escape($id) . '"'
+            . $disabled
+            . $this->_htmlAttribs($attribs)
+            . $this->getClosingBracket();
 
         return $xhtml;
     }

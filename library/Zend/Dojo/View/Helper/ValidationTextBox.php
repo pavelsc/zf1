@@ -31,14 +31,14 @@ require_once 'Zend/Dojo/View/Helper/Dijit.php';
  * @subpackage View
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
-  */
+ */
 class Zend_Dojo_View_Helper_ValidationTextBox extends Zend_Dojo_View_Helper_Dijit
 {
     /**
      * Dijit being used
      * @var string
      */
-    protected $_dijit  = 'dijit.form.ValidationTextBox';
+    protected $_dijit = 'dijit.form.ValidationTextBox';
 
     /**
      * HTML element type
@@ -55,13 +55,13 @@ class Zend_Dojo_View_Helper_ValidationTextBox extends Zend_Dojo_View_Helper_Diji
     /**
      * dijit.form.ValidationTextBox
      *
-     * @param  int $id
-     * @param  mixed $value
-     * @param  array $params  Parameters to use for dijit creation
-     * @param  array $attribs HTML attributes
+     * @param int   $id
+     * @param mixed $value
+     * @param array $params  Parameters to use for dijit creation
+     * @param array $attribs HTML attributes
      * @return string
      */
-    public function validationTextBox($id, $value = null, array $params = array(), array $attribs = array())
+    public function validationTextBox($id, $value = null, array $params = [], array $attribs = [])
     {
         return $this->_createFormElement($id, $value, $params, $attribs);
     }

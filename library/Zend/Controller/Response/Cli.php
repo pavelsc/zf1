@@ -29,8 +29,8 @@ require_once 'Zend/Controller/Response/Abstract.php';
  *
  * CLI response for controllers
  *
- * @uses Zend_Controller_Response_Abstract
- * @package Zend_Controller
+ * @uses       Zend_Controller_Response_Abstract
+ * @package    Zend_Controller
  * @subpackage Response
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License

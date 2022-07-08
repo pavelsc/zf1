@@ -35,19 +35,19 @@ require_once 'Zend/Validate/Abstract.php';
 class Zend_Validate_Iban extends Zend_Validate_Abstract
 {
     const NOTSUPPORTED = 'ibanNotSupported';
-    const FALSEFORMAT  = 'ibanFalseFormat';
-    const CHECKFAILED  = 'ibanCheckFailed';
+    const FALSEFORMAT = 'ibanFalseFormat';
+    const CHECKFAILED = 'ibanCheckFailed';
 
     /**
      * Validation failure message template definitions
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $_messageTemplates = [
         self::NOTSUPPORTED => "Unknown country within the IBAN '%value%'",
-        self::FALSEFORMAT  => "'%value%' has a false IBAN format",
-        self::CHECKFAILED  => "'%value%' has failed the IBAN check",
-    );
+        self::FALSEFORMAT => "'%value%' has a false IBAN format",
+        self::CHECKFAILED => "'%value%' has failed the IBAN check",
+    ];
 
     /**
      * Optional locale
@@ -61,7 +61,7 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
      *
      * @var array
      */
-    protected $_ibanregex = array(
+    protected $_ibanregex = [
         'AD' => '/^AD[0-9]{2}[0-9]{8}[A-Z0-9]{12}$/',
         'AE' => '/^AE[0-9]{2}[0-9]{3}[0-9]{16}$/',
         'AL' => '/^AL[0-9]{2}[0-9]{8}[A-Z0-9]{16}$/',
@@ -127,7 +127,7 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
         'TN' => '/^TN[0-9]{2}[0-9]{5}[0-9]{15}$/',
         'TR' => '/^TR[0-9]{2}[0-9]{5}[A-Z0-9]{17}$/',
         'VG' => '/^VG[0-9]{2}[A-Z]{4}[0-9]{16}$/'
-    );
+    ];
 
     /**
      * Sets validator options
@@ -173,10 +173,10 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
     /**
      * Sets the locale option
      *
-     * @param  string|Zend_Locale $locale
-     * @throws Zend_Locale_Exception
-     * @throws Zend_Validate_Exception
+     * @param string|Zend_Locale $locale
      * @return Zend_Validate_Date provides a fluent interface
+     * @throws Zend_Validate_Exception
+     * @throws Zend_Locale_Exception
      */
     public function setLocale($locale = null)
     {
@@ -198,7 +198,7 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
      *
      * Returns true if $value is a valid IBAN
      *
-     * @param  string $value
+     * @param string $value
      * @return boolean
      */
     public function isValid($value)
@@ -226,14 +226,14 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
 
         $format = substr($value, 4) . substr($value, 0, 4);
         $format = str_replace(
-            array('A',  'B',  'C',  'D',  'E',  'F',  'G',  'H',  'I',  'J',  'K',  'L',  'M',
-                  'N',  'O',  'P',  'Q',  'R',  'S',  'T',  'U',  'V',  'W',  'X',  'Y',  'Z'),
-            array('10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22',
-                  '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35'),
+            ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+                'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
+            ['10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22',
+                '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35'],
             $format);
 
         $temp = intval(substr($format, 0, 1));
-        $len  = strlen($format);
+        $len = strlen($format);
         for ($x = 1; $x < $len; ++$x) {
             $temp *= 10;
             $temp += intval(substr($format, $x, 1));

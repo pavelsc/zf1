@@ -43,19 +43,19 @@ class Zend_View_Helper_FormButton extends Zend_View_Helper_FormElement
      *
      * @access public
      *
-     * @param string|array $name If a string, the element name.  If an
-     * array, all other parameters are ignored, and the array elements
-     * are extracted in place of added parameters.
+     * @param string|array $name    If a string, the element name.  If an
+     *                              array, all other parameters are ignored, and the array elements
+     *                              are extracted in place of added parameters.
      *
-     * @param mixed $value The element value.
+     * @param mixed        $value   The element value.
      *
-     * @param array $attribs Attributes for the element tag.
+     * @param array        $attribs Attributes for the element tag.
      *
      * @return string The element XHTML.
      */
     public function formButton($name, $value = null, $attribs = null)
     {
-        $info    = $this->_getInfo($name, $value, $attribs);
+        $info = $this->_getInfo($name, $value, $attribs);
         extract($info); // name, id, value, attribs, options, listsep, disable, escape
 
         // Get content
@@ -71,7 +71,7 @@ class Zend_View_Helper_FormButton extends Zend_View_Helper_FormElement
         $type = 'button';
         if (isset($attribs['type'])) {
             $attribs['type'] = strtolower($attribs['type']);
-            if (in_array($attribs['type'], array('submit', 'reset', 'button'))) {
+            if (in_array($attribs['type'], ['submit', 'reset', 'button'])) {
                 $type = $attribs['type'];
             }
             unset($attribs['type']);
@@ -85,9 +85,9 @@ class Zend_View_Helper_FormButton extends Zend_View_Helper_FormElement
         $content = ($escape) ? $this->view->escape($content) : $content;
 
         $xhtml = '<button'
-                . ' name="' . $this->view->escape($name) . '"'
-                . ' id="' . $this->view->escape($id) . '"'
-                . ' type="' . $type . '"';
+            . ' name="' . $this->view->escape($name) . '"'
+            . ' id="' . $this->view->escape($id) . '"'
+            . ' type="' . $type . '"';
 
         // add a value if one is given
         if (!empty($value)) {

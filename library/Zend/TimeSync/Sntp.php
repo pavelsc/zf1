@@ -12,11 +12,11 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category  Zend
- * @package   Zend_TimeSync
+ * @category   Zend
+ * @package    Zend_TimeSync
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id$
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
 /**
@@ -27,10 +27,10 @@ require_once 'Zend/TimeSync/Protocol.php';
 /**
  * SNTP Protocol handling class
  *
- * @category  Zend
- * @package   Zend_TimeSync
+ * @category   Zend
+ * @package    Zend_TimeSync
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_TimeSync_Sntp extends Zend_TimeSync_Protocol
 {
@@ -79,7 +79,7 @@ class Zend_TimeSync_Sntp extends Zend_TimeSync_Protocol
      */
     protected function _read()
     {
-        $result       = fread($this->_socket, 49);
+        $result = fread($this->_socket, 49);
         $this->_delay = (($this->_delay - time()) / 2);
 
         return $result;
@@ -88,7 +88,7 @@ class Zend_TimeSync_Sntp extends Zend_TimeSync_Protocol
     /**
      * Writes data to to the timeserver
      *
-     * @param  string $data Data to write to the timeserver
+     * @param string $data Data to write to the timeserver
      * @return void
      */
     protected function _write($data)
@@ -101,13 +101,13 @@ class Zend_TimeSync_Sntp extends Zend_TimeSync_Protocol
     /**
      * Extracts the data returned from the timeserver
      *
-     * @param  string $result Data to extract
+     * @param string $result Data to extract
      * @return integer
      */
     protected function _extract($result)
     {
-        $dec   = hexdec('7fffffff');
-        $time  = abs(($dec - hexdec(bin2hex($result))) - $dec);
+        $dec = hexdec('7fffffff');
+        $time = abs(($dec - hexdec(bin2hex($result))) - $dec);
         $time -= 2208988800;
         // Socket delay
         $time -= $this->_delay;

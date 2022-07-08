@@ -37,16 +37,16 @@ require_once 'Zend/Locale/Format.php';
  */
 class Zend_Validate_Float extends Zend_Validate_Abstract
 {
-    const INVALID   = 'floatInvalid';
+    const INVALID = 'floatInvalid';
     const NOT_FLOAT = 'notFloat';
 
     /**
      * @var array
      */
-    protected $_messageTemplates = array(
-        self::INVALID   => "Invalid type given. String, integer or float expected",
+    protected $_messageTemplates = [
+        self::INVALID => "Invalid type given. String, integer or float expected",
         self::NOT_FLOAT => "'%value%' does not appear to be a float",
-    );
+    ];
 
     protected $_locale;
 
@@ -105,7 +105,7 @@ class Zend_Validate_Float extends Zend_Validate_Abstract
      *
      * Returns true if and only if $value is a floating-point value
      *
-     * @param  string $value
+     * @param string $value
      * @return boolean
      */
     public function isValid($value)
@@ -121,7 +121,7 @@ class Zend_Validate_Float extends Zend_Validate_Abstract
 
         $this->_setValue($value);
         try {
-            if (!Zend_Locale_Format::isFloat($value, array('locale' => $this->_locale))) {
+            if (!Zend_Locale_Format::isFloat($value, ['locale' => $this->_locale])) {
                 $this->_error(self::NOT_FLOAT);
                 return false;
             }

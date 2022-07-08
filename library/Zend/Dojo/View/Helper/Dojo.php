@@ -80,7 +80,7 @@ class Zend_Dojo_View_Helper_Dojo
     /**
      * Set view object
      *
-     * @param  Zend_Dojo_View_Interface $view
+     * @param Zend_Dojo_View_Interface $view
      * @return void
      */
     public function setView(Zend_View_Interface $view)
@@ -102,8 +102,8 @@ class Zend_Dojo_View_Helper_Dojo
     /**
      * Proxy to container methods
      *
-     * @param  string $method
-     * @param  array $args
+     * @param string $method
+     * @param array  $args
      * @return mixed
      * @throws Zend_Dojo_View_Exception For invalid method calls
      */
@@ -114,7 +114,7 @@ class Zend_Dojo_View_Helper_Dojo
             throw new Zend_Dojo_View_Exception(sprintf('Invalid method "%s" called on dojo view helper', $method));
         }
 
-        return call_user_func_array(array($this->_container, $method), $args);
+        return call_user_func_array([$this->_container, $method], $args);
     }
 
     /**
@@ -133,12 +133,12 @@ class Zend_Dojo_View_Helper_Dojo
      * Optionally, specifiy whether or not dijit helpers should generate the
      * programmatic dojo.
      *
-     * @param  int $style
+     * @param int $style
      * @return void
      */
     public static function setUseProgrammatic($style = self::PROGRAMMATIC_SCRIPT)
     {
-        if (!in_array($style, array(self::PROGRAMMATIC_SCRIPT, self::PROGRAMMATIC_NOSCRIPT))) {
+        if (!in_array($style, [self::PROGRAMMATIC_SCRIPT, self::PROGRAMMATIC_NOSCRIPT])) {
             $style = self::PROGRAMMATIC_SCRIPT;
         }
         self::$_useProgrammatic = $style;

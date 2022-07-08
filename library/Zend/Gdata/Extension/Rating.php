@@ -49,14 +49,14 @@ class Zend_Gdata_Extension_Rating extends Zend_Gdata_Extension
     /**
      * Constructs a new Zend_Gdata_Extension_Rating object.
      *
-     * @param integer $average (optional) Average rating.
-     * @param integer $min (optional) Minimum rating.
-     * @param integer $max (optional) Maximum rating.
+     * @param integer $average   (optional) Average rating.
+     * @param integer $min       (optional) Minimum rating.
+     * @param integer $max       (optional) Maximum rating.
      * @param integer $numRaters (optional) Number of raters.
-     * @param integer $value (optional) The value of the rating.
+     * @param integer $value     (optional) The value of the rating.
      */
     public function __construct($average = null, $min = null,
-            $max = null, $numRaters = null, $value = null)
+                                $max = null, $numRaters = null, $value = null)
     {
         parent::__construct();
         $this->_average = $average;
@@ -74,7 +74,7 @@ class Zend_Gdata_Extension_Rating extends Zend_Gdata_Extension
      *
      * @param DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
-     *          child properties.
+     *                         child properties.
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {

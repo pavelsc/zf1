@@ -28,7 +28,7 @@
  * @subpackage Reflection
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version $Id$
+ * @version    $Id$
  */
 class Zend_Server_Reflection_Parameter
 {
@@ -59,8 +59,8 @@ class Zend_Server_Reflection_Parameter
      * Constructor
      *
      * @param ReflectionParameter $r
-     * @param string $type Parameter type
-     * @param string $description Parameter description
+     * @param string              $type        Parameter type
+     * @param string              $description Parameter description
      */
     public function __construct(ReflectionParameter $r, $type = 'mixed', $description = '')
     {
@@ -73,13 +73,13 @@ class Zend_Server_Reflection_Parameter
      * Proxy reflection calls
      *
      * @param string $method
-     * @param array $args
+     * @param array  $args
      * @return mixed
      */
     public function __call($method, $args)
     {
         if (method_exists($this->_reflection, $method)) {
-            return call_user_func_array(array($this->_reflection, $method), $args);
+            return call_user_func_array([$this->_reflection, $method], $args);
         }
 
         require_once 'Zend/Server/Reflection/Exception.php';
@@ -146,7 +146,7 @@ class Zend_Server_Reflection_Parameter
      */
     public function setPosition($index)
     {
-        $this->_position = (int) $index;
+        $this->_position = (int)$index;
     }
 
     /**

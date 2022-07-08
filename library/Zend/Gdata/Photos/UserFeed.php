@@ -96,12 +96,12 @@ class Zend_Gdata_Photos_UserFeed extends Zend_Gdata_Feed
     protected $_entryClassName = 'Zend_Gdata_Photos_UserEntry';
     protected $_feedClassName = 'Zend_Gdata_Photos_UserFeed';
 
-    protected $_entryKindClassMapping = array(
+    protected $_entryKindClassMapping = [
         'http://schemas.google.com/photos/2007#album' => 'Zend_Gdata_Photos_AlbumEntry',
         'http://schemas.google.com/photos/2007#photo' => 'Zend_Gdata_Photos_PhotoEntry',
         'http://schemas.google.com/photos/2007#comment' => 'Zend_Gdata_Photos_CommentEntry',
         'http://schemas.google.com/photos/2007#tag' => 'Zend_Gdata_Photos_TagEntry'
-    );
+    ];
 
     public function __construct($element = null)
     {
@@ -141,8 +141,8 @@ class Zend_Gdata_Photos_UserFeed extends Zend_Gdata_Feed
                 foreach ($categories as $category) {
                     if ($category->scheme == Zend_Gdata_Photos::KIND_PATH &&
                         $this->_entryKindClassMapping[$category->term] != "") {
-                            $entryClassName = $this->_entryKindClassMapping[$category->term];
-                            break;
+                        $entryClassName = $this->_entryKindClassMapping[$category->term];
+                        break;
                     } else {
                         require_once 'Zend/Gdata/App/Exception.php';
                         throw new Zend_Gdata_App_Exception('Entry is missing kind declaration.');
@@ -178,8 +178,8 @@ class Zend_Gdata_Photos_UserFeed extends Zend_Gdata_Feed
     /**
      * Get the value for this element's gphoto:user attribute.
      *
-     * @see setGphotoUser
      * @return string The requested attribute.
+     * @see setGphotoUser
      */
     public function getGphotoUser()
     {
@@ -201,8 +201,8 @@ class Zend_Gdata_Photos_UserFeed extends Zend_Gdata_Feed
     /**
      * Get the value for this element's gphoto:nickname attribute.
      *
-     * @see setGphotoNickname
      * @return string The requested attribute.
+     * @see setGphotoNickname
      */
     public function getGphotoNickname()
     {
@@ -224,8 +224,8 @@ class Zend_Gdata_Photos_UserFeed extends Zend_Gdata_Feed
     /**
      * Get the value for this element's gphoto:thumbnail attribute.
      *
-     * @see setGphotoThumbnail
      * @return string The requested attribute.
+     * @see setGphotoThumbnail
      */
     public function getGphotoThumbnail()
     {

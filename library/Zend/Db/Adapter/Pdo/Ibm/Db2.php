@@ -63,7 +63,7 @@ class Zend_Db_Adapter_Pdo_Ibm_Db2
     public function listTables()
     {
         $sql = "SELECT tabname "
-        . "FROM SYSCAT.TABLES ";
+            . "FROM SYSCAT.TABLES ";
         return $this->_adapter->fetchCol($sql);
     }
 
@@ -94,7 +94,7 @@ class Zend_Db_Adapter_Pdo_Ibm_Db2
         }
         $sql .= " ORDER BY c.colno";
 
-        $desc = array();
+        $desc = [];
         $stmt = $this->_adapter->query($sql);
 
         /**
@@ -106,21 +106,21 @@ class Zend_Db_Adapter_Pdo_Ibm_Db2
          * The ordering of columns is defined by the query so we can map
          * to variables to improve readability
          */
-        $tabschema      = 0;
-        $tabname        = 1;
-        $colname        = 2;
-        $colno          = 3;
-        $typename       = 4;
-        $default        = 5;
-        $nulls          = 6;
-        $length         = 7;
-        $scale          = 8;
-        $identityCol    = 9;
-        $tabconstype    = 10;
-        $colseq         = 11;
+        $tabschema = 0;
+        $tabname = 1;
+        $colname = 2;
+        $colno = 3;
+        $typename = 4;
+        $default = 5;
+        $nulls = 6;
+        $length = 7;
+        $scale = 8;
+        $identityCol = 9;
+        $tabconstype = 10;
+        $colseq = 11;
 
         foreach ($result as $key => $row) {
-            list ($primary, $primaryPosition, $identity) = array(false, null, false);
+            [$primary, $primaryPosition, $identity] = [false, null, false];
             if ($row[$tabconstype] == 'P') {
                 $primary = true;
                 $primaryPosition = $row[$colseq];
@@ -133,22 +133,22 @@ class Zend_Db_Adapter_Pdo_Ibm_Db2
                 $identity = true;
             }
 
-            $desc[$this->_adapter->foldCase($row[$colname])] = array(
-            'SCHEMA_NAME'      => $this->_adapter->foldCase($row[$tabschema]),
-            'TABLE_NAME'       => $this->_adapter->foldCase($row[$tabname]),
-            'COLUMN_NAME'      => $this->_adapter->foldCase($row[$colname]),
-            'COLUMN_POSITION'  => $row[$colno]+1,
-            'DATA_TYPE'        => $row[$typename],
-            'DEFAULT'          => $row[$default],
-            'NULLABLE'         => (bool) ($row[$nulls] == 'Y'),
-            'LENGTH'           => $row[$length],
-            'SCALE'            => $row[$scale],
-            'PRECISION'        => ($row[$typename] == 'DECIMAL' ? $row[$length] : 0),
-            'UNSIGNED'         => false,
-            'PRIMARY'          => $primary,
-            'PRIMARY_POSITION' => $primaryPosition,
-            'IDENTITY'         => $identity
-            );
+            $desc[$this->_adapter->foldCase($row[$colname])] = [
+                'SCHEMA_NAME' => $this->_adapter->foldCase($row[$tabschema]),
+                'TABLE_NAME' => $this->_adapter->foldCase($row[$tabname]),
+                'COLUMN_NAME' => $this->_adapter->foldCase($row[$colname]),
+                'COLUMN_POSITION' => $row[$colno] + 1,
+                'DATA_TYPE' => $row[$typename],
+                'DEFAULT' => $row[$default],
+                'NULLABLE' => (bool)($row[$nulls] == 'Y'),
+                'LENGTH' => $row[$length],
+                'SCALE' => $row[$scale],
+                'PRECISION' => ($row[$typename] == 'DECIMAL' ? $row[$length] : 0),
+                'UNSIGNED' => false,
+                'PRIMARY' => $primary,
+                'PRIMARY_POSITION' => $primaryPosition,
+                'IDENTITY' => $identity
+            ];
         }
 
         return $desc;
@@ -157,11 +157,11 @@ class Zend_Db_Adapter_Pdo_Ibm_Db2
     /**
      * Adds a DB2-specific LIMIT clause to the SELECT statement.
      *
-     * @param string $sql
+     * @param string  $sql
      * @param integer $count
      * @param integer $offset OPTIONAL
-     * @throws Zend_Db_Adapter_Exception
      * @return string
+     * @throws Zend_Db_Adapter_Exception
      */
     public function limit($sql, $count, $offset = 0)
     {
@@ -195,7 +195,7 @@ class Zend_Db_Adapter_Pdo_Ibm_Db2
                       " . $sql . "
                   ) z1
               ) z2
-              WHERE z2.zend_db_rownum BETWEEN " . ($offset+1) . " AND " . ($offset+$count);
+              WHERE z2.zend_db_rownum BETWEEN " . ($offset + 1) . " AND " . ($offset + $count);
         }
         return $limit_sql;
     }
@@ -208,7 +208,7 @@ class Zend_Db_Adapter_Pdo_Ibm_Db2
      */
     public function lastSequenceId($sequenceName)
     {
-        $sql = 'SELECT PREVVAL FOR '.$this->_adapter->quoteIdentifier($sequenceName).' AS VAL FROM SYSIBM.SYSDUMMY1';
+        $sql = 'SELECT PREVVAL FOR ' . $this->_adapter->quoteIdentifier($sequenceName) . ' AS VAL FROM SYSIBM.SYSDUMMY1';
         $value = $this->_adapter->fetchOne($sql);
         return $value;
     }
@@ -216,12 +216,12 @@ class Zend_Db_Adapter_Pdo_Ibm_Db2
     /**
      * DB2-specific sequence id value
      *
-     *  @param string $sequenceName
-     *  @return integer
+     * @param string $sequenceName
+     * @return integer
      */
     public function nextSequenceId($sequenceName)
     {
-        $sql = 'SELECT NEXTVAL FOR '.$this->_adapter->quoteIdentifier($sequenceName).' AS VAL FROM SYSIBM.SYSDUMMY1';
+        $sql = 'SELECT NEXTVAL FOR ' . $this->_adapter->quoteIdentifier($sequenceName) . ' AS VAL FROM SYSIBM.SYSDUMMY1';
         $value = $this->_adapter->fetchOne($sql);
         return $value;
     }

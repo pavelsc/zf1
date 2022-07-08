@@ -78,7 +78,7 @@ abstract class Zend_Search_Lucene_Search_Query_Preprocessing extends Zend_Search
      * Execute query in context of index reader
      * It also initializes necessary internal structures
      *
-     * @param Zend_Search_Lucene_Interface $reader
+     * @param Zend_Search_Lucene_Interface             $reader
      * @param Zend_Search_Lucene_Index_DocsFilter|null $docsFilter
      */
     public function execute(Zend_Search_Lucene_Interface $reader, $docsFilter = null)
@@ -103,7 +103,7 @@ abstract class Zend_Search_Lucene_Search_Query_Preprocessing extends Zend_Search
     /**
      * Score specified document
      *
-     * @param integer $docId
+     * @param integer                      $docId
      * @param Zend_Search_Lucene_Interface $reader
      * @return float
      */

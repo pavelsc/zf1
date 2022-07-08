@@ -53,16 +53,16 @@ abstract class Zend_Captcha_Base extends Zend_Validate_Abstract implements Zend_
      *
      * @var array
      */
-    protected $_options = array();
+    protected $_options = [];
 
     /**
      * Options to skip when processing options
      * @var array
      */
-    protected $_skipOptions = array(
+    protected $_skipOptions = [
         'options',
         'config',
-    );
+    ];
 
     /**
      * Get name
@@ -89,7 +89,7 @@ abstract class Zend_Captcha_Base extends Zend_Validate_Abstract implements Zend_
     /**
      * Constructor
      *
-     * @param  array|Zend_Config $options
+     * @param array|Zend_Config $options
      */
     public function __construct($options = null)
     {
@@ -114,8 +114,8 @@ abstract class Zend_Captcha_Base extends Zend_Validate_Abstract implements Zend_
             return $this;
         }
 
-        $method = 'set' . ucfirst ($key);
-        if (method_exists ($this, $method)) {
+        $method = 'set' . ucfirst($key);
+        if (method_exists($this, $method)) {
             // Setter exists; use it
             $this->$method ($value);
             $this->_options[$key] = $value;
@@ -130,7 +130,7 @@ abstract class Zend_Captcha_Base extends Zend_Validate_Abstract implements Zend_
     /**
      * Set object state from options array
      *
-     * @param  array $options
+     * @param array $options
      * @return Zend_Form_Element
      */
     public function setOptions($options = null)
@@ -154,7 +154,7 @@ abstract class Zend_Captcha_Base extends Zend_Validate_Abstract implements Zend_
     /**
      * Set object state from config object
      *
-     * @param  Zend_Config $config
+     * @param Zend_Config $config
      * @return Zend_Captcha_Base
      */
     public function setConfig(Zend_Config $config)

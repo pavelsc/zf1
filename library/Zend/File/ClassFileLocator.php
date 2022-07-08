@@ -35,7 +35,7 @@ class Zend_File_ClassFileLocator extends FilterIterator
      * Expects either a directory, or a DirectoryIterator (or its recursive variant)
      * instance.
      *
-     * @param  string|DirectoryIterator $dirOrIterator
+     * @param string|DirectoryIterator $dirOrIterator
      */
     public function __construct($dirOrIterator = '.')
     {
@@ -95,9 +95,9 @@ class Zend_File_ClassFileLocator extends FilterIterator
         }
 
         $contents = file_get_contents($file->getRealPath());
-        $tokens   = token_get_all($contents);
-        $count    = count($tokens);
-        $t_trait  = defined('T_TRAIT') ? T_TRAIT : -1; // For preserve PHP 5.3 compatibility
+        $tokens = token_get_all($contents);
+        $count = count($tokens);
+        $t_trait = defined('T_TRAIT') ? T_TRAIT : -1; // For preserve PHP 5.3 compatibility
         for ($i = 0; $i < $count; $i++) {
             $token = $tokens[$i];
             if (!is_array($token)) {
@@ -122,7 +122,7 @@ class Zend_File_ClassFileLocator extends FilterIterator
                             }
                             continue;
                         }
-                        list($type, $content, $line) = $token;
+                        [$type, $content, $line] = $token;
                         switch ($type) {
                             case T_STRING:
                             case T_NS_SEPARATOR:
@@ -145,22 +145,22 @@ class Zend_File_ClassFileLocator extends FilterIterator
                         if (is_string($token)) {
                             continue;
                         }
-                        list($type, $content, $line) = $token;
+                        [$type, $content, $line] = $token;
                         if (T_STRING == $type) {
-                    // If a classname was found, set it in the object, and
-                    // return boolean true (found)
+                            // If a classname was found, set it in the object, and
+                            // return boolean true (found)
                             if (!isset($namespace) || null === $namespace) {
                                 if (isset($saveNamespace) && $saveNamespace) {
                                     $namespace = $savedNamespace;
                                 } else {
                                     $namespace = null;
-                    }
+                                }
 
                             }
                             $class = (null === $namespace) ? $content : $namespace . '\\' . $content;
                             $file->addClass($class);
                             $namespace = null;
-                    break;
+                            break;
                         }
                     }
                     break;

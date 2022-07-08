@@ -101,7 +101,7 @@ class Zend_Application_Resource_Frontcontroller extends Zend_Application_Resourc
                     break;
 
                 case 'plugins':
-                    foreach ((array) $value as $pluginClass) {
+                    foreach ((array)$value as $pluginClass) {
                         $stackIndex = null;
                         if (is_array($pluginClass)) {
                             $pluginClass = array_change_key_case($pluginClass, CASE_LOWER);
@@ -120,11 +120,11 @@ class Zend_Application_Resource_Frontcontroller extends Zend_Application_Resourc
                     break;
 
                 case 'returnresponse':
-                    $front->returnResponse((bool) $value);
+                    $front->returnResponse((bool)$value);
                     break;
 
                 case 'throwexceptions':
-                    $front->throwExceptions((bool) $value);
+                    $front->throwExceptions((bool)$value);
                     break;
 
                 case 'actionhelperpaths':
@@ -141,9 +141,9 @@ class Zend_Application_Resource_Frontcontroller extends Zend_Application_Resourc
                         throw new Zend_Application_Exception('You must specify both ');
                     }
                     if (!isset($value['params'])) {
-                        $value['params'] = array();
+                        $value['params'] = [];
                     }
-                    
+
                     $dispatchClass = $value['class'];
                     if (!class_exists($dispatchClass)) {
                         require_once 'Zend/Application/Exception.php';

@@ -56,18 +56,18 @@ class Zend_Gdata_Photos_PhotoQuery extends Zend_Gdata_Photos_AlbumQuery
      * returned instead.
      *
      * @param string $value The ID of the photo to retrieve, or null to
-     *          clear.
+     *                      clear.
      */
-     public function setPhotoId($value)
-     {
-         $this->_photoId = $value;
-     }
+    public function setPhotoId($value)
+    {
+        $this->_photoId = $value;
+    }
 
     /**
      * Get the photo ID which is to be returned.
      *
-     * @see setPhoto
      * @return string The ID of the photo to retrieve.
+     * @see setPhoto
      */
     public function getPhotoId()
     {
@@ -89,7 +89,7 @@ class Zend_Gdata_Photos_PhotoQuery extends Zend_Gdata_Photos_AlbumQuery
         } else {
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'PhotoId cannot be null');
+                'PhotoId cannot be null');
         }
         $uri .= $incomingUri;
         return parent::getQueryUrl($uri);

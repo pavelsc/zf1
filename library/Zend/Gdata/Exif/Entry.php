@@ -65,7 +65,7 @@ class Zend_Gdata_Exif_Entry extends Zend_Gdata_Entry
      * Create a new instance.
      *
      * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
+     *                            object should be constructed.
      */
     public function __construct($element = null)
     {
@@ -81,7 +81,7 @@ class Zend_Gdata_Exif_Entry extends Zend_Gdata_Entry
      *
      * @param DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
-     * child properties.
+     *                         child properties.
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
@@ -102,23 +102,23 @@ class Zend_Gdata_Exif_Entry extends Zend_Gdata_Entry
     {
         $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
         switch ($absoluteNodeName) {
-        case $this->lookupNamespace('exif') . ':' . 'tags':
-            $tags = new Zend_Gdata_Exif_Extension_Tags();
-            $tags->transferFromDOM($child);
-            $this->_tags = $tags;
-            break;
-        default:
-            parent::takeChildFromDOM($child);
-            break;
+            case $this->lookupNamespace('exif') . ':' . 'tags':
+                $tags = new Zend_Gdata_Exif_Extension_Tags();
+                $tags->transferFromDOM($child);
+                $this->_tags = $tags;
+                break;
+            default:
+                parent::takeChildFromDOM($child);
+                break;
         }
     }
 
     /**
      * Retrieve the tags for this entry.
      *
-     * @see setTags
      * @return Zend_Gdata_Exif_Extension_Tags The requested object
      *              or null if not set.
+     * @see setTags
      */
     public function getTags()
     {
@@ -133,7 +133,7 @@ class Zend_Gdata_Exif_Entry extends Zend_Gdata_Entry
      * protocol.
      *
      * @param Zend_Gdata_Exif_Extension_Tags $value The desired value
-     *              this element, or null to unset.
+     *                                              this element, or null to unset.
      * @return Zend_Gdata_Exif_Entry Provides a fluent interface
      */
     public function setTags($value)

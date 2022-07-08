@@ -26,10 +26,10 @@ require_once 'Zend/View/Helper/Abstract.php';
 /**
  * Currency view helper
  *
- * @category  Zend
- * @package   Zend_View
+ * @category   Zend
+ * @package    Zend_View
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_View_Helper_Currency extends Zend_View_Helper_Abstract
 {
@@ -43,7 +43,7 @@ class Zend_View_Helper_Currency extends Zend_View_Helper_Abstract
     /**
      * Constructor for manually handling
      *
-     * @param  Zend_Currency $currency Instance of Zend_Currency
+     * @param Zend_Currency $currency Instance of Zend_Currency
      * @return void
      */
     public function __construct($currency = null)
@@ -61,8 +61,8 @@ class Zend_View_Helper_Currency extends Zend_View_Helper_Abstract
     /**
      * Output a formatted currency
      *
-     * @param  integer|float            $value    Currency value to output
-     * @param  string|Zend_Locale|array $currency OPTIONAL Currency to use for
+     * @param integer|float            $value     Currency value to output
+     * @param string|Zend_Locale|array $currency  OPTIONAL Currency to use for
      *                                            this call
      * @return string Formatted currency
      */
@@ -75,12 +75,12 @@ class Zend_View_Helper_Currency extends Zend_View_Helper_Abstract
         if (is_string($currency) || ($currency instanceof Zend_Locale)) {
             require_once 'Zend/Locale.php';
             if (Zend_Locale::isLocale($currency)) {
-                $currency = array('locale' => $currency);
+                $currency = ['locale' => $currency];
             }
         }
 
         if (is_string($currency)) {
-            $currency = array('currency' => $currency);
+            $currency = ['currency' => $currency];
         }
 
         if (is_array($currency)) {
@@ -93,9 +93,9 @@ class Zend_View_Helper_Currency extends Zend_View_Helper_Abstract
     /**
      * Sets a currency to use
      *
-     * @param  Zend_Currency|String|Zend_Locale $currency Currency to use
-     * @throws Zend_View_Exception When no or a false currency was set
+     * @param Zend_Currency|String|Zend_Locale $currency Currency to use
      * @return Zend_View_Helper_Currency
+     * @throws Zend_View_Exception When no or a false currency was set
      */
     public function setCurrency($currency = null)
     {

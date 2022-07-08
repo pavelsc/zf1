@@ -90,7 +90,7 @@ class Zend_Application_Resource_Mail extends Zend_Application_Resource_ResourceA
         if (isset($options[$key]['email'])
             && !is_numeric($options[$key]['email'])
         ) {
-            $method = array('Zend_Mail', 'setDefault' . ucfirst($type));
+            $method = ['Zend_Mail', 'setDefault' . ucfirst($type)];
             if (isset($options[$key]['name'])
                 && !is_numeric(
                     $options[$key]['name']
@@ -129,7 +129,7 @@ class Zend_Application_Resource_Mail extends Zend_Application_Resource_ResourceA
         unset($options['type']);
         unset($options['register']); //@see ZF-11022
 
-        switch($transportName) {
+        switch ($transportName) {
             case 'Zend_Mail_Transport_Smtp':
                 if (!isset($options['host'])) {
                     throw new Zend_Application_Resource_Exception(

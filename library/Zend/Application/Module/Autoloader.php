@@ -38,7 +38,7 @@ class Zend_Application_Module_Autoloader extends Zend_Loader_Autoloader_Resource
     /**
      * Constructor
      *
-     * @param  array|Zend_Config $options
+     * @param array|Zend_Config $options
      */
     public function __construct($options)
     {
@@ -55,40 +55,40 @@ class Zend_Application_Module_Autoloader extends Zend_Loader_Autoloader_Resource
     {
         $basePath = $this->getBasePath();
         $this->addResourceTypes(
-            array(
-                'dbtable'    => array(
+            [
+                'dbtable' => [
                     'namespace' => 'Model_DbTable',
-                    'path'      => 'models/DbTable',
-                ),
-                'mappers'    => array(
+                    'path' => 'models/DbTable',
+                ],
+                'mappers' => [
                     'namespace' => 'Model_Mapper',
-                    'path'      => 'models/mappers',
-                ),
-                'form'       => array(
+                    'path' => 'models/mappers',
+                ],
+                'form' => [
                     'namespace' => 'Form',
-                    'path'      => 'forms',
-                ),
-                'model'      => array(
+                    'path' => 'forms',
+                ],
+                'model' => [
                     'namespace' => 'Model',
-                    'path'      => 'models',
-                ),
-                'plugin'     => array(
+                    'path' => 'models',
+                ],
+                'plugin' => [
                     'namespace' => 'Plugin',
-                    'path'      => 'plugins',
-                ),
-                'service'    => array(
+                    'path' => 'plugins',
+                ],
+                'service' => [
                     'namespace' => 'Service',
-                    'path'      => 'services',
-                ),
-                'viewhelper' => array(
+                    'path' => 'services',
+                ],
+                'viewhelper' => [
                     'namespace' => 'View_Helper',
-                    'path'      => 'views/helpers',
-                ),
-                'viewfilter' => array(
+                    'path' => 'views/helpers',
+                ],
+                'viewfilter' => [
                     'namespace' => 'View_Filter',
-                    'path'      => 'views/filters',
-                ),
-            )
+                    'path' => 'views/filters',
+                ],
+            ]
         );
         $this->setDefaultResourceType('model');
     }

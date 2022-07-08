@@ -48,7 +48,7 @@ class Zend_XmlRpc_Client_ServerProxy
     /**
      * @var array of Zend_XmlRpc_Client_ServerProxy
      */
-    private $_cache = array();
+    private $_cache = [];
 
 
     /**
@@ -60,7 +60,7 @@ class Zend_XmlRpc_Client_ServerProxy
     public function __construct($client, $namespace = '')
     {
         $this->_namespace = $namespace;
-        $this->_client    = $client;
+        $this->_client = $client;
     }
 
 
@@ -83,8 +83,8 @@ class Zend_XmlRpc_Client_ServerProxy
     /**
      * Call a method in this namespace.
      *
-     * @param  string $methodN
-     * @param  array $args
+     * @param string $methodN
+     * @param array  $args
      * @return mixed
      */
     public function __call($method, $args)

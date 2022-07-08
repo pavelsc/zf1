@@ -63,7 +63,7 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
     /**
      * @var array
      */
-    protected $_rules = array();
+    protected $_rules = [];
 
     /**
      * Constructor
@@ -76,7 +76,7 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
             $options = $options->toArray();
         } else if (!is_array($options)) {
             $options = func_get_args();
-            $temp    = array();
+            $temp = [];
 
             if (!empty($options)) {
                 $temp['target'] = array_shift($options);
@@ -108,7 +108,7 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
     public function getPluginLoader()
     {
         if (!$this->_pluginLoader instanceof Zend_Loader_PluginLoader_Interface) {
-            $this->_pluginLoader = new Zend_Loader_PluginLoader(array('Zend_Filter_' => 'Zend/Filter/'), __CLASS__);
+            $this->_pluginLoader = new Zend_Loader_PluginLoader(['Zend_Filter_' => 'Zend/Filter/'], __CLASS__);
         }
 
         return $this->_pluginLoader;
@@ -129,9 +129,9 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
     /**
      * Use Zend_Config object to set object state
      *
-     * @deprecated Use setOptions() instead
-     * @param  Zend_Config $config
+     * @param Zend_Config $config
      * @return Zend_Filter_Inflector
+     * @deprecated Use setOptions() instead
      */
     public function setConfig(Zend_Config $config)
     {
@@ -141,10 +141,11 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
     /**
      * Set options
      *
-     * @param  array $options
+     * @param array $options
      * @return Zend_Filter_Inflector
      */
-    public function setOptions($options) {
+    public function setOptions($options)
+    {
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
         }
@@ -222,7 +223,7 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
     public function setTargetReplacementIdentifier($targetReplacementIdentifier)
     {
         if ($targetReplacementIdentifier) {
-            $this->_targetReplacementIdentifier = (string) $targetReplacementIdentifier;
+            $this->_targetReplacementIdentifier = (string)$targetReplacementIdentifier;
         }
 
         return $this;
@@ -247,7 +248,7 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
      */
     public function setTarget($target)
     {
-        $this->_target = (string) $target;
+        $this->_target = (string)$target;
         return $this;
     }
 
@@ -280,7 +281,7 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
      * @param array $rules
      * @return Zend_Filter_Inflector
      */
-    public function setRules(Array $rules)
+    public function setRules(array $rules)
     {
         $this->clearRules();
         $this->addRules($rules);
@@ -303,7 +304,7 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
      * @param array
      * @return Zend_Filter_Inflector
      */
-    public function addRules(Array $rules)
+    public function addRules(array $rules)
     {
         $keys = array_keys($rules);
         foreach ($keys as $spec) {
@@ -323,7 +324,7 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
      * By default, returns all rules. If a $spec is provided, will return those
      * rules if found, false otherwise.
      *
-     * @param  string $spec
+     * @param string $spec
      * @return array|false
      */
     public function getRules($spec = null)
@@ -343,7 +344,7 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
      * getRule() returns a rule set by setFilterRule(), a numeric index must be provided
      *
      * @param string $spec
-     * @param int $index
+     * @param int    $index
      * @return Zend_Filter_Interface|false
      */
     public function getRule($spec, $index)
@@ -364,7 +365,7 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
      */
     public function clearRules()
     {
-        $this->_rules = array();
+        $this->_rules = [];
         return $this;
     }
 
@@ -372,14 +373,14 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
      * Set a filtering rule for a spec.  $ruleSet can be a string, Filter object
      * or an array of strings or filter objects.
      *
-     * @param string $spec
+     * @param string                             $spec
      * @param array|string|Zend_Filter_Interface $ruleSet
      * @return Zend_Filter_Inflector
      */
     public function setFilterRule($spec, $ruleSet)
     {
         $spec = $this->_normalizeSpec($spec);
-        $this->_rules[$spec] = array();
+        $this->_rules[$spec] = [];
         return $this->addFilterRule($spec, $ruleSet);
     }
 
@@ -394,16 +395,16 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
     {
         $spec = $this->_normalizeSpec($spec);
         if (!isset($this->_rules[$spec])) {
-            $this->_rules[$spec] = array();
+            $this->_rules[$spec] = [];
         }
 
         if (!is_array($ruleSet)) {
-            $ruleSet = array($ruleSet);
+            $ruleSet = [$ruleSet];
         }
 
         if (is_string($this->_rules[$spec])) {
             $temp = $this->_rules[$spec];
-            $this->_rules[$spec] = array();
+            $this->_rules[$spec] = [];
             $this->_rules[$spec][] = $temp;
         }
 
@@ -424,7 +425,7 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
     public function setStaticRule($name, $value)
     {
         $name = $this->_normalizeSpec($name);
-        $this->_rules[$name] = (string) $value;
+        $this->_rules[$name] = (string)$value;
         return $this;
     }
 
@@ -436,7 +437,7 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
      * target.
      *
      * @param string $name
-     * @param mixed $reference
+     * @param mixed  $reference
      * @return Zend_Filter_Inflector
      */
     public function setStaticRuleReference($name, &$reference)
@@ -449,40 +450,40 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
     /**
      * Inflect
      *
-     * @param  string|array $source
+     * @param string|array $source
      * @return string
      */
     public function filter($source)
     {
         // clean source
-        foreach ( (array) $source as $sourceName => $sourceValue) {
+        foreach ((array)$source as $sourceName => $sourceValue) {
             $source[ltrim($sourceName, ':')] = $sourceValue;
         }
 
         $pregQuotedTargetReplacementIdentifier = preg_quote($this->_targetReplacementIdentifier, '#');
-        $processedParts = array();
+        $processedParts = [];
 
         foreach ($this->_rules as $ruleName => $ruleValue) {
             if (isset($source[$ruleName])) {
                 if (is_string($ruleValue)) {
                     // overriding the set rule
-                    $processedParts['#'.$pregQuotedTargetReplacementIdentifier.$ruleName.'#'] = str_replace('\\', '\\\\', $source[$ruleName]);
+                    $processedParts['#' . $pregQuotedTargetReplacementIdentifier . $ruleName . '#'] = str_replace('\\', '\\\\', $source[$ruleName]);
                 } elseif (is_array($ruleValue)) {
                     $processedPart = $source[$ruleName];
                     foreach ($ruleValue as $ruleFilter) {
                         $processedPart = $ruleFilter->filter($processedPart);
                     }
-                    $processedParts['#'.$pregQuotedTargetReplacementIdentifier.$ruleName.'#'] = str_replace('\\', '\\\\', $processedPart);
+                    $processedParts['#' . $pregQuotedTargetReplacementIdentifier . $ruleName . '#'] = str_replace('\\', '\\\\', $processedPart);
                 }
             } elseif (is_string($ruleValue)) {
-                $processedParts['#'.$pregQuotedTargetReplacementIdentifier.$ruleName.'#'] = str_replace('\\', '\\\\', $ruleValue);
+                $processedParts['#' . $pregQuotedTargetReplacementIdentifier . $ruleName . '#'] = str_replace('\\', '\\\\', $ruleValue);
             }
         }
 
         // all of the values of processedParts would have been str_replace('\\', '\\\\', ..)'d to disable preg_replace backreferences
         $inflectedTarget = preg_replace(array_keys($processedParts), array_values($processedParts), $this->_target);
 
-        if ($this->_throwTargetExceptionsOn && (preg_match('#(?='.$pregQuotedTargetReplacementIdentifier.'[A-Za-z]{1})#', $inflectedTarget) == true)) {
+        if ($this->_throwTargetExceptionsOn && (preg_match('#(?=' . $pregQuotedTargetReplacementIdentifier . '[A-Za-z]{1})#', $inflectedTarget) == true)) {
             require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('A replacement identifier ' . $this->_targetReplacementIdentifier . ' was found inside the inflected target, perhaps a rule was not satisfied with a target source?  Unsatisfied inflected target: ' . $inflectedTarget);
         }
@@ -493,18 +494,18 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
     /**
      * Normalize spec string
      *
-     * @param  string $spec
+     * @param string $spec
      * @return string
      */
     protected function _normalizeSpec($spec)
     {
-        return ltrim((string) $spec, ':&');
+        return ltrim((string)$spec, ':&');
     }
 
     /**
      * Resolve named filters and convert them to filter objects.
      *
-     * @param  string $rule
+     * @param string $rule
      * @return Zend_Filter_Interface
      */
     protected function _getRule($rule)
@@ -513,9 +514,9 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
             return $rule;
         }
 
-        $rule = (string) $rule;
+        $rule = (string)$rule;
 
-        $className  = $this->getPluginLoader()->load($rule);
+        $className = $this->getPluginLoader()->load($rule);
         $ruleObject = new $className();
         if (!$ruleObject instanceof Zend_Filter_Interface) {
             require_once 'Zend/Filter/Exception.php';

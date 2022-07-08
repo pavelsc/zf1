@@ -108,7 +108,7 @@ class Zend_Tool_Project_Context_Zf_ViewScriptFile extends Zend_Tool_Project_Cont
      */
     public function getPersistentAttributes()
     {
-        $attributes = array();
+        $attributes = [];
 
         if ($this->_forActionName) {
             $attributes['forActionName'] = $this->_forActionName;
@@ -131,7 +131,7 @@ class Zend_Tool_Project_Context_Zf_ViewScriptFile extends Zend_Tool_Project_Cont
         $contents = '';
 
         $controllerName = $this->_resource->getParentResource()->getAttribute('forControllerName');
-        
+
         $viewsDirectoryResource = $this->_resource
             ->getParentResource() // view script
             ->getParentResource() // view controller dir
@@ -141,7 +141,7 @@ class Zend_Tool_Project_Context_Zf_ViewScriptFile extends Zend_Tool_Project_Cont
         } else {
             $moduleName = 'default';
         }
-        
+
         if ($this->_filesystemName == 'error.phtml') {  // should also check that the above directory is forController=error
             $contents .= <<<EOS
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -177,7 +177,7 @@ class Zend_Tool_Project_Context_Zf_ViewScriptFile extends Zend_Tool_Project_Cont
 EOS;
         } elseif ($this->_forActionName == 'index' && $controllerName == 'Index' && $moduleName == 'default') {
 
-            $contents =<<<EOS
+            $contents = <<<EOS
 <style>
     a:link,
     a:visited

@@ -47,7 +47,7 @@ class Zend_Gdata_Books_VolumeQuery extends Zend_Gdata_Query
      * Create Gdata_Books_VolumeQuery object
      *
      * @param string|null $url If non-null, pre-initializes the instance to
-     *        use a given URL.
+     *                         use a given URL.
      */
     public function __construct($url = null)
     {

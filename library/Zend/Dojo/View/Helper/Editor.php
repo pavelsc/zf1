@@ -50,7 +50,7 @@ class Zend_Dojo_View_Helper_Editor extends Zend_Dojo_View_Helper_Dijit
     /**
      * @var array Maps non-core plugin to module basename
      */
-    protected $_pluginsModules = array(
+    protected $_pluginsModules = [
         'createLink' => 'LinkDialog',
         'insertImage' => 'LinkDialog',
         'fontName' => 'FontChoice',
@@ -65,24 +65,24 @@ class Zend_Dojo_View_Helper_Editor extends Zend_Dojo_View_Helper_Dijit
         'tabIndent' => 'TabIndent',
         'toggleDir' => 'ToggleDir',
         'viewSource' => 'ViewSource'
-    );
+    ];
 
     /**
      * JSON-encoded parameters
      * @var array
      */
-    protected $_jsonParams = array('captureEvents', 'events', 'plugins', 'extraPlugins');
+    protected $_jsonParams = ['captureEvents', 'events', 'plugins', 'extraPlugins'];
 
     /**
      * dijit.Editor
      *
-     * @param  string $id
-     * @param  string $value
-     * @param  array $params
-     * @param  array $attribs
+     * @param string $id
+     * @param string $value
+     * @param array  $params
+     * @param array  $attribs
      * @return string
      */
-    public function editor($id, $value = null, $params = array(), $attribs = array())
+    public function editor($id, $value = null, $params = [], $attribs = [])
     {
         if (isset($params['plugins'])) {
             foreach ($this->_getRequiredModules($params['plugins']) as $module) {
@@ -106,14 +106,14 @@ class Zend_Dojo_View_Helper_Editor extends Zend_Dojo_View_Helper_Dijit
         $hiddenId = $this->_normalizeId($hiddenId);
 
         $textareaName = $this->_normalizeEditorName($hiddenName);
-        $textareaId   = $hiddenId . '-Editor';
+        $textareaId = $hiddenId . '-Editor';
 
-        $hiddenAttribs = array(
-            'id'    => $hiddenId,
-            'name'  => $hiddenName,
+        $hiddenAttribs = [
+            'id' => $hiddenId,
+            'name' => $hiddenName,
             'value' => $value,
-            'type'  => 'hidden',
-        );
+            'type' => 'hidden',
+        ];
         $attribs['id'] = $textareaId;
 
         $this->_createGetParentFormFunction();
@@ -121,18 +121,18 @@ class Zend_Dojo_View_Helper_Editor extends Zend_Dojo_View_Helper_Dijit
 
         $attribs = $this->_prepareDijit($attribs, $params, 'textarea');
 
-        $html  = '<div' . $this->_htmlAttribs($attribs) . '>'
-               . $value
-               . "</div>\n";
+        $html = '<div' . $this->_htmlAttribs($attribs) . '>'
+            . $value
+            . "</div>\n";
 
         // Embed a textarea in a <noscript> tag to allow for graceful
         // degradation
         $html .= '<noscript>'
-               . $this->view->formTextarea($hiddenId, $value, $attribs)
-               . '</noscript>';
+            . $this->view->formTextarea($hiddenId, $value, $attribs)
+            . '</noscript>';
 
-        $html  .= '<input' . $this->_htmlAttribs($hiddenAttribs) . $this->getClosingBracket();
-        
+        $html .= '<input' . $this->_htmlAttribs($hiddenAttribs) . $this->getClosingBracket();
+
         return $html;
     }
 
@@ -144,7 +144,7 @@ class Zend_Dojo_View_Helper_Editor extends Zend_Dojo_View_Helper_Dijit
      */
     protected function _getRequiredModules(array $plugins)
     {
-        $modules = array();
+        $modules = [];
         foreach ($plugins as $commandName) {
             if (isset($this->_pluginsModules[$commandName])) {
                 $pluginName = $this->_pluginsModules[$commandName];
@@ -158,7 +158,7 @@ class Zend_Dojo_View_Helper_Editor extends Zend_Dojo_View_Helper_Dijit
     /**
      * Normalize editor element name
      *
-     * @param  string $name
+     * @param string $name
      * @return string
      */
     protected function _normalizeEditorName($name)
@@ -175,8 +175,8 @@ class Zend_Dojo_View_Helper_Editor extends Zend_Dojo_View_Helper_Dijit
     /**
      * Create onSubmit binding for element
      *
-     * @param  string $hiddenId
-     * @param  string $editorId
+     * @param string $hiddenId
+     * @param string $editorId
      * @return void
      */
     protected function _createEditorOnSubmit($hiddenId, $editorId)

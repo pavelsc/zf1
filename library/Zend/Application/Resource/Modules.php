@@ -45,11 +45,11 @@ class Zend_Application_Resource_Modules extends Zend_Application_Resource_Resour
     /**
      * Constructor
      *
-     * @param  mixed $options
+     * @param mixed $options
      */
     public function __construct($options = null)
     {
-        $this->_bootstraps = new ArrayObject(array(), ArrayObject::ARRAY_AS_PROPS);
+        $this->_bootstraps = new ArrayObject([], ArrayObject::ARRAY_AS_PROPS);
         parent::__construct($options);
     }
 
@@ -61,7 +61,7 @@ class Zend_Application_Resource_Modules extends Zend_Application_Resource_Resour
      */
     public function init()
     {
-        $bootstraps = array();
+        $bootstraps = [];
         $bootstrap = $this->getBootstrap();
         $bootstrap->bootstrap('FrontController');
         $front = $bootstrap->getResource('FrontController');
@@ -120,7 +120,7 @@ class Zend_Application_Resource_Modules extends Zend_Application_Resource_Resour
     protected function bootstrapBootstraps($bootstraps)
     {
         $bootstrap = $this->getBootstrap();
-        $out       = new ArrayObject(array(), ArrayObject::ARRAY_AS_PROPS);
+        $out = new ArrayObject([], ArrayObject::ARRAY_AS_PROPS);
 
         foreach ($bootstraps as $module => $bootstrapClass) {
             $moduleBootstrap = new $bootstrapClass($bootstrap);
@@ -144,13 +144,13 @@ class Zend_Application_Resource_Modules extends Zend_Application_Resource_Resour
     /**
      * Format a module name to the module class prefix
      *
-     * @param  string $name
+     * @param string $name
      * @return string
      */
     protected function _formatModuleName($name)
     {
         $name = strtolower($name);
-        $name = str_replace(array('-', '.'), ' ', $name);
+        $name = str_replace(['-', '.'], ' ', $name);
         $name = ucwords($name);
         $name = str_replace(' ', '', $name);
         return $name;

@@ -82,9 +82,9 @@ abstract class Zend_Feed_Pubsubhubbub_CallbackAbstract
     /**
      * Process any injected configuration options
      *
-     * @param  array|Zend_Config $config Options array or Zend_Config instance
-     * @throws Zend_Feed_Pubsubhubbub_Exception
+     * @param array|Zend_Config $config Options array or Zend_Config instance
      * @return Zend_Feed_Pubsubhubbub_CallbackAbstract
+     * @throws Zend_Feed_Pubsubhubbub_Exception
      */
     public function setConfig($config)
     {
@@ -93,7 +93,7 @@ abstract class Zend_Feed_Pubsubhubbub_CallbackAbstract
         } elseif (!is_array($config)) {
             require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
             throw new Zend_Feed_Pubsubhubbub_Exception('Array or Zend_Config object'
-            . 'expected, got ' . gettype($config));
+                . 'expected, got ' . gettype($config));
         }
         if (array_key_exists('storage', $config)) {
             $this->setStorage($config['storage']);
@@ -119,7 +119,7 @@ abstract class Zend_Feed_Pubsubhubbub_CallbackAbstract
      * to background save any verification tokens associated with a subscription
      * or other.
      *
-     * @param  Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface $storage
+     * @param Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface $storage
      * @return Zend_Feed_Pubsubhubbub_CallbackAbstract
      */
     public function setStorage(Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface $storage)
@@ -133,8 +133,8 @@ abstract class Zend_Feed_Pubsubhubbub_CallbackAbstract
      * to background save any verification tokens associated with a subscription
      * or other.
      *
-     * @throws Zend_Feed_Pubsubhubbub_Exception
      * @return Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface
+     * @throws Zend_Feed_Pubsubhubbub_Exception
      */
     public function getStorage()
     {
@@ -151,9 +151,9 @@ abstract class Zend_Feed_Pubsubhubbub_CallbackAbstract
      * Zend_Feed_Pubsubhubbub_HttpResponse which shares an unenforced interface with
      * (i.e. not inherited from) Zend_Controller_Response_Http.
      *
-     * @param  Zend_Feed_Pubsubhubbub_HttpResponse|Zend_Controller_Response_Http $httpResponse
-     * @throws Zend_Feed_Pubsubhubbub_Exception
+     * @param Zend_Feed_Pubsubhubbub_HttpResponse|Zend_Controller_Response_Http $httpResponse
      * @return Zend_Feed_Pubsubhubbub_CallbackAbstract
+     * @throws Zend_Feed_Pubsubhubbub_Exception
      */
     public function setHttpResponse($httpResponse)
     {
@@ -190,9 +190,9 @@ abstract class Zend_Feed_Pubsubhubbub_CallbackAbstract
      * In other words, is this class serving one or more subscribers? How many?
      * Defaults to 1 if left unchanged.
      *
-     * @param  string|int $count
-     * @throws Zend_Feed_Pubsubhubbub_Exception
+     * @param string|int $count
      * @return Zend_Feed_Pubsubhubbub_CallbackAbstract
+     * @throws Zend_Feed_Pubsubhubbub_Exception
      */
     public function setSubscriberCount($count)
     {
@@ -238,7 +238,7 @@ abstract class Zend_Feed_Pubsubhubbub_CallbackAbstract
                 $callbackUrl = substr($callbackUrl, strlen($schemeAndHttpHost));
             }
         } elseif (isset($_SERVER['ORIG_PATH_INFO'])) {
-            $callbackUrl= $_SERVER['ORIG_PATH_INFO'];
+            $callbackUrl = $_SERVER['ORIG_PATH_INFO'];
             if (!empty($_SERVER['QUERY_STRING'])) {
                 $callbackUrl .= '?' . $_SERVER['QUERY_STRING'];
             }
@@ -274,7 +274,7 @@ abstract class Zend_Feed_Pubsubhubbub_CallbackAbstract
     /**
      * Retrieve a Header value from either $_SERVER or Apache
      *
-     * @param  string $header
+     * @param string $header
      * @return bool
      */
     protected function _getHeader($header)

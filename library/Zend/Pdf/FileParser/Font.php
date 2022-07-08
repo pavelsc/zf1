@@ -41,7 +41,7 @@ require_once 'Zend/Pdf/FileParser.php';
  */
 abstract class Zend_Pdf_FileParser_Font extends Zend_Pdf_FileParser
 {
-  /**** Instance Variables ****/
+    /**** Instance Variables ****/
 
 
     /**
@@ -49,7 +49,7 @@ abstract class Zend_Pdf_FileParser_Font extends Zend_Pdf_FileParser
      * {@link __set()}.
      * @var array
      */
-    private $_fontProperties = array();
+    private $_fontProperties = [];
 
     /**
      * Flag indicating whether or not debug logging is active.
@@ -58,11 +58,10 @@ abstract class Zend_Pdf_FileParser_Font extends Zend_Pdf_FileParser
     private $_debug = false;
 
 
+    /**** Public Interface ****/
 
-  /**** Public Interface ****/
 
-
-  /* Object Lifecycle */
+    /* Object Lifecycle */
 
     /**
      * Object constructor.
@@ -79,7 +78,7 @@ abstract class Zend_Pdf_FileParser_Font extends Zend_Pdf_FileParser
     }
 
 
-  /* Accessors */
+    /* Accessors */
 
     /**
      * Get handler
@@ -99,21 +98,21 @@ abstract class Zend_Pdf_FileParser_Font extends Zend_Pdf_FileParser
     /* NOTE: The set handler is defined below in the internal methods group. */
 
 
-  /* Parser Methods */
+    /* Parser Methods */
 
     /**
      * Reads the Unicode UTF-16-encoded string from the binary file at the
      * current offset location. Overridden to fix return character set at UTF-16BE.
      *
-     * @todo Deal with to-dos in the parent method.
-     *
-     * @param integer $byteCount Number of bytes (characters * 2) to return.
-     * @param integer $byteOrder (optional) Big- or little-endian byte order.
-     *   Use the BYTE_ORDER_ constants defined in {@link Zend_Pdf_FileParser}. If
-     *   omitted, uses big-endian.
-     * @param string $characterSet (optional) --Ignored--
+     * @param integer $byteCount    Number of bytes (characters * 2) to return.
+     * @param integer $byteOrder    (optional) Big- or little-endian byte order.
+     *                              Use the BYTE_ORDER_ constants defined in {@link Zend_Pdf_FileParser}. If
+     *                              omitted, uses big-endian.
+     * @param string  $characterSet (optional) --Ignored--
      * @return string
      * @throws Zend_Pdf_Exception
+     * @todo Deal with to-dos in the parent method.
+     *
      */
     public function readStringUTF16($byteCount,
                                     $byteOrder = Zend_Pdf_FileParser::BYTE_ORDER_BIG_ENDIAN,
@@ -126,8 +125,8 @@ abstract class Zend_Pdf_FileParser_Font extends Zend_Pdf_FileParser
      * Reads the Mac Roman-encoded string from the binary file at the current
      * offset location. Overridden to fix return character set at UTF-16BE.
      *
-     * @param integer $byteCount Number of bytes (characters) to return.
-     * @param string $characterSet (optional) --Ignored--
+     * @param integer $byteCount    Number of bytes (characters) to return.
+     * @param string  $characterSet (optional) --Ignored--
      * @return string
      * @throws Zend_Pdf_Exception
      */
@@ -140,9 +139,9 @@ abstract class Zend_Pdf_FileParser_Font extends Zend_Pdf_FileParser
      * Reads the Pascal string from the binary file at the current offset
      * location. Overridden to fix return character set at UTF-16BE.
      *
-     * @param string $characterSet (optional) --Ignored--
-     * @param integer $lengthBytes (optional) Number of bytes that make up the
-     *   length. Default is 1.
+     * @param string  $characterSet (optional) --Ignored--
+     * @param integer $lengthBytes  (optional) Number of bytes that make up the
+     *                              length. Default is 1.
      * @return string
      * @throws Zend_Pdf_Exception
      */
@@ -152,7 +151,7 @@ abstract class Zend_Pdf_FileParser_Font extends Zend_Pdf_FileParser
     }
 
 
-  /* Utility Methods */
+    /* Utility Methods */
 
     /**
      * Writes the entire font properties array to STDOUT. Used only for debugging.
@@ -164,10 +163,10 @@ abstract class Zend_Pdf_FileParser_Font extends Zend_Pdf_FileParser
 
 
 
-  /**** Internal Methods ****/
+    /**** Internal Methods ****/
 
 
-  /* Internal Accessors */
+    /* Internal Accessors */
 
     /**
      * Set handler
@@ -176,7 +175,7 @@ abstract class Zend_Pdf_FileParser_Font extends Zend_Pdf_FileParser
      * the font properties, but only this and its subclasses may set them.
      *
      * @param string $property
-     * @param  mixed $value
+     * @param mixed  $value
      */
     public function __set($property, $value)
     {
@@ -188,7 +187,7 @@ abstract class Zend_Pdf_FileParser_Font extends Zend_Pdf_FileParser
     }
 
 
-  /* Internal Utility Methods */
+    /* Internal Utility Methods */
 
     /**
      * If debug logging is enabled, writes the log message.
@@ -201,7 +200,7 @@ abstract class Zend_Pdf_FileParser_Font extends Zend_Pdf_FileParser
      */
     protected function _debugLog($message)
     {
-        if (! $this->_debug) {
+        if (!$this->_debug) {
             return;
         }
         if (func_num_args() > 1) {

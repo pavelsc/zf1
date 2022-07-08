@@ -57,9 +57,9 @@ class Zend_Mobile_Push_Mpns extends Zend_Mobile_Push_Abstract
     {
         if (!$this->_httpClient) {
             $this->_httpClient = new Zend_Http_Client();
-            $this->_httpClient->setConfig(array(
+            $this->_httpClient->setConfig([
                 'strictredirects' => true,
-            ));
+            ]);
         }
         return $this->_httpClient;
     }
@@ -78,15 +78,15 @@ class Zend_Mobile_Push_Mpns extends Zend_Mobile_Push_Abstract
     /**
      * Send Message
      *
-     * @param  Zend_Mobile_Push_Message_Abstract $message
-     * @throws Zend_Http_Client_Exception
+     * @param Zend_Mobile_Push_Message_Abstract $message
+     * @return boolean
      * @throws Zend_Mobile_Push_Exception
      * @throws Zend_Mobile_Push_Exception_DeviceQuotaExceeded
      * @throws Zend_Mobile_Push_Exception_InvalidPayload
      * @throws Zend_Mobile_Push_Exception_InvalidToken
      * @throws Zend_Mobile_Push_Exception_QuotaExceeded
      * @throws Zend_Mobile_Push_Exception_ServerUnavailable
-     * @return boolean
+     * @throws Zend_Http_Client_Exception
      */
     public function send(Zend_Mobile_Push_Message_Abstract $message)
     {
@@ -98,11 +98,11 @@ class Zend_Mobile_Push_Mpns extends Zend_Mobile_Push_Abstract
 
         $client = $this->getHttpClient();
         $client->setUri($message->getToken());
-        $client->setHeaders(array(
+        $client->setHeaders([
             'Context-Type' => 'text/xml',
             'Accept' => 'application/*',
             'X-NotificationClass' => $message->getDelay()
-        ));
+        ]);
         if ($message->getId()) {
             $client->setHeaders('X-MessageID', $message->getId());
         }
@@ -114,8 +114,7 @@ class Zend_Mobile_Push_Mpns extends Zend_Mobile_Push_Abstract
         $this->close();
 
 
-        switch ($response->getStatus())
-        {
+        switch ($response->getStatus()) {
             case 200:
                 // check headers for response?  need to test how this actually works to correctly handle different states.
                 if ($response->getHeader('NotificationStatus') == 'QueueFull') {

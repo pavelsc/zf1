@@ -71,7 +71,7 @@ class Zend_Gdata_Media_Extension_MediaText extends Zend_Gdata_Extension
      * @param string $end
      */
     public function __construct($text = null, $type = null, $lang = null,
-            $start = null, $end = null)
+                                $start = null, $end = null)
     {
         $this->registerAllNamespaces(Zend_Gdata_Media::$namespaces);
         parent::__construct();
@@ -90,7 +90,7 @@ class Zend_Gdata_Media_Extension_MediaText extends Zend_Gdata_Extension
      *
      * @param DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
-     * child properties.
+     *                         child properties.
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
@@ -120,20 +120,20 @@ class Zend_Gdata_Media_Extension_MediaText extends Zend_Gdata_Extension
     protected function takeAttributeFromDOM($attribute)
     {
         switch ($attribute->localName) {
-        case 'type':
-            $this->_type = $attribute->nodeValue;
-            break;
-        case 'lang':
-            $this->_lang = $attribute->nodeValue;
-            break;
-        case 'start':
-            $this->_start = $attribute->nodeValue;
-            break;
-        case 'end':
-            $this->_end = $attribute->nodeValue;
-            break;
-        default:
-            parent::takeAttributeFromDOM($attribute);
+            case 'type':
+                $this->_type = $attribute->nodeValue;
+                break;
+            case 'lang':
+                $this->_lang = $attribute->nodeValue;
+                break;
+            case 'start':
+                $this->_start = $attribute->nodeValue;
+                break;
+            case 'end':
+                $this->_end = $attribute->nodeValue;
+                break;
+            default:
+                parent::takeAttributeFromDOM($attribute);
         }
     }
 

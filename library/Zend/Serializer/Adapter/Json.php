@@ -38,25 +38,25 @@ class Zend_Serializer_Adapter_Json extends Zend_Serializer_Adapter_AdapterAbstra
     /**
      * @var array Default options
      */
-    protected $_options = array(
-        'cycleCheck'           => false,
+    protected $_options = [
+        'cycleCheck' => false,
         'enableJsonExprFinder' => false,
-        'objectDecodeType'     => Zend_Json::TYPE_ARRAY,
-    );
+        'objectDecodeType' => Zend_Json::TYPE_ARRAY,
+    ];
 
     /**
      * Serialize PHP value to JSON
      *
-     * @param  mixed $value
-     * @param  array $opts
+     * @param mixed $value
+     * @param array $opts
      * @return string
      * @throws Zend_Serializer_Exception on JSON encoding exception
      */
-    public function serialize($value, array $opts = array())
+    public function serialize($value, array $opts = [])
     {
         $opts = $opts + $this->_options;
 
-        try  {
+        try {
             return Zend_Json::encode($value, $opts['cycleCheck'], $opts);
         } catch (Exception $e) {
             require_once 'Zend/Serializer/Exception.php';
@@ -67,11 +67,11 @@ class Zend_Serializer_Adapter_Json extends Zend_Serializer_Adapter_AdapterAbstra
     /**
      * Deserialize JSON to PHP value
      *
-     * @param  string $json
-     * @param  array $opts
+     * @param string $json
+     * @param array  $opts
      * @return mixed
      */
-    public function unserialize($json, array $opts = array())
+    public function unserialize($json, array $opts = [])
     {
         $opts = $opts + $this->_options;
 

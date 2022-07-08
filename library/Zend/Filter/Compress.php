@@ -42,7 +42,7 @@ class Zend_Filter_Compress implements Zend_Filter_Interface
     /**
      * Compression adapter constructor options
      */
-    protected $_adapterOptions = array();
+    protected $_adapterOptions = [];
 
     /**
      * Class constructor
@@ -66,7 +66,7 @@ class Zend_Filter_Compress implements Zend_Filter_Interface
     /**
      * Set filter setate
      *
-     * @param  array $options
+     * @param array $options
      * @return Zend_Filter_Compress
      */
     public function setOptions(array $options)
@@ -125,7 +125,7 @@ class Zend_Filter_Compress implements Zend_Filter_Interface
     /**
      * Sets compression adapter
      *
-     * @param  string|Zend_Filter_Compress_CompressInterface $adapter Adapter to use
+     * @param string|Zend_Filter_Compress_CompressInterface $adapter Adapter to use
      * @return Zend_Filter_Compress
      */
     public function setAdapter($adapter)
@@ -156,7 +156,7 @@ class Zend_Filter_Compress implements Zend_Filter_Interface
     /**
      * Set adapter options
      *
-     * @param  array $options
+     * @param array $options
      * @return void
      */
     public function setAdapterOptions(array $options)
@@ -179,7 +179,7 @@ class Zend_Filter_Compress implements Zend_Filter_Interface
             throw new Zend_Filter_Exception("Unknown method '{$method}'");
         }
 
-        return call_user_func_array(array($adapter, $method), $options);
+        return call_user_func_array([$adapter, $method], $options);
     }
 
     /**
@@ -187,7 +187,7 @@ class Zend_Filter_Compress implements Zend_Filter_Interface
      *
      * Compresses the content $value with the defined settings
      *
-     * @param  string $value Content to compress
+     * @param string $value Content to compress
      * @return string The compressed content
      */
     public function filter($value)

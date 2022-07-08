@@ -12,11 +12,11 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category  Zend
- * @package   Zend_Validate
+ * @category   Zend
+ * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id$
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
 /**
@@ -27,10 +27,10 @@ require_once 'Zend/Validate/File/Exists.php';
 /**
  * Validator which checks if the destination file does not exist
  *
- * @category  Zend
- * @package   Zend_Validate
+ * @category   Zend
+ * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_File_NotExists extends Zend_Validate_File_Exists
 {
@@ -42,17 +42,17 @@ class Zend_Validate_File_NotExists extends Zend_Validate_File_Exists
     /**
      * @var array Error message templates
      */
-    protected $_messageTemplates = array(
+    protected $_messageTemplates = [
         self::DOES_EXIST => "File '%value%' exists",
-    );
+    ];
 
     /**
      * Defined by Zend_Validate_Interface
      *
      * Returns true if and only if the file does not exist in the set destinations
      *
-     * @param  string  $value Real file to check for
-     * @param  array   $file  File data from Zend_File_Transfer
+     * @param string $value Real file to check for
+     * @param array  $file  File data from Zend_File_Transfer
      * @return boolean
      */
     public function isValid($value, $file = null)

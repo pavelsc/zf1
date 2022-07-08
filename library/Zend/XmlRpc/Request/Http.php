@@ -30,11 +30,11 @@ require_once 'Zend/XmlRpc/Request.php';
  * built at construction time using a raw POST; if no data is available, the
  * request is declared a fault.
  *
- * @category Zend
- * @package  Zend_XmlRpc
+ * @category   Zend
+ * @package    Zend_XmlRpc
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version $Id$
+ * @version    $Id$
  */
 class Zend_XmlRpc_Request_Http extends Zend_XmlRpc_Request
 {
@@ -93,7 +93,7 @@ class Zend_XmlRpc_Request_Http extends Zend_XmlRpc_Request
     public function getHeaders()
     {
         if (null === $this->_headers) {
-            $this->_headers = array();
+            $this->_headers = [];
             foreach ($_SERVER as $key => $value) {
                 if ('HTTP_' == substr($key, 0, 5)) {
                     $header = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($key, 5)))));

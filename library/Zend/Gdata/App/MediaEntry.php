@@ -59,7 +59,7 @@ class Zend_Gdata_App_MediaEntry extends Zend_Gdata_App_Entry
      * file to upload
      *
      * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
+     *                            object should be constructed.
      */
     public function __construct($element = null, $mediaSource = null)
     {
@@ -111,7 +111,7 @@ class Zend_Gdata_App_MediaEntry extends Zend_Gdata_App_Entry
         } else {
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'You must specify the media data as a class that conforms to Zend_Gdata_App_MediaSource.');
+                'You must specify the media data as a class that conforms to Zend_Gdata_App_MediaSource.');
         }
         return $this;
     }

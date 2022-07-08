@@ -54,7 +54,7 @@ class Zend_Paginator_Adapter_Iterator implements Zend_Paginator_Adapter_Interfac
     /**
      * Constructor.
      *
-     * @param  Iterator $iterator Iterator to paginate
+     * @param Iterator $iterator Iterator to paginate
      * @throws Zend_Paginator_Exception
      */
     public function __construct(Iterator $iterator)
@@ -75,14 +75,14 @@ class Zend_Paginator_Adapter_Iterator implements Zend_Paginator_Adapter_Interfac
     /**
      * Returns an iterator of items for a page, or an empty array.
      *
-     * @param  integer $offset Page offset
-     * @param  integer $itemCountPerPage Number of items per page
+     * @param integer $offset           Page offset
+     * @param integer $itemCountPerPage Number of items per page
      * @return LimitIterator|array
      */
     public function getItems($offset, $itemCountPerPage)
     {
         if ($this->_count == 0) {
-            return array();
+            return [];
         }
 
         // @link http://bugs.php.net/bug.php?id=49906 | ZF-8084

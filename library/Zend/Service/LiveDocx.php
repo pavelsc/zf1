@@ -124,13 +124,13 @@ class Zend_Service_LiveDocx
      * );
      * {/code}
      *
-     * @param  array|Zend_Config $options
+     * @param array|Zend_Config $options
      * @throws Zend_Service_LiveDocx_Exception
      * @since  LiveDocx 1.0
      */
     public function __construct($options = null)
     {
-        $this->_credentials = array();
+        $this->_credentials = [];
         $this->_loggedIn = false;
 
         if ($options instanceof Zend_Config) {
@@ -146,7 +146,7 @@ class Zend_Service_LiveDocx
      * Set options
      * One or more of username, password, soapClient
      *
-     * @param  array $options
+     * @param array $options
      * @return Zend_Service_LiveDocx
      * @since  LiveDocx 1.2
      */
@@ -176,9 +176,9 @@ class Zend_Service_LiveDocx
     /**
      * Init Soap client - connect to SOAP service
      *
-     * @param  string $endpoint
-     * @throws Zend_Service_LiveDocx_Exception
+     * @param string $endpoint
      * @return void
+     * @throws Zend_Service_LiveDocx_Exception
      * @since  LiveDocx 1.2
      */
     protected function _initSoapClient($endpoint)
@@ -207,7 +207,7 @@ class Zend_Service_LiveDocx
     /**
      * Set SOAP client
      *
-     * @param  Zend_Soap_Client $soapClient
+     * @param Zend_Soap_Client $soapClient
      * @return Zend_Service_LiveDocx
      * @since  LiveDocx 1.2
      */
@@ -220,8 +220,8 @@ class Zend_Service_LiveDocx
     /**
      * Log in to LiveDocx service
      *
-     * @throws Zend_Service_LiveDocx_Exception
      * @return boolean
+     * @throws Zend_Service_LiveDocx_Exception
      * @since  LiveDocx 1.2
      */
     public function logIn()
@@ -246,10 +246,10 @@ class Zend_Service_LiveDocx
             }
 
             try {
-                $this->getSoapClient()->LogIn(array(
+                $this->getSoapClient()->LogIn([
                     'username' => $this->getUsername(),
                     'password' => $this->getPassword(),
-                ));
+                ]);
                 $this->_loggedIn = true;
             } catch (Exception $e) {
                 require_once 'Zend/Service/LiveDocx/Exception.php';
@@ -265,8 +265,8 @@ class Zend_Service_LiveDocx
     /**
      * Log out of the LiveDocx service
      *
-     * @throws Zend_Service_LiveDocx_Exception
      * @return boolean
+     * @throws Zend_Service_LiveDocx_Exception
      * @since  LiveDocx 1.2
      */
     public function logOut()
@@ -380,7 +380,7 @@ class Zend_Service_LiveDocx
     /**
      * Return the document format (extension) of a filename
      *
-     * @param  string $filename
+     * @param string $filename
      * @return string
      * @since  LiveDocx 1.0
      */
@@ -403,7 +403,7 @@ class Zend_Service_LiveDocx
     /**
      * Compare the current API version with another version
      *
-     * @param  string $version (STRING NOT FLOAT)
+     * @param string $version (STRING NOT FLOAT)
      * @return int -1 (version is less than API version), 0 (versions are equal), or 1 (version is greater than API version)
      * @since  LiveDocx 1.0
      */

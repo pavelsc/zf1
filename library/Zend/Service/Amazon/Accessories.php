@@ -44,15 +44,15 @@ class Zend_Service_Amazon_Accessories
     /**
      * Assigns values to properties relevant to Accessories
      *
-     * @param  DOMElement $dom
+     * @param DOMElement $dom
      * @return void
      */
     public function __construct(DOMElement $dom)
     {
         $xpath = new DOMXPath($dom->ownerDocument);
         $xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2011-08-01');
-        foreach (array('ASIN', 'Title') as $el) {
-            $this->$el = (string) $xpath->query("./az:$el/text()", $dom)->item(0)->data;
+        foreach (['ASIN', 'Title'] as $el) {
+            $this->$el = (string)$xpath->query("./az:$el/text()", $dom)->item(0)->data;
         }
     }
 }

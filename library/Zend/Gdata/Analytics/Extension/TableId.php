@@ -56,7 +56,7 @@ class Zend_Gdata_Analytics_Extension_TableId extends Zend_Gdata_Extension
      *
      * @param DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
-     * child properties.
+     *                         child properties.
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
@@ -76,7 +76,7 @@ class Zend_Gdata_Analytics_Extension_TableId extends Zend_Gdata_Extension
      */
     protected function takeChildFromDOM($child)
     {
-       $this->_value = $child->nodeValue;
+        $this->_value = $child->nodeValue;
     }
 
     /**

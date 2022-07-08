@@ -54,8 +54,8 @@ class Zend_Pdf_Annotation_Text extends Zend_Pdf_Annotation
             throw new Zend_Pdf_Exception('Annotation dictionary resource has to be a dictionary.');
         }
 
-        if ($annotationDictionary->Subtype === null  ||
-            $annotationDictionary->Subtype->getType() != Zend_Pdf_Element::TYPE_NAME  ||
+        if ($annotationDictionary->Subtype === null ||
+            $annotationDictionary->Subtype->getType() != Zend_Pdf_Element::TYPE_NAME ||
             $annotationDictionary->Subtype->value != 'Text') {
             require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Subtype => Text entry is requires');
@@ -67,10 +67,10 @@ class Zend_Pdf_Annotation_Text extends Zend_Pdf_Annotation
     /**
      * Create link annotation object
      *
-     * @param float $x1
-     * @param float $y1
-     * @param float $x2
-     * @param float $y2
+     * @param float  $x1
+     * @param float  $y1
+     * @param float  $x2
+     * @param float  $y2
      * @param string $text
      * @return Zend_Pdf_Annotation_Text
      */
@@ -78,7 +78,7 @@ class Zend_Pdf_Annotation_Text extends Zend_Pdf_Annotation
     {
         $annotationDictionary = new Zend_Pdf_Element_Dictionary();
 
-        $annotationDictionary->Type    = new Zend_Pdf_Element_Name('Annot');
+        $annotationDictionary->Type = new Zend_Pdf_Element_Name('Annot');
         $annotationDictionary->Subtype = new Zend_Pdf_Element_Name('Text');
 
         $rectangle = new Zend_Pdf_Element_Array();

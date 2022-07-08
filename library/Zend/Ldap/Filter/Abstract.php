@@ -40,9 +40,9 @@ abstract class Zend_Ldap_Filter_Abstract
 
     /**
      * Returns a string representation of the filter.
+     * @return string
      * @see toString()
      *
-     * @return string
      */
     public function __toString()
     {
@@ -66,7 +66,7 @@ abstract class Zend_Ldap_Filter_Abstract
     /**
      * Creates an 'and' filter.
      *
-     * @param  Zend_Ldap_Filter_Abstract $filter,...
+     * @param Zend_Ldap_Filter_Abstract $filter,...
      * @return Zend_Ldap_Filter_And
      */
     public function addAnd($filter)
@@ -76,14 +76,14 @@ abstract class Zend_Ldap_Filter_Abstract
          */
         require_once 'Zend/Ldap/Filter/And.php';
         $fa = func_get_args();
-        $args = array_merge(array($this), $fa);
+        $args = array_merge([$this], $fa);
         return new Zend_Ldap_Filter_And($args);
     }
 
     /**
      * Creates an 'or' filter.
      *
-     * @param  Zend_Ldap_Filter_Abstract $filter,...
+     * @param Zend_Ldap_Filter_Abstract $filter,...
      * @return Zend_Ldap_Filter_Or
      */
     public function addOr($filter)
@@ -93,7 +93,7 @@ abstract class Zend_Ldap_Filter_Abstract
          */
         require_once 'Zend/Ldap/Filter/Or.php';
         $fa = func_get_args();
-        $args = array_merge(array($this), $fa);
+        $args = array_merge([$this], $fa);
         return new Zend_Ldap_Filter_Or($args);
     }
 
@@ -103,24 +103,24 @@ abstract class Zend_Ldap_Filter_Abstract
      * Any control characters with an ACII code < 32 as well as the characters with special meaning in
      * LDAP filters "*", "(", ")", and "\" (the backslash) are converted into the representation of a
      * backslash followed by two hex digits representing the hexadecimal value of the character.
-     * @see Net_LDAP2_Util::escape_filter_value() from Benedikt Hallinger <beni@php.net>
-     * @link http://pear.php.net/package/Net_LDAP2
+     * @param string|array $values Array of values to escape
+     * @return array Array $values, but escaped
      * @author Benedikt Hallinger <beni@php.net>
      *
-     * @param  string|array $values Array of values to escape
-     * @return array Array $values, but escaped
+     * @see    Net_LDAP2_Util::escape_filter_value() from Benedikt Hallinger <beni@php.net>
+     * @link   http://pear.php.net/package/Net_LDAP2
      */
-    public static function escapeValue($values = array())
+    public static function escapeValue($values = [])
     {
         /**
          * @see Zend_Ldap_Converter
          */
         require_once 'Zend/Ldap/Converter.php';
 
-        if (!is_array($values)) $values = array($values);
+        if (!is_array($values)) $values = [$values];
         foreach ($values as $key => $val) {
             // Escaping of filter meta characters
-            $val = str_replace(array('\\', '*', '(', ')'), array('\5c', '\2a', '\28', '\29'), $val);
+            $val = str_replace(['\\', '*', '(', ')'], ['\5c', '\2a', '\28', '\29'], $val);
             // ASCII < 32 escaping
             $val = Zend_Ldap_Converter::ascToHex32($val);
             if (null === $val) $val = '\0';  // apply escaped "null" if string is empty
@@ -133,21 +133,21 @@ abstract class Zend_Ldap_Filter_Abstract
      * Undoes the conversion done by {@link escapeValue()}.
      *
      * Converts any sequences of a backslash followed by two hex digits into the corresponding character.
-     * @see Net_LDAP2_Util::escape_filter_value() from Benedikt Hallinger <beni@php.net>
-     * @link http://pear.php.net/package/Net_LDAP2
+     * @param string|array $values Array of values to escape
+     * @return array Array $values, but unescaped
      * @author Benedikt Hallinger <beni@php.net>
      *
-     * @param  string|array $values Array of values to escape
-     * @return array Array $values, but unescaped
+     * @see    Net_LDAP2_Util::escape_filter_value() from Benedikt Hallinger <beni@php.net>
+     * @link   http://pear.php.net/package/Net_LDAP2
      */
-    public static function unescapeValue($values = array())
+    public static function unescapeValue($values = [])
     {
         /**
          * @see Zend_Ldap_Converter
          */
         require_once 'Zend/Ldap/Converter.php';
 
-        if (!is_array($values)) $values = array($values);
+        if (!is_array($values)) $values = [$values];
         foreach ($values as $key => $value) {
             // Translate hex code into ascii
             $values[$key] = Zend_Ldap_Converter::hex32ToAsc($value);

@@ -42,9 +42,9 @@ class Zend_Tool_Framework_System_Provider_Version
 
     const MODE_MAJOR = 'major';
     const MODE_MINOR = 'minor';
-    const MODE_MINI  = 'mini';
+    const MODE_MINI = 'mini';
 
-    protected $_specialties = array('MajorPart', 'MinorPart', 'MiniPart');
+    protected $_specialties = ['MajorPart', 'MinorPart', 'MiniPart'];
 
     public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)
     {
@@ -56,14 +56,14 @@ class Zend_Tool_Framework_System_Provider_Version
      * Show Action
      *
      * @param string $mode The mode switch can be one of: major, minor, or mini (default)
-     * @param bool $nameIncluded
+     * @param bool   $nameIncluded
      */
     public function show($mode = self::MODE_MINI, $nameIncluded = true)
     {
 
         $versionInfo = $this->_splitVersion();
 
-        switch($mode) {
+        switch ($mode) {
             case self::MODE_MINOR:
                 unset($versionInfo['mini']);
                 break;
@@ -98,14 +98,14 @@ class Zend_Tool_Framework_System_Provider_Version
     public function showMiniPart($nameIncluded = true)
     {
         $versionNumbers = $this->_splitVersion();
-        $output = (($nameIncluded == true) ? 'ZF Mini Version: ' : null)  . $versionNumbers['mini'];
+        $output = (($nameIncluded == true) ? 'ZF Mini Version: ' : null) . $versionNumbers['mini'];
         $this->_registry->response->appendContent($output);
     }
 
     protected function _splitVersion()
     {
-        list($major, $minor, $mini) = explode('.', Zend_Version::VERSION);
-        return array('major' => $major, 'minor' => $minor, 'mini' => $mini);
+        [$major, $minor, $mini] = explode('.', Zend_Version::VERSION);
+        return ['major' => $major, 'minor' => $minor, 'mini' => $mini];
     }
 
 }

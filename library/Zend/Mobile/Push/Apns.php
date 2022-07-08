@@ -52,12 +52,12 @@ class Zend_Mobile_Push_Apns extends Zend_Mobile_Push_Abstract
      *
      * @var array
      */
-    protected $_serverUriList = array(
+    protected $_serverUriList = [
         'ssl://gateway.sandbox.push.apple.com:2195',
         'ssl://gateway.push.apple.com:2195',
         'ssl://feedback.sandbox.push.apple.com:2196',
         'ssl://feedback.push.apple.com:2196'
-    );
+    ];
 
     /**
      * Current Environment
@@ -100,7 +100,7 @@ class Zend_Mobile_Push_Apns extends Zend_Mobile_Push_Abstract
     /**
      * Set Certificate
      *
-     * @param  string $cert
+     * @param string $cert
      * @return Zend_Mobile_Push_Apns
      * @throws Zend_Mobile_Push_Exception
      */
@@ -129,7 +129,7 @@ class Zend_Mobile_Push_Apns extends Zend_Mobile_Push_Abstract
     /**
      * Set Certificate Passphrase
      *
-     * @param  string $passphrase
+     * @param string $passphrase
      * @return Zend_Mobile_Push_Apns
      * @throws Zend_Mobile_Push_Exception
      */
@@ -145,15 +145,15 @@ class Zend_Mobile_Push_Apns extends Zend_Mobile_Push_Abstract
     /**
      * Connect to Socket
      *
-     * @param  string $uri
+     * @param string $uri
      * @return bool
      * @throws Zend_Mobile_Push_Exception_ServerUnavailable
      */
     protected function _connect($uri)
     {
-        $ssl = array(
+        $ssl = [
             'local_cert' => $this->_certificate,
-        );
+        ];
         if ($this->_certificatePassphrase) {
             $ssl['passphrase'] = $this->_certificatePassphrase;
         }
@@ -163,9 +163,9 @@ class Zend_Mobile_Push_Apns extends Zend_Mobile_Push_Abstract
             $errstr,
             ini_get('default_socket_timeout'),
             STREAM_CLIENT_CONNECT,
-            stream_context_create(array(
+            stream_context_create([
                 'ssl' => $ssl,
-            ))
+            ])
         );
 
         if (!is_resource($this->_socket)) {
@@ -183,12 +183,13 @@ class Zend_Mobile_Push_Apns extends Zend_Mobile_Push_Abstract
     }
 
     /**
-    * Read from the Socket Server
-    * 
-    * @param int $length
-    * @return string
-    */
-    protected function _read($length) {
+     * Read from the Socket Server
+     *
+     * @param int $length
+     * @return string
+     */
+    protected function _read($length)
+    {
         $data = false;
         if (!feof($this->_socket)) {
             $data = fread($this->_socket, $length);
@@ -197,22 +198,23 @@ class Zend_Mobile_Push_Apns extends Zend_Mobile_Push_Abstract
     }
 
     /**
-    * Write to the Socket Server
-    * 
-    * @param string $payload
-    * @return int
-    */
-    protected function _write($payload) {
+     * Write to the Socket Server
+     *
+     * @param string $payload
+     * @return int
+     */
+    protected function _write($payload)
+    {
         return @fwrite($this->_socket, $payload);
     }
 
     /**
      * Connect to the Push Server
      *
-     * @param  int|string $env
-     * @throws Zend_Mobile_Push_Exception
-     * @throws Zend_Mobile_Push_Exception_ServerUnavailable
+     * @param int|string $env
      * @return Zend_Mobile_Push_Abstract
+     * @throws Zend_Mobile_Push_Exception_ServerUnavailable
+     * @throws Zend_Mobile_Push_Exception
      */
     public function connect($env = self::SERVER_PRODUCTION_URI)
     {
@@ -239,7 +241,6 @@ class Zend_Mobile_Push_Apns extends Zend_Mobile_Push_Abstract
     }
 
 
-
     /**
      * Feedback
      *
@@ -251,11 +252,11 @@ class Zend_Mobile_Push_Apns extends Zend_Mobile_Push_Abstract
     {
         if (!$this->_isConnected ||
             !in_array($this->_currentEnv,
-                array(self::SERVER_FEEDBACK_SANDBOX_URI, self::SERVER_FEEDBACK_PRODUCTION_URI))) {
+                [self::SERVER_FEEDBACK_SANDBOX_URI, self::SERVER_FEEDBACK_PRODUCTION_URI])) {
             $this->connect(self::SERVER_FEEDBACK_PRODUCTION_URI);
         }
 
-        $tokens = array();
+        $tokens = [];
         while ($token = $this->_read(38)) {
             if (strlen($token) < 38) {
                 continue;
@@ -271,13 +272,13 @@ class Zend_Mobile_Push_Apns extends Zend_Mobile_Push_Abstract
     /**
      * Send Message
      *
-     * @param  Zend_Mobile_Push_Message_Abstract $message
-     * @throws Zend_Mobile_Push_Exception
+     * @param Zend_Mobile_Push_Message_Abstract $message
+     * @return bool
      * @throws Zend_Mobile_Push_Exception_InvalidPayload
      * @throws Zend_Mobile_Push_Exception_InvalidToken
      * @throws Zend_Mobile_Push_Exception_InvalidTopic
      * @throws Zend_Mobile_Push_Exception_ServerUnavailable
-     * @return bool
+     * @throws Zend_Mobile_Push_Exception
      */
     public function send(Zend_Mobile_Push_Message_Abstract $message)
     {
@@ -285,13 +286,13 @@ class Zend_Mobile_Push_Apns extends Zend_Mobile_Push_Abstract
             throw new Zend_Mobile_Push_Exception('The message is not valid.');
         }
 
-        if (!$this->_isConnected || !in_array($this->_currentEnv, array(
-            self::SERVER_SANDBOX_URI,
-            self::SERVER_PRODUCTION_URI))) {
+        if (!$this->_isConnected || !in_array($this->_currentEnv, [
+                self::SERVER_SANDBOX_URI,
+                self::SERVER_PRODUCTION_URI])) {
             $this->connect(self::SERVER_PRODUCTION_URI);
         }
 
-        $payload = array('aps' => array());
+        $payload = ['aps' => []];
 
         $alert = $message->getAlert();
         foreach ($alert as $k => $v) {
@@ -310,10 +311,10 @@ class Zend_Mobile_Push_Apns extends Zend_Mobile_Push_Abstract
             $payload['aps']['sound'] = $sound;
         }
 
-        foreach($message->getCustomData() as $k => $v) {
+        foreach ($message->getCustomData() as $k => $v) {
             $payload[$k] = $v;
         }
-        
+
         if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
             $payload = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         } else {

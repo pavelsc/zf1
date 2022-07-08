@@ -70,8 +70,8 @@ abstract class Zend_Feed_Entry_Abstract extends Zend_Feed_Element
      * SimpleXMLElement, but it can be an XML string or a DOMNode as
      * well) that contains the contents of the entry.
      *
-     * @param  string $uri
-     * @param  SimpleXMLElement|DOMNode|string  $element
+     * @param string                          $uri
+     * @param SimpleXMLElement|DOMNode|string $element
      * @return void
      * @throws Zend_Feed_Exception
      */

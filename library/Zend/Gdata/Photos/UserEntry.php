@@ -132,7 +132,7 @@ class Zend_Gdata_Photos_UserEntry extends Zend_Gdata_Entry
      * Create a new instance.
      *
      * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
+     *                            object should be constructed.
      */
     public function __construct($element = null)
     {
@@ -142,7 +142,7 @@ class Zend_Gdata_Photos_UserEntry extends Zend_Gdata_Entry
         $category = new Zend_Gdata_App_Extension_Category(
             'http://schemas.google.com/photos/2007#user',
             'http://schemas.google.com/g/2005#kind');
-        $this->setCategory(array($category));
+        $this->setCategory([$category]);
     }
 
     /**
@@ -152,7 +152,7 @@ class Zend_Gdata_Photos_UserEntry extends Zend_Gdata_Entry
      *
      * @param DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
-     *          child properties.
+     *                         child properties.
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
@@ -228,8 +228,8 @@ class Zend_Gdata_Photos_UserEntry extends Zend_Gdata_Entry
     /**
      * Get the value for this element's gphoto:nickname attribute.
      *
-     * @see setGphotoNickname
      * @return string The requested attribute.
+     * @see setGphotoNickname
      */
     public function getGphotoNickname()
     {
@@ -251,8 +251,8 @@ class Zend_Gdata_Photos_UserEntry extends Zend_Gdata_Entry
     /**
      * Get the value for this element's gphoto:thumbnail attribute.
      *
-     * @see setGphotoThumbnail
      * @return string The requested attribute.
+     * @see setGphotoThumbnail
      */
     public function getGphotoThumbnail()
     {
@@ -274,8 +274,8 @@ class Zend_Gdata_Photos_UserEntry extends Zend_Gdata_Entry
     /**
      * Get the value for this element's gphoto:quotacurrent attribute.
      *
-     * @see setGphotoQuotaCurrent
      * @return string The requested attribute.
+     * @see setGphotoQuotaCurrent
      */
     public function getGphotoQuotaCurrent()
     {
@@ -297,8 +297,8 @@ class Zend_Gdata_Photos_UserEntry extends Zend_Gdata_Entry
     /**
      * Get the value for this element's gphoto:quotalimit attribute.
      *
-     * @see setGphotoQuotaLimit
      * @return string The requested attribute.
+     * @see setGphotoQuotaLimit
      */
     public function getGphotoQuotaLimit()
     {
@@ -320,8 +320,8 @@ class Zend_Gdata_Photos_UserEntry extends Zend_Gdata_Entry
     /**
      * Get the value for this element's gphoto:maxPhotosPerAlbum attribute.
      *
-     * @see setGphotoMaxPhotosPerAlbum
      * @return string The requested attribute.
+     * @see setGphotoMaxPhotosPerAlbum
      */
     public function getGphotoMaxPhotosPerAlbum()
     {
@@ -343,8 +343,8 @@ class Zend_Gdata_Photos_UserEntry extends Zend_Gdata_Entry
     /**
      * Get the value for this element's gphoto:user attribute.
      *
-     * @see setGphotoUser
      * @return string The requested attribute.
+     * @see setGphotoUser
      */
     public function getGphotoUser()
     {

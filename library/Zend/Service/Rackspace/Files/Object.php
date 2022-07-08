@@ -137,10 +137,10 @@ class Zend_Service_Rackspace_Files_Object
                 );
             }
 
-            $this->name         = $data['name'];
-            $this->hash         = $data['hash'];
-            $this->size         = $data['bytes'];
-            $this->contentType  = $data['content_type'];
+            $this->name = $data['name'];
+            $this->hash = $data['hash'];
+            $this->size = $data['bytes'];
+            $this->contentType = $data['content_type'];
             $this->lastModified = $data['last_modified'];
 
             if (!empty($data['content'])) {
@@ -156,7 +156,7 @@ class Zend_Service_Rackspace_Files_Object
         }
 
         $this->container = $data['container'];
-        $this->service   = $service;
+        $this->service = $service;
     }
 
     /**
@@ -164,7 +164,7 @@ class Zend_Service_Rackspace_Files_Object
      *
      * @return string
      */
-    public function getName() 
+    public function getName()
     {
         return $this->name;
     }
@@ -174,7 +174,7 @@ class Zend_Service_Rackspace_Files_Object
      *
      * @return string
      */
-    public function getContainer() 
+    public function getContainer()
     {
         return $this->container;
     }
@@ -184,7 +184,7 @@ class Zend_Service_Rackspace_Files_Object
      *
      * @return string|boolean
      */
-    public function getHash() 
+    public function getHash()
     {
         return $this->hash;
     }
@@ -194,7 +194,7 @@ class Zend_Service_Rackspace_Files_Object
      *
      * @return integer|boolean
      */
-    public function getSize() 
+    public function getSize()
     {
         return $this->size;
     }
@@ -204,7 +204,7 @@ class Zend_Service_Rackspace_Files_Object
      *
      * @return string
      */
-    public function getContentType() 
+    public function getContentType()
     {
         return $this->contentType;
     }
@@ -214,7 +214,7 @@ class Zend_Service_Rackspace_Files_Object
      *
      * @return string
      */
-    public function getLastModified() 
+    public function getLastModified()
     {
         return $this->lastModified;
     }
@@ -224,7 +224,7 @@ class Zend_Service_Rackspace_Files_Object
      *
      * @return string
      */
-    public function getContent() 
+    public function getContent()
     {
         return $this->content;
     }
@@ -233,12 +233,12 @@ class Zend_Service_Rackspace_Files_Object
      * Get the metadata of the object
      * If you don't pass the $key it returns the entire array of metadata value
      *
-     * @param  string $key
+     * @param string $key
      * @return string|array|boolean
      */
-    public function getMetadata($key=null) 
+    public function getMetadata($key = null)
     {
-        $result= $this->service->getMetadataObject($this->container,$this->name);
+        $result = $this->service->getMetadataObject($this->container, $this->name);
         if (!empty($result)) {
             if (empty($key)) {
                 return $result['metadata'];
@@ -253,13 +253,13 @@ class Zend_Service_Rackspace_Files_Object
     /**
      * Set the metadata value
      * The old metadata values are replaced with the new one
-     * 
+     *
      * @param array $metadata
      * @return boolean
      */
-    public function setMetadata($metadata) 
+    public function setMetadata($metadata)
     {
-        return $this->service->setMetadataObject($this->container,$this->name,$metadata);
+        return $this->service->setMetadataObject($this->container, $this->name, $metadata);
     }
 
     /**
@@ -267,15 +267,15 @@ class Zend_Service_Rackspace_Files_Object
      * You can add metadata information to the destination object, change the
      * content_type and the name of the object
      *
-     * @param  string $container_dest
-     * @param  string $name_dest
-     * @param  array $metadata
-     * @param  string $content_type
+     * @param string $container_dest
+     * @param string $name_dest
+     * @param array  $metadata
+     * @param string $content_type
      * @return boolean
      */
-    public function copyTo($container_dest,$name_dest,$metadata=array(),$content_type=null) 
+    public function copyTo($container_dest, $name_dest, $metadata = [], $content_type = null)
     {
-        return $this->service->copyObject($this->container,$this->name,$container_dest,$name_dest,$metadata,$content_type);
+        return $this->service->copyObject($this->container, $this->name, $container_dest, $name_dest, $metadata, $content_type);
     }
 
     /**
@@ -283,12 +283,12 @@ class Zend_Service_Rackspace_Files_Object
      *
      * @return string
      */
-    public function getCdnUrl() 
+    public function getCdnUrl()
     {
-        $result= $this->service->getInfoCdnContainer($this->container);
-        if ($result!==false) {
+        $result = $this->service->getInfoCdnContainer($this->container);
+        if ($result !== false) {
             if ($result['cdn_enabled']) {
-                return $result['cdn_uri'].'/'.$this->name;
+                return $result['cdn_uri'] . '/' . $this->name;
             }
         }
         return false;
@@ -299,12 +299,12 @@ class Zend_Service_Rackspace_Files_Object
      *
      * @return string
      */
-    public function getCdnUrlSsl() 
+    public function getCdnUrlSsl()
     {
-        $result= $this->service->getInfoCdnContainer($this->container);
-        if ($result!==false) {
+        $result = $this->service->getInfoCdnContainer($this->container);
+        if ($result !== false) {
             if ($result['cdn_enabled']) {
-                return $result['cdn_uri_ssl'].'/'.$this->name;
+                return $result['cdn_uri_ssl'] . '/' . $this->name;
             }
         }
         return false;

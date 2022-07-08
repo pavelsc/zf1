@@ -43,34 +43,34 @@ class Zend_Validate_Sitemap_Changefreq extends Zend_Validate_Abstract
      *
      */
     const NOT_VALID = 'sitemapChangefreqNotValid';
-    const INVALID   = 'sitemapChangefreqInvalid';
+    const INVALID = 'sitemapChangefreqInvalid';
 
     /**
      * Validation failure message template definitions
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $_messageTemplates = [
         self::NOT_VALID => "'%value%' is not a valid sitemap changefreq",
-        self::INVALID   => "Invalid type given. String expected",
-    );
+        self::INVALID => "Invalid type given. String expected",
+    ];
 
     /**
      * Valid change frequencies
      *
      * @var array
      */
-    protected $_changeFreqs = array(
-        'always',  'hourly', 'daily', 'weekly',
+    protected $_changeFreqs = [
+        'always', 'hourly', 'daily', 'weekly',
         'monthly', 'yearly', 'never'
-    );
+    ];
 
     /**
      * Validates if a string is valid as a sitemap changefreq
      *
      * @link http://www.sitemaps.org/protocol.php#changefreqdef <changefreq>
      *
-     * @param  string  $value  value to validate
+     * @param string $value value to validate
      * @return boolean
      */
     public function isValid($value)

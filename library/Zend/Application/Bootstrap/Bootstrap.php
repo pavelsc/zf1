@@ -57,7 +57,7 @@ class Zend_Application_Bootstrap_Bootstrap
      *
      * Ensure FrontController resource is registered
      *
-     * @param  Zend_Application|Zend_Application_Bootstrap_Bootstrapper $application
+     * @param Zend_Application|Zend_Application_Bootstrap_Bootstrapper $application
      */
     public function __construct($application)
     {
@@ -65,11 +65,11 @@ class Zend_Application_Bootstrap_Bootstrap
 
         if ($application->hasOption('resourceloader')) {
             $this->setOptions(
-                array(
+                [
                     'resourceloader' => $application->getOption(
                         'resourceloader'
                     )
-                )
+                ]
             );
         }
         $this->getResourceLoader();
@@ -93,7 +93,7 @@ class Zend_Application_Bootstrap_Bootstrap
      */
     public function run()
     {
-        $front   = $this->getResource('FrontController');
+        $front = $this->getResource('FrontController');
         $default = $front->getDefaultModule();
         if (null === $front->getControllerDirectory($default)) {
             throw new Zend_Application_Bootstrap_Exception(
@@ -111,7 +111,7 @@ class Zend_Application_Bootstrap_Bootstrap
     /**
      * Set module resource loader
      *
-     * @param  Zend_Loader_Autoloader_Resource $loader
+     * @param Zend_Loader_Autoloader_Resource $loader
      * @return Zend_Application_Module_Bootstrap
      */
     public function setResourceLoader(Zend_Loader_Autoloader_Resource $loader)
@@ -130,14 +130,14 @@ class Zend_Application_Bootstrap_Bootstrap
         if ((null === $this->_resourceLoader)
             && (false !== ($namespace = $this->getAppNamespace()))
         ) {
-            $r    = new ReflectionClass($this);
+            $r = new ReflectionClass($this);
             $path = $r->getFileName();
             $this->setResourceLoader(
                 new Zend_Application_Module_Autoloader(
-                    array(
+                    [
                         'namespace' => $namespace,
-                        'basePath'  => dirname($path),
-                    )
+                        'basePath' => dirname($path),
+                    ]
                 )
             );
         }
@@ -157,12 +157,12 @@ class Zend_Application_Bootstrap_Bootstrap
     /**
      * Set application namespace (for module autoloading)
      *
-     * @param  string
+     * @param string
      * @return Zend_Application_Bootstrap_Bootstrap
      */
     public function setAppNamespace($value)
     {
-        $this->_appNamespace = (string) $value;
+        $this->_appNamespace = (string)$value;
         return $this;
     }
 }

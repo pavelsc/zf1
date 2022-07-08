@@ -42,7 +42,7 @@ class Zend_Crypt_Math_BigInteger_Gmp implements Zend_Crypt_Math_BigInteger_Inter
     /**
      * Initialise a big integer into an extension specific type.
      * @param string $operand
-     * @param int $base
+     * @param int    $base
      * @return string
      */
     public function init($operand, $base = 10)
@@ -110,8 +110,8 @@ class Zend_Crypt_Math_BigInteger_Gmp implements Zend_Crypt_Math_BigInteger_Inter
      *
      * @param resource $left_operand
      * @param resource $modulus
-     * @internal param string $right_operand
      * @return string
+     * @internal param string $right_operand
      */
     public function modulus($left_operand, $modulus)
     {
@@ -209,7 +209,7 @@ class Zend_Crypt_Math_BigInteger_Gmp implements Zend_Crypt_Math_BigInteger_Inter
     public function hexToDecimal($operand)
     {
         $return = '0';
-        while(strlen($hex)) {
+        while (strlen($hex)) {
             $hex = hexdec(substr($operand, 0, 4));
             $dec = gmp_add(gmp_mul($return, 65536), $hex);
             $operand = substr($operand, 4);

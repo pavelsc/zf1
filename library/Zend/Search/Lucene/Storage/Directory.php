@@ -126,7 +126,7 @@ abstract class Zend_Search_Lucene_Storage_Directory
      * Shared handler are good for short atomic requests.
      * Non-shared handlers are useful for stream file reading (especial for compound files).
      *
-     * @param string $filename
+     * @param string  $filename
      * @param boolean $shareHandler
      * @return Zend_Search_Lucene_Storage_File
      */

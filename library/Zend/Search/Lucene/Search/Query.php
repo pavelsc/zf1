@@ -76,7 +76,7 @@ abstract class Zend_Search_Lucene_Search_Query
     /**
      * Score specified document
      *
-     * @param integer $docId
+     * @param integer                      $docId
      * @param Zend_Search_Lucene_Interface $reader
      * @return float
      */
@@ -97,7 +97,7 @@ abstract class Zend_Search_Lucene_Search_Query
      *
      * Query specific implementation
      *
-     * @param Zend_Search_Lucene_Interface $reader
+     * @param Zend_Search_Lucene_Interface             $reader
      * @param Zend_Search_Lucene_Index_DocsFilter|null $docsFilter
      */
     abstract public function execute(Zend_Search_Lucene_Interface $reader, $docsFilter = null);
@@ -171,15 +171,15 @@ abstract class Zend_Search_Lucene_Search_Query
     /**
      * Query specific matches highlighting
      *
-     * @param Zend_Search_Lucene_Search_Highlighter_Interface $highlighter  Highlighter object (also contains doc for highlighting)
+     * @param Zend_Search_Lucene_Search_Highlighter_Interface $highlighter Highlighter object (also contains doc for highlighting)
      */
     abstract protected function _highlightMatches(Zend_Search_Lucene_Search_Highlighter_Interface $highlighter);
 
     /**
      * Highlight matches in $inputHTML
      *
-     * @param string $inputHTML
-     * @param string  $defaultEncoding   HTML encoding, is used if it's not specified using Content-type HTTP-EQUIV meta tag.
+     * @param string                                               $inputHTML
+     * @param string                                               $defaultEncoding HTML encoding, is used if it's not specified using Content-type HTTP-EQUIV meta tag.
      * @param Zend_Search_Lucene_Search_Highlighter_Interface|null $highlighter
      * @return string
      */
@@ -204,8 +204,8 @@ abstract class Zend_Search_Lucene_Search_Query
     /**
      * Highlight matches in $inputHtmlFragment and return it (without HTML header and body tag)
      *
-     * @param string $inputHtmlFragment
-     * @param string  $encoding   Input HTML string encoding
+     * @param string                                               $inputHtmlFragment
+     * @param string                                               $encoding Input HTML string encoding
      * @param Zend_Search_Lucene_Search_Highlighter_Interface|null $highlighter
      * @return string
      */
@@ -217,7 +217,7 @@ abstract class Zend_Search_Lucene_Search_Query
         }
 
         $inputHTML = '<html><head><META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8"/></head><body>'
-                   . iconv($encoding, 'UTF-8//IGNORE', $inputHtmlFragment) . '</body></html>';
+            . iconv($encoding, 'UTF-8//IGNORE', $inputHtmlFragment) . '</body></html>';
 
         /** Zend_Search_Lucene_Document_Html */
         require_once 'Zend/Search/Lucene/Document/Html.php';

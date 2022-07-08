@@ -32,7 +32,7 @@ abstract class Zend_Feed_Reader_EntryAbstract
      *
      * @var array
      */
-    protected $_data = array();
+    protected $_data = [];
 
     /**
      * DOM document object
@@ -67,20 +67,20 @@ abstract class Zend_Feed_Reader_EntryAbstract
      *
      * @var array
      */
-    protected $_extensions = array();
+    protected $_extensions = [];
 
     /**
      * Constructor
      *
-     * @param  DOMElement  $entry
-     * @param  int         $entryKey
-     * @param  string|null $type
+     * @param DOMElement  $entry
+     * @param int         $entryKey
+     * @param string|null $type
      * @return void
      */
     public function __construct(DOMElement $entry, $entryKey, $type = null)
     {
-        $this->_entry       = $entry;
-        $this->_entryKey    = $entryKey;
+        $this->_entry = $entry;
+        $this->_entryKey = $entryKey;
         $this->_domDocument = $entry->ownerDocument;
         if ($type !== null) {
             $this->_data['type'] = $type;
@@ -165,7 +165,7 @@ abstract class Zend_Feed_Reader_EntryAbstract
     /**
      * Set the XPath query
      *
-     * @param  DOMXPath $xpath
+     * @param DOMXPath $xpath
      * @return Zend_Feed_Reader_Entry_EntryAbstract
      */
     public function setXpath(DOMXPath $xpath)
@@ -201,8 +201,8 @@ abstract class Zend_Feed_Reader_EntryAbstract
     /**
      * Method overloading: call given method on first extension implementing it
      *
-     * @param  string $method
-     * @param  array $args
+     * @param string $method
+     * @param array  $args
      * @return mixed
      * @throws Zend_Feed_Exception if no extensions implements the method
      */
@@ -210,7 +210,7 @@ abstract class Zend_Feed_Reader_EntryAbstract
     {
         foreach ($this->_extensions as $extension) {
             if (method_exists($extension, $method)) {
-                return call_user_func_array(array($extension, $method), $args);
+                return call_user_func_array([$extension, $method], $args);
             }
         }
         require_once 'Zend/Feed/Exception.php';

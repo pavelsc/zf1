@@ -44,7 +44,7 @@ class Zend_Feed_Pubsubhubbub_HttpResponse
      *
      * @var array
      */
-    protected $_headers = array();
+    protected $_headers = [];
 
     /**
      * HTTP response code to use in headers
@@ -100,15 +100,15 @@ class Zend_Feed_Pubsubhubbub_HttpResponse
      * If $replace is true, replaces any headers already defined with that
      * $name.
      *
-     * @param  string $name
-     * @param  string $value
-     * @param  boolean $replace
+     * @param string  $name
+     * @param string  $value
+     * @param boolean $replace
      * @return Zend_Feed_Pubsubhubbub_HttpResponse
      */
     public function setHeader($name, $value, $replace = false)
     {
-        $name  = $this->_normalizeHeader($name);
-        $value = (string) $value;
+        $name = $this->_normalizeHeader($name);
+        $value = (string)$value;
         if ($replace) {
             foreach ($this->_headers as $key => $header) {
                 if ($name == $header['name']) {
@@ -116,11 +116,11 @@ class Zend_Feed_Pubsubhubbub_HttpResponse
                 }
             }
         }
-        $this->_headers[] = array(
-            'name'    => $name,
-            'value'   => $value,
+        $this->_headers[] = [
+            'name' => $name,
+            'value' => $value,
             'replace' => $replace,
-        );
+        ];
 
         return $this;
     }
@@ -128,7 +128,7 @@ class Zend_Feed_Pubsubhubbub_HttpResponse
     /**
      * Check if a specific Header is set and return its value
      *
-     * @param  string $name
+     * @param string $name
      * @return string|null
      */
     public function getHeader($name)
@@ -154,7 +154,7 @@ class Zend_Feed_Pubsubhubbub_HttpResponse
     /**
      * Can we send headers?
      *
-     * @param  boolean $throw Whether or not to throw an exception if headers have been sent; defaults to false
+     * @param boolean $throw Whether or not to throw an exception if headers have been sent; defaults to false
      * @return boolean
      * @throws Zend_Feed_Pubsubhubbub_Exception
      */
@@ -171,16 +171,16 @@ class Zend_Feed_Pubsubhubbub_HttpResponse
     /**
      * Set HTTP response code to use with headers
      *
-     * @param  int $code
-     * @throws Zend_Feed_Pubsubhubbub_Exception
+     * @param int $code
      * @return Zend_Feed_Pubsubhubbub_HttpResponse
+     * @throws Zend_Feed_Pubsubhubbub_Exception
      */
     public function setHttpResponseCode($code)
     {
         if (!is_int($code) || (100 > $code) || (599 < $code)) {
             require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
             throw new Zend_Feed_Pubsubhubbub_Exception('Invalid HTTP response'
-            . ' code:' . $code);
+                . ' code:' . $code);
         }
         $this->_httpResponseCode = $code;
         return $this;
@@ -199,12 +199,12 @@ class Zend_Feed_Pubsubhubbub_HttpResponse
     /**
      * Set body content
      *
-     * @param  string $content
+     * @param string $content
      * @return Zend_Feed_Pubsubhubbub_HttpResponse
      */
     public function setBody($content)
     {
-        $this->_body = (string) $content;
+        $this->_body = (string)$content;
         $this->setHeader('content-length', strlen($content));
         return $this;
     }
@@ -222,12 +222,12 @@ class Zend_Feed_Pubsubhubbub_HttpResponse
     /**
      * Normalizes a header name to X-Capitalized-Names
      *
-     * @param  string $name
+     * @param string $name
      * @return string
      */
     protected function _normalizeHeader($name)
     {
-        $filtered = str_replace(array('-', '_'), ' ', (string) $name);
+        $filtered = str_replace(['-', '_'], ' ', (string)$name);
         $filtered = ucwords(strtolower($filtered));
         $filtered = str_replace(' ', '-', $filtered);
         return $filtered;

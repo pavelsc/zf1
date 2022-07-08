@@ -34,7 +34,7 @@ require_once('Zend/Gdata/Query.php');
 /**
  * Assists in constructing queries for Google Health
  *
- * @link http://code.google.com/apis/health
+ * @link       http://code.google.com/apis/health
  *
  * @category   Zend
  * @package    Zend_Gdata
@@ -60,7 +60,7 @@ class Zend_Gdata_Health_Query extends Zend_Gdata_Query
      * Namespace for an item category
      */
     const ITEM_CATEGORY_NS = 'http://schemas.google.com/health/item';
-    
+
     /**
      * Create Gdata_Query object
      */

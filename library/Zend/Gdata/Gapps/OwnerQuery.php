@@ -60,9 +60,9 @@ class Zend_Gdata_Gapps_OwnerQuery extends Zend_Gdata_Gapps_Query
     /**
      * Create a new instance.
      *
-     * @param string $domain (optional) The Google Apps-hosted domain to use
-     *          when constructing query URIs.
-     * @param string $groupId (optional) Value for the groupId property.
+     * @param string $domain     (optional) The Google Apps-hosted domain to use
+     *                           when constructing query URIs.
+     * @param string $groupId    (optional) Value for the groupId property.
      * @param string $ownerEmail (optional) Value for the OwnerEmail property.
      */
     public function __construct($domain = null, $groupId = null, $ownerEmail = null)
@@ -75,8 +75,8 @@ class Zend_Gdata_Gapps_OwnerQuery extends Zend_Gdata_Gapps_Query
     /**
      * Set the group id to query for.
      *
-     * @see getGroupId
      * @param string $value
+     * @see getGroupId
      */
     public function setGroupId($value)
     {
@@ -97,8 +97,8 @@ class Zend_Gdata_Gapps_OwnerQuery extends Zend_Gdata_Gapps_Query
     /**
      * Set the owner email to query for.
      *
-     * @see getOwnerEmail
      * @param string $value
+     * @see getOwnerEmail
      */
     public function setOwnerEmail($value)
     {
@@ -131,7 +131,7 @@ class Zend_Gdata_Gapps_OwnerQuery extends Zend_Gdata_Gapps_Query
         } else {
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'groupId must not be null');
+                'groupId must not be null');
         }
 
         $uri .= '/owner';

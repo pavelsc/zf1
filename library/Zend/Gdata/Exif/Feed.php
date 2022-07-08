@@ -59,7 +59,7 @@ class Zend_Gdata_Exif_Feed extends Zend_Gdata_Feed
      * Create a new instance.
      *
      * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
+     *                            object should be constructed.
      */
     public function __construct($element = null)
     {

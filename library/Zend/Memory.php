@@ -42,12 +42,12 @@ class Zend_Memory
     /**
      * Factory
      *
-     * @param string $backend backend name
-     * @param array $backendOptions associative array of options for the corresponding backend constructor
+     * @param string $backend        backend name
+     * @param array  $backendOptions associative array of options for the corresponding backend constructor
      * @return Zend_Memory_Manager
      * @throws Zend_Memory_Exception
      */
-    public static function factory($backend, $backendOptions = array())
+    public static function factory($backend, $backendOptions = [])
     {
         if (strcasecmp($backend, 'none') == 0) {
             return new Zend_Memory_Manager();

@@ -46,13 +46,13 @@ class Zend_Amf_Response
      * Array of Zend_Amf_Value_MessageBody objects
      * @var array
      */
-    protected $_bodies = array();
+    protected $_bodies = [];
 
     /**
      * Array of Zend_Amf_Value_MessageHeader objects
      * @var array
      */
-    protected $_headers = array();
+    protected $_headers = [];
 
     /**
      * @var Zend_Amf_Parse_OutputStream
@@ -75,7 +75,7 @@ class Zend_Amf_Response
      * Serialize the PHP data types back into Actionscript and
      * create and AMF stream.
      *
-     * @param  Zend_Amf_Parse_OutputStream $stream
+     * @param Zend_Amf_Parse_OutputStream $stream
      * @return Zend_Amf_Response
      */
     public function writeMessage(Zend_Amf_Parse_OutputStream $stream)
@@ -150,7 +150,7 @@ class Zend_Amf_Response
     /**
      * Add an AMF body to be sent to the Flash Player
      *
-     * @param  Zend_Amf_Value_MessageBody $body
+     * @param Zend_Amf_Value_MessageBody $body
      * @return Zend_Amf_Response
      */
     public function addAmfBody(Zend_Amf_Value_MessageBody $body)
@@ -172,7 +172,7 @@ class Zend_Amf_Response
     /**
      * Add an AMF Header to be sent back to the flash player
      *
-     * @param  Zend_Amf_Value_MessageHeader $header
+     * @param Zend_Amf_Value_MessageHeader $header
      * @return Zend_Amf_Response
      */
     public function addAmfHeader(Zend_Amf_Value_MessageHeader $header)
@@ -194,7 +194,7 @@ class Zend_Amf_Response
     /**
      * Set the AMF encoding that will be used for serialization
      *
-     * @param  int $encoding
+     * @param int $encoding
      * @return Zend_Amf_Response
      */
     public function setObjectEncoding($encoding)

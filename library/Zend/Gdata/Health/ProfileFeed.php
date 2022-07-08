@@ -34,7 +34,7 @@ require_once 'Zend/Gdata/Feed.php';
 /**
  * Represents a Google Health user's Profile Feed
  *
- * @link http://code.google.com/apis/health/
+ * @link       http://code.google.com/apis/health/
  *
  * @category   Zend
  * @package    Zend_Gdata
@@ -48,7 +48,7 @@ class Zend_Gdata_Health_ProfileFeed extends Zend_Gdata_Feed
      * Creates a Health Profile feed, representing a user's Health profile
      *
      * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
+     *                            object should be constructed.
      */
     public function __construct($element = null)
     {

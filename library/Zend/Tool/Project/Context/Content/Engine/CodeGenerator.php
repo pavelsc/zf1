@@ -47,11 +47,11 @@ class Zend_Tool_Project_Context_Content_Engine_CodeGenerator
      * __construct()
      *
      * @param Zend_Tool_Framework_Client_Storage $storage
-     * @param string $contentPrefix
+     * @param string                             $contentPrefix
      */
     public function __construct(Zend_Tool_Framework_Client_Storage $storage, $contentPrefix)
     {
-        $this->_storage       = $storage;
+        $this->_storage = $storage;
         $this->_contentPrefix = $contentPrefix;
     }
 
@@ -59,7 +59,7 @@ class Zend_Tool_Project_Context_Content_Engine_CodeGenerator
      * hasContent()
      *
      * @param Zend_Tool_Project_Context_Interface $context
-     * @param string $method
+     * @param string                              $method
      * @return string
      */
     public function hasContent(Zend_Tool_Project_Context_Interface $context, $method)
@@ -71,8 +71,8 @@ class Zend_Tool_Project_Context_Content_Engine_CodeGenerator
      * getContent()
      *
      * @param Zend_Tool_Project_Context_Interface $context
-     * @param string $method
-     * @param mixed $parameters
+     * @param string                              $method
+     * @param mixed                               $parameters
      * @return string
      */
     public function getContent(Zend_Tool_Project_Context_Interface $context, $method, $parameters)

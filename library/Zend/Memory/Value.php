@@ -32,7 +32,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @todo       also implement Countable for PHP 5.1 but not yet to stay 5.0 compatible
  */
-class Zend_Memory_Value implements ArrayAccess {
+class Zend_Memory_Value implements ArrayAccess
+{
     /**
      * Value
      *
@@ -58,7 +59,7 @@ class Zend_Memory_Value implements ArrayAccess {
     /**
      * Object constructor
      *
-     * @param string $value
+     * @param string                        $value
      * @param Zend_Memory_Container_Movable $container
      */
     public function __construct($value, Zend_Memory_Container_Movable $container)
@@ -88,7 +89,7 @@ class Zend_Memory_Value implements ArrayAccess {
      */
     public function offsetExists($offset)
     {
-        return $offset >= 0  &&  $offset < strlen($this->_value);
+        return $offset >= 0 && $offset < strlen($this->_value);
     }
 
     /**
@@ -108,7 +109,7 @@ class Zend_Memory_Value implements ArrayAccess {
      * Set character at $offset position
      *
      * @param integer $offset
-     * @param string $char
+     * @param string  $char
      */
     public function offsetSet($offset, $char)
     {
@@ -154,8 +155,8 @@ class Zend_Memory_Value implements ArrayAccess {
      * _Must_ be used for value access before PHP v 5.2
      * or _may_ be used for performance considerations
      *
-     * @internal
      * @return string
+     * @internal
      */
     public function &getRef()
     {

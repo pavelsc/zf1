@@ -33,9 +33,9 @@ class Zend_Oauth_Signature_Plaintext extends Zend_Oauth_Signature_SignatureAbstr
     /**
      * Sign a request
      *
-     * @param  array $params
-     * @param  null|string $method
-     * @param  null|string $url
+     * @param array       $params
+     * @param null|string $method
+     * @param null|string $url
      * @return string
      */
     public function sign(array $params, $method = null, $url = null)
@@ -43,7 +43,7 @@ class Zend_Oauth_Signature_Plaintext extends Zend_Oauth_Signature_SignatureAbstr
         if ($this->_tokenSecret === null) {
             return $this->_consumerSecret . '&';
         }
-        $return = implode('&', array($this->_consumerSecret, $this->_tokenSecret));
+        $return = implode('&', [$this->_consumerSecret, $this->_tokenSecret]);
         return $return;
     }
 }

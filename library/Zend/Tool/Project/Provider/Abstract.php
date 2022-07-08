@@ -59,7 +59,7 @@ abstract class Zend_Tool_Project_Provider_Abstract
 {
 
     const NO_PROFILE_THROW_EXCEPTION = true;
-    const NO_PROFILE_RETURN_FALSE    = false;
+    const NO_PROFILE_RETURN_FALSE = false;
 
     /**
      * @var bool
@@ -108,7 +108,7 @@ abstract class Zend_Tool_Project_Provider_Abstract
 
     public function getContextClasses()
     {
-        return array();
+        return [];
     }
 
     /**

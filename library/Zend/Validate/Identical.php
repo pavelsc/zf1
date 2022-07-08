@@ -34,24 +34,24 @@ class Zend_Validate_Identical extends Zend_Validate_Abstract
      * Error codes
      * @const string
      */
-    const NOT_SAME      = 'notSame';
+    const NOT_SAME = 'notSame';
     const MISSING_TOKEN = 'missingToken';
 
     /**
      * Error messages
      * @var array
      */
-    protected $_messageTemplates = array(
-        self::NOT_SAME      => "The two given tokens do not match",
+    protected $_messageTemplates = [
+        self::NOT_SAME => "The two given tokens do not match",
         self::MISSING_TOKEN => 'No token was provided to match against',
-    );
+    ];
 
     /**
      * @var array
      */
-    protected $_messageVariables = array(
+    protected $_messageVariables = [
         'token' => '_tokenString'
-    );
+    ];
 
     /**
      * Original token against which to validate
@@ -96,13 +96,13 @@ class Zend_Validate_Identical extends Zend_Validate_Abstract
     /**
      * Set token against which to compare
      *
-     * @param  mixed $token
+     * @param mixed $token
      * @return Zend_Validate_Identical
      */
     public function setToken($token)
     {
         $this->_tokenString = $token;
-        $this->_token       = $token;
+        $this->_token = $token;
         return $this;
     }
 
@@ -124,7 +124,7 @@ class Zend_Validate_Identical extends Zend_Validate_Abstract
      */
     public function setStrict($strict)
     {
-        $this->_strict = (boolean) $strict;
+        $this->_strict = (boolean)$strict;
         return $this;
     }
 
@@ -134,8 +134,8 @@ class Zend_Validate_Identical extends Zend_Validate_Abstract
      * Returns true if and only if a token has been set and the provided value
      * matches that token.
      *
-     * @param  mixed $value
-     * @param  array $context
+     * @param mixed $value
+     * @param array $context
      * @return boolean
      */
     public function isValid($value, $context = null)

@@ -27,7 +27,7 @@ require_once 'Zend/Pdf/Element.php';
 /**
  * PDF name tree representation class
  *
- * @todo implement lazy resource loading so resources will be really loaded at access time
+ * @todo       implement lazy resource loading so resources will be really loaded at access time
  *
  * @package    Zend_Pdf
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
@@ -41,7 +41,7 @@ class Zend_Pdf_NameTree implements ArrayAccess, Iterator, Countable
      *
      * @var array
      */
-    protected $_items = array();
+    protected $_items = [];
 
     /**
      * Object constructor
@@ -55,8 +55,8 @@ class Zend_Pdf_NameTree implements ArrayAccess, Iterator, Countable
             throw new Zend_Pdf_Exception('Name tree root must be a dictionary.');
         }
 
-        $intermediateNodes = array();
-        $leafNodes         = array();
+        $intermediateNodes = [];
+        $leafNodes = [];
         if ($rootDictionary->Kids !== null) {
             $intermediateNodes[] = $rootDictionary;
         } else {
@@ -64,7 +64,7 @@ class Zend_Pdf_NameTree implements ArrayAccess, Iterator, Countable
         }
 
         while (count($intermediateNodes) != 0) {
-            $newIntermediateNodes = array();
+            $newIntermediateNodes = [];
             foreach ($intermediateNodes as $node) {
                 foreach ($node->Kids->items as $childNode) {
                     if ($childNode->Kids !== null) {
@@ -78,9 +78,9 @@ class Zend_Pdf_NameTree implements ArrayAccess, Iterator, Countable
         }
 
         foreach ($leafNodes as $leafNode) {
-            $destinationsCount = count($leafNode->Names->items)/2;
+            $destinationsCount = count($leafNode->Names->items) / 2;
             for ($count = 0; $count < $destinationsCount; $count++) {
-                $this->_items[$leafNode->Names->items[$count*2]->value] = $leafNode->Names->items[$count*2 + 1];
+                $this->_items[$leafNode->Names->items[$count * 2]->value] = $leafNode->Names->items[$count * 2 + 1];
             }
         }
     }
@@ -103,8 +103,9 @@ class Zend_Pdf_NameTree implements ArrayAccess, Iterator, Countable
     }
 
 
-    public function valid() {
-        return current($this->_items)!==false;
+    public function valid()
+    {
+        return current($this->_items) !== false;
     }
 
 
@@ -129,7 +130,7 @@ class Zend_Pdf_NameTree implements ArrayAccess, Iterator, Countable
     public function offsetSet($offset, $value)
     {
         if ($offset === null) {
-            $this->_items[]        = $value;
+            $this->_items[] = $value;
         } else {
             $this->_items[$offset] = $value;
         }
@@ -144,7 +145,7 @@ class Zend_Pdf_NameTree implements ArrayAccess, Iterator, Countable
 
     public function clear()
     {
-        $this->_items = array();
+        $this->_items = [];
     }
 
     public function count()

@@ -71,7 +71,7 @@ require_once 'Zend/Gdata/Gapps/EmailListRecipientFeed.php';
  * Because of the nature of this API, all access must occur over an
  * authenticated connection.
  *
- * @link http://code.google.com/apis/apps/gdata_provisioning_api_v2.0_reference.html
+ * @link       http://code.google.com/apis/apps/gdata_provisioning_api_v2.0_reference.html
  *
  * @category   Zend
  * @package    Zend_Gdata
@@ -122,18 +122,18 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      *
      * @var array
      */
-    public static $namespaces = array(
-        array('apps', 'http://schemas.google.com/apps/2006', 1, 0)
-    );
+    public static $namespaces = [
+        ['apps', 'http://schemas.google.com/apps/2006', 1, 0]
+    ];
 
     /**
      * Create Gdata_Gapps object
      *
-     * @param Zend_Http_Client $client (optional) The HTTP client to use when
-     *          when communicating with the Google Apps servers.
-     * @param string $domain (optional) The Google Apps domain which is to be
-     *          accessed.
-     * @param string $applicationId The identity of the app in the form of Company-AppName-Version
+     * @param Zend_Http_Client $client        (optional) The HTTP client to use when
+     *                                        when communicating with the Google Apps servers.
+     * @param string           $domain        (optional) The Google Apps domain which is to be
+     *                                        accessed.
+     * @param string           $applicationId The identity of the app in the form of Company-AppName-Version
      */
     public function __construct($client = null, $domain = null, $applicationId = 'MyCompany-MyApp-1.0')
     {
@@ -153,14 +153,15 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * @throws Zend_Gdata_Gapps_ServiceException
      * @throws mixed
      */
-    public static function throwServiceExceptionIfDetected($e) {
+    public static function throwServiceExceptionIfDetected($e)
+    {
         // Check to make sure that there actually response!
         // This can happen if the connection dies before the request
         // completes. (See ZF-5949)
         $response = $e->getResponse();
         if (!$response) {
-          require_once('Zend/Gdata/App/IOException.php');
-          throw new Zend_Gdata_App_IOException('No HTTP response received (possible connection failure)');
+            require_once('Zend/Gdata/App/IOException.php');
+            throw new Zend_Gdata_App_IOException('No HTTP response received (possible connection failure)');
         }
 
         try {
@@ -185,17 +186,17 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * This method overrides the default behavior of Zend_Gdata_App,
      * providing support for Zend_Gdata_Gapps_ServiceException.
      *
-     * @param  string $uri
-     * @param  Zend_Http_Client $client (optional) The client used for
-     *          communication
-     * @param  string $className (optional) The class which is used as the
-     *          return type
-     * @throws Zend_Gdata_App_Exception
+     * @param string           $uri
+     * @param Zend_Http_Client $client    (optional) The client used for
+     *                                    communication
+     * @param string           $className (optional) The class which is used as the
+     *                                    return type
+     * @return Zend_Gdata_App_Feed
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
-     * @return Zend_Gdata_App_Feed
+     * @throws Zend_Gdata_App_Exception
      */
-    public static function import($uri, $client = null, $className='Zend_Gdata_App_Feed', $useObjectMapping = true)
+    public static function import($uri, $client = null, $className = 'Zend_Gdata_App_Feed', $useObjectMapping = true)
     {
         try {
             return parent::import($uri, $client, $className, $useObjectMapping);
@@ -209,14 +210,14 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * This method overrides the default behavior of Zend_Gdata_App,
      * providing support for Zend_Gdata_Gapps_ServiceException.
      *
-     * @param string $uri GET URI
-     * @param array $extraHeaders Extra headers to add to the request, as an
-     *        array of string-based key/value pairs.
-     * @throws Zend_Gdata_App_HttpException
-     * @throws Zend_Gdata_Gapps_ServiceException
+     * @param string $uri          GET URI
+     * @param array  $extraHeaders Extra headers to add to the request, as an
+     *                             array of string-based key/value pairs.
      * @return Zend_Http_Response
+     * @throws Zend_Gdata_Gapps_ServiceException
+     * @throws Zend_Gdata_App_HttpException
      */
-    public function get($uri, $extraHeaders = array())
+    public function get($uri, $extraHeaders = [])
     {
         try {
             return parent::get($uri, $extraHeaders);
@@ -230,18 +231,18 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * This method overrides the default behavior of Zend_Gdata_App,
      * providing support for Zend_Gdata_Gapps_ServiceException.
      *
-     * @param mixed $data The Zend_Gdata_App_Entry or XML to post
-     * @param string $uri (optional) POST URI
+     * @param mixed   $data               The Zend_Gdata_App_Entry or XML to post
+     * @param string  $uri                (optional) POST URI
      * @param integer $remainingRedirects (optional)
-     * @param string $contentType Content-type of the data
-     * @param array $extraHaders Extra headers to add tot he request
+     * @param string  $contentType        Content-type of the data
+     * @param array   $extraHaders        Extra headers to add tot he request
      * @return Zend_Http_Response
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_App_InvalidArgumentException
      * @throws Zend_Gdata_Gapps_ServiceException
      */
     public function post($data, $uri = null, $remainingRedirects = null,
-            $contentType = null, $extraHeaders = null)
+                         $contentType = null, $extraHeaders = null)
     {
         try {
             return parent::post($data, $uri, $remainingRedirects, $contentType, $extraHeaders);
@@ -255,18 +256,18 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * This method overrides the default behavior of Zend_Gdata_App,
      * providing support for Zend_Gdata_Gapps_ServiceException.
      *
-     * @param mixed $data The Zend_Gdata_App_Entry or XML to post
-     * @param string $uri (optional) PUT URI
+     * @param mixed   $data               The Zend_Gdata_App_Entry or XML to post
+     * @param string  $uri                (optional) PUT URI
      * @param integer $remainingRedirects (optional)
-     * @param string $contentType Content-type of the data
-     * @param array $extraHaders Extra headers to add tot he request
+     * @param string  $contentType        Content-type of the data
+     * @param array   $extraHaders        Extra headers to add tot he request
      * @return Zend_Http_Response
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_App_InvalidArgumentException
      * @throws Zend_Gdata_Gapps_ServiceException
      */
     public function put($data, $uri = null, $remainingRedirects = null,
-            $contentType = null, $extraHeaders = null)
+                        $contentType = null, $extraHeaders = null)
     {
         try {
             return parent::put($data, $uri, $remainingRedirects, $contentType, $extraHeaders);
@@ -280,7 +281,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * This method overrides the default behavior of Zend_Gdata_App,
      * providing support for Zend_Gdata_Gapps_ServiceException.
      *
-     * @param mixed $data The Zend_Gdata_App_Entry or URL to delete
+     * @param mixed   $data               The Zend_Gdata_App_Entry or URL to delete
      * @param integer $remainingRedirects (optional)
      * @return void
      * @throws Zend_Gdata_App_HttpException
@@ -331,27 +332,27 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * overridden by providing a fully qualified domain as $domain.
      *
      * @param string $domain (optional) A fully-qualified domain to use
-     *          instead of the default domain for this service instance.
+     *                       instead of the default domain for this service instance.
      * @throws Zend_Gdata_App_InvalidArgumentException
      */
-     public function getBaseUrl($domain = null)
-     {
-         if ($domain !== null) {
-             return self::APPS_BASE_FEED_URI . '/' . $domain;
-         } else if ($this->_domain !== null) {
-             return self::APPS_BASE_FEED_URI . '/' . $this->_domain;
-         } else {
-             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
-             throw new Zend_Gdata_App_InvalidArgumentException(
-                     'Domain must be specified.');
-         }
-     }
+    public function getBaseUrl($domain = null)
+    {
+        if ($domain !== null) {
+            return self::APPS_BASE_FEED_URI . '/' . $domain;
+        } else if ($this->_domain !== null) {
+            return self::APPS_BASE_FEED_URI . '/' . $this->_domain;
+        } else {
+            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
+            throw new Zend_Gdata_App_InvalidArgumentException(
+                'Domain must be specified.');
+        }
+    }
 
     /**
      * Retrieve a UserFeed containing multiple UserEntry objects.
      *
      * @param mixed $location (optional) The location for the feed, as a URL
-     *          or Query.
+     *                        or Query.
      * @return Zend_Gdata_Gapps_UserFeed
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
@@ -373,7 +374,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * Retreive NicknameFeed object containing multiple NicknameEntry objects.
      *
      * @param mixed $location (optional) The location for the feed, as a URL
-     *          or Query.
+     *                        or Query.
      * @return Zend_Gdata_Gapps_NicknameFeed
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
@@ -396,7 +397,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * objects.
      *
      * @param mixed $location (optional) The location for the feed, as a URL
-     *          or Query.
+     *                        or Query.
      * @return Zend_Gdata_Gapps_GroupFeed
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
@@ -405,7 +406,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
     public function getGroupFeed($location = null)
     {
         if ($location === null) {
-            $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
+            $uri = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
             $uri .= $this->getDomain();
         } else if ($location instanceof Zend_Gdata_Query) {
             $uri = $location->getQueryUrl();
@@ -420,7 +421,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * objects.
      *
      * @param mixed $location (optional) The location for the feed, as a URL
-     *          or Query.
+     *                        or Query.
      * @return Zend_Gdata_Gapps_MemberFeed
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
@@ -431,7 +432,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
         if ($location === null) {
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'Location must not be null');
+                'Location must not be null');
         } else if ($location instanceof Zend_Gdata_Query) {
             $uri = $location->getQueryUrl();
         } else {
@@ -445,7 +446,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * objects.
      *
      * @param mixed $location (optional) The location for the feed, as a URL
-     *          or Query.
+     *                        or Query.
      * @return Zend_Gdata_Gapps_OwnerFeed
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
@@ -456,7 +457,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
         if ($location === null) {
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'Location must not be null');
+                'Location must not be null');
         } else if ($location instanceof Zend_Gdata_Query) {
             $uri = $location->getQueryUrl();
         } else {
@@ -470,7 +471,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * objects.
      *
      * @param mixed $location (optional) The location for the feed, as a URL
-     *          or Query.
+     *                        or Query.
      * @return Zend_Gdata_Gapps_EmailListFeed
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
@@ -503,7 +504,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
         if ($location === null) {
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'Location must not be null');
+                'Location must not be null');
         } else if ($location instanceof Zend_Gdata_Query) {
             $uri = $location->getQueryUrl();
         } else {
@@ -526,7 +527,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
         if ($location === null) {
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'Location must not be null');
+                'Location must not be null');
         } else if ($location instanceof Zend_Gdata_Query) {
             $uri = $location->getQueryUrl();
         } else {
@@ -549,7 +550,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
         if ($location === null) {
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'Location must not be null');
+                'Location must not be null');
         } else if ($location instanceof Zend_Gdata_Query) {
             $uri = $location->getQueryUrl();
         } else {
@@ -572,7 +573,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
         if ($location === null) {
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'Location must not be null');
+                'Location must not be null');
         } else if ($location instanceof Zend_Gdata_Query) {
             $uri = $location->getQueryUrl();
         } else {
@@ -595,7 +596,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
         if ($location === null) {
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'Location must not be null');
+                'Location must not be null');
         } else if ($location instanceof Zend_Gdata_Query) {
             $uri = $location->getQueryUrl();
         } else {
@@ -618,7 +619,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
         if ($location === null) {
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'Location must not be null');
+                'Location must not be null');
         } else if ($location instanceof Zend_Gdata_Query) {
             $uri = $location->getQueryUrl();
         } else {
@@ -641,7 +642,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
         if ($location === null) {
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'Location must not be null');
+                'Location must not be null');
         } else if ($location instanceof Zend_Gdata_Query) {
             $uri = $location->getQueryUrl();
         } else {
@@ -664,7 +665,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
         if ($location === null) {
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'Location must not be null');
+                'Location must not be null');
         } else if ($location instanceof Zend_Gdata_Query) {
             $uri = $location->getQueryUrl();
         } else {
@@ -677,11 +678,11 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * Create a new user from a UserEntry.
      *
      * @param Zend_Gdata_Gapps_UserEntry $user The user entry to insert.
-     * @param string $uri (optional) The URI where the user should be
-     *          uploaded to. If null, the default user creation URI for
-     *          this domain will be used.
+     * @param string                     $uri  (optional) The URI where the user should be
+     *                                         uploaded to. If null, the default user creation URI for
+     *                                         this domain will be used.
      * @return Zend_Gdata_Gapps_UserEntry The inserted user entry as
-     *          returned by the server.
+     *                                         returned by the server.
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
@@ -699,12 +700,12 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * Create a new nickname from a NicknameEntry.
      *
      * @param Zend_Gdata_Gapps_NicknameEntry $nickname The nickname entry to
-     *          insert.
-     * @param string $uri (optional) The URI where the nickname should be
-     *          uploaded to. If null, the default nickname creation URI for
-     *          this domain will be used.
+     *                                                 insert.
+     * @param string                         $uri      (optional) The URI where the nickname should be
+     *                                                 uploaded to. If null, the default nickname creation URI for
+     *                                                 this domain will be used.
      * @return Zend_Gdata_Gapps_NicknameEntry The inserted nickname entry as
-     *          returned by the server.
+     *                                                 returned by the server.
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
@@ -722,11 +723,11 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * Create a new group from a GroupEntry.
      *
      * @param Zend_Gdata_Gapps_GroupEntry $group The group entry to insert.
-     * @param string $uri (optional) The URI where the group should be
-     *          uploaded to. If null, the default user creation URI for
-     *          this domain will be used.
+     * @param string                      $uri   (optional) The URI where the group should be
+     *                                           uploaded to. If null, the default user creation URI for
+     *                                           this domain will be used.
      * @return Zend_Gdata_Gapps_GroupEntry The inserted group entry as
-     *          returned by the server.
+     *                                           returned by the server.
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
@@ -734,7 +735,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
     public function insertGroup($group, $uri = null)
     {
         if ($uri === null) {
-            $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
+            $uri = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
             $uri .= $this->getDomain();
         }
         $newEntry = $this->insertEntry($group, $uri, 'Zend_Gdata_Gapps_GroupEntry');
@@ -745,11 +746,11 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * Create a new member from a MemberEntry.
      *
      * @param Zend_Gdata_Gapps_MemberEntry $member The member entry to insert.
-     * @param string $uri (optional) The URI where the group should be
-     *          uploaded to. If null, the default user creation URI for
-     *          this domain will be used.
+     * @param string                       $uri    (optional) The URI where the group should be
+     *                                             uploaded to. If null, the default user creation URI for
+     *                                             this domain will be used.
      * @return Zend_Gdata_Gapps_MemberEntry The inserted member entry as
-     *          returned by the server.
+     *                                             returned by the server.
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
@@ -759,7 +760,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
         if ($uri === null) {
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'URI must not be null');
+                'URI must not be null');
         }
         $newEntry = $this->insertEntry($member, $uri, 'Zend_Gdata_Gapps_MemberEntry');
         return $newEntry;
@@ -769,11 +770,11 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * Create a new group from a OwnerEntry.
      *
      * @param Zend_Gdata_Gapps_OwnerEntry $owner The owner entry to insert.
-     * @param string $uri (optional) The URI where the owner should be
-     *          uploaded to. If null, the default user creation URI for
-     *          this domain will be used.
+     * @param string                      $uri   (optional) The URI where the owner should be
+     *                                           uploaded to. If null, the default user creation URI for
+     *                                           this domain will be used.
      * @return Zend_Gdata_Gapps_OwnerEntry The inserted owner entry as
-     *          returned by the server.
+     *                                           returned by the server.
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
@@ -783,7 +784,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
         if ($uri === null) {
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'URI must not be null');
+                'URI must not be null');
         }
         $newEntry = $this->insertEntry($owner, $uri, 'Zend_Gdata_Gapps_OwnerEntry');
         return $newEntry;
@@ -793,12 +794,12 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * Create a new email list from an EmailListEntry.
      *
      * @param Zend_Gdata_Gapps_EmailListEntry $emailList The email list entry
-     *          to insert.
-     * @param string $uri (optional) The URI where the email list should be
-     *          uploaded to. If null, the default email list creation URI for
-     *          this domain will be used.
+     *                                                   to insert.
+     * @param string                          $uri       (optional) The URI where the email list should be
+     *                                                   uploaded to. If null, the default email list creation URI for
+     *                                                   this domain will be used.
      * @return Zend_Gdata_Gapps_EmailListEntry The inserted email list entry
-     *          as returned by the server.
+     *                                                   as returned by the server.
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
@@ -816,12 +817,12 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * Create a new email list recipient from an EmailListRecipientEntry.
      *
      * @param Zend_Gdata_Gapps_EmailListRecipientEntry $recipient The recipient
-     *          entry to insert.
-     * @param string $uri (optional) The URI where the recipient should be
-     *          uploaded to. If null, the default recipient creation URI for
-     *          this domain will be used.
+     *                                                            entry to insert.
+     * @param string                                   $uri       (optional) The URI where the recipient should be
+     *                                                            uploaded to. If null, the default recipient creation URI for
+     *                                                            this domain will be used.
      * @return Zend_Gdata_Gapps_EmailListRecipientEntry The inserted
-     *          recipient entry as returned by the server.
+     *                                                            recipient entry as returned by the server.
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
@@ -831,7 +832,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
         if ($uri === null) {
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'URI must not be null');
+                'URI must not be null');
         } elseif ($uri instanceof Zend_Gdata_Gapps_EmailListEntry) {
             $uri = $uri->getLink('edit')->href;
         }
@@ -848,38 +849,39 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * do not need to have their domain manually set when created with
      * a magic factory method.
      *
-     * @see Zend_Gdata_App::__call()
      * @param string $method The method name being called
-     * @param array $args The arguments passed to the call
+     * @param array  $args   The arguments passed to the call
      * @throws Zend_Gdata_App_Exception
+     * @see Zend_Gdata_App::__call()
      */
-    public function __call($method, $args) {
+    public function __call($method, $args)
+    {
         if (preg_match('/^new(\w+Query)/', $method, $matches)) {
             $class = $matches[1];
             $foundClassName = null;
             foreach ($this->_registeredPackages as $name) {
-                 try {
-                     // Autoloading disabled on next line for compatibility
-                     // with magic factories. See ZF-6660.
-                     if (!class_exists($name . '_' . $class, false)) {
+                try {
+                    // Autoloading disabled on next line for compatibility
+                    // with magic factories. See ZF-6660.
+                    if (!class_exists($name . '_' . $class, false)) {
                         require_once 'Zend/Loader.php';
                         @Zend_Loader::loadClass($name . '_' . $class);
-                     }
-                     $foundClassName = $name . '_' . $class;
-                     break;
-                 } catch (Zend_Exception $e) {
-                     // package wasn't here- continue searching
-                 }
+                    }
+                    $foundClassName = $name . '_' . $class;
+                    break;
+                } catch (Zend_Exception $e) {
+                    // package wasn't here- continue searching
+                }
             }
             if ($foundClassName != null) {
                 $reflectionObj = new ReflectionClass($foundClassName);
                 // Prepend the domain to the query
-                $args = array_merge(array($this->getDomain()), $args);
+                $args = array_merge([$this->getDomain()], $args);
                 return $reflectionObj->newInstanceArgs($args);
             } else {
                 require_once 'Zend/Gdata/App/Exception.php';
                 throw new Zend_Gdata_App_Exception(
-                        "Unable to find '${class}' in registered packages");
+                    "Unable to find '${class}' in registered packages");
             }
         } else {
             return parent::__call($method, $args);
@@ -893,21 +895,22 @@ class Zend_Gdata_Gapps extends Zend_Gdata
     /**
      * Create a new user entry and send it to the Google Apps servers.
      *
-     * @param string $username The username for the new user.
-     * @param string $givenName The given name for the new user.
-     * @param string $familyName The family name for the new user.
-     * @param string $password The password for the new user as a plaintext string
-     *                 (if $passwordHashFunction is null) or a SHA-1 hashed
-     *                 value (if $passwordHashFunction = 'SHA-1').
+     * @param string $username       The username for the new user.
+     * @param string $givenName      The given name for the new user.
+     * @param string $familyName     The family name for the new user.
+     * @param string $password       The password for the new user as a plaintext string
+     *                               (if $passwordHashFunction is null) or a SHA-1 hashed
+     *                               value (if $passwordHashFunction = 'SHA-1').
      * @param string $quotaLimitInMB (optional) The quota limit for the new user in MB.
      * @return Zend_Gdata_Gapps_UserEntry (optional) The new user entry as returned by
-     *                 server.
+     *                               server.
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
      */
-    public function createUser ($username, $givenName, $familyName, $password,
-            $passwordHashFunction = null, $quotaLimitInMB = null) {
+    public function createUser($username, $givenName, $familyName, $password,
+                               $passwordHashFunction = null, $quotaLimitInMB = null)
+    {
         $user = $this->newUserEntry();
         $user->login = $this->newLogin();
         $user->login->username = $username;
@@ -928,11 +931,12 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      *
      * @param string $username The username to search for.
      * @return Zend_Gdata_Gapps_UserEntry The username to search for, or null
-     *              if no match found.
+     *                         if no match found.
      * @throws Zend_Gdata_App_InvalidArgumentException
      * @throws Zend_Gdata_App_HttpException
      */
-    public function retrieveUser ($username) {
+    public function retrieveUser($username)
+    {
         $query = $this->newUserQuery($username);
         try {
             $user = $this->getUserEntry($query);
@@ -952,15 +956,16 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * provided username.
      *
      * @param string $startUsername (optional) The first username to retrieve.
-     *          If null or not declared, the page will begin with the first
-     *          user in the domain.
+     *                              If null or not declared, the page will begin with the first
+     *                              user in the domain.
      * @return Zend_Gdata_Gapps_UserFeed Collection of Zend_Gdata_UserEntry
-     *              objects representing all users in the domain.
+     *                              objects representing all users in the domain.
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
      */
-    public function retrievePageOfUsers ($startUsername = null) {
+    public function retrievePageOfUsers($startUsername = null)
+    {
         $query = $this->newUserQuery();
         $query->setStartUsername($startUsername);
         return $this->getUserFeed($query);
@@ -978,7 +983,8 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
      */
-    public function retrieveAllUsers () {
+    public function retrieveAllUsers()
+    {
         return $this->retrieveAllEntriesForFeed($this->retrievePageOfUsers());
     }
 
@@ -990,17 +996,18 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * Provisioning API specification. Normally users will instead want to
      * call UserEntry::save() instead.
      *
-     * @see Zend_Gdata_App_Entry::save
-     * @param string $username The username whose data will be overwritten.
+     * @param string                     $username  The username whose data will be overwritten.
      * @param Zend_Gdata_Gapps_UserEntry $userEntry The user entry which
-     *          will be overwritten.
+     *                                              will be overwritten.
      * @return Zend_Gdata_Gapps_UserEntry The UserEntry returned by the
-     *          server.
+     *                                              server.
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
+     * @see Zend_Gdata_App_Entry::save
      */
-    public function updateUser($username, $userEntry) {
+    public function updateUser($username, $userEntry)
+    {
         return $this->updateEntry($userEntry, $this->getBaseUrl() .
             self::APPS_USER_PATH . '/' . $username);
     }
@@ -1009,14 +1016,15 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * Mark a given user as suspended.
      *
      * @param string $username The username associated with the user who
-     *          should be suspended.
+     *                         should be suspended.
      * @return Zend_Gdata_Gapps_UserEntry The UserEntry for the modified
-     *          user.
+     *                         user.
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
      */
-    public function suspendUser($username) {
+    public function suspendUser($username)
+    {
         $user = $this->retrieveUser($username);
         $user->login->suspended = true;
         return $user->save();
@@ -1026,14 +1034,15 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * Mark a given user as not suspended.
      *
      * @param string $username The username associated with the user who
-     *          should be restored.
+     *                         should be restored.
      * @return Zend_Gdata_Gapps_UserEntry The UserEntry for the modified
-     *          user.
+     *                         user.
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
      */
-    public function restoreUser($username) {
+    public function restoreUser($username)
+    {
         $user = $this->retrieveUser($username);
         $user->login->suspended = false;
         return $user->save();
@@ -1043,12 +1052,13 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * Delete a user by username.
      *
      * @param string $username The username associated with the user who
-     *          should be deleted.
+     *                         should be deleted.
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
      */
-    public function deleteUser($username) {
+    public function deleteUser($username)
+    {
         $this->delete($this->getBaseUrl() . self::APPS_USER_PATH . '/' .
             $username);
     }
@@ -1057,15 +1067,16 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * Create a nickname for a given user.
      *
      * @param string $username The username to which the new nickname should
-     *          be associated.
+     *                         be associated.
      * @param string $nickname The new nickname to be created.
      * @return Zend_Gdata_Gapps_NicknameEntry The nickname entry which was
-     *          created by the server.
+     *                         created by the server.
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
      */
-    public function createNickname($username, $nickname) {
+    public function createNickname($username, $nickname)
+    {
         $entry = $this->newNicknameEntry();
         $nickname = $this->newNickname($nickname);
         $login = $this->newLogin($username);
@@ -1083,7 +1094,8 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
      */
-    public function retrieveNickname($nickname) {
+    public function retrieveNickname($nickname)
+    {
         $query = $this->newNicknameQuery();
         $query->setNickname($nickname);
         try {
@@ -1103,14 +1115,15 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * Retrieve all nicknames associated with a specific username.
      *
      * @param string $username The username whose nicknames should be
-     *          returned.
+     *                         returned.
      * @return Zend_Gdata_Gapps_NicknameFeed A feed containing all nicknames
-     *          for the given user, or null if
+     *                         for the given user, or null if
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
      */
-    public function retrieveNicknames($username) {
+    public function retrieveNicknames($username)
+    {
         $query = $this->newNicknameQuery();
         $query->setUsername($username);
         $nicknameFeed = $this->retrieveAllEntriesForFeed(
@@ -1123,15 +1136,16 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * provided nickname.
      *
      * @param string $startNickname (optional) The first nickname to
-     *          retrieve. If null or not declared, the page will begin with
-     *          the first nickname in the domain.
+     *                              retrieve. If null or not declared, the page will begin with
+     *                              the first nickname in the domain.
      * @return Zend_Gdata_Gapps_NicknameFeed Collection of Zend_Gdata_NicknameEntry
-     *              objects representing all nicknames in the domain.
+     *                              objects representing all nicknames in the domain.
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
      */
-    public function retrievePageOfNicknames ($startNickname = null) {
+    public function retrievePageOfNicknames($startNickname = null)
+    {
         $query = $this->newNicknameQuery();
         $query->setStartNickname($startNickname);
         return $this->getNicknameFeed($query);
@@ -1149,7 +1163,8 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
      */
-    public function retrieveAllNicknames () {
+    public function retrieveAllNicknames()
+    {
         return $this->retrieveAllEntriesForFeed($this->retrievePageOfNicknames());
     }
 
@@ -1161,16 +1176,17 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
      */
-    public function deleteNickname($nickname) {
+    public function deleteNickname($nickname)
+    {
         $this->delete($this->getBaseUrl() . self::APPS_NICKNAME_PATH . '/' . $nickname);
     }
 
     /**
      * Create a new group.
      *
-     * @param string $groupId A unique identifier for the group
-     * @param string $groupName The name of the group
-     * @param string $description A description of the group
+     * @param string $groupId         A unique identifier for the group
+     * @param string $groupName       The name of the group
+     * @param string $description     A description of the group
      * @param string $emailPermission The subscription permission of the group
      * @return Zend_Gdata_Gapps_GroupEntry The group entry as created on the server.
      */
@@ -1188,14 +1204,14 @@ class Zend_Gdata_Gapps extends Zend_Gdata
         $properties[$i]->value = $groupName;
         $i++;
 
-        if($description != null) {
+        if ($description != null) {
             $properties[$i] = $this->newProperty();
             $properties[$i]->name = 'description';
             $properties[$i]->value = $description;
             $i++;
         }
 
-        if($emailPermission != null) {
+        if ($emailPermission != null) {
             $properties[$i] = $this->newProperty();
             $properties[$i]->name = 'emailPermission';
             $properties[$i]->value = $emailPermission;
@@ -1252,7 +1268,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      */
     public function deleteGroup($groupId)
     {
-        $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
+        $uri = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
         $uri .= $this->getDomain() . '/' . $groupId;
 
         $this->delete($uri);
@@ -1262,12 +1278,12 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * Check to see if a member id or group id is a member of group
      *
      * @param string $memberId Member id or group group id
-     * @param string $groupId Group to be checked for
+     * @param string $groupId  Group to be checked for
      * @return bool True, if given entity is a member
      */
     public function isMember($memberId, $groupId)
     {
-        $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
+        $uri = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
         $uri .= $this->getDomain() . '/' . $groupId . '/member/' . $memberId;
 
         //if the enitiy is not a member, an exception is thrown
@@ -1277,10 +1293,10 @@ class Zend_Gdata_Gapps extends Zend_Gdata
             $results = false;
         }
 
-        if($results) {
-            return TRUE;
+        if ($results) {
+            return true;
         } else {
-            return FALSE;
+            return false;
         }
     }
 
@@ -1288,7 +1304,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * Add an email address to a group as a member
      *
      * @param string $recipientAddress Email address, member id, or group id
-     * @param string $groupId The unique id of the group
+     * @param string $groupId          The unique id of the group
      * @return Zend_Gdata_Gapps_MemberEntry The member entry returned by the server
      */
     public function addMemberToGroup($recipientAddress, $groupId)
@@ -1301,7 +1317,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
 
         $member->property = $properties;
 
-        $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
+        $uri = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
         $uri .= $this->getDomain() . '/' . $groupId . '/member';
 
         return $this->insertMember($member, $uri);
@@ -1311,11 +1327,11 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * Remove a member id from a group
      *
      * @param string $memberId Member id or group id
-     * @param string $groupId The unique id of the group
+     * @param string $groupId  The unique id of the group
      */
     public function removeMemberFromGroup($memberId, $groupId)
     {
-        $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
+        $uri = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
         $uri .= $this->getDomain() . '/' . $groupId . '/member/' . $memberId;
 
         return $this->delete($uri);
@@ -1326,18 +1342,18 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      *
      * @param string $groupId The unique id of the group
      * @return Zend_Gdata_Gapps_MemberFeed Collection of MemberEntry objects
-     *              representing all members apart of the group.
+     *                        representing all members apart of the group.
      */
     public function retrieveAllMembers($groupId)
     {
         return $this->retrieveAllEntriesForFeed(
-                $this->retrievePageOfMembers($groupId));
+            $this->retrievePageOfMembers($groupId));
     }
 
     /**
      * Add an email as an owner of a group
      *
-     * @param string $email Owner's email
+     * @param string $email   Owner's email
      * @param string $groupId Group ownership to be checked for
      * @return Zend_Gdata_Gapps_OwnerEntry The OwnerEntry returned by the server
      */
@@ -1351,7 +1367,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
 
         $owner->property = $properties;
 
-        $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
+        $uri = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
         $uri .= $this->getDomain() . '/' . $groupId . '/owner';
 
         return $this->insertOwner($owner, $uri);
@@ -1362,11 +1378,11 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      *
      * @param string $groupId The unique identifier for the group
      * @return Zend_Gdata_Gapps_OwnerFeed Collection of Zend_Gdata_OwnerEntry
-     *              objects representing all owners apart of the group.
+     *                        objects representing all owners apart of the group.
      */
     public function retrieveGroupOwners($groupId)
     {
-        $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
+        $uri = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
         $uri .= $this->getDomain() . '/' . $groupId . '/owner';
 
         return $this->getOwnerFeed($uri);
@@ -1375,13 +1391,13 @@ class Zend_Gdata_Gapps extends Zend_Gdata
     /**
      * Checks to see if an email is an owner of a group
      *
-     * @param string $email Owner's email
+     * @param string $email   Owner's email
      * @param string $groupId Group ownership to be checked for
      * @return bool True, if given entity is an owner
      */
     public function isOwner($email, $groupId)
     {
-        $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
+        $uri = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
         $uri .= $this->getDomain() . '/' . $groupId . '/owner/' . $email;
 
         //if the enitiy is not an owner of the group, an exception is thrown
@@ -1391,22 +1407,22 @@ class Zend_Gdata_Gapps extends Zend_Gdata
             $results = false;
         }
 
-        if($results) {
-            return TRUE;
+        if ($results) {
+            return true;
         } else {
-            return FALSE;
+            return false;
         }
     }
 
     /**
      * Remove email as an owner of a group
      *
-     * @param string $email Owner's email
+     * @param string $email   Owner's email
      * @param string $groupId The unique identifier for the group
      */
     public function removeOwnerFromGroup($email, $groupId)
     {
-        $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
+        $uri = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
         $uri .= $this->getDomain() . '/' . $groupId . '/owner/' . $email;
 
         return $this->delete($uri);
@@ -1416,14 +1432,14 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * Update group properties with new values. any property not defined will not
      * be updated
      *
-     * @param string $groupId A unique identifier for the group
-     * @param string $groupName The name of the group
-     * @param string $description A description of the group
+     * @param string $groupId         A unique identifier for the group
+     * @param string $groupName       The name of the group
+     * @param string $description     A description of the group
      * @param string $emailPermission The subscription permission of the group
      * @return Zend_Gdata_Gapps_GroupEntry The group entry as updated on the server.
      */
     public function updateGroup($groupId, $groupName = null, $description = null,
-            $emailPermission = null)
+                                $emailPermission = null)
     {
         $i = 0;
         $group = $this->newGroupEntry();
@@ -1433,21 +1449,21 @@ class Zend_Gdata_Gapps extends Zend_Gdata
         $properties[$i]->value = $groupId;
         $i++;
 
-        if($groupName != null) {
+        if ($groupName != null) {
             $properties[$i] = $this->newProperty();
             $properties[$i]->name = 'groupName';
             $properties[$i]->value = $groupName;
             $i++;
         }
 
-        if($description != null) {
+        if ($description != null) {
             $properties[$i] = $this->newProperty();
             $properties[$i]->name = 'description';
             $properties[$i]->value = $description;
             $i++;
         }
 
-        if($emailPermission != null) {
+        if ($emailPermission != null) {
             $properties[$i] = $this->newProperty();
             $properties[$i]->name = 'emailPermission';
             $properties[$i]->value = $emailPermission;
@@ -1456,7 +1472,7 @@ class Zend_Gdata_Gapps extends Zend_Gdata
 
         $group->property = $properties;
 
-        $uri  = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
+        $uri = self::APPS_BASE_FEED_URI . self::APPS_GROUP_PATH . '/';
         $uri .= $this->getDomain() . '/' . $groupId;
 
         return $this->updateEntry($group, $uri, 'Zend_Gdata_Gapps_GroupEntry');
@@ -1465,17 +1481,17 @@ class Zend_Gdata_Gapps extends Zend_Gdata
     /**
      * Retrieve all of the groups that a user is a member of
      *
-     * @param string $memberId Member username
-     * @param bool $directOnly (Optional) If true, members with direct association
-     *             only will be considered
+     * @param string $memberId   Member username
+     * @param bool   $directOnly (Optional) If true, members with direct association
+     *                           only will be considered
      * @return Zend_Gdata_Gapps_GroupFeed Collection of Zend_Gdata_GroupEntry
-     *              objects representing all groups member is apart of in the domain.
+     *                           objects representing all groups member is apart of in the domain.
      */
     public function retrieveGroups($memberId, $directOnly = null)
     {
         $query = $this->newGroupQuery();
         $query->setMember($memberId);
-        if($directOnly != null) {
+        if ($directOnly != null) {
             $query->setDirectOnly($directOnly);
         }
         return $this->getGroupFeed($query);
@@ -1486,15 +1502,15 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * provided group.
      *
      * @param string $startGroup (optional) The first group to
-     *              retrieve. If null or not defined, the page will begin
-     *              with the first group in the domain.
+     *                           retrieve. If null or not defined, the page will begin
+     *                           with the first group in the domain.
      * @return Zend_Gdata_Gapps_GroupFeed Collection of Zend_Gdata_GroupEntry
-     *              objects representing the groups in the domain.
+     *                           objects representing the groups in the domain.
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
      */
-    public function retrievePageOfGroups ($startGroup = null)
+    public function retrievePageOfGroups($startGroup = null)
     {
         $query = $this->newGroupQuery();
         $query->setStartGroupId($startGroup);
@@ -1504,11 +1520,11 @@ class Zend_Gdata_Gapps extends Zend_Gdata
     /**
      * Gets page of Members
      *
-     * @param string $groupId The group id which should be searched.
+     * @param string $groupId     The group id which should be searched.
      * @param string $startMember (optinal) The address of the first member,
-     *              or null to start with the first member in the list.
+     *                            or null to start with the first member in the list.
      * @return Zend_Gdata_Gapps_MemberFeed Collection of Zend_Gdata_MemberEntry
-     *              objects
+     *                            objects
      */
     public function retrievePageOfMembers($groupId, $startMember = null)
     {
@@ -1522,12 +1538,13 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      *
      * @param string $emailList The name of the email list to be created.
      * @return Zend_Gdata_Gapps_EmailListEntry The email list entry
-     *          as created on the server.
+     *                          as created on the server.
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
      */
-    public function createEmailList($emailList) {
+    public function createEmailList($emailList)
+    {
         $entry = $this->newEmailListEntry();
         $list = $this->newEmailList();
         $list->name = $emailList;
@@ -1539,14 +1556,15 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * Retrieve all email lists associated with a recipient.
      *
      * @param string $username The recipient whose associated email lists
-     *          should be returned.
+     *                         should be returned.
      * @return Zend_Gdata_Gapps_EmailListFeed The list of email lists found as
-     *          Zend_Gdata_EmailListEntry objects.
+     *                         Zend_Gdata_EmailListEntry objects.
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
      */
-    public function retrieveEmailLists($recipient) {
+    public function retrieveEmailLists($recipient)
+    {
         $query = $this->newEmailListQuery();
         $query->recipient = $recipient;
         return $this->getEmailListFeed($query);
@@ -1557,15 +1575,16 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * provided email list.
      *
      * @param string $startEmailListName (optional) The first list to
-     *              retrieve. If null or not defined, the page will begin
-     *              with the first email list in the domain.
+     *                                   retrieve. If null or not defined, the page will begin
+     *                                   with the first email list in the domain.
      * @return Zend_Gdata_Gapps_EmailListFeed Collection of Zend_Gdata_EmailListEntry
-     *              objects representing all nicknames in the domain.
+     *                                   objects representing all nicknames in the domain.
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
      */
-    public function retrievePageOfEmailLists ($startNickname = null) {
+    public function retrievePageOfEmailLists($startNickname = null)
+    {
         $query = $this->newEmailListQuery();
         $query->setStartEmailListName($startNickname);
         return $this->getEmailListFeed($query);
@@ -1583,7 +1602,8 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
      */
-    public function retrieveAllEmailLists() {
+    public function retrieveAllEmailLists()
+    {
         return $this->retrieveAllEntriesForFeed($this->retrievePageOfEmailLists());
     }
 
@@ -1595,7 +1615,8 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
      */
-    public function deleteEmailList($emailList) {
+    public function deleteEmailList($emailList)
+    {
         $this->delete($this->getBaseUrl() . self::APPS_EMAIL_LIST_PATH . '/'
             . $emailList);
     }
@@ -1604,21 +1625,22 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * Add a specified recipient to an existing emailList.
      *
      * @param string $recipientAddress The address of the recipient to be
-     *              added to the email list.
-     * @param string $emailList The name of the email address to which the
-     *              recipient should be added.
+     *                                 added to the email list.
+     * @param string $emailList        The name of the email address to which the
+     *                                 recipient should be added.
      * @return Zend_Gdata_Gapps_EmailListRecipientEntry The recipient entry
-     *              created by the server.
+     *                                 created by the server.
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
      */
-    public function addRecipientToEmailList($recipientAddress, $emailList) {
+    public function addRecipientToEmailList($recipientAddress, $emailList)
+    {
         $entry = $this->newEmailListRecipientEntry();
         $who = $this->newWho();
         $who->email = $recipientAddress;
         $entry->who = $who;
-        $address = $this->getBaseUrl() .  self::APPS_EMAIL_LIST_PATH . '/' .
+        $address = $this->getBaseUrl() . self::APPS_EMAIL_LIST_PATH . '/' .
             $emailList . self::APPS_EMAIL_LIST_RECIPIENT_POSTFIX . '/';
         return $this->insertEmailListRecipient($entry, $address);
     }
@@ -1627,19 +1649,20 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * Retrieve a page of email list recipients in alphabetical order,
      * starting with the provided email list recipient.
      *
-     * @param string $emaiList The email list which should be searched.
+     * @param string $emaiList       The email list which should be searched.
      * @param string $startRecipient (optinal) The address of the first
-     *              recipient, or null to start with the first recipient in
-     *              the list.
+     *                               recipient, or null to start with the first recipient in
+     *                               the list.
      * @return Zend_Gdata_Gapps_EmailListRecipientFeed Collection of
-     *              Zend_Gdata_EmailListRecipientEntry objects representing all
-     *              recpients in the specified list.
+     *                               Zend_Gdata_EmailListRecipientEntry objects representing all
+     *                               recpients in the specified list.
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
      */
-    public function retrievePageOfRecipients ($emailList,
-            $startRecipient = null) {
+    public function retrievePageOfRecipients($emailList,
+                                             $startRecipient = null)
+    {
         $query = $this->newEmailListRecipientQuery();
         $query->setEmailListName($emailList);
         $query->setStartRecipient($startRecipient);
@@ -1654,27 +1677,29 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      *
      * @param string $emaiList The email list which should be searched.
      * @return Zend_Gdata_Gapps_EmailListRecipientFeed The list of email lists
-     *              found as Zend_Gdata_Gapps_EmailListRecipientEntry objects.
+     *                         found as Zend_Gdata_Gapps_EmailListRecipientEntry objects.
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
      */
-    public function retrieveAllRecipients($emailList) {
+    public function retrieveAllRecipients($emailList)
+    {
         return $this->retrieveAllEntriesForFeed(
-                $this->retrievePageOfRecipients($emailList));
+            $this->retrievePageOfRecipients($emailList));
     }
 
     /**
      * Remove a specified recipient from an email list.
      *
      * @param string $recipientAddress The recipient to be removed.
-     * @param string $emailList The list from which the recipient should
-     *              be removed.
+     * @param string $emailList        The list from which the recipient should
+     *                                 be removed.
      * @throws Zend_Gdata_App_Exception
      * @throws Zend_Gdata_App_HttpException
      * @throws Zend_Gdata_Gapps_ServiceException
      */
-    public function removeRecipientFromEmailList($recipientAddress, $emailList) {
+    public function removeRecipientFromEmailList($recipientAddress, $emailList)
+    {
         $this->delete($this->getBaseUrl() . self::APPS_EMAIL_LIST_PATH . '/'
             . $emailList . self::APPS_EMAIL_LIST_RECIPIENT_POSTFIX . '/'
             . $recipientAddress);

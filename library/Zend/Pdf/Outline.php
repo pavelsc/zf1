@@ -24,7 +24,7 @@
 /**
  * Abstract PDF outline representation class
  *
- * @todo Implement an ability to associate an outline item with a structure element (PDF 1.3 feature)
+ * @todo       Implement an ability to associate an outline item with a structure element (PDF 1.3 feature)
  *
  * @package    Zend_Pdf
  * @subpackage Outlines
@@ -45,7 +45,7 @@ abstract class Zend_Pdf_Outline implements RecursiveIterator, Countable
      *
      * @var array
      */
-    public $childOutlines = array();
+    public $childOutlines = [];
 
 
     /**
@@ -155,12 +155,12 @@ abstract class Zend_Pdf_Outline implements RecursiveIterator, Countable
      */
     public function getOptions()
     {
-        return array('title'  => $this->_title,
-                     'open'   => $this->_open,
-                     'color'  => $this->_color,
-                     'italic' => $this->_italic,
-                     'bold'   => $this->_bold,
-                     'target' => $this->_target);
+        return ['title' => $this->_title,
+            'open' => $this->_open,
+            'color' => $this->_color,
+            'italic' => $this->_italic,
+            'bold' => $this->_bold,
+            'target' => $this->_target];
     }
 
     /**
@@ -231,15 +231,15 @@ abstract class Zend_Pdf_Outline implements RecursiveIterator, Countable
     {
         require_once 'Zend/Pdf/Outline/Created.php';
         if (is_string($param1)) {
-            if ($param2 !== null  &&  !($param2 instanceof Zend_Pdf_Target  ||  is_string($param2))) {
+            if ($param2 !== null && !($param2 instanceof Zend_Pdf_Target || is_string($param2))) {
                 require_once 'Zend/Pdf/Exception.php';
                 throw new Zend_Pdf_Exception('Outline create method takes $title (string) and $target (Zend_Pdf_Target or string) or an array as an input');
             }
 
-            return new Zend_Pdf_Outline_Created(array('title'  => $param1,
-                                                      'target' => $param2));
+            return new Zend_Pdf_Outline_Created(['title' => $param1,
+                'target' => $param2]);
         } else {
-            if (!is_array($param1)  ||  $param2 !== null) {
+            if (!is_array($param1) || $param2 !== null) {
                 require_once 'Zend/Pdf/Exception.php';
                 throw new Zend_Pdf_Exception('Outline create method takes $title (string) and $destination (Zend_Pdf_Destination) or an array as an input');
             }
@@ -251,8 +251,8 @@ abstract class Zend_Pdf_Outline implements RecursiveIterator, Countable
     /**
      * Returns number of the total number of open items at all levels of the outline.
      *
-     * @internal
      * @return integer
+     * @internal
      */
     public function openOutlinesCount()
     {
@@ -272,18 +272,18 @@ abstract class Zend_Pdf_Outline implements RecursiveIterator, Countable
      *
      * Returns dictionary indirect object or reference
      *
-     * @param Zend_Pdf_ElementFactory    $factory object factory for newly created indirect objects
-     * @param boolean $updateNavigation  Update navigation flag
-     * @param Zend_Pdf_Element $parent   Parent outline dictionary reference
-     * @param Zend_Pdf_Element $prev     Previous outline dictionary reference
-     * @param SplObjectStorage $processedOutlines  List of already processed outlines
+     * @param Zend_Pdf_ElementFactory $factory           object factory for newly created indirect objects
+     * @param boolean                 $updateNavigation  Update navigation flag
+     * @param Zend_Pdf_Element        $parent            Parent outline dictionary reference
+     * @param Zend_Pdf_Element        $prev              Previous outline dictionary reference
+     * @param SplObjectStorage        $processedOutlines List of already processed outlines
      * @return Zend_Pdf_Element
      */
     abstract public function dumpOutline(Zend_Pdf_ElementFactory_Interface $factory,
                                                                            $updateNavigation,
-                                                          Zend_Pdf_Element $parent,
-                                                          Zend_Pdf_Element $prev = null,
-                                                          SplObjectStorage $processedOutlines = null);
+                                         Zend_Pdf_Element                  $parent,
+                                         Zend_Pdf_Element                  $prev = null,
+                                         SplObjectStorage                  $processedOutlines = null);
 
 
     ////////////////////////////////////////////////////////////////////////

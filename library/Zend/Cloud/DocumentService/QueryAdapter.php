@@ -59,8 +59,8 @@ interface Zend_Cloud_DocumentService_QueryAdapter
      * WHERE clause (conditions to be used)
      *
      * @param string $where
-     * @param mixed $value Value or array of values to be inserted instead of ?
-     * @param string $op Operation to use to join where clauses (AND/OR)
+     * @param mixed  $value Value or array of values to be inserted instead of ?
+     * @param string $op    Operation to use to join where clauses (AND/OR)
      * @return Zend_Cloud_DocumentService_QueryAdapter
      */
     public function where($where, $value = null, $op = 'and');
@@ -87,7 +87,7 @@ interface Zend_Cloud_DocumentService_QueryAdapter
     /**
      * ORDER BY clause (sorting)
      *
-     * @param string $sort Column to sort by
+     * @param string $sort      Column to sort by
      * @param string $direction Direction - asc/desc
      * @return Zend_Cloud_DocumentService_QueryAdapter
      */

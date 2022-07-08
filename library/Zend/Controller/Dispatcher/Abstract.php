@@ -61,7 +61,7 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      * controllers
      * @var array
      */
-    protected $_invokeParams = array();
+    protected $_invokeParams = [];
 
     /**
      * Path delimiter character
@@ -79,14 +79,14 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      * Word delimiter characters
      * @var array
      */
-    protected $_wordDelimiter = array('-', '.');
+    protected $_wordDelimiter = ['-', '.'];
 
     /**
      * Constructor
      *
      * @return void
      */
-    public function __construct(array $params = array())
+    public function __construct(array $params = [])
     {
         $this->setParams($params);
     }
@@ -133,7 +133,7 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
     public function _verifyDelimiter($spec)
     {
         if (is_string($spec)) {
-            return (array) $spec;
+            return (array)$spec;
         } elseif (is_array($spec)) {
             $allStrings = true;
             foreach ($spec as $delim) {
@@ -223,7 +223,7 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      * the following word Title cased. All non-alphanumeric characters are
      * removed.
      *
-     * @param string $unformatted
+     * @param string  $unformatted
      * @param boolean $isAction Defaults to false
      * @return string
      */
@@ -233,12 +233,12 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
         if (!$isAction) {
             $segments = explode($this->getPathDelimiter(), $unformatted);
         } else {
-            $segments = (array) $unformatted;
+            $segments = (array)$unformatted;
         }
 
         foreach ($segments as $key => $segment) {
-            $segment        = str_replace($this->getWordDelimiter(), ' ', strtolower($segment));
-            $segment        = preg_replace('/[^a-z0-9 ]/', '', $segment);
+            $segment = str_replace($this->getWordDelimiter(), ' ', strtolower($segment));
+            $segment = preg_replace('/[^a-z0-9 ]/', '', $segment);
             $segments[$key] = str_replace(' ', '', ucwords($segment));
         }
 
@@ -276,12 +276,12 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      * Add or modify a parameter to use when instantiating an action controller
      *
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
      * @return Zend_Controller_Dispatcher_Abstract
      */
     public function setParam($name, $value)
     {
-        $name = (string) $name;
+        $name = (string)$name;
         $this->_invokeParams[$name] = $value;
         return $this;
     }
@@ -306,7 +306,7 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      */
     public function getParam($name)
     {
-        if(isset($this->_invokeParams[$name])) {
+        if (isset($this->_invokeParams[$name])) {
             return $this->_invokeParams[$name];
         }
 
@@ -336,7 +336,7 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
     public function clearParams($name = null)
     {
         if (null === $name) {
-            $this->_invokeParams = array();
+            $this->_invokeParams = [];
         } elseif (is_string($name) && isset($this->_invokeParams[$name])) {
             unset($this->_invokeParams[$name]);
         } elseif (is_array($name)) {
@@ -380,7 +380,7 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      */
     public function setDefaultControllerName($controller)
     {
-        $this->_defaultController = (string) $controller;
+        $this->_defaultController = (string)$controller;
         return $this;
     }
 
@@ -402,7 +402,7 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      */
     public function setDefaultAction($action)
     {
-        $this->_defaultAction = (string) $action;
+        $this->_defaultAction = (string)$action;
         return $this;
     }
 
@@ -424,7 +424,7 @@ abstract class Zend_Controller_Dispatcher_Abstract implements Zend_Controller_Di
      */
     public function setDefaultModule($module)
     {
-        $this->_defaultModule = (string) $module;
+        $this->_defaultModule = (string)$module;
         return $this;
     }
 

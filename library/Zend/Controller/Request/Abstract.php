@@ -73,7 +73,7 @@ abstract class Zend_Controller_Request_Abstract
      * Request parameters
      * @var array
      */
-    protected $_params = array();
+    protected $_params = [];
 
     /**
      * Retrieve the module name
@@ -177,7 +177,7 @@ abstract class Zend_Controller_Request_Abstract
      */
     public function setModuleKey($key)
     {
-        $this->_moduleKey = (string) $key;
+        $this->_moduleKey = (string)$key;
         return $this;
     }
 
@@ -199,7 +199,7 @@ abstract class Zend_Controller_Request_Abstract
      */
     public function setControllerKey($key)
     {
-        $this->_controllerKey = (string) $key;
+        $this->_controllerKey = (string)$key;
         return $this;
     }
 
@@ -221,7 +221,7 @@ abstract class Zend_Controller_Request_Abstract
      */
     public function setActionKey($key)
     {
-        $this->_actionKey = (string) $key;
+        $this->_actionKey = (string)$key;
         return $this;
     }
 
@@ -229,12 +229,12 @@ abstract class Zend_Controller_Request_Abstract
      * Get an action parameter
      *
      * @param string $key
-     * @param mixed $default Default value to use if key not found
+     * @param mixed  $default Default value to use if key not found
      * @return mixed
      */
     public function getParam($key, $default = null)
     {
-        $key = (string) $key;
+        $key = (string)$key;
         if (isset($this->_params[$key])) {
             return $this->_params[$key];
         }
@@ -274,12 +274,12 @@ abstract class Zend_Controller_Request_Abstract
      * A $value of null will unset the $key if it exists
      *
      * @param string $key
-     * @param mixed $value
+     * @param mixed  $value
      * @return Zend_Controller_Request_Abstract
      */
     public function setParam($key, $value)
     {
-        $key = (string) $key;
+        $key = (string)$key;
 
         if ((null === $value) && isset($this->_params[$key])) {
             unset($this->_params[$key]);
@@ -295,10 +295,10 @@ abstract class Zend_Controller_Request_Abstract
      *
      * @return array
      */
-     public function getParams()
-     {
-         return $this->_params;
-     }
+    public function getParams()
+    {
+        return $this->_params;
+    }
 
     /**
      * Set action parameters en masse; does not overwrite
@@ -310,7 +310,7 @@ abstract class Zend_Controller_Request_Abstract
      */
     public function setParams(array $array)
     {
-        $this->_params = $this->_params + (array) $array;
+        $this->_params = $this->_params + (array)$array;
 
         foreach ($array as $key => $value) {
             if (null === $value) {
@@ -328,7 +328,7 @@ abstract class Zend_Controller_Request_Abstract
      */
     public function clearParams()
     {
-        $this->_params = array();
+        $this->_params = [];
         return $this;
     }
 

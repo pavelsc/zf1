@@ -51,12 +51,12 @@ class Zend_Service_Delicious_SimplePost
     /**
      * @var array Post tags
      */
-    protected $_tags = array();
+    protected $_tags = [];
 
     /**
      * Constructor
      *
-     * @param   array $post Post data
+     * @param array $post Post data
      * @return  void
      * @throws  Zend_Service_Delicious_Exception
      */
@@ -70,7 +70,7 @@ class Zend_Service_Delicious_SimplePost
             throw new Zend_Service_Delicious_Exception('Title and URL not set.');
         }
 
-        $this->_url   = $post['u'];
+        $this->_url = $post['u'];
         $this->_title = $post['d'];
 
         if (isset($post['t'])) {

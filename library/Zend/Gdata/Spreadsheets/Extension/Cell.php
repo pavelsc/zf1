@@ -76,10 +76,10 @@ class Zend_Gdata_Spreadsheets_Extension_Cell extends Zend_Gdata_Extension
     /**
      * Constructs a new Zend_Gdata_Spreadsheets_Extension_Cell element.
      *
-     * @param string $text (optional) Text contents of the element.
-     * @param string $row (optional) Row attribute of the element.
-     * @param string $col (optional) Column attribute of the element.
-     * @param string $inputValue (optional) Input value attribute of the element.
+     * @param string $text         (optional) Text contents of the element.
+     * @param string $row          (optional) Row attribute of the element.
+     * @param string $col          (optional) Column attribute of the element.
+     * @param string $inputValue   (optional) Input value attribute of the element.
      * @param string $numericValue (optional) Numeric value attribute of the element.
      */
     public function __construct($text = null, $row = null, $col = null, $inputValue = null, $numericValue = null)
@@ -106,20 +106,20 @@ class Zend_Gdata_Spreadsheets_Extension_Cell extends Zend_Gdata_Extension
     protected function takeAttributeFromDOM($attribute)
     {
         switch ($attribute->localName) {
-        case 'row':
-            $this->_row = $attribute->nodeValue;
-            break;
-        case 'col':
-            $this->_col = $attribute->nodeValue;
-            break;
-        case 'inputValue':
-            $this->_inputValue = $attribute->nodeValue;
-            break;
-        case 'numericValue':
-            $this->_numericValue = $attribute->nodeValue;
-            break;
-        default:
-            parent::takeAttributeFromDOM($attribute);
+            case 'row':
+                $this->_row = $attribute->nodeValue;
+                break;
+            case 'col':
+                $this->_col = $attribute->nodeValue;
+                break;
+            case 'inputValue':
+                $this->_inputValue = $attribute->nodeValue;
+                break;
+            case 'numericValue':
+                $this->_numericValue = $attribute->nodeValue;
+                break;
+            default:
+                parent::takeAttributeFromDOM($attribute);
         }
     }
 

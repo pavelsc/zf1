@@ -38,7 +38,7 @@ require_once 'Zend/Server/Reflection/Parameter.php';
  * @subpackage Reflection
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version $Id$
+ * @version    $Id$
  */
 class Zend_Server_Reflection_Prototype
 {
@@ -46,7 +46,7 @@ class Zend_Server_Reflection_Prototype
      * Constructor
      *
      * @param Zend_Server_Reflection_ReturnValue $return
-     * @param array $params
+     * @param array                              $params
      * @return void
      */
     public function __construct(Zend_Server_Reflection_ReturnValue $return, $params = null)

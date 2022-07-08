@@ -48,7 +48,7 @@ require_once 'Zend/Gdata/Calendar/ListEntry.php';
 
 /**
  * Service class for interacting with the Google Calendar data API
- * @link http://code.google.com/apis/gdata/calendar.html
+ * @link       http://code.google.com/apis/gdata/calendar.html
  *
  * @category   Zend
  * @package    Zend_Gdata
@@ -70,16 +70,16 @@ class Zend_Gdata_Calendar extends Zend_Gdata
      *
      * @var array
      */
-    public static $namespaces = array(
-        array('gCal', 'http://schemas.google.com/gCal/2005', 1, 0)
-    );
+    public static $namespaces = [
+        ['gCal', 'http://schemas.google.com/gCal/2005', 1, 0]
+    ];
 
     /**
      * Create Gdata_Calendar object
      *
-     * @param Zend_Http_Client $client (optional) The HTTP client to use when
-     *          when communicating with the Google servers.
-     * @param string $applicationId The identity of the app in the form of Company-AppName-Version
+     * @param Zend_Http_Client $client        (optional) The HTTP client to use when
+     *                                        when communicating with the Google servers.
+     * @param string           $applicationId The identity of the app in the form of Company-AppName-Version
      */
     public function __construct($client = null, $applicationId = 'MyCompany-MyApp-1.0')
     {
@@ -117,7 +117,7 @@ class Zend_Gdata_Calendar extends Zend_Gdata
         if ($location == null) {
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'Location must not be null');
+                'Location must not be null');
         } else if ($location instanceof Zend_Gdata_Query) {
             $uri = $location->getQueryUrl();
         } else {
@@ -135,7 +135,7 @@ class Zend_Gdata_Calendar extends Zend_Gdata
     public function getCalendarListFeed()
     {
         $uri = self::CALENDAR_FEED_URI . '/default';
-        return parent::getFeed($uri,'Zend_Gdata_Calendar_ListFeed');
+        return parent::getFeed($uri, 'Zend_Gdata_Calendar_ListFeed');
     }
 
     /**
@@ -148,16 +148,16 @@ class Zend_Gdata_Calendar extends Zend_Gdata
         if ($location == null) {
             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
-                    'Location must not be null');
+                'Location must not be null');
         } else if ($location instanceof Zend_Gdata_Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
         }
-        return parent::getEntry($uri,'Zend_Gdata_Calendar_ListEntry');
+        return parent::getEntry($uri, 'Zend_Gdata_Calendar_ListEntry');
     }
 
-    public function insertEvent($event, $uri=null)
+    public function insertEvent($event, $uri = null)
     {
         if ($uri == null) {
             $uri = $this->_defaultPostUri;

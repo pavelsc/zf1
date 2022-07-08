@@ -45,7 +45,7 @@ class Zend_Gdata_Query
      *
      * @var array
      */
-    protected $_params = array();
+    protected $_params = [];
 
     /**
      * Default URL
@@ -82,7 +82,7 @@ class Zend_Gdata_Query
      */
     public function getQueryString()
     {
-        $queryArray = array();
+        $queryArray = [];
         foreach ($this->_params as $name => $value) {
             if (substr($name, 0, 1) == '_') {
                 continue;
@@ -101,7 +101,7 @@ class Zend_Gdata_Query
      */
     public function resetParameters()
     {
-        $this->_params = array();
+        $this->_params = [];
     }
 
     /**
@@ -395,9 +395,9 @@ class Zend_Gdata_Query
 
     public function __get($name)
     {
-        $method = 'get'.ucfirst($name);
+        $method = 'get' . ucfirst($name);
         if (method_exists($this, $method)) {
-            return call_user_func(array(&$this, $method));
+            return call_user_func([&$this, $method]);
         } else {
             require_once 'Zend/Gdata/App/Exception.php';
             throw new Zend_Gdata_App_Exception('Property ' . $name . '  does not exist');
@@ -406,9 +406,9 @@ class Zend_Gdata_Query
 
     public function __set($name, $val)
     {
-        $method = 'set'.ucfirst($name);
+        $method = 'set' . ucfirst($name);
         if (method_exists($this, $method)) {
-            return call_user_func(array(&$this, $method), $val);
+            return call_user_func([&$this, $method], $val);
         } else {
             require_once 'Zend/Gdata/App/Exception.php';
             throw new Zend_Gdata_App_Exception('Property ' . $name . '  does not exist');

@@ -44,16 +44,16 @@ class Zend_Service_Amazon_SimilarProduct
     /**
      * Assigns values to properties relevant to SimilarProduct
      *
-     * @param  DOMElement $dom
+     * @param DOMElement $dom
      * @return void
      */
     public function __construct(DOMElement $dom)
     {
         $xpath = new DOMXPath($dom->ownerDocument);
         $xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2011-08-01');
-        foreach (array('ASIN', 'Title') as $el) {
+        foreach (['ASIN', 'Title'] as $el) {
             $text = $xpath->query("./az:$el/text()", $dom)->item(0);
-            if($text instanceof DOMText) {
+            if ($text instanceof DOMText) {
                 $this->$el = (string)$text->data;
             }
         }

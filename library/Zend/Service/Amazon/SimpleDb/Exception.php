@@ -44,7 +44,7 @@ class Zend_Service_Amazon_SimpleDb_Exception extends Zend_Service_Amazon_Excepti
      * Constructor
      *
      * @param string $message
-     * @param int $code
+     * @param int    $code
      * @param string $awsErrorCode
      * @return void
      */

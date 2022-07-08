@@ -55,10 +55,10 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
      *
      * @var array Available options
      */
-    protected $_options = array(
+    protected $_options = [
         'cache_db_complete_path' => null,
         'automatic_vacuum_factor' => 10
-    );
+    ];
 
     /**
      * DB ressource
@@ -77,11 +77,11 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
     /**
      * Constructor
      *
-     * @param  array $options Associative array of options
-     * @throws Zend_cache_Exception
+     * @param array $options Associative array of options
      * @return void
+     * @throws Zend_cache_Exception
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         parent::__construct($options);
         if ($this->_options['cache_db_complete_path'] === null) {
@@ -106,8 +106,8 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
     /**
      * Test if a cache is available for the given id and (if yes) return it (false else)
      *
-     * @param  string  $id                     Cache id
-     * @param  boolean $doNotTestCacheValidity If set to true, the cache validity won't be tested
+     * @param string  $id                     Cache id
+     * @param boolean $doNotTestCacheValidity If set to true, the cache validity won't be tested
      * @return string|false Cached datas
      */
     public function load($id, $doNotTestCacheValidity = false)
@@ -138,7 +138,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
         $result = $this->_query($sql);
         $row = @sqlite_fetch_array($result);
         if ($row) {
-            return ((int) $row['lastModified']);
+            return ((int)$row['lastModified']);
         }
         return false;
     }
@@ -149,14 +149,14 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
      * Note : $data is always "string" (serialization is done by the
      * core not by the backend)
      *
-     * @param  string $data             Datas to cache
-     * @param  string $id               Cache id
-     * @param  array  $tags             Array of strings, the cache record will be tagged by each string entry
-     * @param  int    $specificLifetime If != false, set a specific lifetime for this cache record (null => infinite lifetime)
-     * @throws Zend_Cache_Exception
+     * @param string $data             Datas to cache
+     * @param string $id               Cache id
+     * @param array  $tags             Array of strings, the cache record will be tagged by each string entry
+     * @param int    $specificLifetime If != false, set a specific lifetime for this cache record (null => infinite lifetime)
      * @return boolean True if no problem
+     * @throws Zend_Cache_Exception
      */
-    public function save($data, $id, $tags = array(), $specificLifetime = false)
+    public function save($data, $id, $tags = [], $specificLifetime = false)
     {
         $this->_checkAndBuildStructure();
         $lifetime = $this->getLifetime($specificLifetime);
@@ -184,7 +184,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
     /**
      * Remove a cache record
      *
-     * @param  string $id Cache id
+     * @param string $id Cache id
      * @return boolean True if no problem
      */
     public function remove($id)
@@ -211,11 +211,11 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
      * Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG => remove cache entries matching any given tags
      *                                               ($tags can be an array of strings or a single string)
      *
-     * @param  string $mode Clean mode
-     * @param  array  $tags Array of tags
+     * @param string $mode Clean mode
+     * @param array  $tags Array of tags
      * @return boolean True if no problem
      */
-    public function clean($mode = Zend_Cache::CLEANING_MODE_ALL, $tags = array())
+    public function clean($mode = Zend_Cache::CLEANING_MODE_ALL, $tags = [])
     {
         $this->_checkAndBuildStructure();
         $return = $this->_clean($mode, $tags);
@@ -232,7 +232,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
     {
         $this->_checkAndBuildStructure();
         $res = $this->_query("SELECT id FROM cache WHERE (expire=0 OR expire>" . time() . ")");
-        $result = array();
+        $result = [];
         while ($id = @sqlite_fetch_single($res)) {
             $result[] = $id;
         }
@@ -248,7 +248,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
     {
         $this->_checkAndBuildStructure();
         $res = $this->_query("SELECT DISTINCT(name) AS name FROM tag");
-        $result = array();
+        $result = [];
         while ($id = @sqlite_fetch_single($res)) {
             $result[] = $id;
         }
@@ -263,17 +263,17 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
      * @param array $tags array of tags
      * @return array array of matching cache ids (string)
      */
-    public function getIdsMatchingTags($tags = array())
+    public function getIdsMatchingTags($tags = [])
     {
         $first = true;
-        $ids = array();
+        $ids = [];
         foreach ($tags as $tag) {
             $res = $this->_query("SELECT DISTINCT(id) AS id FROM tag WHERE name='$tag'");
             if (!$res) {
-                return array();
+                return [];
             }
             $rows = @sqlite_fetch_all($res, SQLITE_ASSOC);
-            $ids2 = array();
+            $ids2 = [];
             foreach ($rows as $row) {
                 $ids2[] = $row['id'];
             }
@@ -284,7 +284,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
                 $ids = array_intersect($ids, $ids2);
             }
         }
-        $result = array();
+        $result = [];
         foreach ($ids as $id) {
             $result[] = $id;
         }
@@ -299,20 +299,20 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
      * @param array $tags array of tags
      * @return array array of not matching cache ids (string)
      */
-    public function getIdsNotMatchingTags($tags = array())
+    public function getIdsNotMatchingTags($tags = [])
     {
         $res = $this->_query("SELECT id FROM cache");
         $rows = @sqlite_fetch_all($res, SQLITE_ASSOC);
-        $result = array();
+        $result = [];
         foreach ($rows as $row) {
             $id = $row['id'];
             $matching = false;
             foreach ($tags as $tag) {
                 $res = $this->_query("SELECT COUNT(*) AS nbr FROM tag WHERE name='$tag' AND id='$id'");
                 if (!$res) {
-                    return array();
+                    return [];
                 }
-                $nbr = (int) @sqlite_fetch_single($res);
+                $nbr = (int)@sqlite_fetch_single($res);
                 if ($nbr > 0) {
                     $matching = true;
                 }
@@ -332,17 +332,17 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
      * @param array $tags array of tags
      * @return array array of any matching cache ids (string)
      */
-    public function getIdsMatchingAnyTags($tags = array())
+    public function getIdsMatchingAnyTags($tags = [])
     {
         $first = true;
-        $ids = array();
+        $ids = [];
         foreach ($tags as $tag) {
             $res = $this->_query("SELECT DISTINCT(id) AS id FROM tag WHERE name='$tag'");
             if (!$res) {
-                return array();
+                return [];
             }
             $rows = @sqlite_fetch_all($res, SQLITE_ASSOC);
-            $ids2 = array();
+            $ids2 = [];
             foreach ($rows as $row) {
                 $ids2[] = $row['id'];
             }
@@ -353,7 +353,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
                 $ids = array_merge($ids, $ids2);
             }
         }
-        $result = array();
+        $result = [];
         foreach ($ids as $id) {
             $result[] = $id;
         }
@@ -363,8 +363,8 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
     /**
      * Return the filling percentage of the backend storage
      *
-     * @throws Zend_Cache_Exception
      * @return int integer between 0 and 100
+     * @throws Zend_Cache_Exception
      */
     public function getFillingPercentage()
     {
@@ -377,7 +377,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
             if ($free >= $total) {
                 return 100;
             }
-            return ((int) (100. * ($total - $free) / $total));
+            return ((int)(100. * ($total - $free) / $total));
         }
     }
 
@@ -394,7 +394,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
      */
     public function getMetadatas($id)
     {
-        $tags = array();
+        $tags = [];
         $res = $this->_query("SELECT name FROM tag WHERE id='$id'");
         if ($res) {
             $rows = @sqlite_fetch_all($res, SQLITE_ASSOC);
@@ -408,18 +408,18 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
             return false;
         }
         $row = @sqlite_fetch_array($res, SQLITE_ASSOC);
-        return array(
+        return [
             'tags' => $tags,
             'mtime' => $row['lastModified'],
             'expire' => $row['expire']
-        );
+        ];
     }
 
     /**
      * Give (if possible) an extra lifetime to the given cache id
      *
      * @param string $id cache id
-     * @param int $extraLifetime
+     * @param int    $extraLifetime
      * @return boolean true if ok
      */
     public function touch($id, $extraLifetime)
@@ -455,14 +455,14 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
      */
     public function getCapabilities()
     {
-        return array(
+        return [
             'automatic_cleaning' => true,
             'tags' => true,
             'expired_read' => true,
             'priority' => false,
             'infinite_lifetime' => true,
             'get_list' => true
-        );
+        ];
     }
 
     /**
@@ -483,8 +483,8 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
      *
      * If we are not connected, the connection is made
      *
-     * @throws Zend_Cache_Exception
      * @return resource Connection resource
+     * @throws Zend_Cache_Exception
      */
     private function _getConnection()
     {
@@ -537,11 +537,12 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
     /**
      * Register a cache id with the given tag
      *
-     * @param  string $id  Cache id
-     * @param  string $tag Tag
+     * @param string $id  Cache id
+     * @param string $tag Tag
      * @return boolean True if no problem
      */
-    private function _registerTag($id, $tag) {
+    private function _registerTag($id, $tag)
+    {
         $res = $this->_query("DELETE FROM TAG WHERE name='$tag' AND id='$id'");
         $res = $this->_query("INSERT INTO tag (name, id) VALUES ('$tag', '$id')");
         if (!$res) {
@@ -586,7 +587,7 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
         if (!$row) {
             return false;
         }
-        if (((int) $row['num']) != 1) {
+        if (((int)$row['num']) != 1) {
             // old cache structure
             $this->_log('Zend_Cache_Backend_Sqlite::_checkStructureVersion() : old cache structure version detected => the cache is going to be dropped');
             return false;
@@ -607,11 +608,11 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
      * Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG => remove cache entries matching any given tags
      *                                               ($tags can be an array of strings or a single string)
      *
-     * @param  string $mode Clean mode
-     * @param  array  $tags Array of tags
+     * @param string $mode Clean mode
+     * @param array  $tags Array of tags
      * @return boolean True if no problem
      */
-    private function _clean($mode = Zend_Cache::CLEANING_MODE_ALL, $tags = array())
+    private function _clean($mode = Zend_Cache::CLEANING_MODE_ALL, $tags = [])
     {
         switch ($mode) {
             case Zend_Cache::CLEANING_MODE_ALL:
@@ -658,8 +659,8 @@ class Zend_Cache_Backend_Sqlite extends Zend_Cache_Backend implements Zend_Cache
     /**
      * Check if the database structure is ok (with the good version), if no : build it
      *
-     * @throws Zend_Cache_Exception
      * @return boolean True if ok
+     * @throws Zend_Cache_Exception
      */
     private function _checkAndBuildStructure()
     {

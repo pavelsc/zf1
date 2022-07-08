@@ -37,7 +37,7 @@ class Zend_Feed_Writer_Renderer_RendererAbstract
      * Extensions
      * @var array
      */
-    protected $_extensions = array();
+    protected $_extensions = [];
 
     /**
      * @var mixed
@@ -57,7 +57,7 @@ class Zend_Feed_Writer_Renderer_RendererAbstract
     /**
      * @var array
      */
-    protected $_exceptions = array();
+    protected $_exceptions = [];
 
     /**
      * Encoding of all text values
@@ -82,7 +82,7 @@ class Zend_Feed_Writer_Renderer_RendererAbstract
     /**
      * Constructor
      *
-     * @param  mixed $container
+     * @param mixed $container
      * @return void
      */
     public function __construct($container)
@@ -135,7 +135,7 @@ class Zend_Feed_Writer_Renderer_RendererAbstract
     /**
      * Set feed encoding
      *
-     * @param  string $enc
+     * @param string $enc
      * @return Zend_Feed_Writer_Renderer_RendererAbstract
      */
     public function setEncoding($enc)
@@ -157,7 +157,7 @@ class Zend_Feed_Writer_Renderer_RendererAbstract
     /**
      * Indicate whether or not to ignore exceptions
      *
-     * @param  bool $bool
+     * @param bool $bool
      * @return Zend_Feed_Writer_Renderer_RendererAbstract
      */
     public function ignoreExceptions($bool = true)

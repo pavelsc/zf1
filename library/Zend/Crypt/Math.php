@@ -67,13 +67,13 @@ class Zend_Crypt_Math extends Zend_Crypt_Math_BigInteger
     /**
      * Return a random strings of $length bytes
      *
-     * @param  integer $length
-     * @param  boolean $strong
+     * @param integer $length
+     * @param boolean $strong
      * @return string
      */
     public static function randBytes($length, $strong = false)
     {
-        $length = (int) $length;
+        $length = (int)$length;
         if ($length <= 0) {
             return false;
         }
@@ -83,9 +83,9 @@ class Zend_Crypt_Math extends Zend_Crypt_Math_BigInteger
     /**
      * Return a random integer between $min and $max
      *
-     * @param  integer $min
-     * @param  integer $max
-     * @param  boolean $strong
+     * @param integer $min
+     * @param integer $max
+     * @param boolean $strong
      * @return integer
      */
     public static function randInteger($min, $max, $strong = false)
@@ -115,11 +115,11 @@ class Zend_Crypt_Math extends Zend_Crypt_Math_BigInteger
             $bits++;
             $r >>= 1;
         }
-        $bits   = (int) max($bits, 1);
-        $bytes  = (int) max(ceil($bits / 8), 1);
-        $filter = (int) ((1 << $bits) - 1);
+        $bits = (int)max($bits, 1);
+        $bytes = (int)max(ceil($bits / 8), 1);
+        $filter = (int)((1 << $bits) - 1);
         do {
-            $rnd  = hexdec(bin2hex(self::randBytes($bytes, $strong)));
+            $rnd = hexdec(bin2hex(self::randBytes($bytes, $strong)));
             $rnd &= $filter;
         } while ($rnd > $range);
         return ($min + $rnd);

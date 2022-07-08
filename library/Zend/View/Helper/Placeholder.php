@@ -43,7 +43,7 @@ class Zend_View_Helper_Placeholder extends Zend_View_Helper_Abstract
      * Placeholder items
      * @var array
      */
-    protected $_items = array();
+    protected $_items = [];
 
     /**
      * @var Zend_View_Helper_Placeholder_Registry
@@ -66,12 +66,12 @@ class Zend_View_Helper_Placeholder extends Zend_View_Helper_Abstract
     /**
      * Placeholder helper
      *
-     * @param  string $name
+     * @param string $name
      * @return Zend_View_Helper_Placeholder_Container_Abstract
      */
     public function placeholder($name)
     {
-        $name = (string) $name;
+        $name = (string)$name;
         return $this->_registry->getContainer($name);
     }
 

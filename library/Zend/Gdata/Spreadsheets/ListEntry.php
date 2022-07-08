@@ -16,9 +16,9 @@
  * @category     Zend
  * @package      Zend_Gdata
  * @subpackage   Spreadsheets
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @copyright    Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license      http://framework.zend.com/license/new-bsd     New BSD License
+ * @version      $Id$
  */
 
 /**
@@ -37,8 +37,8 @@ require_once 'Zend/Gdata/Spreadsheets/Extension/Custom.php';
  * @category     Zend
  * @package      Zend_Gdata
  * @subpackage   Spreadsheets
- * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @copyright    Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license      http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Spreadsheets_ListEntry extends Zend_Gdata_Entry
 {
@@ -50,14 +50,14 @@ class Zend_Gdata_Spreadsheets_ListEntry extends Zend_Gdata_Entry
      * indexed by order added to this entry.
      * @var array
      */
-    protected $_custom = array();
+    protected $_custom = [];
 
     /**
      * List of custom row elements (Zend_Gdata_Spreadsheets_Extension_Custom),
      * indexed by element name.
      * @var array
      */
-    protected $_customByName = array();
+    protected $_customByName = [];
 
     /**
      * Constructs a new Zend_Gdata_Spreadsheets_ListEntry object.
@@ -83,14 +83,14 @@ class Zend_Gdata_Spreadsheets_ListEntry extends Zend_Gdata_Entry
     protected function takeChildFromDOM($child)
     {
         switch ($child->namespaceURI) {
-        case $this->lookupNamespace('gsx');
-            $custom = new Zend_Gdata_Spreadsheets_Extension_Custom($child->localName);
-            $custom->transferFromDOM($child);
-            $this->addCustom($custom);
-            break;
-        default:
-            parent::takeChildFromDOM($child);
-            break;
+            case $this->lookupNamespace('gsx');
+                $custom = new Zend_Gdata_Spreadsheets_Extension_Custom($child->localName);
+                $custom->transferFromDOM($child);
+                $this->addCustom($custom);
+                break;
+            default:
+                parent::takeChildFromDOM($child);
+                break;
         }
     }
 
@@ -106,13 +106,13 @@ class Zend_Gdata_Spreadsheets_ListEntry extends Zend_Gdata_Entry
     /**
      * Gets a single row element contained by this list entry using its name.
      * @param string $name The name of a custom element to return. If null
-     *          or not defined, an array containing all custom elements
-     *          indexed by name will be returned.
+     *                     or not defined, an array containing all custom elements
+     *                     indexed by name will be returned.
      * @return mixed If a name is specified, the
-     *          Zend_Gdata_Spreadsheets_Extension_Custom element requested,
-     *          is returned or null if not found. Otherwise, an array of all
-     *          Zend_Gdata_Spreadsheets_Extension_Custom elements is returned
-     *          indexed by name.
+     *                     Zend_Gdata_Spreadsheets_Extension_Custom element requested,
+     *                     is returned or null if not found. Otherwise, an array of all
+     *                     Zend_Gdata_Spreadsheets_Extension_Custom elements is returned
+     *                     indexed by name.
      */
     public function getCustomByName($name = null)
     {
@@ -131,12 +131,12 @@ class Zend_Gdata_Spreadsheets_ListEntry extends Zend_Gdata_Entry
      * Sets the row elements contained by this list entry. If any
      * custom row elements were previously stored, they will be overwritten.
      * @param array $custom The custom row elements to be contained in this
-     *          list entry.
+     *                      list entry.
      * @return Zend_Gdata_Spreadsheets_ListEntry Provides a fluent interface.
      */
     public function setCustom($custom)
     {
-        $this->_custom = array();
+        $this->_custom = [];
         foreach ($custom as $c) {
             $this->addCustom($c);
         }
@@ -146,7 +146,7 @@ class Zend_Gdata_Spreadsheets_ListEntry extends Zend_Gdata_Entry
     /**
      * Add an individual custom row element to this list entry.
      * @param Zend_Gdata_Spreadsheets_Extension_Custom $custom The custom
-     *             element to be added.
+     *                                                         element to be added.
      * @return Zend_Gdata_Spreadsheets_ListEntry Provides a fluent interface.
      */
     public function addCustom($custom)

@@ -60,13 +60,13 @@ class Zend_Gdata_Gapps_MemberEntry extends Zend_Gdata_Entry
      *
      * @var Zend_Gdata_Gapps_Extension_Property
      */
-    protected $_property = array();
+    protected $_property = [];
 
     /**
      * Create a new instance.
      *
      * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
+     *                            object should be constructed.
      */
     public function __construct($element = null)
     {
@@ -81,7 +81,7 @@ class Zend_Gdata_Gapps_MemberEntry extends Zend_Gdata_Entry
      *
      * @param DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
-     *          child properties.
+     *                         child properties.
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
@@ -120,12 +120,12 @@ class Zend_Gdata_Gapps_MemberEntry extends Zend_Gdata_Entry
      * Returns all property tags for this entry
      *
      * @param string $rel The rel value of the property to be found. If null,
-     *          the array of properties is returned instead.
+     *                    the array of properties is returned instead.
      * @return mixed Either an array of Zend_Gdata_Gapps_Extension_Property
-     *          objects if $rel is null, a single
-     *          Zend_Gdata_Gapps_Extension_Property object if $rel is specified
-     *          and a matching feed link is found, or null if $rel is
-     *          specified and no matching property is found.
+     *                    objects if $rel is null, a single
+     *                    Zend_Gdata_Gapps_Extension_Property object if $rel is specified
+     *                    and a matching feed link is found, or null if $rel is
+     *                    specified and no matching property is found.
      */
     public function getProperty($rel = null)
     {
@@ -145,7 +145,7 @@ class Zend_Gdata_Gapps_MemberEntry extends Zend_Gdata_Entry
      * Set the value of the  property property for this object.
      *
      * @param array $value A collection of
-     *          Zend_Gdata_Gapps_Extension_Property objects.
+     *                     Zend_Gdata_Gapps_Extension_Property objects.
      * @return Zend_Gdata_Gapps_MemberEntry Provides a fluent interface.
      */
     public function setProperty($value)

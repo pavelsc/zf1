@@ -61,7 +61,7 @@ class Zend_Search_Lucene_Search_Query_Term extends Zend_Search_Lucene_Search_Que
      * Zend_Search_Lucene_Search_Query_Term constructor
      *
      * @param Zend_Search_Lucene_Index_Term $term
-     * @param boolean $sign
+     * @param boolean                       $sign
      */
     public function __construct(Zend_Search_Lucene_Index_Term $term)
     {
@@ -129,7 +129,7 @@ class Zend_Search_Lucene_Search_Query_Term extends Zend_Search_Lucene_Search_Que
      * Execute query in context of index reader
      * It also initializes necessary internal structures
      *
-     * @param Zend_Search_Lucene_Interface $reader
+     * @param Zend_Search_Lucene_Interface             $reader
      * @param Zend_Search_Lucene_Index_DocsFilter|null $docsFilter
      */
     public function execute(Zend_Search_Lucene_Interface $reader, $docsFilter = null)
@@ -156,7 +156,7 @@ class Zend_Search_Lucene_Search_Query_Term extends Zend_Search_Lucene_Search_Que
     /**
      * Score specified document
      *
-     * @param integer $docId
+     * @param integer                      $docId
      * @param Zend_Search_Lucene_Interface $reader
      * @return float
      */
@@ -164,9 +164,9 @@ class Zend_Search_Lucene_Search_Query_Term extends Zend_Search_Lucene_Search_Que
     {
         if (isset($this->_docVector[$docId])) {
             return $reader->getSimilarity()->tf($this->_termFreqs[$docId]) *
-                   $this->_weight->getValue() *
-                   $reader->norm($docId, $this->_term->field) *
-                   $this->getBoost();
+                $this->_weight->getValue() *
+                $reader->norm($docId, $this->_term->field) *
+                $this->getBoost();
         } else {
             return 0;
         }
@@ -179,7 +179,7 @@ class Zend_Search_Lucene_Search_Query_Term extends Zend_Search_Lucene_Search_Que
      */
     public function getQueryTerms()
     {
-        return array($this->_term);
+        return [$this->_term];
     }
 
     /**
@@ -195,7 +195,7 @@ class Zend_Search_Lucene_Search_Query_Term extends Zend_Search_Lucene_Search_Que
     /**
      * Query specific matches highlighting
      *
-     * @param Zend_Search_Lucene_Search_Highlighter_Interface $highlighter  Highlighter object (also contains doc for highlighting)
+     * @param Zend_Search_Lucene_Search_Highlighter_Interface $highlighter Highlighter object (also contains doc for highlighting)
      */
     protected function _highlightMatches(Zend_Search_Lucene_Search_Highlighter_Interface $highlighter)
     {

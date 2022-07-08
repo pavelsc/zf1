@@ -47,12 +47,12 @@ abstract class Zend_Tool_Framework_Loader_Abstract
     /**
      * @var array
      */
-    private $_retrievedFiles = array();
+    private $_retrievedFiles = [];
 
     /**
      * @var array
      */
-    private $_loadedClasses  = array();
+    private $_loadedClasses = [];
 
     /**
      * _getFiles
@@ -81,16 +81,16 @@ abstract class Zend_Tool_Framework_Loader_Abstract
     public function load()
     {
         $this->_retrievedFiles = $this->getRetrievedFiles();
-        $this->_loadedClasses  = array();
+        $this->_loadedClasses = [];
 
         $manifestRepository = $this->_registry->getManifestRepository();
         $providerRepository = $this->_registry->getProviderRepository();
 
-        $loadedClasses = array();
+        $loadedClasses = [];
 
         // loop through files and find the classes declared by loading the file
         foreach ($this->_retrievedFiles as $file) {
-            if(is_dir($file)) {
+            if (is_dir($file)) {
                 continue;
             }
 
@@ -109,16 +109,14 @@ abstract class Zend_Tool_Framework_Loader_Abstract
             // reflect class to see if its something we want to load
             $reflectionClass = new ReflectionClass($loadedClass);
             if ($reflectionClass->implementsInterface('Zend_Tool_Framework_Manifest_Interface')
-                && !$reflectionClass->isAbstract())
-            {
+                && !$reflectionClass->isAbstract()) {
                 $manifestRepository->addManifest($reflectionClass->newInstance());
                 $this->_loadedClasses[] = $loadedClass;
             }
 
             if ($reflectionClass->implementsInterface('Zend_Tool_Framework_Provider_Interface')
                 && !$reflectionClass->isAbstract()
-                && !$providerRepository->hasProvider($reflectionClass->getName(), false))
-            {
+                && !$providerRepository->hasProvider($reflectionClass->getName(), false)) {
                 $providerRepository->addProvider($reflectionClass->newInstance());
                 $this->_loadedClasses[] = $loadedClass;
             }

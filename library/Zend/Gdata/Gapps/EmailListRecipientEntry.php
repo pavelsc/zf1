@@ -70,7 +70,7 @@ class Zend_Gdata_Gapps_EmailListRecipientEntry extends Zend_Gdata_Entry
      * Create a new instance.
      *
      * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
+     *                            object should be constructed.
      */
     public function __construct($element = null)
     {
@@ -85,7 +85,7 @@ class Zend_Gdata_Gapps_EmailListRecipientEntry extends Zend_Gdata_Entry
      *
      * @param DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
-     *          child properties.
+     *                         child properties.
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
@@ -121,8 +121,8 @@ class Zend_Gdata_Gapps_EmailListRecipientEntry extends Zend_Gdata_Entry
     /**
      * Get the value of the who property for this object.
      *
-     * @see setWho
      * @return Zend_Gdata_Extension_Who The requested object.
+     * @see setWho
      */
     public function getWho()
     {
@@ -134,7 +134,7 @@ class Zend_Gdata_Gapps_EmailListRecipientEntry extends Zend_Gdata_Entry
      * is used to store the email address of the current recipient.
      *
      * @param Zend_Gdata_Extension_Who $value The desired value for this
-     *          instance's who property.
+     *                                        instance's who property.
      * @return Zend_Gdata_Gapps_EventEntry Provides a fluent interface.
      */
     public function setWho($value)

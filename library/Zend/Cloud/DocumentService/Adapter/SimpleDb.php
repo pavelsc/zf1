@@ -38,12 +38,12 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
     /*
      * Options array keys for the SimpleDB adapter.
      */
-    const AWS_ACCESS_KEY   = 'aws_accesskey';
-    const AWS_SECRET_KEY   = 'aws_secretkey';
+    const AWS_ACCESS_KEY = 'aws_accesskey';
+    const AWS_SECRET_KEY = 'aws_secretkey';
 
-    const ITEM_NAME        = 'ItemName';
+    const ITEM_NAME = 'ItemName';
 
-    const MERGE_OPTION     = "merge";
+    const MERGE_OPTION = "merge";
     const RETURN_DOCUMENTS = "return_documents";
 
     const DEFAULT_QUERY_CLASS = 'Zend_Cloud_DocumentService_Adapter_SimpleDb_Query';
@@ -64,10 +64,10 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
     /**
      * Constructor
      *
-     * @param  array|Zend_Config $options
+     * @param array|Zend_Config $options
      * @return void
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
@@ -101,39 +101,39 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
     /**
      * Create collection.
      *
-     * @param  string $name
-     * @param  array  $options
+     * @param string $name
+     * @param array  $options
      * @return void
      */
     public function createCollection($name, $options = null)
     {
         try {
             $this->_simpleDb->createDomain($name);
-        } catch(Zend_Service_Amazon_Exception $e) {
-            throw new Zend_Cloud_DocumentService_Exception('Error on domain creation: '.$e->getMessage(), $e->getCode(), $e);
+        } catch (Zend_Service_Amazon_Exception $e) {
+            throw new Zend_Cloud_DocumentService_Exception('Error on domain creation: ' . $e->getMessage(), $e->getCode(), $e);
         }
     }
 
     /**
      * Delete collection.
      *
-     * @param  string $name
-     * @param  array  $options
+     * @param string $name
+     * @param array  $options
      * @return void
      */
     public function deleteCollection($name, $options = null)
     {
         try {
             $this->_simpleDb->deleteDomain($name);
-        } catch(Zend_Service_Amazon_Exception $e) {
-            throw new Zend_Cloud_DocumentService_Exception('Error on collection deletion: '.$e->getMessage(), $e->getCode(), $e);
+        } catch (Zend_Service_Amazon_Exception $e) {
+            throw new Zend_Cloud_DocumentService_Exception('Error on collection deletion: ' . $e->getMessage(), $e->getCode(), $e);
         }
     }
 
     /**
      * List collections.
      *
-     * @param  array  $options
+     * @param array $options
      * @return array
      */
     public function listCollections($options = null)
@@ -141,8 +141,8 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
         try {
             // TODO package this in Pages
             $domains = $this->_simpleDb->listDomains()->getData();
-        } catch(Zend_Service_Amazon_Exception $e) {
-            throw new Zend_Cloud_DocumentService_Exception('Error on collection deletion: '.$e->getMessage(), $e->getCode(), $e);
+        } catch (Zend_Service_Amazon_Exception $e) {
+            throw new Zend_Cloud_DocumentService_Exception('Error on collection deletion: ' . $e->getMessage(), $e->getCode(), $e);
         }
 
         return $domains;
@@ -153,8 +153,8 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
      *
      * Returns a key/value array of document names to document objects.
      *
-     * @param  string $collectionName Name of collection for which to list documents
-     * @param  array|null $options
+     * @param string     $collectionName Name of collection for which to list documents
+     * @param array|null $options
      * @return Zend_Cloud_DocumentService_DocumentSet
      */
     public function listDocuments($collectionName, array $options = null)
@@ -167,15 +167,15 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
     /**
      * Insert document
      *
-     * @param  string $collectionName Collection into which to insert document
-     * @param  array|Zend_Cloud_DocumentService_Document $document
-     * @param  array $options
+     * @param string                                    $collectionName Collection into which to insert document
+     * @param array|Zend_Cloud_DocumentService_Document $document
+     * @param array                                     $options
      * @return void
      */
     public function insertDocument($collectionName, $document, $options = null)
     {
         if (is_array($document)) {
-            $document =  $this->_getDocumentFromArray($document);
+            $document = $this->_getDocumentFromArray($document);
         }
 
         if (!$document instanceof Zend_Cloud_DocumentService_Document) {
@@ -188,23 +188,23 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
                 $document->getID(),
                 $this->_makeAttributes($document->getID(), $document->getFields())
             );
-        } catch(Zend_Service_Amazon_Exception $e) {
-            throw new Zend_Cloud_DocumentService_Exception('Error on document insertion: '.$e->getMessage(), $e->getCode(), $e);
+        } catch (Zend_Service_Amazon_Exception $e) {
+            throw new Zend_Cloud_DocumentService_Exception('Error on document insertion: ' . $e->getMessage(), $e->getCode(), $e);
         }
     }
 
     /**
      * Replace an existing document with a new version
      *
-     * @param  string $collectionName
-     * @param  array|Zend_Cloud_DocumentService_Document $document
-     * @param  array $options
+     * @param string                                    $collectionName
+     * @param array|Zend_Cloud_DocumentService_Document $document
+     * @param array                                     $options
      * @return void
      */
     public function replaceDocument($collectionName, $document, $options = null)
     {
         if (is_array($document)) {
-            $document =  $this->_getDocumentFromArray($document);
+            $document = $this->_getDocumentFromArray($document);
         }
 
         if (!$document instanceof Zend_Cloud_DocumentService_Document) {
@@ -214,11 +214,11 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
         // Delete document first, then insert. PutAttributes always keeps any
         // fields not referenced in the payload, but present in the document
         $documentId = $document->getId();
-        $fields     = $document->getFields();
-        $docClass   = get_class($document);
+        $fields = $document->getFields();
+        $docClass = get_class($document);
         $this->deleteDocument($collectionName, $document, $options);
 
-        $document   = new $docClass($fields, $documentId);
+        $document = new $docClass($fields, $documentId);
         $this->insertDocument($collectionName, $document);
     }
 
@@ -229,16 +229,16 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
      * specific attributes ("attr" => true) instead of replacing them.
      * By default, attributes are replaced.
      *
-     * @param  string $collectionName
-     * @param  mixed|Zend_Cloud_DocumentService_Document $documentId Document ID, adapter-dependent
-     * @param  array|Zend_Cloud_DocumentService_Document $fieldset Set of fields to update
-     * @param  array                   $options
+     * @param string                                    $collectionName
+     * @param mixed|Zend_Cloud_DocumentService_Document $documentId Document ID, adapter-dependent
+     * @param array|Zend_Cloud_DocumentService_Document $fieldset   Set of fields to update
+     * @param array                                     $options
      * @return boolean
      */
     public function updateDocument($collectionName, $documentId, $fieldset = null, $options = null)
     {
         if (null === $fieldset && $documentId instanceof Zend_Cloud_DocumentService_Document) {
-            $fieldset   = $documentId->getFields();
+            $fieldset = $documentId->getFields();
             if (empty($documentId)) {
                 $documentId = $documentId->getId();
             }
@@ -249,7 +249,7 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
             $fieldset = $fieldset->getFields();
         }
 
-        $replace = array();
+        $replace = [];
         if (empty($options[self::MERGE_OPTION])) {
             // no merge option - we replace all
             foreach ($fieldset as $key => $value) {
@@ -271,8 +271,8 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
                 $this->_makeAttributes($documentId, $fieldset),
                 $replace
             );
-        } catch(Zend_Service_Amazon_Exception $e) {
-            throw new Zend_Cloud_DocumentService_Exception('Error on document update: '.$e->getMessage(), $e->getCode(), $e);
+        } catch (Zend_Service_Amazon_Exception $e) {
+            throw new Zend_Cloud_DocumentService_Exception('Error on document update: ' . $e->getMessage(), $e->getCode(), $e);
         }
         return true;
     }
@@ -280,9 +280,9 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
     /**
      * Delete document.
      *
-     * @param  string $collectionName Collection from which to delete document
-     * @param  mixed  $document Document ID or Document object.
-     * @param  array  $options
+     * @param string $collectionName Collection from which to delete document
+     * @param mixed  $document       Document ID or Document object.
+     * @param array  $options
      * @return boolean
      */
     public function deleteDocument($collectionName, $document, $options = null)
@@ -292,8 +292,8 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
         }
         try {
             $this->_simpleDb->deleteAttributes($collectionName, $document);
-        } catch(Zend_Service_Amazon_Exception $e) {
-            throw new Zend_Cloud_DocumentService_Exception('Error on document deletion: '.$e->getMessage(), $e->getCode(), $e);
+        } catch (Zend_Service_Amazon_Exception $e) {
+            throw new Zend_Cloud_DocumentService_Exception('Error on document deletion: ' . $e->getMessage(), $e->getCode(), $e);
         }
         return true;
     }
@@ -301,9 +301,9 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
     /**
      * Fetch single document by ID
      *
-     * @param  string $collectionName Collection name
-     * @param  mixed $documentId Document ID, adapter-dependent
-     * @param  array $options
+     * @param string $collectionName Collection name
+     * @param mixed  $documentId     Document ID, adapter-dependent
+     * @param array  $options
      * @return Zend_Cloud_DocumentService_Document
      */
     public function fetchDocument($collectionName, $documentId, $options = null)
@@ -314,8 +314,8 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
                 return false;
             }
             return $this->_resolveAttributes($attributes, true);
-        } catch(Zend_Service_Amazon_Exception $e) {
-            throw new Zend_Cloud_DocumentService_Exception('Error on fetching document: '.$e->getMessage(), $e->getCode(), $e);
+        } catch (Zend_Service_Amazon_Exception $e) {
+            throw new Zend_Cloud_DocumentService_Exception('Error on fetching document: ' . $e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -323,24 +323,24 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
      * Query for documents stored in the document service. If a string is passed in
      * $query, the query string will be passed directly to the service.
      *
-     * @param  string $collectionName Collection name
-     * @param  string $query
-     * @param  array $options
+     * @param string $collectionName Collection name
+     * @param string $query
+     * @param array  $options
      * @return array Zend_Cloud_DocumentService_DocumentSet
      */
     public function query($collectionName, $query, $options = null)
     {
         $returnDocs = isset($options[self::RETURN_DOCUMENTS])
-                    ? (bool) $options[self::RETURN_DOCUMENTS]
-                    : true;
+            ? (bool)$options[self::RETURN_DOCUMENTS]
+            : true;
 
         try {
             if ($query instanceof Zend_Cloud_DocumentService_Adapter_SimpleDb_Query) {
                 $query = $query->assemble($collectionName);
             }
             $result = $this->_simpleDb->select($query);
-        } catch(Zend_Service_Amazon_Exception $e) {
-            throw new Zend_Cloud_DocumentService_Exception('Error on document query: '.$e->getMessage(), $e->getCode(), $e);
+        } catch (Zend_Service_Amazon_Exception $e) {
+            throw new Zend_Cloud_DocumentService_Exception('Error on document query: ' . $e->getMessage(), $e->getCode(), $e);
         }
 
         return $this->_getDocumentSetFromResultSet($result, $returnDocs);
@@ -349,7 +349,7 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
     /**
      * Create query statement
      *
-     * @param  string $fields
+     * @param string $fields
      * @return Zend_Cloud_DocumentService_Adapter_SimpleDb_Query
      */
     public function select($fields = null)
@@ -384,12 +384,12 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
      * Convert array of key-value pairs to array of Amazon attributes
      *
      * @param string $name
-     * @param array $attributes
+     * @param array  $attributes
      * @return array
      */
     protected function _makeAttributes($name, $attributes)
     {
-        $result = array();
+        $result = [];
         foreach ($attributes as $key => $attr) {
             $result[] = new Zend_Service_Amazon_SimpleDb_Attribute($name, $key, $attr);
         }
@@ -404,7 +404,7 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
      */
     protected function _resolveAttributes($attributes, $returnDocument = false)
     {
-        $result = array();
+        $result = [];
         foreach ($attributes as $attr) {
             $value = $attr->getValues();
             if (count($value) == 0) {
@@ -437,7 +437,7 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
                 $key = $document[self::ITEM_NAME];
                 unset($document[self::ITEM_NAME]);
             } else {
-                throw new Zend_Cloud_DocumentService_Exception('Fields array should contain the key field '.Zend_Cloud_DocumentService_Document::KEY_FIELD);
+                throw new Zend_Cloud_DocumentService_Exception('Fields array should contain the key field ' . Zend_Cloud_DocumentService_Document::KEY_FIELD);
             }
         } else {
             $key = $document[Zend_Cloud_DocumentService_Document::KEY_FIELD];
@@ -451,13 +451,13 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb
     /**
      * Create a DocumentSet from a SimpleDb resultset
      *
-     * @param  Zend_Service_Amazon_SimpleDb_Page $resultSet
-     * @param  bool $returnDocs
+     * @param Zend_Service_Amazon_SimpleDb_Page $resultSet
+     * @param bool                              $returnDocs
      * @return Zend_Cloud_DocumentService_DocumentSet
      */
     protected function _getDocumentSetFromResultSet(Zend_Service_Amazon_SimpleDb_Page $resultSet, $returnDocs = true)
     {
-        $docs = array();
+        $docs = [];
         foreach ($resultSet->getData() as $item) {
             $docs[] = $this->_resolveAttributes($item, $returnDocs);
         }

@@ -56,7 +56,7 @@ class Zend_Mail_Transport_File extends Zend_Mail_Transport_Abstract
     /**
      * Constructor
      *
-     * @param  array|Zend_Config $options OPTIONAL (Default: null)
+     * @param array|Zend_Config $options OPTIONAL (Default: null)
      * @return void
      */
     public function __construct($options = null)
@@ -64,7 +64,7 @@ class Zend_Mail_Transport_File extends Zend_Mail_Transport_Abstract
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
         } elseif (!is_array($options)) {
-            $options = array();
+            $options = [];
         }
 
         // Making sure we have some defaults to work with
@@ -72,7 +72,7 @@ class Zend_Mail_Transport_File extends Zend_Mail_Transport_Abstract
             $options['path'] = sys_get_temp_dir();
         }
         if (!isset($options['callback'])) {
-            $options['callback'] = array($this, 'defaultCallback');
+            $options['callback'] = [$this, 'defaultCallback'];
         }
 
         $this->setOptions($options);
@@ -81,7 +81,7 @@ class Zend_Mail_Transport_File extends Zend_Mail_Transport_Abstract
     /**
      * Sets options
      *
-     * @param  array $options
+     * @param array $options
      * @return void
      */
     public function setOptions(array $options)

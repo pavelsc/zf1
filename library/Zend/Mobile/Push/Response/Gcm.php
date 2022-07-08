@@ -82,7 +82,7 @@ class Zend_Mobile_Push_Response_Gcm
     /**
      * Constructor
      *
-     * @param string $responseString JSON encoded response
+     * @param string                       $responseString JSON encoded response
      * @param Zend_Mobile_Push_Message_Gcm $message
      * @return Zend_Mobile_Push_Response_Gcm
      * @throws Zend_Mobile_Push_Exception_ServerUnavailable
@@ -138,9 +138,9 @@ class Zend_Mobile_Push_Response_Gcm
     /**
      * Set Response
      *
-     * @param  array $response
-     * @throws Zend_Mobile_Push_Exception
+     * @param array $response
      * @return Zend_Mobile_Push_Response_Gcm
+     * @throws Zend_Mobile_Push_Exception
      */
     public function setResponse(array $response)
     {
@@ -153,10 +153,10 @@ class Zend_Mobile_Push_Response_Gcm
         }
         $this->_response = $response;
         $this->_results = $response['results'];
-        $this->_successCnt = (int) $response['success'];
-        $this->_failureCnt = (int) $response['failure'];
-        $this->_canonicalCnt = (int) $response['canonical_ids'];
-        $this->_id = (int) $response['multicast_id'];
+        $this->_successCnt = (int)$response['success'];
+        $this->_failureCnt = (int)$response['failure'];
+        $this->_canonicalCnt = (int)$response['canonical_ids'];
+        $this->_id = (int)$response['multicast_id'];
         return $this;
     }
 
@@ -195,7 +195,7 @@ class Zend_Mobile_Push_Response_Gcm
      *
      * @return array multi dimensional array of:
      *         NOTE: key is registration_id if the message is passed.
-     *         'registration_id' => array( 
+     *         'registration_id' => array(
      *             'message_id' => 'id',
      *             'error' => 'error',
      *             'registration_id' => 'id'
@@ -209,13 +209,13 @@ class Zend_Mobile_Push_Response_Gcm
     /**
      * Get Singular Result
      *
-     * @param  int   $flag one of the RESULT_* flags
+     * @param int $flag one of the RESULT_* flags
      * @return array singular array with keys being registration id
-     *               value is the type of result
+     *                  value is the type of result
      */
     public function getResult($flag)
     {
-        $ret = array();
+        $ret = [];
         foreach ($this->_correlate() as $k => $v) {
             if (isset($v[$flag])) {
                 $ret[$k] = $v[$flag];
@@ -234,7 +234,7 @@ class Zend_Mobile_Push_Response_Gcm
         $results = $this->_results;
         if ($this->_message && $results) {
             $tokens = $this->_message->getToken();
-            while($token = array_shift($tokens)) {
+            while ($token = array_shift($tokens)) {
                 $results[$token] = array_shift($results);
             }
         }

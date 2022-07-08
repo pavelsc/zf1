@@ -40,17 +40,17 @@ class Zend_Validate_Hex extends Zend_Validate_Abstract
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $_messageTemplates = [
         self::INVALID => "Invalid type given. String expected",
         self::NOT_HEX => "'%value%' has not only hexadecimal digit characters",
-    );
+    ];
 
     /**
      * Defined by Zend_Validate_Interface
      *
      * Returns true if and only if $value contains only hexadecimal digit characters
      *
-     * @param  string $value
+     * @param string $value
      * @return boolean
      */
     public function isValid($value)
@@ -61,7 +61,7 @@ class Zend_Validate_Hex extends Zend_Validate_Abstract
         }
 
         $this->_setValue($value);
-        if (!ctype_xdigit((string) $value)) {
+        if (!ctype_xdigit((string)$value)) {
             $this->_error(self::NOT_HEX);
             return false;
         }

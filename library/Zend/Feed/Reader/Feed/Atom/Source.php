@@ -39,8 +39,8 @@ class Zend_Feed_Reader_Feed_Atom_Source extends Zend_Feed_Reader_Feed_Atom
      * metadata from an Atom entry's source element.
      *
      * @param DOMElement $source
-     * @param string $xpathPrefix Passed from parent Entry object
-     * @param string $type Nearly always Atom 1.0
+     * @param string     $xpathPrefix Passed from parent Entry object
+     * @param string     $type        Nearly always Atom 1.0
      */
     public function __construct(DOMElement $source, $xpathPrefix, $type = Zend_Feed_Reader::TYPE_ATOM_10)
     {
@@ -67,36 +67,50 @@ class Zend_Feed_Reader_Feed_Atom_Source extends Zend_Feed_Reader_Feed_Atom
     /**
      * @return void
      */
-    public function count() {}
+    public function count()
+    {
+    }
 
     /**
      * @return void
      */
-    public function current() {}
+    public function current()
+    {
+    }
 
     /**
      * @return void
      */
-    public function key() {}
+    public function key()
+    {
+    }
 
     /**
      * @return void
      */
-    public function next() {}
+    public function next()
+    {
+    }
 
     /**
      * @return void
      */
-    public function rewind() {}
+    public function rewind()
+    {
+    }
 
     /**
      * @return void
      */
-    public function valid() {}
+    public function valid()
+    {
+    }
 
     /**
      * @return void
      */
-    protected function _indexEntries() {}
+    protected function _indexEntries()
+    {
+    }
 
 }

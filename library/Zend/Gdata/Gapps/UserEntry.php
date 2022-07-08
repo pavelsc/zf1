@@ -98,13 +98,13 @@ class Zend_Gdata_Gapps_UserEntry extends Zend_Gdata_Entry
      *
      * @var Zend_Gdata_Extension_FeedLink
      */
-    protected $_feedLink = array();
+    protected $_feedLink = [];
 
     /**
      * Create a new instance.
      *
      * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
+     *                            object should be constructed.
      */
     public function __construct($element = null)
     {
@@ -119,7 +119,7 @@ class Zend_Gdata_Gapps_UserEntry extends Zend_Gdata_Entry
      *
      * @param DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
-     *          child properties.
+     *                         child properties.
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
@@ -179,8 +179,8 @@ class Zend_Gdata_Gapps_UserEntry extends Zend_Gdata_Entry
     /**
      * Get the value of the login property for this object.
      *
-     * @see setLogin
      * @return Zend_Gdata_Gapps_Extension_Login The requested object.
+     * @see setLogin
      */
     public function getLogin()
     {
@@ -192,7 +192,7 @@ class Zend_Gdata_Gapps_UserEntry extends Zend_Gdata_Entry
      * is used to store the username address of the current user.
      *
      * @param Zend_Gdata_Gapps_Extension_Login $value The desired value for
-     *          this instance's login property.
+     *                                                this instance's login property.
      * @return Zend_Gdata_Gapps_UserEntry Provides a fluent interface.
      */
     public function setLogin($value)
@@ -204,8 +204,8 @@ class Zend_Gdata_Gapps_UserEntry extends Zend_Gdata_Entry
     /**
      * Get the value of the name property for this object.
      *
-     * @see setName
      * @return Zend_Gdata_Gapps_Extension_Name The requested object.
+     * @see setName
      */
     public function getName()
     {
@@ -217,7 +217,7 @@ class Zend_Gdata_Gapps_UserEntry extends Zend_Gdata_Entry
      * is used to store the full name of the current user.
      *
      * @param Zend_Gdata_Gapps_Extension_Name $value The desired value for
-     *          this instance's name property.
+     *                                               this instance's name property.
      * @return Zend_Gdata_Gapps_UserEntry Provides a fluent interface.
      */
     public function setName($value)
@@ -229,8 +229,8 @@ class Zend_Gdata_Gapps_UserEntry extends Zend_Gdata_Entry
     /**
      * Get the value of the quota property for this object.
      *
-     * @see setQuota
      * @return Zend_Gdata_Gapps_Extension_Quota The requested object.
+     * @see setQuota
      */
     public function getQuota()
     {
@@ -243,7 +243,7 @@ class Zend_Gdata_Gapps_UserEntry extends Zend_Gdata_Entry
      * user. Quotas may not be modifiable depending on the domain used.
      *
      * @param Zend_Gdata_Gapps_Extension_Quota $value The desired value for
-     *          this instance's quota property.
+     *                                                this instance's quota property.
      * @return Zend_Gdata_Gapps_UserEntry Provides a fluent interface.
      */
     public function setQuota($value)
@@ -257,12 +257,12 @@ class Zend_Gdata_Gapps_UserEntry extends Zend_Gdata_Entry
      * specified, the feed link associated with that value is returned.
      *
      * @param string $rel The rel value of the link to be found. If null,
-     *          the array of links is returned instead.
+     *                    the array of links is returned instead.
      * @return mixed Either an array of Zend_Gdata_Extension_FeedLink
-     *          objects if $rel is null, a single
-     *          Zend_Gdata_Extension_FeedLink object if $rel is specified
-     *          and a matching feed link is found, or null if $rel is
-     *          specified and no matching feed link is found.
+     *                    objects if $rel is null, a single
+     *                    Zend_Gdata_Extension_FeedLink object if $rel is specified
+     *                    and a matching feed link is found, or null if $rel is
+     *                    specified and no matching feed link is found.
      */
     public function getFeedLink($rel = null)
     {
@@ -283,7 +283,7 @@ class Zend_Gdata_Gapps_UserEntry extends Zend_Gdata_Entry
      * is used to provide links to alternative feeds relevant to this entry.
      *
      * @param array $value A collection of
-     *          Zend_Gdata_Gapps_Extension_FeedLink objects.
+     *                     Zend_Gdata_Gapps_Extension_FeedLink objects.
      * @return Zend_Gdata_Gapps_EventEntry Provides a fluent interface.
      */
     public function setFeedLink($value)

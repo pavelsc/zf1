@@ -32,7 +32,6 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
 class Zend_View_Helper_RenderToPlaceholder extends Zend_View_Helper_Abstract
 {
 
@@ -40,7 +39,7 @@ class Zend_View_Helper_RenderToPlaceholder extends Zend_View_Helper_Abstract
      * Renders a template and stores the rendered output as a placeholder
      * variable for later use.
      *
-     * @param string $script The template script to render
+     * @param string $script      The template script to render
      * @param string $placeholder The placeholder variable name in which to store the rendered output
      * @return void
      */

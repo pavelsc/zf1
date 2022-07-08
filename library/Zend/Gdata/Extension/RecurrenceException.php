@@ -60,7 +60,7 @@ class Zend_Gdata_Extension_RecurrenceException extends Zend_Gdata_Extension
      * @param Zend_Gdata_OriginalEvent (optional) The origianl recurrent event this is an exeption to.
      */
     public function __construct($specialized = null, $entryLink = null,
-            $originalEvent = null)
+                                $originalEvent = null)
     {
         parent::__construct();
         $this->_specialized = $specialized;
@@ -76,7 +76,7 @@ class Zend_Gdata_Extension_RecurrenceException extends Zend_Gdata_Extension
      *
      * @param DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
-     * child properties.
+     *                         child properties.
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
@@ -103,19 +103,17 @@ class Zend_Gdata_Extension_RecurrenceException extends Zend_Gdata_Extension
     protected function takeAttributeFromDOM($attribute)
     {
         switch ($attribute->localName) {
-        case 'specialized':
-            if ($attribute->nodeValue == "true") {
-                $this->_specialized = true;
-            }
-            else if ($attribute->nodeValue == "false") {
-                $this->_specialized = false;
-            }
-            else {
-                throw new Zend_Gdata_App_InvalidArgumentException("Expected 'true' or 'false' for gCal:selected#value.");
-            }
-            break;
-        default:
-            parent::takeAttributeFromDOM($attribute);
+            case 'specialized':
+                if ($attribute->nodeValue == "true") {
+                    $this->_specialized = true;
+                } else if ($attribute->nodeValue == "false") {
+                    $this->_specialized = false;
+                } else {
+                    throw new Zend_Gdata_App_InvalidArgumentException("Expected 'true' or 'false' for gCal:selected#value.");
+                }
+                break;
+            default:
+                parent::takeAttributeFromDOM($attribute);
         }
     }
 
@@ -129,19 +127,19 @@ class Zend_Gdata_Extension_RecurrenceException extends Zend_Gdata_Extension
     {
         $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
         switch ($absoluteNodeName) {
-        case $this->lookupNamespace('gd') . ':' . 'entryLink':
-            $entryLink = new Zend_Gdata_Extension_EntryLink();
-            $entryLink->transferFromDOM($child);
-            $this->_entryLink = $entryLink;
-            break;
-        case $this->lookupNamespace('gd') . ':' . 'originalEvent':
-            $originalEvent = new Zend_Gdata_Extension_OriginalEvent();
-            $originalEvent->transferFromDOM($child);
-            $this->_originalEvent = $originalEvent;
-            break;
-        default:
-            parent::takeChildFromDOM($child);
-            break;
+            case $this->lookupNamespace('gd') . ':' . 'entryLink':
+                $entryLink = new Zend_Gdata_Extension_EntryLink();
+                $entryLink->transferFromDOM($child);
+                $this->_entryLink = $entryLink;
+                break;
+            case $this->lookupNamespace('gd') . ':' . 'originalEvent':
+                $originalEvent = new Zend_Gdata_Extension_OriginalEvent();
+                $originalEvent->transferFromDOM($child);
+                $this->_originalEvent = $originalEvent;
+                break;
+            default:
+                parent::takeChildFromDOM($child);
+                break;
         }
     }
 

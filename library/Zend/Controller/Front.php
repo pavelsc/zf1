@@ -71,7 +71,7 @@ class Zend_Controller_Front
      * controllers
      * @var array
      */
-    protected $_invokeParams = array();
+    protected $_invokeParams = [];
 
     /**
      * Subdirectory within a module containing controllers; defaults to 'controllers'
@@ -174,7 +174,7 @@ class Zend_Controller_Front
                     break;
                 case '_controllerDir':
                 case '_invokeParams':
-                    $this->{$name} = array();
+                    $this->{$name} = [];
                     break;
                 case '_plugins':
                     $this->{$name} = new Zend_Controller_Plugin_Broker();
@@ -201,7 +201,7 @@ class Zend_Controller_Front
      * may actually be called after setting up your front controller.
      *
      * @param string|array $controllerDirectory Path to Zend_Controller_Action
-     * controller classes or array of such paths
+     *                                          controller classes or array of such paths
      * @return void
      * @throws Zend_Controller_Exception if called from an object instance
      */
@@ -236,8 +236,8 @@ class Zend_Controller_Front
      * directories or a string containing a single directory.
      *
      * @param string|array $directory Path to Zend_Controller_Action controller
-     * classes or array of such paths
-     * @param  string $module Optional module name to use with string $directory
+     *                                classes or array of such paths
+     * @param string       $module    Optional module name to use with string $directory
      * @return Zend_Controller_Front
      */
     public function setControllerDirectory($directory, $module = null)
@@ -254,7 +254,7 @@ class Zend_Controller_Front
      * - String path if $name passed and exists as a key in controller directory array
      * - null if $name passed but does not exist in controller directory keys
      *
-     * @param  string $name Default null
+     * @param string $name Default null
      * @return array|string|null
      */
     public function getControllerDirectory($name = null)
@@ -265,7 +265,7 @@ class Zend_Controller_Front
     /**
      * Remove a controller directory by module name
      *
-     * @param  string $module
+     * @param string $module
      * @return bool
      */
     public function removeControllerDirectory($module)
@@ -280,14 +280,14 @@ class Zend_Controller_Front
      * the subdirectory within each module named after {@link $_moduleControllerDirectoryName}
      * will be used as the controller directory path.
      *
-     * @param  string $path
+     * @param string $path
      * @return Zend_Controller_Front
      */
     public function addModuleDirectory($path)
     {
-        try{
+        try {
             $dir = new DirectoryIterator($path);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             require_once 'Zend/Controller/Exception.php';
             throw new Zend_Controller_Exception("Directory $path not readable", 0, $e);
         }
@@ -296,7 +296,7 @@ class Zend_Controller_Front
                 continue;
             }
 
-            $module    = $file->getFilename();
+            $module = $file->getFilename();
 
             // Don't use SCCS directories as modules
             if (preg_match('/^[^a-z]/i', $module) || ('CVS' == $module)) {
@@ -313,7 +313,7 @@ class Zend_Controller_Front
     /**
      * Return the path to a module directory (but not the controllers directory within)
      *
-     * @param  string $module
+     * @param string $module
      * @return string|null
      */
     public function getModuleDirectory($module = null)
@@ -340,12 +340,12 @@ class Zend_Controller_Front
     /**
      * Set the directory name within a module containing controllers
      *
-     * @param  string $name
+     * @param string $name
      * @return Zend_Controller_Front
      */
     public function setModuleControllerDirectoryName($name = 'controllers')
     {
-        $this->_moduleControllerDirectoryName = (string) $name;
+        $this->_moduleControllerDirectoryName = (string)$name;
 
         return $this;
     }
@@ -437,8 +437,8 @@ class Zend_Controller_Front
      * If a class name is provided, it will instantiate it
      *
      * @param string|Zend_Controller_Request_Abstract $request
-     * @throws Zend_Controller_Exception if invalid request class
      * @return Zend_Controller_Front
+     * @throws Zend_Controller_Exception if invalid request class
      */
     public function setRequest($request)
     {
@@ -479,8 +479,8 @@ class Zend_Controller_Front
      * registered via {@link setParam()} or {@link setParams()}.
      *
      * @param string|Zend_Controller_Router_Interface $router
-     * @throws Zend_Controller_Exception if invalid router class
      * @return Zend_Controller_Front
+     * @throws Zend_Controller_Exception if invalid router class
      */
     public function setRouter($router)
     {
@@ -611,8 +611,8 @@ class Zend_Controller_Front
      * If a class name is provided, instantiates a response object.
      *
      * @param string|Zend_Controller_Response_Abstract $response
-     * @throws Zend_Controller_Exception if invalid response class
      * @return Zend_Controller_Front
+     * @throws Zend_Controller_Exception if invalid response class
      */
     public function setResponse($response)
     {
@@ -647,12 +647,12 @@ class Zend_Controller_Front
      * Add or modify a parameter to use when instantiating an action controller
      *
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
      * @return Zend_Controller_Front
      */
     public function setParam($name, $value)
     {
-        $name = (string) $name;
+        $name = (string)$name;
         $this->_invokeParams[$name] = $value;
         return $this;
     }
@@ -677,7 +677,7 @@ class Zend_Controller_Front
      */
     public function getParam($name)
     {
-        if(isset($this->_invokeParams[$name])) {
+        if (isset($this->_invokeParams[$name])) {
             return $this->_invokeParams[$name];
         }
 
@@ -707,7 +707,7 @@ class Zend_Controller_Front
     public function clearParams($name = null)
     {
         if (null === $name) {
-            $this->_invokeParams = array();
+            $this->_invokeParams = [];
         } elseif (is_string($name) && isset($this->_invokeParams[$name])) {
             unset($this->_invokeParams[$name]);
         } elseif (is_array($name)) {
@@ -724,8 +724,8 @@ class Zend_Controller_Front
     /**
      * Register a plugin.
      *
-     * @param  Zend_Controller_Plugin_Abstract $plugin
-     * @param  int $stackIndex Optional; stack index for plugin
+     * @param Zend_Controller_Plugin_Abstract $plugin
+     * @param int                             $stackIndex Optional; stack index for plugin
      * @return Zend_Controller_Front
      */
     public function registerPlugin(Zend_Controller_Plugin_Abstract $plugin, $stackIndex = null)
@@ -737,7 +737,7 @@ class Zend_Controller_Front
     /**
      * Unregister a plugin.
      *
-     * @param  string|Zend_Controller_Plugin_Abstract $plugin Plugin class or object to unregister
+     * @param string|Zend_Controller_Plugin_Abstract $plugin Plugin class or object to unregister
      * @return Zend_Controller_Front
      */
     public function unregisterPlugin($plugin)
@@ -749,7 +749,7 @@ class Zend_Controller_Front
     /**
      * Is a particular plugin registered?
      *
-     * @param  string $class
+     * @param string $class
      * @return bool
      */
     public function hasPlugin($class)
@@ -760,7 +760,7 @@ class Zend_Controller_Front
     /**
      * Retrieve a plugin or plugins by class
      *
-     * @param  string $class
+     * @param string $class
      * @return false|Zend_Controller_Plugin_Abstract|array
      */
     public function getPlugin($class)
@@ -797,7 +797,7 @@ class Zend_Controller_Front
     public function throwExceptions($flag = null)
     {
         if ($flag !== null) {
-            $this->_throwExceptions = (bool) $flag;
+            $this->_throwExceptions = (bool)$flag;
             return $this;
         }
 
@@ -828,7 +828,7 @@ class Zend_Controller_Front
     /**
      * Dispatch an HTTP request to a controller/action.
      *
-     * @param Zend_Controller_Request_Abstract|null $request
+     * @param Zend_Controller_Request_Abstract|null  $request
      * @param Zend_Controller_Response_Abstract|null $response
      * @return void|Zend_Controller_Response_Abstract Returns response object if returnResponse() is true
      */
@@ -859,7 +859,7 @@ class Zend_Controller_Front
         /**
          * Set base URL of request object, if available
          */
-        if (is_callable(array($this->_request, 'setBaseUrl'))) {
+        if (is_callable([$this->_request, 'setBaseUrl'])) {
             if (null !== $this->_baseUrl) {
                 $this->_request->setBaseUrl($this->_baseUrl);
             }
@@ -880,8 +880,8 @@ class Zend_Controller_Front
          * Register request and response objects with plugin broker
          */
         $this->_plugins
-             ->setRequest($this->_request)
-             ->setResponse($this->_response);
+            ->setRequest($this->_request)
+            ->setResponse($this->_response);
 
         /**
          * Initialize router
@@ -894,7 +894,7 @@ class Zend_Controller_Front
          */
         $dispatcher = $this->getDispatcher();
         $dispatcher->setParams($this->getParams())
-                   ->setResponse($this->_response);
+            ->setResponse($this->_response);
 
         // Begin dispatch
         try {
@@ -903,13 +903,13 @@ class Zend_Controller_Front
              */
 
             /**
-            * Notify plugins of router startup
-            */
+             * Notify plugins of router startup
+             */
             $this->_plugins->routeStartup($this->_request);
 
             try {
                 $router->route($this->_request);
-            }  catch (Exception $e) {
+            } catch (Exception $e) {
                 if ($this->throwExceptions()) {
                     throw $e;
                 }
@@ -918,8 +918,8 @@ class Zend_Controller_Front
             }
 
             /**
-            * Notify plugins of router completion
-            */
+             * Notify plugins of router completion
+             */
             $this->_plugins->routeShutdown($this->_request);
 
             /**

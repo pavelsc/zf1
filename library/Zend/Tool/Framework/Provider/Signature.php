@@ -65,17 +65,17 @@ class Zend_Tool_Framework_Provider_Signature implements Zend_Tool_Framework_Regi
     /**
      * @var array
      */
-    protected $_specialties = array();
+    protected $_specialties = [];
 
     /**
      * @var array
      */
-    protected $_actionableMethods = array();
+    protected $_actionableMethods = [];
 
     /**
      * @var unknown_type
      */
-    protected $_actions = array();
+    protected $_actions = [];
 
     /**
      * @var Zend_Reflection_Class
@@ -241,7 +241,7 @@ class Zend_Tool_Framework_Provider_Signature implements Zend_Tool_Framework_Regi
             $className = get_class($this->_provider);
             $name = $className;
             if (strpos($name, '_')) {
-                $name = substr($name, strrpos($name, '_')+1);
+                $name = substr($name, strrpos($name, '_') + 1);
             }
             $name = preg_replace('#(Provider|Manifest)$#', '', $name);
             $this->_name = $name;
@@ -254,7 +254,7 @@ class Zend_Tool_Framework_Provider_Signature implements Zend_Tool_Framework_Regi
      */
     protected function _processSpecialties()
     {
-        $specialties = array();
+        $specialties = [];
 
         if ($this->_providerReflection->hasMethod('getSpecialties')) {
             $specialties = $this->_provider->getSpecialties();
@@ -262,20 +262,20 @@ class Zend_Tool_Framework_Provider_Signature implements Zend_Tool_Framework_Regi
                 require_once 'Zend/Tool/Framework/Provider/Exception.php';
                 throw new Zend_Tool_Framework_Provider_Exception(
                     'Provider ' . get_class($this->_provider) . ' must return an array for method getSpecialties().'
-                    );
+                );
             }
         } else {
             $defaultProperties = $this->_providerReflection->getDefaultProperties();
-            $specialties = (isset($defaultProperties['_specialties'])) ? $defaultProperties['_specialties'] : array();
+            $specialties = (isset($defaultProperties['_specialties'])) ? $defaultProperties['_specialties'] : [];
             if (!is_array($specialties)) {
                 require_once 'Zend/Tool/Framework/Provider/Exception.php';
                 throw new Zend_Tool_Framework_Provider_Exception(
                     'Provider ' . get_class($this->_provider) . '\'s property $_specialties must be an array.'
-                    );
+                );
             }
         }
 
-        $this->_specialties = array_merge(array('_Global'), $specialties);
+        $this->_specialties = array_merge(['_Global'], $specialties);
 
     }
 
@@ -291,7 +291,7 @@ class Zend_Tool_Framework_Provider_Signature implements Zend_Tool_Framework_Regi
 
         $methods = $this->_providerReflection->getMethods();
 
-        $actionableMethods = array();
+        $actionableMethods = [];
         foreach ($methods as $method) {
 
             $methodName = $method->getName();
@@ -305,8 +305,8 @@ class Zend_Tool_Framework_Provider_Signature implements Zend_Tool_Framework_Regi
                 || !$method->isPublic()
                 || $methodName[0] == '_'
                 || $method->isStatic()
-                || in_array($methodName, array('getContextClasses', 'getName')) // other protected public methods will nee to go here
-                ) {
+                || in_array($methodName, ['getContextClasses', 'getName']) // other protected public methods will nee to go here
+            ) {
                 continue;
             }
 
@@ -349,23 +349,22 @@ class Zend_Tool_Framework_Provider_Signature implements Zend_Tool_Framework_Regi
                 $this->_actions[] = $actionableMethods[$methodName]['action'];
             }
 
-            $parameterInfo = array();
+            $parameterInfo = [];
             $position = 1;
             foreach ($method->getParameters() as $parameter) {
                 $currentParam = $parameter->getName();
-                $parameterInfo[$currentParam]['position']    = $position++;
-                $parameterInfo[$currentParam]['optional']    = $parameter->isOptional();
-                $parameterInfo[$currentParam]['default']     = ($parameter->isOptional()) ? $parameter->getDefaultValue() : null;
-                $parameterInfo[$currentParam]['name']        = $currentParam;
-                $parameterInfo[$currentParam]['type']        = 'string';
+                $parameterInfo[$currentParam]['position'] = $position++;
+                $parameterInfo[$currentParam]['optional'] = $parameter->isOptional();
+                $parameterInfo[$currentParam]['default'] = ($parameter->isOptional()) ? $parameter->getDefaultValue() : null;
+                $parameterInfo[$currentParam]['name'] = $currentParam;
+                $parameterInfo[$currentParam]['type'] = 'string';
                 $parameterInfo[$currentParam]['description'] = null;
             }
 
             $matches = null;
             if (($docComment = $method->getDocComment()) != '' &&
-                (preg_match_all('/@param\s+(\w+)+\s+(\$\S+)\s+(.*?)(?=(?:\*\s*@)|(?:\*\/))/s', $docComment, $matches)))
-            {
-                for ($i=0; $i <= count($matches[0])-1; $i++) {
+                (preg_match_all('/@param\s+(\w+)+\s+(\$\S+)\s+(.*?)(?=(?:\*\s*@)|(?:\*\/))/s', $docComment, $matches))) {
+                for ($i = 0; $i <= count($matches[0]) - 1; $i++) {
                     $currentParam = ltrim($matches[2][$i], '$');
 
                     if ($currentParam != '' && isset($parameterInfo[$currentParam])) {

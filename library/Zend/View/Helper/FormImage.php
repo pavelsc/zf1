@@ -43,13 +43,13 @@ class Zend_View_Helper_FormImage extends Zend_View_Helper_FormElement
      *
      * @access public
      *
-     * @param string|array $name If a string, the element name.  If an
-     * array, all other parameters are ignored, and the array elements
-     * are extracted in place of added parameters.
+     * @param string|array $name    If a string, the element name.  If an
+     *                              array, all other parameters are ignored, and the array elements
+     *                              are extracted in place of added parameters.
      *
-     * @param mixed $value The source ('src="..."') for the image.
+     * @param mixed        $value   The source ('src="..."') for the image.
      *
-     * @param array $attribs Attributes for the element tag.
+     * @param array        $attribs Attributes for the element tag.
      *
      * @return string The element XHTML.
      */
@@ -82,13 +82,13 @@ class Zend_View_Helper_FormImage extends Zend_View_Helper_FormElement
 
         // build the element
         $xhtml = '<input type="image"'
-                . ' name="' . $this->view->escape($name) . '"'
-                . ' id="' . $this->view->escape($id) . '"'
-                . $src
-                . $value
-                . $disabled
-                . $this->_htmlAttribs($attribs)
-                . $this->getClosingBracket();
+            . ' name="' . $this->view->escape($name) . '"'
+            . ' id="' . $this->view->escape($id) . '"'
+            . $src
+            . $value
+            . $disabled
+            . $this->_htmlAttribs($attribs)
+            . $this->getClosingBracket();
 
         return $xhtml;
     }

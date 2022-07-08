@@ -57,7 +57,7 @@ class Zend_Filter_Callback implements Zend_Filter_Interface
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
         } else if (!is_array($options) || !array_key_exists('callback', $options)) {
-            $options          = func_get_args();
+            $options = func_get_args();
             $temp['callback'] = array_shift($options);
             if (!empty($options)) {
                 $temp['options'] = array_shift($options);
@@ -135,11 +135,11 @@ class Zend_Filter_Callback implements Zend_Filter_Interface
      */
     public function filter($value)
     {
-        $options = array();
+        $options = [];
 
         if ($this->_options !== null) {
             if (!is_array($this->_options)) {
-                $options = array($this->_options);
+                $options = [$this->_options];
             } else {
                 $options = $this->_options;
             }

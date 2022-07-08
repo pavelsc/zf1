@@ -43,9 +43,9 @@ class Zend_Service_StrikeIron
     /**
      * Class constructor
      *
-     * @param array  $options  Options to pass to Zend_Service_StrikeIron_Base constructor
+     * @param array $options Options to pass to Zend_Service_StrikeIron_Base constructor
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         $this->_options = $options;
     }
@@ -54,11 +54,11 @@ class Zend_Service_StrikeIron
      * Factory method to return a preconfigured Zend_Service_StrikeIron_*
      * instance.
      *
-     * @param  null|string  $options  Service options
+     * @param null|string $options Service options
      * @return object       Zend_Service_StrikeIron_* instance
      * @throws Zend_Service_StrikeIron_Exception
      */
-    public function getService($options = array())
+    public function getService($options = [])
     {
         $class = isset($options['class']) ? $options['class'] : 'Base';
         unset($options['class']);

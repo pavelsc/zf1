@@ -45,7 +45,7 @@ require_once 'Zend/Validate/Hostname.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
- * @todo Implement proxy settings
+ * @todo       Implement proxy settings
  */
 abstract class Zend_Mail_Protocol_Abstract
 {
@@ -121,16 +121,16 @@ abstract class Zend_Mail_Protocol_Abstract
      * Log of mail requests and server responses for a session
      * @var array
      */
-    private $_log = array();
+    private $_log = [];
 
 
     /**
      * Constructor.
      *
-     * @param  string  $host OPTIONAL Hostname of remote connection (default: 127.0.0.1)
-     * @param  integer $port OPTIONAL Port number (default: null)
-     * @throws Zend_Mail_Protocol_Exception
+     * @param string  $host OPTIONAL Hostname of remote connection (default: 127.0.0.1)
+     * @param integer $port OPTIONAL Port number (default: null)
      * @return void
+     * @throws Zend_Mail_Protocol_Exception
      */
     public function __construct($host = '127.0.0.1', $port = null)
     {
@@ -168,7 +168,7 @@ abstract class Zend_Mail_Protocol_Abstract
      */
     public function setMaximumLog($maximumLog)
     {
-        $this->_maximumLog = (int) $maximumLog;
+        $this->_maximumLog = (int)$maximumLog;
     }
 
 
@@ -231,13 +231,13 @@ abstract class Zend_Mail_Protocol_Abstract
      */
     public function resetLog()
     {
-        $this->_log = array();
+        $this->_log = [];
     }
 
     /**
      * Add the transaction log
      *
-     * @param  string new transaction
+     * @param string new transaction
      * @return void
      */
     protected function _addLog($value)
@@ -254,9 +254,9 @@ abstract class Zend_Mail_Protocol_Abstract
      *
      * An example $remote string may be 'tcp://mail.example.com:25' or 'ssh://hostname.com:2222'
      *
-     * @param  string $remote Remote
-     * @throws Zend_Mail_Protocol_Exception
+     * @param string $remote Remote
      * @return boolean
+     * @throws Zend_Mail_Protocol_Exception
      */
     protected function _connect($remote)
     {
@@ -305,9 +305,9 @@ abstract class Zend_Mail_Protocol_Abstract
     /**
      * Send the given request followed by a LINEEND to the server.
      *
-     * @param  string $request
-     * @throws Zend_Mail_Protocol_Exception
+     * @param string $request
      * @return integer|boolean Number of bytes written to remote host
+     * @throws Zend_Mail_Protocol_Exception
      */
     protected function _send($request)
     {
@@ -341,9 +341,9 @@ abstract class Zend_Mail_Protocol_Abstract
     /**
      * Get a line from the stream.
      *
-     * @var    integer $timeout Per-request timeout value if applicable
-     * @throws Zend_Mail_Protocol_Exception
      * @return string
+     * @throws Zend_Mail_Protocol_Exception
+     * @var    integer $timeout Per-request timeout value if applicable
      */
     protected function _receive($timeout = null)
     {
@@ -395,30 +395,30 @@ abstract class Zend_Mail_Protocol_Abstract
      * Read the response from the stream and check for expected return code.
      * Throws a Zend_Mail_Protocol_Exception if an unexpected code is returned.
      *
-     * @param  string|array $code One or more codes that indicate a successful response
-     * @throws Zend_Mail_Protocol_Exception
+     * @param string|array $code One or more codes that indicate a successful response
      * @return string Last line of response string
+     * @throws Zend_Mail_Protocol_Exception
      */
     protected function _expect($code, $timeout = null)
     {
-        $this->_response = array();
-        $cmd  = '';
+        $this->_response = [];
+        $cmd = '';
         $more = '';
-        $msg  = '';
+        $msg = '';
         $errMsg = '';
 
         if (!is_array($code)) {
-            $code = array($code);
+            $code = [$code];
         }
 
         do {
             $this->_response[] = $result = $this->_receive($timeout);
-            list($cmd, $more, $msg) = preg_split('/([\s-]+)/', $result, 2, PREG_SPLIT_DELIM_CAPTURE);
+            [$cmd, $more, $msg] = preg_split('/([\s-]+)/', $result, 2, PREG_SPLIT_DELIM_CAPTURE);
 
             if ($errMsg !== '') {
                 $errMsg .= ' ' . $msg;
             } elseif ($cmd === null || !in_array($cmd, $code)) {
-                $errMsg =  $msg;
+                $errMsg = $msg;
             }
 
         } while (strpos($more, '-') === 0); // The '-' message prefix indicates an information string instead of a response string.
@@ -442,6 +442,6 @@ abstract class Zend_Mail_Protocol_Abstract
      */
     protected function _setStreamTimeout($timeout)
     {
-       return stream_set_timeout($this->_socket, $timeout);
+        return stream_set_timeout($this->_socket, $timeout);
     }
 }

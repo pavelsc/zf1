@@ -84,27 +84,27 @@ class Zend_Service_Amazon_Item
     /**
      * @var Zend_Service_Amazon_CustomerReview[]
      */
-    public $CustomerReviews = array();
+    public $CustomerReviews = [];
 
     /**
      * @var Zend_Service_Amazon_SimilarProducts[]
      */
-    public $SimilarProducts = array();
+    public $SimilarProducts = [];
 
     /**
      * @var Zend_Service_Amazon_Accessories[]
      */
-    public $Accessories = array();
+    public $Accessories = [];
 
     /**
      * @var array
      */
-    public $Tracks = array();
+    public $Tracks = [];
 
     /**
      * @var Zend_Service_Amazon_ListmaniaLists[]
      */
-    public $ListmaniaLists = array();
+    public $ListmaniaLists = [];
 
     protected $_dom;
 
@@ -112,7 +112,7 @@ class Zend_Service_Amazon_Item
     /**
      * Parse the given <Item> element
      *
-     * @param  null|DOMElement $dom
+     * @param null|DOMElement $dom
      * @return void
      * @throws    Zend_Service_Amazon_Exception
      *
@@ -138,9 +138,9 @@ class Zend_Service_Amazon_Item
         }
 
         if ($xpath->query('./az:ItemAttributes/az:ListPrice', $dom)->length >= 1) {
-            $this->CurrencyCode = (string) $xpath->query('./az:ItemAttributes/az:ListPrice/az:CurrencyCode/text()', $dom)->item(0)->data;
-            $this->Amount = (int) $xpath->query('./az:ItemAttributes/az:ListPrice/az:Amount/text()', $dom)->item(0)->data;
-            $this->FormattedPrice = (string) $xpath->query('./az:ItemAttributes/az:ListPrice/az:FormattedPrice/text()', $dom)->item(0)->data;
+            $this->CurrencyCode = (string)$xpath->query('./az:ItemAttributes/az:ListPrice/az:CurrencyCode/text()', $dom)->item(0)->data;
+            $this->Amount = (int)$xpath->query('./az:ItemAttributes/az:ListPrice/az:Amount/text()', $dom)->item(0)->data;
+            $this->FormattedPrice = (string)$xpath->query('./az:ItemAttributes/az:ListPrice/az:FormattedPrice/text()', $dom)->item(0)->data;
         }
 
         $result = $xpath->query('./az:ItemAttributes/az:*/text()', $dom);
@@ -148,17 +148,17 @@ class Zend_Service_Amazon_Item
             foreach ($result as $v) {
                 if (isset($this->{$v->parentNode->tagName})) {
                     if (is_array($this->{$v->parentNode->tagName})) {
-                        array_push($this->{$v->parentNode->tagName}, (string) $v->data);
+                        array_push($this->{$v->parentNode->tagName}, (string)$v->data);
                     } else {
-                        $this->{$v->parentNode->tagName} = array($this->{$v->parentNode->tagName}, (string) $v->data);
+                        $this->{$v->parentNode->tagName} = [$this->{$v->parentNode->tagName}, (string)$v->data];
                     }
                 } else {
-                    $this->{$v->parentNode->tagName} = (string) $v->data;
+                    $this->{$v->parentNode->tagName} = (string)$v->data;
                 }
             }
         }
 
-        foreach (array('SmallImage', 'MediumImage', 'LargeImage') as $im) {
+        foreach (['SmallImage', 'MediumImage', 'LargeImage'] as $im) {
             $result = $xpath->query("./az:ImageSets/az:ImageSet[position() = 1]/az:$im", $dom);
             if ($result->length == 1) {
                 /**
@@ -171,7 +171,7 @@ class Zend_Service_Amazon_Item
 
         $result = $xpath->query('./az:SalesRank/text()', $dom);
         if ($result->length == 1) {
-            $this->SalesRank = (int) $result->item(0)->data;
+            $this->SalesRank = (int)$result->item(0)->data;
         }
 
         $result = $xpath->query('./az:CustomerReviews/az:Review', $dom);
@@ -183,8 +183,8 @@ class Zend_Service_Amazon_Item
             foreach ($result as $review) {
                 $this->CustomerReviews[] = new Zend_Service_Amazon_CustomerReview($review);
             }
-            $this->AverageRating = (float) $xpath->query('./az:CustomerReviews/az:AverageRating/text()', $dom)->item(0)->data;
-            $this->TotalReviews = (int) $xpath->query('./az:CustomerReviews/az:TotalReviews/text()', $dom)->item(0)->data;
+            $this->AverageRating = (float)$xpath->query('./az:CustomerReviews/az:AverageRating/text()', $dom)->item(0)->data;
+            $this->TotalReviews = (int)$xpath->query('./az:CustomerReviews/az:TotalReviews/text()', $dom)->item(0)->data;
         }
 
         $result = $xpath->query('./az:EditorialReviews/az:*', $dom);
@@ -226,12 +226,12 @@ class Zend_Service_Amazon_Item
                 foreach ($xpath->query('./*/text()', $disk) as $t) {
                     // TODO: For consistency in a bugfix all tracks are appended to one single array
                     // Erroreous line: $this->Tracks[$disk->getAttribute('number')] = (string) $t->data;
-                    $this->Tracks[] = (string) $t->data;
+                    $this->Tracks[] = (string)$t->data;
                 }
             }
         } else if ($result->length == 1) {
             foreach ($xpath->query('./*/text()', $result->item(0)) as $t) {
-                $this->Tracks[] = (string) $t->data;
+                $this->Tracks[] = (string)$t->data;
             }
         }
 

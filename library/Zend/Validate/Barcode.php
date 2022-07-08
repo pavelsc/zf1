@@ -37,26 +37,26 @@ require_once 'Zend/Loader.php';
  */
 class Zend_Validate_Barcode extends Zend_Validate_Abstract
 {
-    const INVALID        = 'barcodeInvalid';
-    const FAILED         = 'barcodeFailed';
-    const INVALID_CHARS  = 'barcodeInvalidChars';
+    const INVALID = 'barcodeInvalid';
+    const FAILED = 'barcodeFailed';
+    const INVALID_CHARS = 'barcodeInvalidChars';
     const INVALID_LENGTH = 'barcodeInvalidLength';
 
-    protected $_messageTemplates = array(
-        self::FAILED         => "'%value%' failed checksum validation",
-        self::INVALID_CHARS  => "'%value%' contains invalid characters",
+    protected $_messageTemplates = [
+        self::FAILED => "'%value%' failed checksum validation",
+        self::INVALID_CHARS => "'%value%' contains invalid characters",
         self::INVALID_LENGTH => "'%value%' should have a length of %length% characters",
-        self::INVALID        => "Invalid type given. String expected",
-    );
+        self::INVALID => "Invalid type given. String expected",
+    ];
 
     /**
      * Additional variables available for validation failure messages
      *
      * @var array
      */
-    protected $_messageVariables = array(
+    protected $_messageVariables = [
         'length' => '_length'
-    );
+    ];
 
     /**
      * Length for the set subtype
@@ -75,7 +75,7 @@ class Zend_Validate_Barcode extends Zend_Validate_Abstract
     /**
      * Generates the standard validator object
      *
-     * @param  string|Zend_Config|
+     * @param string|Zend_Config|
      *         Zend_Validate_Barcode_BarcodeAdapter $adapter Barcode adapter to use
      * @throws Zend_Validate_Exception
      */
@@ -85,7 +85,7 @@ class Zend_Validate_Barcode extends Zend_Validate_Abstract
             $adapter = $adapter->toArray();
         }
 
-        $options  = null;
+        $options = null;
         $checksum = null;
         if (is_array($adapter)) {
             if (array_key_exists('options', $adapter)) {
@@ -123,8 +123,8 @@ class Zend_Validate_Barcode extends Zend_Validate_Abstract
     /**
      * Sets a new barcode adapter
      *
-     * @param  string|Zend_Validate_Barcode $adapter Barcode adapter to use
-     * @param  array  $options Options for this adapter
+     * @param string|Zend_Validate_Barcode $adapter Barcode adapter to use
+     * @param array                        $options Options for this adapter
      * @return $this
      * @throws Zend_Validate_Exception
      */
@@ -132,7 +132,7 @@ class Zend_Validate_Barcode extends Zend_Validate_Abstract
     {
         $adapter = ucfirst(strtolower($adapter));
         require_once 'Zend/Loader.php';
-        if (Zend_Loader::isReadable('Zend/Validate/Barcode/' . $adapter. '.php')) {
+        if (Zend_Loader::isReadable('Zend/Validate/Barcode/' . $adapter . '.php')) {
             $adapter = 'Zend_Validate_Barcode_' . $adapter;
         }
 
@@ -164,7 +164,7 @@ class Zend_Validate_Barcode extends Zend_Validate_Abstract
     /**
      * Sets the checksum option
      *
-     * @param  boolean $checksum
+     * @param boolean $checksum
      * @return Zend_Validate_Barcode
      */
     public function setChecksum($checksum)
@@ -178,7 +178,7 @@ class Zend_Validate_Barcode extends Zend_Validate_Abstract
      *
      * Returns true if and only if $value contains a valid barcode
      *
-     * @param  string $value
+     * @param string $value
      * @return boolean
      */
     public function isValid($value)
@@ -189,14 +189,14 @@ class Zend_Validate_Barcode extends Zend_Validate_Abstract
         }
 
         $this->_setValue($value);
-        $adapter       = $this->getAdapter();
+        $adapter = $this->getAdapter();
         $this->_length = $adapter->getLength();
-        $result        = $adapter->checkLength($value);
+        $result = $adapter->checkLength($value);
         if (!$result) {
             if (is_array($this->_length)) {
                 $temp = $this->_length;
                 $this->_length = "";
-                foreach($temp as $length) {
+                foreach ($temp as $length) {
                     $this->_length .= "/";
                     $this->_length .= $length;
                 }

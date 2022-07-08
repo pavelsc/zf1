@@ -66,7 +66,7 @@ class Zend_View_Helper_DeclareVars extends Zend_View_Helper_Abstract
     public function declareVars()
     {
         $args = func_get_args();
-        foreach($args as $key) {
+        foreach ($args as $key) {
             if (is_array($key)) {
                 foreach ($key as $name => $value) {
                     $this->_declareVar($name, $value);
@@ -82,8 +82,8 @@ class Zend_View_Helper_DeclareVars extends Zend_View_Helper_Abstract
      *
      * Checks to see if a $key is set in the view object; if not, sets it to $value.
      *
-     * @param  string $key
-     * @param  string $value Defaults to an empty string
+     * @param string $key
+     * @param string $value Defaults to an empty string
      * @return void
      */
     protected function _declareVar($key, $value = '')

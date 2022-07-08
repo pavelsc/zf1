@@ -56,7 +56,7 @@ class Zend_CodeGenerator_Php_Method extends Zend_CodeGenerator_Php_Member_Abstra
     /**
      * @var array
      */
-    protected $_parameters = array();
+    protected $_parameters = [];
 
     /**
      * @var string
@@ -119,7 +119,7 @@ class Zend_CodeGenerator_Php_Method extends Zend_CodeGenerator_Php_Member_Abstra
      * @param array $parameters
      * @return Zend_CodeGenerator_Php_Method
      */
-    public function setParameters(Array $parameters)
+    public function setParameters(array $parameters)
     {
         foreach ($parameters as $parameter) {
             $this->setParameter($parameter);
@@ -222,8 +222,8 @@ class Zend_CodeGenerator_Php_Method extends Zend_CodeGenerator_Php_Member_Abstra
 
         if ($this->_body && $this->isSourceDirty()) {
             $output .= '        '
-                    .  str_replace(self::LINE_FEED, self::LINE_FEED . $indent . $indent, trim($this->_body))
-                    .  self::LINE_FEED;
+                . str_replace(self::LINE_FEED, self::LINE_FEED . $indent . $indent, trim($this->_body))
+                . self::LINE_FEED;
         } elseif ($this->_body) {
             $output .= $this->_body . self::LINE_FEED;
         }

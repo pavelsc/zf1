@@ -42,7 +42,7 @@ class Zend_Controller_Action_Helper_AutoCompleteDojo extends Zend_Controller_Act
      *
      * Stub; unused
      *
-     * @param  mixed $data
+     * @param mixed $data
      * @return boolean
      */
     public function validateData($data)
@@ -53,17 +53,17 @@ class Zend_Controller_Action_Helper_AutoCompleteDojo extends Zend_Controller_Act
     /**
      * Prepare data for autocompletion
      *
-     * @param  mixed   $data
-     * @param  boolean $keepLayouts
+     * @param mixed   $data
+     * @param boolean $keepLayouts
      * @return string
      */
     public function prepareAutoCompletion($data, $keepLayouts = false)
     {
         if (!$data instanceof Zend_Dojo_Data) {
             require_once 'Zend/Dojo/Data.php';
-            $items = array();
+            $items = [];
             foreach ($data as $key => $value) {
-                $items[] = array('label' => $value, 'name' => $value);
+                $items[] = ['label' => $value, 'name' => $value];
             }
             $data = new Zend_Dojo_Data('name', $items);
         }

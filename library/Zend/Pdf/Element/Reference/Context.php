@@ -48,14 +48,14 @@ class Zend_Pdf_Element_Reference_Context
     /**
      * Object constructor
      *
-     * @param Zend_Pdf_StringParser $parser
+     * @param Zend_Pdf_StringParser            $parser
      * @param Zend_Pdf_Element_Reference_Table $refTable
      */
-    public function __construct(Zend_Pdf_StringParser $parser,
+    public function __construct(Zend_Pdf_StringParser            $parser,
                                 Zend_Pdf_Element_Reference_Table $refTable)
     {
         $this->_stringParser = $parser;
-        $this->_refTable     = $refTable;
+        $this->_refTable = $refTable;
     }
 
 

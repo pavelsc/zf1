@@ -25,7 +25,7 @@ require_once 'Zend/Search/Lucene/Interface.php';
 
 /**
  * Import Zend_Search_Lucene_Interface_MultiSearcher for BC (see ZF-12067)
- * @see Zend_Search_Lucene_Interface_MultiSearcher 
+ * @see Zend_Search_Lucene_Interface_MultiSearcher
  */
 require_once 'Zend/Search/Lucene/Interface/MultiSearcher.php';
 
@@ -50,10 +50,10 @@ class Zend_Search_Lucene_MultiSearcher implements Zend_Search_Lucene_Interface
     /**
      * Object constructor.
      *
-     * @param array $indices   Arrays of indices for search
+     * @param array $indices Arrays of indices for search
      * @throws Zend_Search_Lucene_Exception
      */
-    public function __construct($indices = array())
+    public function __construct($indices = [])
     {
         $this->_indices = $indices;
 
@@ -463,10 +463,10 @@ class Zend_Search_Lucene_MultiSearcher implements Zend_Search_Lucene_Interface
     public function find($query)
     {
         if (count($this->_indices) == 0) {
-            return array();
+            return [];
         }
 
-        $hitsList = array();
+        $hitsList = [];
 
         $indexShift = 0;
         foreach ($this->_indices as $index) {
@@ -495,7 +495,7 @@ class Zend_Search_Lucene_MultiSearcher implements Zend_Search_Lucene_Interface
      */
     public function getFieldNames($indexed = false)
     {
-        $fieldNamesList = array();
+        $fieldNamesList = [];
 
         foreach ($this->_indices as $index) {
             $fieldNamesList[] = $index->getFieldNames($indexed);
@@ -555,7 +555,7 @@ class Zend_Search_Lucene_MultiSearcher implements Zend_Search_Lucene_Interface
     /**
      * Returns IDs of all the documents containing term.
      *
-     * @param Zend_Search_Lucene_Index_Term $term
+     * @param Zend_Search_Lucene_Index_Term            $term
      * @param Zend_Search_Lucene_Index_DocsFilter|null $docsFilter
      * @return array
      * @throws Zend_Search_Lucene_Exception
@@ -567,7 +567,7 @@ class Zend_Search_Lucene_MultiSearcher implements Zend_Search_Lucene_Interface
             throw new Zend_Search_Lucene_Exception('Document filters could not used with multi-searcher');
         }
 
-        $docsList = array();
+        $docsList = [];
 
         $indexShift = 0;
         foreach ($this->_indices as $index) {
@@ -592,7 +592,7 @@ class Zend_Search_Lucene_MultiSearcher implements Zend_Search_Lucene_Interface
      * It performs the same operation as termDocs, but return result as
      * Zend_Search_Lucene_Index_DocsFilter object
      *
-     * @param Zend_Search_Lucene_Index_Term $term
+     * @param Zend_Search_Lucene_Index_Term            $term
      * @param Zend_Search_Lucene_Index_DocsFilter|null $docsFilter
      * @return Zend_Search_Lucene_Index_DocsFilter
      * @throws Zend_Search_Lucene_Exception
@@ -607,7 +607,7 @@ class Zend_Search_Lucene_MultiSearcher implements Zend_Search_Lucene_Interface
      * Returns an array of all term freqs.
      * Return array structure: array( docId => freq, ...)
      *
-     * @param Zend_Search_Lucene_Index_Term $term
+     * @param Zend_Search_Lucene_Index_Term            $term
      * @param Zend_Search_Lucene_Index_DocsFilter|null $docsFilter
      * @return integer
      * @throws Zend_Search_Lucene_Exception
@@ -619,14 +619,14 @@ class Zend_Search_Lucene_MultiSearcher implements Zend_Search_Lucene_Interface
             throw new Zend_Search_Lucene_Exception('Document filters could not used with multi-searcher');
         }
 
-        $freqsList = array();
+        $freqsList = [];
 
         $indexShift = 0;
         foreach ($this->_indices as $index) {
             $freqs = $index->termFreqs($term);
 
             if ($indexShift != 0) {
-                $freqsShifted = array();
+                $freqsShifted = [];
 
                 foreach ($freqs as $docId => $freq) {
                     $freqsShifted[$docId + $indexShift] = $freq;
@@ -645,7 +645,7 @@ class Zend_Search_Lucene_MultiSearcher implements Zend_Search_Lucene_Interface
      * Returns an array of all term positions in the documents.
      * Return array structure: array( docId => array( pos1, pos2, ...), ...)
      *
-     * @param Zend_Search_Lucene_Index_Term $term
+     * @param Zend_Search_Lucene_Index_Term            $term
      * @param Zend_Search_Lucene_Index_DocsFilter|null $docsFilter
      * @return array
      * @throws Zend_Search_Lucene_Exception
@@ -657,14 +657,14 @@ class Zend_Search_Lucene_MultiSearcher implements Zend_Search_Lucene_Interface
             throw new Zend_Search_Lucene_Exception('Document filters could not used with multi-searcher');
         }
 
-        $termPositionsList = array();
+        $termPositionsList = [];
 
         $indexShift = 0;
         foreach ($this->_indices as $index) {
             $termPositions = $index->termPositions($term);
 
             if ($indexShift != 0) {
-                $termPositionsShifted = array();
+                $termPositionsShifted = [];
 
                 foreach ($termPositions as $docId => $positions) {
                     $termPositions[$docId + $indexShift] = $positions;
@@ -725,7 +725,7 @@ class Zend_Search_Lucene_MultiSearcher implements Zend_Search_Lucene_Interface
      * Returns a normalization factor for "field, document" pair.
      *
      * @param integer $id
-     * @param string $fieldName
+     * @param string  $fieldName
      * @return float
      */
     public function norm($id, $fieldName)
@@ -804,7 +804,7 @@ class Zend_Search_Lucene_MultiSearcher implements Zend_Search_Lucene_Interface
      */
     public function setDocumentDistributorCallback($callback)
     {
-        if ($callback !== null  &&  !is_callable($callback)) {
+        if ($callback !== null && !is_callable($callback)) {
             require_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('$callback parameter must be a valid callback.');
         }
@@ -868,7 +868,7 @@ class Zend_Search_Lucene_MultiSearcher implements Zend_Search_Lucene_Interface
      */
     public function terms()
     {
-        $termsList = array();
+        $termsList = [];
 
         foreach ($this->_indices as $index) {
             $termsList[] = $index->terms();

@@ -77,13 +77,13 @@ class Zend_Service_Yahoo_Result
     /**
      * Initializes the result
      *
-     * @param  DOMElement $result
+     * @param DOMElement $result
      * @return void
      */
     public function __construct(DOMElement $result)
     {
         // default fields for all search results:
-        $fields = array('Title', 'Url', 'ClickUrl');
+        $fields = ['Title', 'Url', 'ClickUrl'];
 
         // merge w/ child's fields
         $this->_fields = array_merge($this->_fields, $fields);

@@ -71,7 +71,7 @@ class Zend_Filter_Encrypt implements Zend_Filter_Interface
     /**
      * Sets new encryption options
      *
-     * @param  string|array $options (Optional) Encryption options
+     * @param string|array $options (Optional) Encryption options
      * @return Zend_Filter_Encrypt
      */
     public function setAdapter($options = null)
@@ -86,10 +86,10 @@ class Zend_Filter_Encrypt implements Zend_Filter_Interface
         }
 
         if (!is_array($options)) {
-            $options = array();
+            $options = [];
         }
 
-        if (Zend_Loader::isReadable('Zend/Filter/Encrypt/' . ucfirst($adapter). '.php')) {
+        if (Zend_Loader::isReadable('Zend/Filter/Encrypt/' . ucfirst($adapter) . '.php')) {
             $adapter = 'Zend_Filter_Encrypt_' . ucfirst($adapter);
         }
 
@@ -120,7 +120,7 @@ class Zend_Filter_Encrypt implements Zend_Filter_Interface
             throw new Zend_Filter_Exception("Unknown method '{$method}'");
         }
 
-        return call_user_func_array(array($this->_adapter, $method), $options);
+        return call_user_func_array([$this->_adapter, $method], $options);
     }
 
     /**
@@ -128,7 +128,7 @@ class Zend_Filter_Encrypt implements Zend_Filter_Interface
      *
      * Encrypts the content $value with the defined settings
      *
-     * @param  string $value Content to encrypt
+     * @param string $value Content to encrypt
      * @return string The encrypted content
      */
     public function filter($value)

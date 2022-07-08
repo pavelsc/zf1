@@ -49,24 +49,24 @@ class Zend_Validate_Sitemap_Lastmod extends Zend_Validate_Abstract
      *
      */
     const NOT_VALID = 'sitemapLastmodNotValid';
-    const INVALID   = 'sitemapLastmodInvalid';
+    const INVALID = 'sitemapLastmodInvalid';
 
     /**
      * Validation failure message template definitions
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $_messageTemplates = [
         self::NOT_VALID => "'%value%' is not a valid sitemap lastmod",
-        self::INVALID   => "Invalid type given. String expected",
-    );
+        self::INVALID => "Invalid type given. String expected",
+    ];
 
     /**
      * Validates if a string is valid as a sitemap lastmod
      *
      * @link http://www.sitemaps.org/protocol.php#lastmoddef <lastmod>
      *
-     * @param  string  $value  value to validate
+     * @param string $value value to validate
      * @return boolean
      */
     public function isValid($value)

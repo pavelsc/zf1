@@ -48,9 +48,9 @@ class Zend_Dom_Query
     /**#@+
      * Document types
      */
-    const DOC_DOM   = 'docDom';
-    const DOC_XML   = 'docXml';
-    const DOC_HTML  = 'docHtml';
+    const DOC_DOM = 'docDom';
+    const DOC_XML = 'docXml';
+    const DOC_HTML = 'docHtml';
     const DOC_XHTML = 'docXhtml';
     /**#@-*/
 
@@ -81,13 +81,13 @@ class Zend_Dom_Query
      * XPath namespaces
      * @var array
      */
-    protected $_xpathNamespaces = array();
+    protected $_xpathNamespaces = [];
 
     /**
      * Constructor
      *
      * @param null|string|DOMDocument $document
-     * @param null|string $encoding
+     * @param null|string             $encoding
      */
     public function __construct($document = null, $encoding = null)
     {
@@ -98,12 +98,12 @@ class Zend_Dom_Query
     /**
      * Set document encoding
      *
-     * @param  string $encoding
+     * @param string $encoding
      * @return Zend_Dom_Query
      */
     public function setEncoding($encoding)
     {
-        $this->_encoding = (null === $encoding) ? null : (string) $encoding;
+        $this->_encoding = (null === $encoding) ? null : (string)$encoding;
         return $this;
     }
 
@@ -120,8 +120,8 @@ class Zend_Dom_Query
     /**
      * Set document to query
      *
-     * @param  string|DOMDocument $document
-     * @param  null|string $encoding Document encoding
+     * @param string|DOMDocument $document
+     * @param null|string        $encoding Document encoding
      * @return Zend_Dom_Query
      */
     public function setDocument($document, $encoding = null)
@@ -149,13 +149,13 @@ class Zend_Dom_Query
     /**
      * Set DOMDocument to query
      *
-     * @param  DOMDocument $document
+     * @param DOMDocument $document
      * @return Zend_Dom_Query
      */
     public function setDocumentDom(DOMDocument $document)
     {
         $this->_document = $document;
-        $this->_docType  = self::DOC_DOM;
+        $this->_docType = self::DOC_DOM;
         if (null !== $document->encoding) {
             $this->setEncoding($document->encoding);
         }
@@ -165,14 +165,14 @@ class Zend_Dom_Query
     /**
      * Register HTML document
      *
-     * @param  string $document
-     * @param  null|string $encoding Document encoding
+     * @param string      $document
+     * @param null|string $encoding Document encoding
      * @return Zend_Dom_Query
      */
     public function setDocumentHtml($document, $encoding = null)
     {
-        $this->_document = (string) $document;
-        $this->_docType  = self::DOC_HTML;
+        $this->_document = (string)$document;
+        $this->_docType = self::DOC_HTML;
         if (null !== $encoding) {
             $this->setEncoding($encoding);
         }
@@ -182,14 +182,14 @@ class Zend_Dom_Query
     /**
      * Register XHTML document
      *
-     * @param  string $document
-     * @param  null|string $encoding Document encoding
+     * @param string      $document
+     * @param null|string $encoding Document encoding
      * @return Zend_Dom_Query
      */
     public function setDocumentXhtml($document, $encoding = null)
     {
-        $this->_document = (string) $document;
-        $this->_docType  = self::DOC_XHTML;
+        $this->_document = (string)$document;
+        $this->_docType = self::DOC_XHTML;
         if (null !== $encoding) {
             $this->setEncoding($encoding);
         }
@@ -199,14 +199,14 @@ class Zend_Dom_Query
     /**
      * Register XML document
      *
-     * @param  string $document
-     * @param  null|string $encoding Document encoding
+     * @param string      $document
+     * @param null|string $encoding Document encoding
      * @return Zend_Dom_Query
      */
     public function setDocumentXml($document, $encoding = null)
     {
-        $this->_document = (string) $document;
-        $this->_docType  = self::DOC_XML;
+        $this->_document = (string)$document;
+        $this->_docType = self::DOC_XML;
         if (null !== $encoding) {
             $this->setEncoding($encoding);
         }
@@ -246,7 +246,7 @@ class Zend_Dom_Query
     /**
      * Perform a CSS selector query
      *
-     * @param  string $query
+     * @param string $query
      * @return Zend_Dom_Query_Result
      */
     public function query($query)
@@ -258,10 +258,10 @@ class Zend_Dom_Query
     /**
      * Perform an XPath query
      *
-     * @param  string|array $xpathQuery
-     * @param  string       $query CSS selector query
-     * @throws Zend_Dom_Exception
+     * @param string|array $xpathQuery
+     * @param string       $query CSS selector query
      * @return Zend_Dom_Query_Result
+     * @throws Zend_Dom_Exception
      */
     public function queryXpath($xpathQuery, $query = null)
     {
@@ -277,7 +277,7 @@ class Zend_Dom_Query
         } else {
             $domDoc = new DOMDocument('1.0', $encoding);
         }
-        $type   = $this->getDocumentType();
+        $type = $this->getDocumentType();
         switch ($type) {
             case self::DOC_DOM:
                 $domDoc = $this->_document;
@@ -329,17 +329,17 @@ class Zend_Dom_Query
     /**
      * Prepare node list
      *
-     * @param  DOMDocument $document
-     * @param  string|array $xpathQuery
+     * @param DOMDocument  $document
+     * @param string|array $xpathQuery
      * @return array
      */
     protected function _getNodeList($document, $xpathQuery)
     {
-        $xpath      = new DOMXPath($document);
+        $xpath = new DOMXPath($document);
         foreach ($this->_xpathNamespaces as $prefix => $namespaceUri) {
             $xpath->registerNamespace($prefix, $namespaceUri);
         }
-        $xpathQuery = (string) $xpathQuery;
+        $xpathQuery = (string)$xpathQuery;
         if (preg_match_all('|\[contains\((@[a-z0-9_-]+),\s?\' |i', $xpathQuery, $matches)) {
             foreach ($matches[1] as $attribute) {
                 $queryString = '//*[' . $attribute . ']';

@@ -61,14 +61,14 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
      *
      * @var array
      */
-    protected static $_namespaceLocks = array();
+    protected static $_namespaceLocks = [];
 
     /**
      * Single instance namespace array to ensure data security.
      *
      * @var array
      */
-    protected static $_singleInstances = array();
+    protected static $_singleInstances = [];
 
     /**
      * resetSingleInstance()
@@ -85,7 +85,7 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
             return;
         }
 
-        self::$_singleInstances = array();
+        self::$_singleInstances = [];
         return;
     }
 
@@ -95,8 +95,8 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
      * The optional argument $singleInstance will prevent construction of additional
      * instance objects acting as accessors to this $namespace.
      *
-     * @param string $namespace       - programmatic name of the requested namespace
-     * @param bool $singleInstance    - prevent creation of additional accessor instance objects for this namespace
+     * @param string $namespace      - programmatic name of the requested namespace
+     * @param bool   $singleInstance - prevent creation of additional accessor instance objects for this namespace
      * @return void
      */
     public function __construct($namespace = 'Default', $singleInstance = false)
@@ -184,7 +184,7 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
                             unset($_SESSION['__ZF'][$namespace]['ENVNH'][$variable]);
                         }
                     }
-                    if(empty($_SESSION['__ZF'][$namespace]['ENVNH'])) {
+                    if (empty($_SESSION['__ZF'][$namespace]['ENVNH'])) {
                         unset($_SESSION['__ZF'][$namespace]['ENVNH']);
                     }
                 }
@@ -242,7 +242,7 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
      */
     public static function unlockAll()
     {
-        self::$_namespaceLocks = array();
+        self::$_namespaceLocks = [];
     }
 
 
@@ -291,10 +291,10 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
     /**
      * __set() - method to set a variable/value in this object's namespace
      *
-     * @param string $name - programmatic name of a key, in a <key,value> pair in the current namespace
-     * @param mixed $value - value in the <key,value> pair to assign to the $name key
-     * @throws Zend_Session_Exception
+     * @param string $name  - programmatic name of a key, in a <key,value> pair in the current namespace
+     * @param mixed  $value - value in the <key,value> pair to assign to the $name key
      * @return true
+     * @throws Zend_Session_Exception
      */
     public function __set($name, $value)
     {
@@ -322,7 +322,7 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
             throw new Zend_Session_Exception(parent::_THROW_NOT_WRITABLE_MSG);
         }
 
-        $name = (string) $name;
+        $name = (string)$name;
 
         $_SESSION[$this->_namespace][$name] = $value;
     }
@@ -419,10 +419,10 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
      * setExpirationSeconds() - expire the namespace, or specific variables after a specified
      * number of seconds
      *
-     * @param int $seconds     - expires in this many seconds
+     * @param int   $seconds   - expires in this many seconds
      * @param mixed $variables - OPTIONAL list of variables to expire (defaults to all)
-     * @throws Zend_Session_Exception
      * @return void
+     * @throws Zend_Session_Exception
      */
     public function setExpirationSeconds($seconds, $variables = null)
     {
@@ -450,7 +450,7 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
         } else {
 
             if (is_string($variables)) {
-                $variables = array($variables);
+                $variables = [$variables];
             }
 
             foreach ($variables as $variable) {
@@ -466,11 +466,11 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
      * setExpirationHops() - expire the namespace, or specific variables after a specified
      * number of page hops
      *
-     * @param int $hops        - how many "hops" (number of subsequent requests) before expiring
-     * @param mixed $variables - OPTIONAL list of variables to expire (defaults to all)
+     * @param int     $hops                - how many "hops" (number of subsequent requests) before expiring
+     * @param mixed   $variables           - OPTIONAL list of variables to expire (defaults to all)
      * @param boolean $hopCountOnUsageOnly - OPTIONAL if set, only count a hop/request if this namespace is used
-     * @throws Zend_Session_Exception
      * @return void
+     * @throws Zend_Session_Exception
      */
     public function setExpirationHops($hops, $variables = null, $hopCountOnUsageOnly = false)
     {
@@ -502,7 +502,7 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
         } else {
 
             if (is_string($variables)) {
-                $variables = array($variables);
+                $variables = [$variables];
             }
 
             foreach ($variables as $variable) {

@@ -33,13 +33,13 @@ class Zend_Oauth_Token_AuthorizedRequest extends Zend_Oauth_Token
     /**
      * @var array
      */
-    protected $_data = array();
+    protected $_data = [];
 
     /**
      * Constructor
      *
-     * @param  null|array $data
-     * @param  null|Zend_Oauth_Http_Utility $utility
+     * @param null|array                   $data
+     * @param null|Zend_Oauth_Http_Utility $utility
      * @return void
      */
     public function __construct(array $data = null, Zend_Oauth_Http_Utility $utility = null)
@@ -90,7 +90,7 @@ class Zend_Oauth_Token_AuthorizedRequest extends Zend_Oauth_Token
      */
     protected function _parseData()
     {
-        $params = array();
+        $params = [];
         if (empty($this->_data)) {
             return;
         }

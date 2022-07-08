@@ -39,7 +39,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
     /**
      * @var array
      */
-    protected $_fetchStack = array();
+    protected $_fetchStack = [];
 
     /**
      * @var int
@@ -62,10 +62,10 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      * @param array $rows
      * @return Zend_Test_DbStatement
      */
-    static public function createSelectStatement(array $rows=array())
+    static public function createSelectStatement(array $rows = [])
     {
         $stmt = new Zend_Test_DbStatement();
-        foreach($rows AS $row) {
+        foreach ($rows as $row) {
             $stmt->append($row);
         }
         return $stmt;
@@ -74,10 +74,10 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
     /**
      * Create an Insert Statement
      *
-     * @param  int $affectedRows
+     * @param int $affectedRows
      * @return Zend_Test_DbStatement
      */
-    static public function createInsertStatement($affectedRows=0)
+    static public function createInsertStatement($affectedRows = 0)
     {
         return self::_createRowCountStatement($affectedRows);
     }
@@ -85,10 +85,10 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
     /**
      * Create an Delete Statement
      *
-     * @param  int $affectedRows
+     * @param int $affectedRows
      * @return Zend_Test_DbStatement
      */
-    static public function createDeleteStatement($affectedRows=0)
+    static public function createDeleteStatement($affectedRows = 0)
     {
         return self::_createRowCountStatement($affectedRows);
     }
@@ -96,10 +96,10 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
     /**
      * Create an Update Statement
      *
-     * @param  int $affectedRows
+     * @param int $affectedRows
      * @return Zend_Test_DbStatement
      */
-    static public function createUpdateStatement($affectedRows=0)
+    static public function createUpdateStatement($affectedRows = 0)
     {
         return self::_createRowCountStatement($affectedRows);
     }
@@ -107,7 +107,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
     /**
      * Create a Row Count Statement
      *
-     * @param  int $affectedRows
+     * @param int $affectedRows
      * @return Zend_Test_DbStatement
      */
     static protected function _createRowCountStatement($affectedRows)
@@ -172,7 +172,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      */
     public function bindParam($parameter, &$variable, $type = null, $length = null, $options = null)
     {
-        if($this->_queryProfile !== null) {
+        if ($this->_queryProfile !== null) {
             $this->_queryProfile->bindParam($parameter, $variable);
         }
         return true;
@@ -246,9 +246,9 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      * @return bool
      * @throws Zend_Db_Statement_Exception
      */
-    public function execute(array $params = array())
+    public function execute(array $params = [])
     {
-        if($this->_queryProfile !== null) {
+        if ($this->_queryProfile !== null) {
             $this->_queryProfile->bindParams($params);
             $this->_queryProfile->end();
         }
@@ -266,7 +266,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      */
     public function fetch($style = null, $cursor = null, $offset = null)
     {
-        if(count($this->_fetchStack)) {
+        if (count($this->_fetchStack)) {
             $row = array_shift($this->_fetchStack);
             return $row;
         } else {
@@ -285,7 +285,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
     public function fetchAll($style = null, $col = null)
     {
         $rows = $this->_fetchStack;
-        $this->_fetchStack = array();
+        $this->_fetchStack = [];
 
         return $rows;
     }
@@ -301,13 +301,13 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
     {
         $row = $this->fetch();
 
-        if($row == false) {
+        if ($row == false) {
             return false;
         } else {
-            if(count($row) < $col) {
+            if (count($row) < $col) {
                 require_once "Zend/Db/Statement/Exception.php";
                 throw new Zend_Db_Statement_Exception(
-                    "Column Position '".$col."' is out of bounds."
+                    "Column Position '" . $col . "' is out of bounds."
                 );
             }
 
@@ -324,15 +324,15 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      * @return mixed One object instance of the specified class.
      * @throws Zend_Db_Statement_Exception
      */
-    public function fetchObject($class = 'stdClass', array $config = array())
+    public function fetchObject($class = 'stdClass', array $config = [])
     {
-        if(!class_exists($class)) {
-            throw new Zend_Db_Statement_Exception("Class '".$class."' does not exist!");
+        if (!class_exists($class)) {
+            throw new Zend_Db_Statement_Exception("Class '" . $class . "' does not exist!");
         }
 
         $object = new $class();
         $row = $this->fetch();
-        foreach($row AS $k => $v) {
+        foreach ($row as $k => $v) {
             $object->$k = $v;
         }
 
@@ -393,7 +393,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
     /**
      * Set the default fetch mode for this statement.
      *
-     * @param int   $mode The fetch mode.
+     * @param int $mode The fetch mode.
      * @return bool
      * @throws Zend_Db_Statement_Exception
      */

@@ -66,9 +66,9 @@ class Zend_Gdata_Gapps_Extension_Name extends Zend_Gdata_Extension
      * Constructs a new Zend_Gdata_Gapps_Extension_Name object.
      *
      * @param string $familyName (optional) The familyName to be set for this
-     *          object.
-     * @param string $givenName (optional) The givenName to be set for this
-     *          object.
+     *                           object.
+     * @param string $givenName  (optional) The givenName to be set for this
+     *                           object.
      */
     public function __construct($familyName = null, $givenName = null)
     {
@@ -86,7 +86,7 @@ class Zend_Gdata_Gapps_Extension_Name extends Zend_Gdata_Extension
      *
      * @param DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
-     * child properties.
+     *                         child properties.
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
@@ -110,22 +110,22 @@ class Zend_Gdata_Gapps_Extension_Name extends Zend_Gdata_Extension
     protected function takeAttributeFromDOM($attribute)
     {
         switch ($attribute->localName) {
-        case 'familyName':
-            $this->_familyName = $attribute->nodeValue;
-            break;
-        case 'givenName':
-            $this->_givenName = $attribute->nodeValue;
-            break;
-        default:
-            parent::takeAttributeFromDOM($attribute);
+            case 'familyName':
+                $this->_familyName = $attribute->nodeValue;
+                break;
+            case 'givenName':
+                $this->_givenName = $attribute->nodeValue;
+                break;
+            default:
+                parent::takeAttributeFromDOM($attribute);
         }
     }
 
     /**
      * Get the value for this element's familyName attribute.
      *
-     * @see setFamilyName
      * @return string The requested attribute.
+     * @see setFamilyName
      */
     public function getFamilyName()
     {
@@ -148,8 +148,8 @@ class Zend_Gdata_Gapps_Extension_Name extends Zend_Gdata_Extension
     /**
      * Get the value for this element's givenName attribute.
      *
-     * @see setGivenName
      * @return string The requested attribute.
+     * @see setGivenName
      */
     public function getGivenName()
     {

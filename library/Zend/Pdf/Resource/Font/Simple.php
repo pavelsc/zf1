@@ -96,7 +96,7 @@ abstract class Zend_Pdf_Resource_Font_Simple extends Zend_Pdf_Resource_Font
     /**** Public Interface ****/
 
 
-  /* Object Lifecycle */
+    /* Object Lifecycle */
 
     /**
      * Object constructor
@@ -168,7 +168,7 @@ abstract class Zend_Pdf_Resource_Font_Simple extends Zend_Pdf_Resource_Font
      *
      * @param string $string
      * @param string $charEncoding (optional) Character encoding of source text.
-     *   If omitted, uses 'current locale'.
+     *                             If omitted, uses 'current locale'.
      * @return float
      */
     public function getCoveredPercentage($string, $charEncoding = '')
@@ -222,7 +222,7 @@ abstract class Zend_Pdf_Resource_Font_Simple extends Zend_Pdf_Resource_Font
      */
     public function widthsForGlyphs($glyphNumbers)
     {
-        $widths = array();
+        $widths = [];
         foreach ($glyphNumbers as $key => $glyphNumber) {
             if (!isset($this->_glyphWidths[$glyphNumber])) {
                 $widths[$key] = $this->_missingGlyphWidth;

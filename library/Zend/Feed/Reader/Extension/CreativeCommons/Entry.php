@@ -65,12 +65,12 @@ class Zend_Feed_Reader_Extension_CreativeCommons_Entry extends Zend_Feed_Reader_
             return $this->_data[$name];
         }
 
-        $licenses = array();
+        $licenses = [];
         $list = $this->_xpath->evaluate($this->getXpathPrefix() . '//cc:license');
 
         if ($list->length) {
             foreach ($list as $license) {
-                    $licenses[] = $license->nodeValue;
+                $licenses[] = $license->nodeValue;
             }
 
             $licenses = array_unique($licenses);

@@ -40,13 +40,13 @@ class Zend_Reflection_Extension extends ReflectionExtension
     /**
      * Get extension function reflection objects
      *
-     * @param  string $reflectionClass Name of reflection class to use
+     * @param string $reflectionClass Name of reflection class to use
      * @return array Array of Zend_Reflection_Function objects
      */
     public function getFunctions($reflectionClass = 'Zend_Reflection_Function')
     {
-        $phpReflections  = parent::getFunctions();
-        $zendReflections = array();
+        $phpReflections = parent::getFunctions();
+        $zendReflections = [];
         while ($phpReflections && ($phpReflection = array_shift($phpReflections))) {
             $instance = new $reflectionClass($phpReflection->getName());
             if (!$instance instanceof Zend_Reflection_Function) {
@@ -63,13 +63,13 @@ class Zend_Reflection_Extension extends ReflectionExtension
     /**
      * Get extension class reflection objects
      *
-     * @param  string $reflectionClass Name of reflection class to use
+     * @param string $reflectionClass Name of reflection class to use
      * @return array Array of Zend_Reflection_Class objects
      */
     public function getClasses($reflectionClass = 'Zend_Reflection_Class')
     {
-        $phpReflections  = parent::getClasses();
-        $zendReflections = array();
+        $phpReflections = parent::getClasses();
+        $zendReflections = [];
         while ($phpReflections && ($phpReflection = array_shift($phpReflections))) {
             $instance = new $reflectionClass($phpReflection->getName());
             if (!$instance instanceof Zend_Reflection_Class) {

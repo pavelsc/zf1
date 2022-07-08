@@ -48,7 +48,7 @@ require_once 'Zend/Server/Reflection/Prototype.php';
  * @subpackage Reflection
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version $Id$
+ * @version    $Id$
  */
 abstract class Zend_Server_Reflection_Function_Abstract
 {
@@ -61,7 +61,7 @@ abstract class Zend_Server_Reflection_Function_Abstract
      * Additional arguments to pass to method on invocation
      * @var array
      */
-    protected $_argv = array();
+    protected $_argv = [];
 
     /**
      * Used to store extra configuration for the method (typically done by the
@@ -70,7 +70,7 @@ abstract class Zend_Server_Reflection_Function_Abstract
      * {@link __set()}
      * @var array
      */
-    protected $_config = array();
+    protected $_config = [];
 
     /**
      * Declaring class (needed for when serialization occurs)
@@ -94,7 +94,7 @@ abstract class Zend_Server_Reflection_Function_Abstract
      * Prototypes
      * @var array
      */
-    protected $_prototypes = array();
+    protected $_prototypes = [];
 
     private $_return;
     private $_returnDesc;
@@ -107,7 +107,7 @@ abstract class Zend_Server_Reflection_Function_Abstract
      *
      * @param ReflectionFunction $r
      */
-    public function __construct(Reflector $r, $namespace = null, $argv = array())
+    public function __construct(Reflector $r, $namespace = null, $argv = [])
     {
         // In PHP 5.1.x, ReflectionMethod extends ReflectionFunction. In 5.2.x,
         // both extend ReflectionFunctionAbstract. So, we can't do normal type
@@ -121,7 +121,7 @@ abstract class Zend_Server_Reflection_Function_Abstract
         $this->_reflection = $r;
 
         // Determine namespace
-        if (null !== $namespace){
+        if (null !== $namespace) {
             $this->setNamespace($namespace);
         }
 
@@ -147,7 +147,7 @@ abstract class Zend_Server_Reflection_Function_Abstract
      * to the current value (unless the current value is null).
      *
      * @param Zend_Server_Reflection_Node $parent
-     * @param int $level
+     * @param int                         $level
      * @return void
      */
     protected function _addTree(Zend_Server_Reflection_Node $parent, $level = 0)
@@ -175,8 +175,8 @@ abstract class Zend_Server_Reflection_Function_Abstract
      */
     protected function _buildTree()
     {
-        $returnTree = array();
-        foreach ((array) $this->_return as $value) {
+        $returnTree = [];
+        foreach ((array)$this->_return as $value) {
             $node = new Zend_Server_Reflection_Node($value);
             $this->_addTree($node);
             $returnTree[] = $node;
@@ -191,27 +191,27 @@ abstract class Zend_Server_Reflection_Function_Abstract
      * Builds method signatures using the array of return types and the array of
      * parameters types
      *
-     * @param array $return Array of return types
+     * @param array  $return     Array of return types
      * @param string $returnDesc Return value description
-     * @param array $params Array of arguments (each an array of types)
-     * @param array $paramDesc Array of parameter descriptions
+     * @param array  $params     Array of arguments (each an array of types)
+     * @param array  $paramDesc  Array of parameter descriptions
      * @return array
      */
     protected function _buildSignatures($return, $returnDesc, $paramTypes, $paramDesc)
     {
-        $this->_return         = $return;
-        $this->_returnDesc     = $returnDesc;
-        $this->_paramDesc      = $paramDesc;
-        $this->_sigParams      = $paramTypes;
+        $this->_return = $return;
+        $this->_returnDesc = $returnDesc;
+        $this->_paramDesc = $paramDesc;
+        $this->_sigParams = $paramTypes;
         $this->_sigParamsDepth = count($paramTypes);
-        $signatureTrees        = $this->_buildTree();
-        $signatures            = array();
+        $signatureTrees = $this->_buildTree();
+        $signatures = [];
 
-        $endPoints = array();
+        $endPoints = [];
         foreach ($signatureTrees as $root) {
             $tmp = $root->getEndPoints();
             if (empty($tmp)) {
-                $endPoints = array_merge($endPoints, array($root));
+                $endPoints = array_merge($endPoints, [$root]);
             } else {
                 $endPoints = array_merge($endPoints, $tmp);
             }
@@ -222,7 +222,7 @@ abstract class Zend_Server_Reflection_Function_Abstract
                 continue;
             }
 
-            $signature = array();
+            $signature = [];
             do {
                 array_unshift($signature, $node->getValue());
                 $node = $node->getParent();
@@ -235,7 +235,7 @@ abstract class Zend_Server_Reflection_Function_Abstract
         $params = $this->_reflection->getParameters();
         foreach ($signatures as $signature) {
             $return = new Zend_Server_Reflection_ReturnValue(array_shift($signature), $this->_returnDesc);
-            $tmp    = array();
+            $tmp = [];
             foreach ($signature as $key => $type) {
                 $param = new Zend_Server_Reflection_Parameter($params[$key], $type, (isset($this->_paramDesc[$key]) ? $this->_paramDesc[$key] : null));
                 $param->setPosition($key);
@@ -258,19 +258,18 @@ abstract class Zend_Server_Reflection_Function_Abstract
      */
     protected function _reflect()
     {
-        $function           = $this->_reflection;
-        $helpText           = '';
-        $signatures         = array();
-        $returnDesc         = '';
-        $paramCount         = $function->getNumberOfParameters();
+        $function = $this->_reflection;
+        $helpText = '';
+        $signatures = [];
+        $returnDesc = '';
+        $paramCount = $function->getNumberOfParameters();
         $paramCountRequired = $function->getNumberOfRequiredParameters();
-        $parameters         = $function->getParameters();
-        $docBlock           = $function->getDocComment();
+        $parameters = $function->getParameters();
+        $docBlock = $function->getDocComment();
 
         if (!empty($docBlock)) {
             // Get help text
-            if (preg_match(':/\*\*\s*\r?\n\s*\*\s(.*?)\r?\n\s*\*(\s@|/):s', $docBlock, $matches))
-            {
+            if (preg_match(':/\*\*\s*\r?\n\s*\*\s(.*?)\r?\n\s*\*(\s@|/):s', $docBlock, $matches)) {
                 $helpText = $matches[1];
                 $helpText = preg_replace('/(^\s*\*\s)/m', '', $helpText);
                 $helpText = preg_replace('/\r?\n\s*\*\s*(\r?\n)*/s', "\n", $helpText);
@@ -278,11 +277,10 @@ abstract class Zend_Server_Reflection_Function_Abstract
             }
 
             // Get return type(s) and description
-            $return     = 'void';
+            $return = 'void';
             if (preg_match('/@return\s+(\S+)/', $docBlock, $matches)) {
                 $return = explode('|', $matches[1]);
-                if (preg_match('/@return\s+\S+\s+(.*?)(@|\*\/)/s', $docBlock, $matches))
-                {
+                if (preg_match('/@return\s+\S+\s+(.*?)(@|\*\/)/s', $docBlock, $matches)) {
                     $value = $matches[1];
                     $value = preg_replace('/\s?\*\s/m', '', $value);
                     $value = preg_replace('/\s{2,}/', ' ', $value);
@@ -293,8 +291,7 @@ abstract class Zend_Server_Reflection_Function_Abstract
             // Get param types and description
             if (preg_match_all('/@param\s+([^\s]+)/m', $docBlock, $matches)) {
                 $paramTypesTmp = $matches[1];
-                if (preg_match_all('/@param\s+\S+\s+(\$\S+)\s+(.*?)(?=@|\*\/)/s', $docBlock, $matches))
-                {
+                if (preg_match_all('/@param\s+\S+\s+(\$\S+)\s+(.*?)(?=@|\*\/)/s', $docBlock, $matches)) {
                     $paramDesc = $matches[2];
                     foreach ($paramDesc as $key => $value) {
                         $value = preg_replace('/\s?\*\s/m', '', $value);
@@ -305,10 +302,10 @@ abstract class Zend_Server_Reflection_Function_Abstract
             }
         } else {
             $helpText = $function->getName();
-            $return   = 'void';
+            $return = 'void';
 
             // Try and auto-determine type, based on reflection
-            $paramTypesTmp = array();
+            $paramTypesTmp = [];
             foreach ($parameters as $i => $param) {
                 $paramType = 'mixed';
                 if ($param->isArray()) {
@@ -325,7 +322,7 @@ abstract class Zend_Server_Reflection_Function_Abstract
         if (!isset($paramTypesTmp) && (0 < $paramCount)) {
             $paramTypesTmp = array_fill(0, $paramCount, 'mixed');
         } elseif (!isset($paramTypesTmp)) {
-            $paramTypesTmp = array();
+            $paramTypesTmp = [];
         } elseif (count($paramTypesTmp) < $paramCount) {
             $start = $paramCount - count($paramTypesTmp);
             for ($i = $start; $i < $paramCount; ++$i) {
@@ -337,7 +334,7 @@ abstract class Zend_Server_Reflection_Function_Abstract
         if (!isset($paramDesc) && (0 < $paramCount)) {
             $paramDesc = array_fill(0, $paramCount, '');
         } elseif (!isset($paramDesc)) {
-            $paramDesc = array();
+            $paramDesc = [];
         } elseif (count($paramDesc) < $paramCount) {
             $start = $paramCount - count($paramDesc);
             for ($i = $start; $i < $paramCount; ++$i) {
@@ -348,13 +345,13 @@ abstract class Zend_Server_Reflection_Function_Abstract
         if (count($paramTypesTmp) != $paramCount) {
             require_once 'Zend/Server/Reflection/Exception.php';
             throw new Zend_Server_Reflection_Exception(
-               'Variable number of arguments is not supported for services (except optional parameters). '
-             . 'Number of function arguments in ' . $function->getDeclaringClass()->getName() . '::'
-             . $function->getName() . '() must correspond to actual number of arguments described in the '
-             . 'docblock.');
+                'Variable number of arguments is not supported for services (except optional parameters). '
+                . 'Number of function arguments in ' . $function->getDeclaringClass()->getName() . '::'
+                . $function->getName() . '() must correspond to actual number of arguments described in the '
+                . 'docblock.');
         }
 
-        $paramTypes = array();
+        $paramTypes = [];
         foreach ($paramTypesTmp as $i => $param) {
             $tmp = explode('|', $param);
             if ($parameters[$i]->isOptional()) {
@@ -371,17 +368,17 @@ abstract class Zend_Server_Reflection_Function_Abstract
      * Proxy reflection calls
      *
      * @param string $method
-     * @param array $args
+     * @param array  $args
      * @return mixed
      */
     public function __call($method, $args)
     {
         if (method_exists($this->_reflection, $method)) {
-            return call_user_func_array(array($this->_reflection, $method), $args);
+            return call_user_func_array([$this->_reflection, $method], $args);
         }
 
         require_once 'Zend/Server/Reflection/Exception.php';
-        throw new Zend_Server_Reflection_Exception('Invalid reflection method ("' .$method. '")');
+        throw new Zend_Server_Reflection_Exception('Invalid reflection method ("' . $method . '")');
     }
 
     /**
@@ -408,7 +405,7 @@ abstract class Zend_Server_Reflection_Function_Abstract
      * Values are stored by $key in {@link $_config}.
      *
      * @param string $key
-     * @param mixed $value
+     * @param mixed  $value
      * @return void
      */
     public function __set($key, $value)

@@ -22,7 +22,7 @@
 
 
 /** Define constant used to provide correct file processing order    */
-/** @todo Section should be removed with ZF 2.0 release as obsolete  */
+/** @todo Section should be removed with ZF 2.0 release as obsolete */
 if (!defined('ZEND_SEARCH_LUCENE_COMMON_ANALYZER_PROCESSED')) {
     define('ZEND_SEARCH_LUCENE_COMMON_ANALYZER_PROCESSED', true);
 }
@@ -43,7 +43,7 @@ require_once 'Zend/Search/Lucene/Analysis/TokenFilter.php';
  * There are several standard standard subclasses provided by Zend_Search_Lucene/Analysis
  * subpackage: Zend_Search_Lucene_Analysis_Analyzer_Common_Text, ZSearchHTMLAnalyzer, ZSearchXMLAnalyzer.
  *
- * @todo ZSearchHTMLAnalyzer and ZSearchXMLAnalyzer implementation
+ * @todo       ZSearchHTMLAnalyzer and ZSearchXMLAnalyzer implementation
  *
  * @category   Zend
  * @package    Zend_Search_Lucene
@@ -59,7 +59,7 @@ abstract class Zend_Search_Lucene_Analysis_Analyzer_Common extends Zend_Search_L
      *
      * @var array
      */
-    private $_filters = array();
+    private $_filters = [];
 
     /**
      * Add Token filter to the Analyzer

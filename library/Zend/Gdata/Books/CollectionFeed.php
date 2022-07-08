@@ -43,7 +43,7 @@ class Zend_Gdata_Books_CollectionFeed extends Zend_Gdata_Feed
      * Describes a Book Search collection feed
      *
      * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
+     *                            object should be constructed.
      */
     public function __construct($element = null)
     {

@@ -35,7 +35,7 @@ class Zend_Db_Table_Definition
     /**
      * @var array
      */
-    protected $_tableConfigs = array();
+    protected $_tableConfigs = [];
 
     /**
      * __construct()
@@ -69,7 +69,7 @@ class Zend_Db_Table_Definition
      * @param array $options
      * @return Zend_Db_Table_Definition
      */
-    public function setOptions(Array $options)
+    public function setOptions(array $options)
     {
         foreach ($options as $optionName => $optionValue) {
             $this->setTableConfig($optionName, $optionValue);

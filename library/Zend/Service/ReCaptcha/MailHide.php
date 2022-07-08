@@ -85,9 +85,9 @@ class Zend_Service_ReCaptcha_MailHide extends Zend_Service_ReCaptcha
     /**
      * Local constructor
      *
-     * @param string $publicKey
-     * @param string $privateKey
-     * @param string $email
+     * @param string            $publicKey
+     * @param string            $privateKey
+     * @param string            $email
      * @param array|Zend_Config $options
      */
     public function __construct($publicKey = null, $privateKey = null, $email = null, $options = null)
@@ -132,7 +132,7 @@ class Zend_Service_ReCaptcha_MailHide extends Zend_Service_ReCaptcha
     /**
      * Set email validator
      *
-     * @param  Zend_Validate_Interface $validator
+     * @param Zend_Validate_Interface $validator
      * @return Zend_Service_ReCaptcha_MailHide
      */
     public function setEmailValidator(Zend_Validate_Interface $validator)
@@ -184,13 +184,13 @@ class Zend_Service_ReCaptcha_MailHide extends Zend_Service_ReCaptcha
      */
     public function getDefaultOptions()
     {
-        return array(
-            'encoding'       => 'UTF-8',
-            'linkTitle'      => 'Reveal this e-mail address',
+        return [
+            'encoding' => 'UTF-8',
+            'linkTitle' => 'Reveal this e-mail address',
             'linkHiddenText' => '...',
-            'popupWidth'     => 500,
-            'popupHeight'    => 300,
-        );
+            'popupWidth' => 500,
+            'popupHeight' => 300,
+        ];
     }
 
     /**
@@ -313,17 +313,17 @@ class Zend_Service_ReCaptcha_MailHide extends Zend_Service_ReCaptcha
         /* Genrate the HTML used to represent the email address */
         $html = htmlentities($this->getEmailLocalPart(), ENT_COMPAT, $enc)
             . '<a href="'
-                . htmlentities($url, ENT_COMPAT, $enc)
-                . '" onclick="window.open(\''
-                    . htmlentities($url, ENT_COMPAT, $enc)
-                    . '\', \'\', \'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width='
-                    . $this->_options['popupWidth']
-                    . ',height='
-                    . $this->_options['popupHeight']
-                . '\'); return false;" title="'
-                . $this->_options['linkTitle']
-                . '">' . $this->_options['linkHiddenText'] . '</a>@'
-                . htmlentities($this->getEmailDomainPart(), ENT_COMPAT, $enc);
+            . htmlentities($url, ENT_COMPAT, $enc)
+            . '" onclick="window.open(\''
+            . htmlentities($url, ENT_COMPAT, $enc)
+            . '\', \'\', \'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width='
+            . $this->_options['popupWidth']
+            . ',height='
+            . $this->_options['popupHeight']
+            . '\'); return false;" title="'
+            . $this->_options['linkTitle']
+            . '">' . $this->_options['linkHiddenText'] . '</a>@'
+            . htmlentities($this->getEmailDomainPart(), ENT_COMPAT, $enc);
 
         return $html;
     }

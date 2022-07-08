@@ -113,11 +113,11 @@ class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Prof
         }
 
         if (isset($xmlDataIterator['type'])) {
-            $this->_profile->setAttribute('type', (string) $xmlDataIterator['type']);
+            $this->_profile->setAttribute('type', (string)$xmlDataIterator['type']);
         }
 
         if (isset($xmlDataIterator['version'])) {
-            $this->_profile->setAttribute('version', (string) $xmlDataIterator['version']);
+            $this->_profile->setAttribute('version', (string)$xmlDataIterator['version']);
         }
 
         // start un-serialization of the xml doc
@@ -136,7 +136,7 @@ class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Prof
      * This method will be used to traverse the depths of the structure
      * when *serializing* an xml structure into a string
      *
-     * @param array $resources
+     * @param array            $resources
      * @param SimpleXmlElement $xmlNode
      */
     protected function _serializeRecurser($resources, SimpleXmlElement $xmlNode)
@@ -182,7 +182,7 @@ class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Prof
      * This method will be used to traverse the depths of the structure
      * as needed to *unserialize* the profile from an xmlIterator
      *
-     * @param SimpleXMLIterator $xmlIterator
+     * @param SimpleXMLIterator                  $xmlIterator
      * @param Zend_Tool_Project_Profile_Resource $resource
      */
     protected function _unserializeRecurser(SimpleXMLIterator $xmlIterator, Zend_Tool_Project_Profile_Resource $resource = null)
@@ -195,9 +195,9 @@ class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Prof
             $subResource->setProfile($this->_profile);
 
             if ($resourceAttributes = $resourceData->attributes()) {
-                $attributes = array();
+                $attributes = [];
                 foreach ($resourceAttributes as $attrName => $attrValue) {
-                    $attributes[$attrName] = (string) $attrValue;
+                    $attributes[$attrName] = (string)$attrValue;
                 }
                 $subResource->setAttributes($attributes);
             }

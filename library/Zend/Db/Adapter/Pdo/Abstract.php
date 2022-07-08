@@ -153,7 +153,7 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
      */
     public function isConnected()
     {
-        return ((bool) ($this->_connection instanceof PDO));
+        return ((bool)($this->_connection instanceof PDO));
     }
 
     /**
@@ -169,8 +169,8 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
     /**
      * Prepares an SQL statement.
      *
-     * @param string $sql The SQL statement with placeholders.
-     * @param array $bind An array of data to bind to the placeholders.
+     * @param string $sql  The SQL statement with placeholders.
+     * @param array  $bind An array of data to bind to the placeholders.
      * @return PDOStatement
      */
     public function prepare($sql)
@@ -199,8 +199,8 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
      * On RDBMS brands that don't support sequences, $tableName and $primaryKey
      * are ignored.
      *
-     * @param string $tableName   OPTIONAL Name of table.
-     * @param string $primaryKey  OPTIONAL Name of primary key column.
+     * @param string $tableName  OPTIONAL Name of table.
+     * @param string $primaryKey OPTIONAL Name of primary key column.
      * @return string
      */
     public function lastInsertId($tableName = null, $primaryKey = null)
@@ -213,12 +213,12 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
      * Special handling for PDO query().
      * All bind parameter names must begin with ':'
      *
-     * @param string|Zend_Db_Select $sql The SQL statement with placeholders.
-     * @param array $bind An array of data to bind to the placeholders.
+     * @param string|Zend_Db_Select $sql  The SQL statement with placeholders.
+     * @param array                 $bind An array of data to bind to the placeholders.
      * @return Zend_Db_Statement_Pdo
      * @throws Zend_Db_Adapter_Exception To re-throw PDOException.
      */
-    public function query($sql, $bind = array())
+    public function query($sql, $bind = [])
     {
         if (empty($bind) && $sql instanceof Zend_Db_Select) {
             $bind = $sql->getBind();
@@ -248,7 +248,7 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
     /**
      * Executes an SQL statement and return the number of affected rows
      *
-     * @param  mixed  $sql  The SQL statement with placeholders.
+     * @param mixed $sql    The SQL statement with placeholders.
      *                      May be a string or Zend_Db_Select.
      * @return integer      Number of rows that were modified
      *                      or deleted by the SQL statement
@@ -284,7 +284,7 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
     /**
      * Quote a raw string.
      *
-     * @param string $value     Raw string
+     * @param string $value Raw string
      * @return string           Quoted string
      */
     protected function _quote($value)
@@ -317,7 +317,8 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
     /**
      * Roll-back a transaction.
      */
-    protected function _rollBack() {
+    protected function _rollBack()
+    {
         $this->_connect();
         $this->_connection->rollBack();
     }
@@ -325,11 +326,11 @@ abstract class Zend_Db_Adapter_Pdo_Abstract extends Zend_Db_Adapter_Abstract
     /**
      * Set the PDO fetch mode.
      *
-     * @todo Support FETCH_CLASS and FETCH_INTO.
-     *
      * @param int $mode A PDO fetch mode.
      * @return void
      * @throws Zend_Db_Adapter_Exception
+     * @todo Support FETCH_CLASS and FETCH_INTO.
+     *
      */
     public function setFetchMode($mode)
     {

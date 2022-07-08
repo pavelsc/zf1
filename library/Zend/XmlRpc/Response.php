@@ -39,11 +39,11 @@ require_once 'Zend/Xml/Exception.php';
  *
  * Container for accessing an XMLRPC return value and creating the XML response.
  *
- * @category Zend
- * @package  Zend_XmlRpc
+ * @category   Zend
+ * @package    Zend_XmlRpc
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version $Id$
+ * @version    $Id$
  */
 class Zend_XmlRpc_Response
 {
@@ -77,7 +77,7 @@ class Zend_XmlRpc_Response
      * Can optionally pass in the return value and type hinting; otherwise, the
      * return value can be set via {@link setReturnValue()}.
      *
-     * @param mixed $return
+     * @param mixed  $return
      * @param string $type
      * @return void
      */
@@ -114,14 +114,14 @@ class Zend_XmlRpc_Response
      *
      * Sets the return value, with optional type hinting if provided.
      *
-     * @param mixed $value
+     * @param mixed  $value
      * @param string $type
      * @return void
      */
     public function setReturnValue($value, $type = null)
     {
         $this->_return = $value;
-        $this->_type = (string) $type;
+        $this->_type = (string)$type;
     }
 
     /**
@@ -184,7 +184,7 @@ class Zend_XmlRpc_Response
 
         try {
             $xml = Zend_Xml_Security::scan($response);
-        } catch (Zend_Xml_Exception $e) {    
+        } catch (Zend_Xml_Exception $e) {
             // Not valid XML
             $this->_fault = new Zend_XmlRpc_Fault(651);
             $this->_fault->setEncoding($this->getEncoding());
@@ -233,12 +233,12 @@ class Zend_XmlRpc_Response
         $value = $this->_getXmlRpcReturn();
         $generator = Zend_XmlRpc_Value::getGenerator();
         $generator->openElement('methodResponse')
-                  ->openElement('params')
-                  ->openElement('param');
+            ->openElement('params')
+            ->openElement('param');
         $value->generateXml();
         $generator->closeElement('param')
-                  ->closeElement('params')
-                  ->closeElement('methodResponse');
+            ->closeElement('params')
+            ->closeElement('methodResponse');
 
         return $generator->flush();
     }

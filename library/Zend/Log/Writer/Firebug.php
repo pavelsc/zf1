@@ -48,14 +48,14 @@ class Zend_Log_Writer_Firebug extends Zend_Log_Writer_Abstract
      *
      * @var array
      */
-    protected $_priorityStyles = array(Zend_Log::EMERG  => Zend_Wildfire_Plugin_FirePhp::ERROR,
-                                       Zend_Log::ALERT  => Zend_Wildfire_Plugin_FirePhp::ERROR,
-                                       Zend_Log::CRIT   => Zend_Wildfire_Plugin_FirePhp::ERROR,
-                                       Zend_Log::ERR    => Zend_Wildfire_Plugin_FirePhp::ERROR,
-                                       Zend_Log::WARN   => Zend_Wildfire_Plugin_FirePhp::WARN,
-                                       Zend_Log::NOTICE => Zend_Wildfire_Plugin_FirePhp::INFO,
-                                       Zend_Log::INFO   => Zend_Wildfire_Plugin_FirePhp::INFO,
-                                       Zend_Log::DEBUG  => Zend_Wildfire_Plugin_FirePhp::LOG);
+    protected $_priorityStyles = [Zend_Log::EMERG => Zend_Wildfire_Plugin_FirePhp::ERROR,
+        Zend_Log::ALERT => Zend_Wildfire_Plugin_FirePhp::ERROR,
+        Zend_Log::CRIT => Zend_Wildfire_Plugin_FirePhp::ERROR,
+        Zend_Log::ERR => Zend_Wildfire_Plugin_FirePhp::ERROR,
+        Zend_Log::WARN => Zend_Wildfire_Plugin_FirePhp::WARN,
+        Zend_Log::NOTICE => Zend_Wildfire_Plugin_FirePhp::INFO,
+        Zend_Log::INFO => Zend_Wildfire_Plugin_FirePhp::INFO,
+        Zend_Log::DEBUG => Zend_Wildfire_Plugin_FirePhp::LOG];
 
     /**
      * The default logging style for un-mapped priorities
@@ -88,7 +88,7 @@ class Zend_Log_Writer_Firebug extends Zend_Log_Writer_Abstract
     /**
      * Create a new instance of Zend_Log_Writer_Firebug
      *
-     * @param  array|Zend_Config $config
+     * @param array|Zend_Config $config
      * @return Zend_Log_Writer_Firebug
      */
     static public function factory($config)
@@ -145,14 +145,14 @@ class Zend_Log_Writer_Firebug extends Zend_Log_Writer_Abstract
     /**
      * Set a display style for a logging priority
      *
-     * @param int $priority The logging priority
-     * @param string $style The logging display style
+     * @param int    $priority The logging priority
+     * @param string $style    The logging display style
      * @return string|boolean The previous logging display style if defined or TRUE otherwise
      */
     public function setPriorityStyle($priority, $style)
     {
         $previous = true;
-        if (array_key_exists($priority,$this->_priorityStyles)) {
+        if (array_key_exists($priority, $this->_priorityStyles)) {
             $previous = $this->_priorityStyles[$priority];
         }
         $this->_priorityStyles[$priority] = $style;
@@ -167,7 +167,7 @@ class Zend_Log_Writer_Firebug extends Zend_Log_Writer_Abstract
      */
     public function getPriorityStyle($priority)
     {
-        if (array_key_exists($priority,$this->_priorityStyles)) {
+        if (array_key_exists($priority, $this->_priorityStyles)) {
             return $this->_priorityStyles[$priority];
         }
         return false;
@@ -185,7 +185,7 @@ class Zend_Log_Writer_Firebug extends Zend_Log_Writer_Abstract
             return;
         }
 
-        if (array_key_exists($event['priority'],$this->_priorityStyles)) {
+        if (array_key_exists($event['priority'], $this->_priorityStyles)) {
             $type = $this->_priorityStyles[$event['priority']];
         } else {
             $type = $this->_defaultPriorityStyle;
@@ -193,12 +193,12 @@ class Zend_Log_Writer_Firebug extends Zend_Log_Writer_Abstract
 
         $message = $this->_formatter->format($event);
 
-        $label = isset($event['firebugLabel'])?$event['firebugLabel']:null;
+        $label = isset($event['firebugLabel']) ? $event['firebugLabel'] : null;
 
         Zend_Wildfire_Plugin_FirePhp::getInstance()->send($message,
-                                                          $label,
-                                                          $type,
-                                                          array('traceOffset'=>4,
-                                                                'fixZendLogOffsetIfApplicable'=>true));
+            $label,
+            $type,
+            ['traceOffset' => 4,
+                'fixZendLogOffsetIfApplicable' => true]);
     }
 }

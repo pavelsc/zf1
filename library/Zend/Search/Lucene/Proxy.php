@@ -343,7 +343,7 @@ class Zend_Search_Lucene_Proxy implements Zend_Search_Lucene_Interface
         $parameters = func_get_args();
 
         // invoke $this->_index->find() method with specified parameters
-        return call_user_func_array(array(&$this->_index, 'find'), $parameters);
+        return call_user_func_array([&$this->_index, 'find'], $parameters);
     }
 
     /**
@@ -385,7 +385,7 @@ class Zend_Search_Lucene_Proxy implements Zend_Search_Lucene_Interface
     /**
      * Returns IDs of all the documents containing term.
      *
-     * @param Zend_Search_Lucene_Index_Term $term
+     * @param Zend_Search_Lucene_Index_Term            $term
      * @param Zend_Search_Lucene_Index_DocsFilter|null $docsFilter
      * @return array
      */
@@ -400,7 +400,7 @@ class Zend_Search_Lucene_Proxy implements Zend_Search_Lucene_Interface
      * It performs the same operation as termDocs, but return result as
      * Zend_Search_Lucene_Index_DocsFilter object
      *
-     * @param Zend_Search_Lucene_Index_Term $term
+     * @param Zend_Search_Lucene_Index_Term            $term
      * @param Zend_Search_Lucene_Index_DocsFilter|null $docsFilter
      * @return Zend_Search_Lucene_Index_DocsFilter
      */
@@ -413,7 +413,7 @@ class Zend_Search_Lucene_Proxy implements Zend_Search_Lucene_Interface
      * Returns an array of all term freqs.
      * Return array structure: array( docId => freq, ...)
      *
-     * @param Zend_Search_Lucene_Index_Term $term
+     * @param Zend_Search_Lucene_Index_Term            $term
      * @param Zend_Search_Lucene_Index_DocsFilter|null $docsFilter
      * @return integer
      */
@@ -426,7 +426,7 @@ class Zend_Search_Lucene_Proxy implements Zend_Search_Lucene_Interface
      * Returns an array of all term positions in the documents.
      * Return array structure: array( docId => array( pos1, pos2, ...), ...)
      *
-     * @param Zend_Search_Lucene_Index_Term $term
+     * @param Zend_Search_Lucene_Index_Term            $term
      * @param Zend_Search_Lucene_Index_DocsFilter|null $docsFilter
      * @return array
      */
@@ -460,7 +460,7 @@ class Zend_Search_Lucene_Proxy implements Zend_Search_Lucene_Interface
      * Returns a normalization factor for "field, document" pair.
      *
      * @param integer $id
-     * @param string $fieldName
+     * @param string  $fieldName
      * @return float
      */
     public function norm($id, $fieldName)

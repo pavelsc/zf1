@@ -31,7 +31,7 @@ class Zend_Tool_Project_Provider_DbTable
     implements Zend_Tool_Framework_Provider_Pretendable
 {
 
-    protected $_specialties = array('FromDatabase');
+    protected $_specialties = ['FromDatabase'];
 
     /**
      * @var Zend_Filter
@@ -40,10 +40,10 @@ class Zend_Tool_Project_Provider_DbTable
 
     public static function createResource(Zend_Tool_Project_Profile $profile, $dbTableName, $actualTableName, $moduleName = null)
     {
-        $profileSearchParams = array();
+        $profileSearchParams = [];
 
         if ($moduleName != null && is_string($moduleName)) {
-            $profileSearchParams = array('modulesDirectory', 'moduleDirectory' => array('moduleName' => $moduleName));
+            $profileSearchParams = ['modulesDirectory', 'moduleDirectory' => ['moduleName' => $moduleName]];
         }
 
         $profileSearchParams[] = 'modelsDirectory';
@@ -54,24 +54,24 @@ class Zend_Tool_Project_Provider_DbTable
             throw new Zend_Tool_Project_Provider_Exception(
                 'A models directory was not found' .
                 (($moduleName) ? ' for module ' . $moduleName . '.' : '.')
-                );
+            );
         }
 
         if (!($dbTableDirectory = $modelsDirectory->search('DbTableDirectory'))) {
             $dbTableDirectory = $modelsDirectory->createResource('DbTableDirectory');
         }
 
-        $dbTableFile = $dbTableDirectory->createResource('DbTableFile', array('dbTableName' => $dbTableName, 'actualTableName' => $actualTableName));
+        $dbTableFile = $dbTableDirectory->createResource('DbTableFile', ['dbTableName' => $dbTableName, 'actualTableName' => $actualTableName]);
 
         return $dbTableFile;
     }
 
     public static function hasResource(Zend_Tool_Project_Profile $profile, $dbTableName, $moduleName = null)
     {
-        $profileSearchParams = array();
+        $profileSearchParams = [];
 
         if ($moduleName != null && is_string($moduleName)) {
-            $profileSearchParams = array('modulesDirectory', 'moduleDirectory' => array('moduleName' => $moduleName));
+            $profileSearchParams = ['modulesDirectory', 'moduleDirectory' => ['moduleName' => $moduleName]];
         }
 
         $profileSearchParams[] = 'modelsDirectory';
@@ -83,7 +83,7 @@ class Zend_Tool_Project_Provider_DbTable
             return false;
         }
 
-        $dbTableFile = $dbTableDirectory->search(array('DbTableFile' => array('dbTableName' => $dbTableName)));
+        $dbTableFile = $dbTableDirectory->search(['DbTableFile' => ['dbTableName' => $dbTableName]]);
 
         return ($dbTableFile instanceof Zend_Tool_Project_Profile_Resource) ? true : false;
     }
@@ -119,10 +119,10 @@ class Zend_Tool_Project_Provider_DbTable
         if ($name !== $originalName) {
             $response->appendContent(
                 'Note: The canonical model name that ' . $tense
-                    . ' used with other providers is "' . $name . '";'
-                    . ' not "' . $originalName . '" as supplied',
-                array('color' => array('yellow'))
-                );
+                . ' used with other providers is "' . $name . '";'
+                . ' not "' . $originalName . '" as supplied',
+                ['color' => ['yellow']]
+            );
         }
 
         try {
@@ -135,7 +135,7 @@ class Zend_Tool_Project_Provider_DbTable
 
         // do the creation
         if ($request->isPretend()) {
-            $response->appendContent('Would create a DbTable at '  . $tableResource->getContext()->getPath());
+            $response->appendContent('Would create a DbTable at ' . $tableResource->getContext()->getPath());
         } else {
             $response->appendContent('Creating a DbTable at ' . $tableResource->getContext()->getPath());
             $tableResource->create();
@@ -144,9 +144,9 @@ class Zend_Tool_Project_Provider_DbTable
     }
 
     /**
-     * @param string $module        Module name action should be applied to.
-     * @param bool $forceOverwrite  Whether should force overwriting previous classes generated
-     * @return void 
+     * @param string $module         Module name action should be applied to.
+     * @param bool   $forceOverwrite Whether should force overwriting previous classes generated
+     * @return void
      */
     public function createFromDatabase($module = null, $forceOverwrite = false)
     {
@@ -167,7 +167,7 @@ class Zend_Tool_Project_Provider_DbTable
         /* @var $db Zend_Db_Adapter_Abstract */
         $db = $zendApp->getBootstrap()->getResource('db');
 
-        $tableResources = array();
+        $tableResources = [];
         foreach ($db->listTables() as $actualTableName) {
 
             $dbTableName = $this->_convertTableNameToClassName($actualTableName);
@@ -176,7 +176,7 @@ class Zend_Tool_Project_Provider_DbTable
                 throw new Zend_Tool_Project_Provider_Exception(
                     'This DbTable resource already exists, if you wish to overwrite it, '
                     . 'pass the "forceOverwrite" flag to this provider.'
-                    );
+                );
             }
 
             $tableResources[] = self::createResource(
@@ -184,7 +184,7 @@ class Zend_Tool_Project_Provider_DbTable
                 $dbTableName,
                 $actualTableName,
                 $module
-                );
+            );
         }
 
         if (count($tableResources) == 0) {
@@ -195,7 +195,7 @@ class Zend_Tool_Project_Provider_DbTable
         if ($this->_registry->getRequest()->isPretend()) {
 
             foreach ($tableResources as $tableResource) {
-                $this->_registry->getResponse()->appendContent('Would create a DbTable at '  . $tableResource->getContext()->getPath());
+                $this->_registry->getResponse()->appendContent('Would create a DbTable at ' . $tableResource->getContext()->getPath());
             }
 
         } else {

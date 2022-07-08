@@ -52,7 +52,7 @@ final class Zend_Http_Header_HeaderValue
      */
     public static function filter($value)
     {
-        $value  = (string) $value;
+        $value = (string)$value;
         $length = strlen($value);
         $string = '';
         for ($i = 0; $i < $length; $i += 1) {
@@ -89,7 +89,7 @@ final class Zend_Http_Header_HeaderValue
      */
     public static function isValid($value)
     {
-        $value  = (string) $value;
+        $value = (string)$value;
         $length = strlen($value);
         for ($i = 0; $i < $length; $i += 1) {
             $ascii = ord($value[$i]);
@@ -114,12 +114,12 @@ final class Zend_Http_Header_HeaderValue
      * Assert a header value is valid.
      *
      * @param string $value
-     * @throws Exception\RuntimeException for invalid values
      * @return void
+     * @throws Exception\RuntimeException for invalid values
      */
     public static function assertValid($value)
     {
-        if (! self::isValid($value)) {
+        if (!self::isValid($value)) {
             require_once 'Zend/Http/Header/Exception/InvalidArgumentException.php';
             throw new Zend_Http_Header_Exception_InvalidArgumentException('Invalid header value');
         }

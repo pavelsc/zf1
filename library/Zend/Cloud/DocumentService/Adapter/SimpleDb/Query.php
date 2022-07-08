@@ -43,8 +43,8 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb_Query
     /**
      * Constructor
      *
-     * @param  Zend_Cloud_DocumentService_Adapter_SimpleDb $adapter
-     * @param  null|string $collectionName
+     * @param Zend_Cloud_DocumentService_Adapter_SimpleDb $adapter
+     * @param null|string                                 $collectionName
      * @return void
      */
     public function __construct(Zend_Cloud_DocumentService_Adapter_SimpleDb $adapter, $collectionName = null)
@@ -68,19 +68,19 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb_Query
     /**
      * Assemble the query into a format the adapter can utilize
      *
-     * @var    string $collectionName Name of collection from which to select
      * @return string
+     * @var    string $collectionName Name of collection from which to select
      */
     public function assemble($collectionName = null)
     {
         $adapter = $this->getAdapter()->getClient();
-        $select  = null;
-        $from    = null;
-        $where   = null;
-        $order   = null;
-        $limit   = null;
+        $select = null;
+        $from = null;
+        $where = null;
+        $order = null;
+        $limit = null;
         foreach ($this->getClauses() as $clause) {
-            list($name, $args) = $clause;
+            [$name, $args] = $clause;
 
             switch ($name) {
                 case self::QUERY_SELECT:
@@ -102,7 +102,7 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb_Query
                     }
                     break;
                 case self::QUERY_WHEREID:
-                    $statement = $this->_parseWhere('ItemName() = ?', array($args));
+                    $statement = $this->_parseWhere('ItemName() = ?', [$args]);
                     if (null === $where) {
                         $where = $statement;
                     } else {
@@ -151,25 +151,25 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb_Query
     /**
      * Parse a where statement into service-specific language
      *
-     * @todo   Ensure this fulfills the entire SimpleDB query specification for WHERE
-     * @param  string $where
-     * @param  array $args
+     * @param string $where
+     * @param array  $args
      * @return string
+     * @todo   Ensure this fulfills the entire SimpleDB query specification for WHERE
      */
     protected function _parseWhere($where, $args)
     {
         if (!is_array($args)) {
-            $args = (array) $args;
+            $args = (array)$args;
         }
         $adapter = $this->getAdapter()->getClient();
         $i = 0;
         while (false !== ($pos = strpos($where, '?'))) {
-           $where = substr_replace($where, $adapter->quote($args[$i]), $pos);
-           ++$i;
+            $where = substr_replace($where, $adapter->quote($args[$i]), $pos);
+            ++$i;
         }
         if (('(' != $where[0]) || (')' != $where[strlen($where) - 1])) {
             $where = '(' . $where . ')';
         }
         return $where;
     }
- }
+}

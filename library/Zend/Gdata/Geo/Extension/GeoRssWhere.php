@@ -63,7 +63,7 @@ class Zend_Gdata_Geo_Extension_GeoRssWhere extends Zend_Gdata_Extension
      * Create a new instance.
      *
      * @param Zend_Gdata_Geo_Extension_GmlPoint $point (optional) Point to which
-     *          object should be initialized.
+     *                                                 object should be initialized.
      */
     public function __construct($point = null)
     {
@@ -79,7 +79,7 @@ class Zend_Gdata_Geo_Extension_GeoRssWhere extends Zend_Gdata_Extension
      *
      * @param DOMDocument $doc The DOMDocument used to construct DOMElements
      * @return DOMElement The DOMElement representing this element and all
-     *          child properties.
+     *                         child properties.
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
@@ -112,8 +112,8 @@ class Zend_Gdata_Geo_Extension_GeoRssWhere extends Zend_Gdata_Extension
     /**
      * Get the value for this element's point attribute.
      *
-     * @see setPoint
      * @return Zend_Gdata_Geo_Extension_GmlPoint The requested attribute.
+     * @see setPoint
      */
     public function getPoint()
     {

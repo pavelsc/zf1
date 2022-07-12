@@ -135,7 +135,7 @@ class Zend_Controller_Action_HelperBroker_PriorityStack implements IteratorAggre
      * @param Zend_Controller_Action_Helper_Abstract $helper
      * @return Zend_Controller_Action_HelperBroker_PriorityStack
      */
-    public function offsetSet($priority, $helper)
+    #[ReturnTypeWillChange] public function offsetSet($priority, $helper): static
     {
         $priority = (int)$priority;
 

@@ -97,7 +97,7 @@ class Zend_Db_Statement_Pdo extends Zend_Db_Statement implements IteratorAggrega
      * @return bool
      * @throws Zend_Db_Statement_Exception
      */
-    protected function _bindParam($parameter, &$variable, $type = null, $length = null, $options = null)
+    protected function _bindParam($parameter, &$variable, $type = null, $length = 0, $options = null)
     {
         try {
             if ($type === null) {

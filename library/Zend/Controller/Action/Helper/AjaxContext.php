@@ -49,6 +49,7 @@ class Zend_Controller_Action_Helper_AjaxContext extends Zend_Controller_Action_H
      * Add HTML context
      *
      * @return void
+     * @throws Zend_Controller_Action_Exception
      */
     public function __construct()
     {
@@ -63,6 +64,7 @@ class Zend_Controller_Action_Helper_AjaxContext extends Zend_Controller_Action_H
      *
      * @param string $format
      * @return void
+     * @throws Zend_Controller_Action_Exception
      */
     public function initContext($format = null)
     {

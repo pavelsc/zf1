@@ -205,7 +205,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      *
      * @return int
      */
-    public function getHeight()
+    public function getHeight(): int
     {
         return $this->_height;
     }
@@ -215,7 +215,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      *
      * @return string
      */
-    public function getImgDir()
+    public function getImgDir(): string
     {
         return $this->_imgDir;
     }
@@ -225,7 +225,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      *
      * @return string
      */
-    public function getImgUrl()
+    public function getImgUrl(): string
     {
         return $this->_imgUrl;
     }
@@ -235,7 +235,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      *
      * @return string
      */
-    public function getSuffix()
+    public function getSuffix(): string
     {
         return $this->_suffix;
     }
@@ -245,7 +245,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      *
      * @return int
      */
-    public function getWidth()
+    public function getWidth(): int
     {
         return $this->_width;
     }
@@ -256,7 +256,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      * @param string $startImage
      * @return Zend_Captcha_Image
      */
-    public function setStartImage($startImage)
+    public function setStartImage(string $startImage): static
     {
         $this->_startImage = $startImage;
         return $this;
@@ -268,7 +268,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      * @param int $dotNoiseLevel
      * @return Zend_Captcha_Image
      */
-    public function setDotNoiseLevel($dotNoiseLevel)
+    public function setDotNoiseLevel(int $dotNoiseLevel): static
     {
         $this->_dotNoiseLevel = $dotNoiseLevel;
         return $this;
@@ -280,7 +280,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      * @param int $lineNoiseLevel
      * @return Zend_Captcha_Image
      */
-    public function setLineNoiseLevel($lineNoiseLevel)
+    public function setLineNoiseLevel(int $lineNoiseLevel): static
     {
         $this->_lineNoiseLevel = $lineNoiseLevel;
         return $this;
@@ -292,7 +292,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      * @param int $expiration
      * @return Zend_Captcha_Image
      */
-    public function setExpiration($expiration)
+    public function setExpiration(int $expiration): static
     {
         $this->_expiration = $expiration;
         return $this;
@@ -304,7 +304,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      * @param int $gcFreq
      * @return Zend_Captcha_Image
      */
-    public function setGcFreq($gcFreq)
+    public function setGcFreq(int $gcFreq): static
     {
         $this->_gcFreq = $gcFreq;
         return $this;
@@ -316,7 +316,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      * @param string $font
      * @return Zend_Captcha_Image
      */
-    public function setFont($font)
+    public function setFont(string $font): static
     {
         $this->_font = $font;
         return $this;
@@ -328,7 +328,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      * @param int $fsize
      * @return Zend_Captcha_Image
      */
-    public function setFontSize($fsize)
+    public function setFontSize(int $fsize): static
     {
         $this->_fsize = $fsize;
         return $this;
@@ -340,7 +340,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      * @param int $height
      * @return Zend_Captcha_Image
      */
-    public function setHeight($height)
+    public function setHeight(int $height): static
     {
         $this->_height = $height;
         return $this;
@@ -352,7 +352,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      * @param string $imgDir
      * @return Zend_Captcha_Image
      */
-    public function setImgDir($imgDir)
+    public function setImgDir(string $imgDir): static
     {
         $this->_imgDir = rtrim($imgDir, "/\\") . '/';
         return $this;
@@ -364,7 +364,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      * @param string $imgUrl
      * @return Zend_Captcha_Image
      */
-    public function setImgUrl($imgUrl)
+    public function setImgUrl(string $imgUrl): static
     {
         $this->_imgUrl = rtrim($imgUrl, "/\\") . '/';
         return $this;
@@ -376,7 +376,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      * @param string $imgAlt
      * @return Zend_Captcha_Image
      */
-    public function setImgAlt($imgAlt)
+    public function setImgAlt(string $imgAlt): static
     {
         $this->_imgAlt = $imgAlt;
         return $this;
@@ -388,7 +388,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      * @param string $suffix
      * @return Zend_Captcha_Image
      */
-    public function setSuffix($suffix)
+    public function setSuffix(string $suffix): static
     {
         $this->_suffix = $suffix;
         return $this;
@@ -400,7 +400,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      * @param int $width
      * @return Zend_Captcha_Image
      */
-    public function setWidth($width)
+    public function setWidth(int $width): static
     {
         $this->_width = $width;
         return $this;
@@ -411,7 +411,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      *
      * @return float
      */
-    protected function _randomFreq()
+    protected function _randomFreq(): float
     {
         return mt_rand(700000, 1000000) / 15000000;
     }
@@ -421,7 +421,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      *
      * @return float
      */
-    protected function _randomPhase()
+    protected function _randomPhase(): float
     {
         // random phase from 0 to pi
         return mt_rand(0, 3141592) / 1000000;
@@ -430,9 +430,9 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
     /**
      * Generate random character size
      *
-     * @return int
+     * @return float|int
      */
-    protected function _randomSize()
+    protected function _randomSize(): float|int
     {
         return mt_rand(300, 700) / 100;
     }
@@ -441,8 +441,9 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      * Generate captcha
      *
      * @return string captcha ID
+     * @throws Zend_Captcha_Exception
      */
-    public function generate()
+    public function generate(): string
     {
         $id = parent::generate();
         $tries = 5;
@@ -465,7 +466,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      * Override this function if you want different image generator
      * Wave transform from http://www.captcha.ru/captchas/multiwave/
      *
-     * @param string $id   Captcha ID
+     * @param string $id Captcha ID
      * @param string $word Captcha word
      * @throws Zend_Captcha_Exception
      */
@@ -619,7 +620,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
      * Display the captcha
      *
      * @param Zend_View_Interface $view
-     * @param mixed               $element
+     * @param mixed $element
      * @return string
      */
     public function render(Zend_View_Interface $view = null, $element = null)

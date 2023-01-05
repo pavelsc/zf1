@@ -9,8 +9,8 @@
  * It is also available through the world-wide-web at this URL:
  * http://framework.zend.com/license/new-bsd
  * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
+ * obtain it through the world-wide-web, please email
+ * license@zend.com, so we can send you a copy immediately.
  *
  * @category   Zend
  * @package    Zend_Validate
@@ -62,18 +62,22 @@ class Zend_Validate_File_Exists extends Zend_Validate_Abstract
     /**
      * Sets validator options
      *
-     * @param string|array|Zend_Config $directory
+     * @param Zend_Config|array|string $directory
      * @throws Zend_Validate_Exception
      */
-    public function __construct($directory = [])
+    public function __construct(Zend_Config|array|string $directory = [])
     {
         if ($directory instanceof Zend_Config) {
             $directory = $directory->toArray();
-        } else if (is_string($directory)) {
-            $directory = explode(',', $directory);
-        } else if (!is_array($directory)) {
-            require_once 'Zend/Validate/Exception.php';
-            throw new Zend_Validate_Exception ('Invalid options to validator provided');
+        } else {
+            if (is_string($directory)) {
+                $directory = explode(',', $directory);
+            } else {
+                if (!is_array($directory)) {
+                    require_once 'Zend/Validate/Exception.php';
+                    throw new Zend_Validate_Exception ('Invalid options to validator provided');
+                }
+            }
         }
 
         $this->setDirectory($directory);
@@ -83,9 +87,9 @@ class Zend_Validate_File_Exists extends Zend_Validate_Abstract
      * Returns the set file directories which are checked
      *
      * @param boolean $asArray Returns the values as array, when false an concated string is returned
-     * @return string
+     * @return string|array
      */
-    public function getDirectory($asArray = false)
+    public function getDirectory(bool $asArray = false): array|string
     {
         $asArray = (bool)$asArray;
         $directory = (string)$this->_directory;
@@ -99,10 +103,11 @@ class Zend_Validate_File_Exists extends Zend_Validate_Abstract
     /**
      * Sets the file directory which will be checked
      *
-     * @param string|array $directory The directories to validate
-     * @return Zend_Validate_File_Extension Provides a fluent interface
+     * @param array|string $directory The directories to validate
+     * @return Zend_Validate_File_Exists Provides a fluent interface
+     * @throws Zend_Validate_Exception
      */
-    public function setDirectory($directory)
+    public function setDirectory(array|string $directory): static
     {
         $this->_directory = null;
         $this->addDirectory($directory);
@@ -112,11 +117,11 @@ class Zend_Validate_File_Exists extends Zend_Validate_Abstract
     /**
      * Adds the file directory which will be checked
      *
-     * @param string|array $directory The directory to add for validation
-     * @return Zend_Validate_File_Extension Provides a fluent interface
+     * @param array|string $directory The directory to add for validation
+     * @return Zend_Validate_File_Exists Provides a fluent interface
      * @throws Zend_Validate_Exception
      */
-    public function addDirectory($directory)
+    public function addDirectory(array|string $directory): static
     {
         $directories = $this->getDirectory(true);
 
@@ -153,17 +158,19 @@ class Zend_Validate_File_Exists extends Zend_Validate_Abstract
      *
      * Returns true if and only if the file already exists in the set directories
      *
-     * @param string $value Real file to check for existance
-     * @param array  $file  File data from Zend_File_Transfer
+     * @param string $value Real file to check for existence
+     * @param array|null $file File data from Zend_File_Transfer
      * @return boolean
      */
-    public function isValid($value, $file = null)
+    public function isValid($value, array $file = null): bool
     {
         $directories = $this->getDirectory(true);
         if (($file !== null) and (!empty($file['destination']))) {
             $directories[] = $file['destination'];
-        } else if (!isset($file['name'])) {
-            $file['name'] = $value;
+        } else {
+            if (!isset($file['name'])) {
+                $file['name'] = $value;
+            }
         }
 
         $check = false;
@@ -188,11 +195,11 @@ class Zend_Validate_File_Exists extends Zend_Validate_Abstract
     /**
      * Throws an error of the given type
      *
-     * @param string $file
+     * @param array|null $file
      * @param string $errorType
      * @return false
      */
-    protected function _throw($file, $errorType)
+    protected function _throw(array|null $file, string $errorType): bool
     {
         if ($file !== null) {
             $this->_value = $file['name'];

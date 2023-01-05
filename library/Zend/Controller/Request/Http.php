@@ -180,7 +180,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
      * raise an exception. Use setParam() instead.
      *
      * @param string $key
-     * @param mixed  $value
+     * @param mixed $value
      * @return void
      * @throws Zend_Controller_Request_Exception
      */
@@ -194,7 +194,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
      * Alias to __set()
      *
      * @param string $key
-     * @param mixed  $value
+     * @param mixed $value
      * @return void
      */
     public function set($key, $value)
@@ -243,7 +243,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
      * Set GET values
      *
      * @param string|array $spec
-     * @param null|mixed   $value
+     * @param null|mixed $value
      * @return Zend_Controller_Request_Http
      */
     public function setQuery($spec, $value = null)
@@ -268,7 +268,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
      * If no $key is passed, returns the entire $_GET array.
      *
      * @param string $key
-     * @param mixed  $default Default value to use if key not found
+     * @param mixed $default Default value to use if key not found
      * @return mixed Returns null if key does not exist
      * @todo How to retrieve from nested arrays
      */
@@ -285,7 +285,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
      * Set POST values
      *
      * @param string|array $spec
-     * @param null|mixed   $value
+     * @param null|mixed $value
      * @return Zend_Controller_Request_Http
      */
     public function setPost($spec, $value = null)
@@ -310,7 +310,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
      * If no $key is passed, returns the entire $_POST array.
      *
      * @param string $key
-     * @param mixed  $default Default value to use if key not found
+     * @param mixed $default Default value to use if key not found
      * @return mixed Returns null if key does not exist
      * @todo How to retrieve from nested arrays
      */
@@ -329,7 +329,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
      * If no $key is passed, returns the entire $_COOKIE array.
      *
      * @param string $key
-     * @param mixed  $default Default value to use if key not found
+     * @param mixed $default Default value to use if key not found
      * @return mixed Returns null if key does not exist
      * @todo How to retrieve from nested arrays
      */
@@ -348,7 +348,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
      * If no $key is passed, returns the entire $_SERVER array.
      *
      * @param string $key
-     * @param mixed  $default Default value to use if key not found
+     * @param mixed $default Default value to use if key not found
      * @return mixed Returns null if key does not exist
      */
     public function getServer($key = null, $default = null)
@@ -366,7 +366,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
      * If no $key is passed, returns the entire $_ENV array.
      *
      * @param string $key
-     * @param mixed  $default Default value to use if key not found
+     * @param mixed $default Default value to use if key not found
      * @return mixed Returns null if key does not exist
      */
     public function getEnv($key = null, $default = null)
@@ -950,7 +950,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
     public function isFlashRequest()
     {
         $header = strtolower($this->getHeader('USER_AGENT'));
-        return (strstr($header, ' flash')) ? true : false;
+        return (bool)strstr($header, ' flash');
     }
 
     /**
@@ -958,7 +958,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
      *
      * @return boolean
      */
-    public function isSecure()
+    public function isSecure(): bool
     {
         return ($this->getScheme() === self::SCHEME_HTTPS);
     }
